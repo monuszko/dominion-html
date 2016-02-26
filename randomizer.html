@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Single file Dominion randomizer</title>
+    <meta>
+    </meta>
+
+    <script type='text/javascript'>
+<!--
+function sayHello() {
+    alert("Hello World");
+}
+//-->
+    </script>
+</head>
+
+
+<body>
+    <form action=''>
+
+        <div>
+            <label for='set_dominion'>Dominion</label>
+            <input type='checkbox' id='set_dominion' />
+
+            <label for='set_intrigue'>Intrigue</label>
+            <input type='checkbox' id='set_intrigue' />
+
+            <label for='set_seaside'>Seaside</label>
+            <input type='checkbox' id='set_seaside' />
+
+            <label for='set_alchemy'>Alchemy</label>
+            <input type='checkbox' id='set_alchemy' />
+
+            <label for='set_prosperity'>Prosperity</label>
+            <input type='checkbox' id='set_prosperity' />
+
+            <label for='set_cornucopia'>Cornucopia</label>
+            <input type='checkbox' id='set_cornucopia' />
+
+            <label for='set_hinterlands'>Hinterlands</label>
+            <input type='checkbox' id='set_hinterlands' />
+
+            <label for='set_darkages'>Dark Ages</label>
+            <input type='checkbox' id='set_darkages' />
+
+            <label for='set_guilds'>Guilds</label>
+            <input type='checkbox' id='set_guilds' />
+
+            <label for='set_adventures'>Adventures</label>
+            <input type='checkbox' id='set_adventures' />
+
+            <label for='set_empires'>Empires</label>
+            <input type='checkbox' id='set_empires' />
+        </div>
+
+        <div>
+            <label for='desiredcosts'>Card costs:</label>
+            <input type='tel' maxlength='10' id='desiredcosts' value='2445' />
+        </div>
+
+        <div>
+            <label for='reactions'>No Reactions without attack ?</label>
+            <input type='checkbox' id='reactions' checked />
+        </div>
+
+        <div>
+            <fieldset>
+                <legend>What about attacks ?</legend>
+                <label for='attacks_unrestricted'><input type='radio' id='attacks_unrestricted' name='attacks' checked />Unrestricted</label>
+                <label for='attacks_noevilgoesunpunished'><input type='radio' id='attacks_noevilgoesunpunished' name='attacks' />No evil goes unpunished</label>
+                <label for='attacks_rainbowsandunicorns'><input type='radio' id='attacks_rainbowsandunicorns' name='attacks' />Rainbows and unicorns</label>
+            </fieldset>
+        </div>
+
+        <div class='button'>
+            <button type='button' onclick='sayHello()'>Randomize</button>
+        </div>
+    </form>
+</body>
+
+</html>
