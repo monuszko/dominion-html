@@ -1,82 +1,903 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Single file Dominion randomizer</title>
-    <meta>
-    </meta>
+    <head>
+        <title>Single file Dominion randomizer</title>
+        <meta charset="utf-8">    
 
-    <script type='text/javascript'>
-<!--
-function sayHello() {
-    alert("Hello World");
+        <style>
+
+.flex_list {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
-//-->
-    </script>
-</head>
+
+.flex_item {
+    width: 20%;
+    float: left;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+figure {
+    text-align: center;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+figcaption {
+    border-bottom: 1px solid black;
+}
+
+.hidden {
+    display: none;
+}
+
+.card_text {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex: 0 0 auto;
+    border-top: 1px solid black;
+}
+
+.card_cost {
+    float: left;
+    background: yellow;
+    border-radius: 50%;
+    box-shadow: inset 0 0 2px red;
+    width: 1em;
+
+}
 
 
-<body>
-    <form action=''>
+        </style>
 
-        <div>
-            <label for='set_dominion'>Dominion</label>
-            <input type='checkbox' id='set_dominion' />
+        <script type='text/javascript'>
+const existing_cards = JSON.parse(`
+        [ 
+        {
+            "actions": 0,
+            "cost": 6,
+            "name": "Fairgrounds",
+            "set": "cornucopia",
+            "tags": [],
+            "types": [
+                "Victory"
+            ]
+        },
+        {
+            "actions": 2,
+            "cost": 4,
+            "name": "Farming Village",
+            "set": "cornucopia",
+            "tags": [],
+            "types": [
+                "Action"
+            ]
+        },
+{
+    "actions": 0,
+    "cost": 3,
+    "name": "Fortune Teller",
+    "set": "cornucopia",
+    "tags": [
+        "deck_pooper"
+    ],
+    "types": [
+        "Action",
+        "Attack"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 2,
+    "name": "Hamlet",
+    "set": "cornucopia",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Harvest",
+    "set": "cornucopia",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Horn of Plenty",
+    "set": "cornucopia",
+    "tags": [],
+    "types": [
+        "Treasure"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 4,
+    "name": "Horse Traders",
+    "set": "cornucopia",
+    "tags": [],
+    "types": [
+        "Action",
+        "Reaction"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 5,
+    "name": "Hunting Party",
+    "set": "cornucopia",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Jester",
+    "set": "cornucopia",
+    "tags": [
+        "gives_junk"
+    ],
+    "types": [
+        "Action",
+        "Attack"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 3,
+    "name": "Menagerie",
+    "set": "cornucopia",
+    "tags": [
+        "counters_handsize"
+    ],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 4,
+    "name": "Remake",
+    "set": "cornucopia",
+    "tags": [
+        "counters_junk"
+    ],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 4,
+    "name": "Tournament",
+    "set": "cornucopia",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 4,
+    "name": "Young Witch",
+    "set": "cornucopia",
+    "tags": [
+        "gives_junk"
+    ],
+    "types": [
+        "Action",
+        "Attack"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 4,
+    "name": "Advisor",
+    "set": "guilds",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 5,
+    "name": "Baker",
+    "set": "guilds",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Butcher",
+    "set": "guilds",
+    "tags": [
+        "counters_junk"
+    ],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 2,
+    "name": "Candlestick Maker",
+    "set": "guilds",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 3,
+    "name": "Doctor",
+    "set": "guilds",
+    "tags": [
+        "counters_junk"
+    ],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Ghost Ship",
+    "set": "seaside",
+    "tags": [
+        "reduces_hand",
+        "deck_pooper"
+    ],
+    "types": [
+        "Action",
+        "Attack"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 4,
+    "name": "Herald",
+    "set": "guilds",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Journeyman",
+    "set": "guilds",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 3,
+    "name": "Masterpiece",
+    "set": "guilds",
+    "tags": [],
+    "types": [
+        "Treasure"
+    ]
+},
+{
+    "actions": 2,
+    "cost": 4,
+    "name": "Plaza",
+    "set": "guilds",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Soothsayer",
+    "set": "guilds",
+    "tags": [
+        "gives_junk"
+    ],
+    "types": [
+        "Action",
+        "Attack"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 2,
+    "name": "Stonemason",
+    "set": "guilds",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Tactician",
+    "set": "seaside",
+    "tags": [
+        "counters_handsize"
+    ],
+    "types": [
+        "Action",
+        "Duration"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 4,
+    "name": "Taxman",
+    "set": "guilds",
+    "tags": [
+        "reduces_hand"
+    ],
+    "types": [
+        "Action",
+        "Attack"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 4,
+    "name": "Treasure Map",
+    "set": "guilds",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 3,
+    "name": "Ambassador",
+    "set": "seaside",
+    "tags": [
+        "counters_junk",
+        "gives_junk"
+    ],
+    "types": [
+        "Action",
+        "Attack"
+    ]
+},
+{
+    "actions": 2,
+    "cost": 5,
+    "name": "Bazaar",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 4,
+    "name": "Caravan",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action",
+        "Duration"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 4,
+    "name": "Cutpurse",
+    "set": "seaside",
+    "tags": [
+        "reduces_hand"
+    ],
+    "types": [
+        "Action",
+        "Attack"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 2,
+    "name": "Embargo",
+    "set": "seaside",
+    "tags": [
+        "gives_junk",
+        "punishes_buying"
+    ],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Explorer",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 2,
+    "cost": 3,
+    "name": "Fishing Village",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action",
+        "Duration"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 2,
+    "name": "Haven",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action",
+        "Duration"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 4,
+    "name": "Island",
+    "set": "seaside",
+    "tags": [
+        "counters_junk"
+    ],
+    "types": [
+        "Action",
+        "Victory"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 2,
+    "name": "Lighthouse",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action",
+        "Duration"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 3,
+    "name": "Lookout",
+    "set": "seaside",
+    "tags": [
+        "counters_junk"
+    ],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Merchant Guild",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Merchant Ship",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action",
+        "Duration"
+    ]
+},
+{
+    "actions": 2,
+    "cost": 2,
+    "name": "Native Village",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 4,
+    "name": "Navigator",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Outpost",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action",
+        "Duration"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 2,
+    "name": "Pearl Diver",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 4,
+    "name": "Pirate Ship",
+    "set": "seaside",
+    "tags": [
+        "deck_pooper"
+    ],
+    "types": [
+        "Action",
+        "Attack"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 4,
+    "name": "Salvager",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 4,
+    "name": "Sea Hag",
+    "set": "seaside",
+    "tags": [
+        "gives_junk",
+        "deck_pooper"
+    ],
+    "types": [
+        "Action",
+        "Attack"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 3,
+    "name": "Smugglers",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 5,
+    "name": "Treasury",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 1,
+    "cost": 3,
+    "name": "Warehouse",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action"
+    ]
+},
+{
+    "actions": 0,
+    "cost": 5,
+    "name": "Wharf",
+    "set": "seaside",
+    "tags": [],
+    "types": [
+        "Action",
+        "Duration"
+    ]
+}
+]`);
 
-            <label for='set_intrigue'>Intrigue</label>
-            <input type='checkbox' id='set_intrigue' />
 
-            <label for='set_seaside'>Seaside</label>
-            <input type='checkbox' id='set_seaside' />
+owned_cards = Array();
 
-            <label for='set_alchemy'>Alchemy</label>
-            <input type='checkbox' id='set_alchemy' />
+function getownedcards() {
+    owned_cards = [];
+    owned_sets = new Set();
+    existing_sets = [
+        'dominion',
+        'intrigue',
+        'seaside',
+        'alchemy',
+        'prosperity',
+        'cornucopia',
+        'hinterlands',
+        'darkages',
+        'guilds',
+        'adventures',
+        'empires',
+    ];
 
-            <label for='set_prosperity'>Prosperity</label>
-            <input type='checkbox' id='set_prosperity' />
+    var i;
+    for (i = 0; i < existing_sets.length; i++) {
+        var checkbox = document.getElementById('set_' + existing_sets[i]).checked;
+        if (checkbox == true) {
+            owned_sets.add(existing_sets[i]);
+        };
+    }
 
-            <label for='set_cornucopia'>Cornucopia</label>
-            <input type='checkbox' id='set_cornucopia' />
+    for (i = 0; i < existing_cards.length; i++) {
+        if (owned_sets.has(existing_cards[i].set)) {
+            owned_cards.push(existing_cards[i]);
+        }
+    }
+    return owned_cards;
+}
 
-            <label for='set_hinterlands'>Hinterlands</label>
-            <input type='checkbox' id='set_hinterlands' />
 
-            <label for='set_darkages'>Dark Ages</label>
-            <input type='checkbox' id='set_darkages' />
+/**
+ * Randomize array element order in-place.
+ * Using Durstenfeld shuffle algorithm.
+ */
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
 
-            <label for='set_guilds'>Guilds</label>
-            <input type='checkbox' id='set_guilds' />
 
-            <label for='set_adventures'>Adventures</label>
-            <input type='checkbox' id='set_adventures' />
+function select_cards (owned_cards) {
+    if (owned_cards.length == 0) {
+        //TODO: there's probably a more idiomatic way to hide cards.
+        var displayed_cards = document.getElementsByTagName('figure');
+        var i;
+        for (i = 0; i < displayed_cards.length; i++) {
+              displayed_cards[i].className = 'hidden';
+              }
+        return;
+    }
 
-            <label for='set_empires'>Empires</label>
-            <input type='checkbox' id='set_empires' />
-        </div>
+    chosen_cards = new Array();
+    chosen_names = new Set();
+    chosen_bane = null;
 
-        <div>
-            <label for='desiredcosts'>Card costs:</label>
-            <input type='tel' maxlength='10' id='desiredcosts' value='2445' />
-        </div>
+    owned_cards = shuffleArray(owned_cards);
 
-        <div>
-            <label for='reactions'>No Reactions without attack ?</label>
-            <input type='checkbox' id='reactions' checked />
-        </div>
+    // Select the cards:
+    var i;
+    for (i = 0; i < 10; i++){
+        choice = owned_cards[i];
+        chosen_cards.push(choice);
+        chosen_names.add(choice.name);
+    }
 
-        <div>
-            <fieldset>
-                <legend>What about attacks ?</legend>
-                <label for='attacks_unrestricted'><input type='radio' id='attacks_unrestricted' name='attacks' checked />Unrestricted</label>
-                <label for='attacks_noevilgoesunpunished'><input type='radio' id='attacks_noevilgoesunpunished' name='attacks' />No evil goes unpunished</label>
-                <label for='attacks_rainbowsandunicorns'><input type='radio' id='attacks_rainbowsandunicorns' name='attacks' />Rainbows and unicorns</label>
-            </fieldset>
-        </div>
 
-        <div class='button'>
-            <button type='button' onclick='sayHello()'>Randomize</button>
-        </div>
-    </form>
-</body>
+    // add Bane if Young Witch is present:
+    var i;
+    for (i = 0; i < chosen_cards.length; i++) {
+        if (chosen_cards[i].name == 'Young Witch') {
+            chosen_bane = get_bane(owned_cards, chosen_cards, chosen_names);
+            break;
+        }
+    }
+
+    // Test conditions:
+
+    // Sort output:
+    chosen_cards.sort(function(a, b){return a.cost - b.cost});
+
+    // insert chosen cards into page:
+
+    var i;
+    for (i = 0; i< 10; i++) {
+        fig = document.getElementById('card_' + i);
+
+        fig.className = '';
+        fig.querySelector('figcaption').textContent = chosen_cards[i].name;
+        fig.querySelector('.card_cost').textContent = chosen_cards[i].cost;
+        fig.querySelector('.card_type').textContent = chosen_cards[i].types;
+        
+    }
+
+    // insert the bane:
+    bane = document.getElementById('bane');
+    bane.className = 'hidden';
+
+    if (chosen_bane != null) {
+        bane.className = '';
+        bane.querySelector('figcaption').textContent = chosen_bane.name;
+        bane.querySelector('.card_cost').textContent = chosen_bane.cost;
+        bane.querySelector('.card_type').textContent = chosen_bane.types;
+    }
+}
+
+
+function get_bane (owned_cards, chosen_cards, chosen_names) {
+    var i;
+    for (i = 0; i < owned_cards.length; i++) {
+        var card = owned_cards[i];
+        if ((card.cost == 2 || card.cost == 3) && !chosen_names.has(card.name)) {
+            return card;
+        }
+    }
+}
+
+
+
+        </script>
+    </head>
+
+
+    <body onload='owned_cards=getownedcards(existing_cards)'>
+        <form action=''>
+
+            <div>
+                <label for='set_dominion'><input type='checkbox' id='set_dominion' onchange='owned_cards=getownedcards(existing_cards);' />Dominion</label>
+
+                <label for='set_intrigue'><input type='checkbox' id='set_intrigue' onchange='owned_cards=getownedcards(existing_cards);' />Intrigue</label>
+
+                <label for='set_seaside'><input type='checkbox' id='set_seaside' onchange='owned_cards=getownedcards(existing_cards);' />Seaside</label>
+
+                <label for='set_alchemy'><input type='checkbox' id='set_alchemy' onchange='owned_cards=getownedcards(existing_cards);' />Alchemy</label>
+
+                <label for='set_prosperity'><input type='checkbox' id='set_prosperity' onchange='owned_cards=getownedcards(existing_cards);' />Prosperity</label>
+
+                <label for='set_cornucopia'><input type='checkbox' id='set_cornucopia' onchange='owned_cards=getownedcards(existing_cards);' />Cornucopia</label>
+
+                <label for='set_hinterlands'><input type='checkbox' id='set_hinterlands' onchange='owned_cards=getownedcards(existing_cards);' />Hinterlands</label>
+
+                <label for='set_darkages'><input type='checkbox' id='set_darkages' onchange='owned_cards=getownedcards(existing_cards);' />Dark Ages</label>
+
+                <label for='set_guilds'><input type='checkbox' id='set_guilds' onchange='owned_cards=getownedcards(existing_cards);' />Guilds</label>
+
+                <label for='set_adventures'><input type='checkbox' id='set_adventures' onchange='owned_cards=getownedcards(existing_cards);' />Adventures</label>
+
+                <label for='set_empires'><input type='checkbox' id='set_empires' onchange='owned_cards=getownedcards(existing_cards);' />Empires</label>
+            </div>
+
+            <div>
+                <label for='desiredcosts'>Card costs:</label>
+                <input type='tel' maxlength='10' id='desiredcosts' value='2445' />
+            </div>
+
+            <div>
+                <label for='reactions'>No Reactions without attack ?</label>
+                <input type='checkbox' id='reactions' checked />
+            </div>
+
+            <div>
+                <fieldset>
+                    <legend>What about attacks ?</legend>
+                    <label for='attacks_unrestricted'><input type='radio' id='attacks_unrestricted' name='attacks' checked />Unrestricted</label>
+                    <label for='attacks_noevilgoesunpunished'><input type='radio' id='attacks_noevilgoesunpunished' name='attacks' />No evil goes unpunished</label>
+                    <label for='attacks_rainbowsandunicorns'><input type='radio' id='attacks_rainbowsandunicorns' name='attacks' />Rainbows and unicorns</label>
+                </fieldset>
+            </div>
+
+            <div class='button'>
+                <button type='button' onclick='select_cards(owned_cards)'>Randomize</button>
+            </div>
+        </form>
+
+        <ol class='flex_list'>
+            <li class='flex_item'>
+                <figure class='hidden' id='card_0'><figcaption></figcaption>
+                    <p class='card_text'></p>
+                    <div class='footer'><div class='card_cost'></div><div class='card_type'></div></div></figure>
+            </li>
+
+            <li class='flex_item'>
+                <figure class='hidden' id='card_1'><figcaption></figcaption>
+                    <p class='card_text'></p>
+                    <div class='footer'><div class='card_cost'></div><div class='card_type'></div></div></figure>
+            </li>
+
+            <li class='flex_item'>
+                <figure class='hidden' id='card_2'><figcaption></figcaption>
+                    <p class='card_text'></p>
+                    <div class='footer'><div class='card_cost'></div><div class='card_type'></div></div></figure>
+            </li>
+
+            <li class='flex_item'>
+                <figure class='hidden' id='card_3'><figcaption></figcaption>
+                    <p class='card_text'></p>
+                    <div class='footer'><div class='card_cost'></div><div class='card_type'></div></div></figure>
+            </li>
+
+            <li class='flex_item'>
+                <figure class='hidden' id='card_4'><figcaption></figcaption>
+                    <p class='card_text'></p>
+                    <div class='footer'><div class='card_cost'></div><div class='card_type'></div></div></figure>
+            </li>
+
+            <li class='flex_item'>
+                <figure class='hidden' id='card_5'><figcaption></figcaption>
+                    <p class='card_text'></p>
+                    <div class='footer'><div class='card_cost'></div><div class='card_type'></div></div></figure>
+            </li>
+
+            <li class='flex_item'>
+                <figure class='hidden' id='card_6'><figcaption></figcaption>
+                    <p class='card_text'></p>
+                    <div class='footer'><div class='card_cost'></div><div class='card_type'></div></div></figure>
+            </li>
+
+
+            <li class='flex_item'>
+                <figure class='hidden' id='card_7'><figcaption></figcaption>
+                    <p class='card_text'></p>
+                    <div class='footer'><div class='card_cost'></div><div class='card_type'></div></div></figure>
+            </li>
+
+            <li class='flex_item'>
+                <figure class='hidden' id='card_8'><figcaption></figcaption>
+                    <p class='card_text'></p>
+                    <div class='footer'><div class='card_cost'></div><div class='card_type'></div></div></figure>
+            </li>
+
+            <li class='flex_item'>
+                <figure class='hidden' id='card_9'><figcaption></figcaption>
+                    <p class='card_text'></p>
+                    <div class='footer'><div class='card_cost'></div><div class='card_type'></div></div></figure>
+            </li>
+
+        </ol>
+                <figure class='hidden' id='bane'><figcaption></figcaption>
+                    <p class='card_text'></p>
+                    <div class='footer'><div class='card_cost'></div><div class='card_type'></div></div></figure>
+
+    </body>
 
 </html>
