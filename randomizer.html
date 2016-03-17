@@ -62,588 +62,850 @@ figcaption {
         </style>
 
         <script type='text/javascript'>
+<!--
+
 const existing_cards = JSON.parse(`
-        [ 
-        {
-            "actions": 0,
-            "cost": 6,
-            "name": "Fairgrounds",
-            "set": "cornucopia",
-            "tags": [],
-            "types": [
-                "Victory"
-            ]
-        },
-        {
-            "actions": 2,
-            "cost": 4,
-            "name": "Farming Village",
-            "set": "cornucopia",
-            "tags": [],
-            "types": [
-                "Action"
-            ]
-        },
-{
-    "actions": 0,
-    "cost": 3,
-    "name": "Fortune Teller",
-    "set": "cornucopia",
-    "tags": [
-        "deck_pooper"
-    ],
-    "types": [
-        "Action",
-        "Attack"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 2,
-    "name": "Hamlet",
-    "set": "cornucopia",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Harvest",
-    "set": "cornucopia",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Horn of Plenty",
-    "set": "cornucopia",
-    "tags": [],
-    "types": [
-        "Treasure"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 4,
-    "name": "Horse Traders",
-    "set": "cornucopia",
-    "tags": [],
-    "types": [
-        "Action",
-        "Reaction"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 5,
-    "name": "Hunting Party",
-    "set": "cornucopia",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Jester",
-    "set": "cornucopia",
-    "tags": [
-        "gives_junk"
-    ],
-    "types": [
-        "Action",
-        "Attack"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 3,
-    "name": "Menagerie",
-    "set": "cornucopia",
-    "tags": [
-        "counters_handsize"
-    ],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 4,
-    "name": "Remake",
-    "set": "cornucopia",
-    "tags": [
-        "counters_junk"
-    ],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 4,
-    "name": "Tournament",
-    "set": "cornucopia",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 4,
-    "name": "Young Witch",
-    "set": "cornucopia",
-    "tags": [
-        "gives_junk"
-    ],
-    "types": [
-        "Action",
-        "Attack"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 4,
-    "name": "Advisor",
-    "set": "guilds",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 5,
-    "name": "Baker",
-    "set": "guilds",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Butcher",
-    "set": "guilds",
-    "tags": [
-        "counters_junk"
-    ],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 2,
-    "name": "Candlestick Maker",
-    "set": "guilds",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 3,
-    "name": "Doctor",
-    "set": "guilds",
-    "tags": [
-        "counters_junk"
-    ],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Ghost Ship",
-    "set": "seaside",
-    "tags": [
-        "reduces_hand",
-        "deck_pooper"
-    ],
-    "types": [
-        "Action",
-        "Attack"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 4,
-    "name": "Herald",
-    "set": "guilds",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Journeyman",
-    "set": "guilds",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 3,
-    "name": "Masterpiece",
-    "set": "guilds",
-    "tags": [],
-    "types": [
-        "Treasure"
-    ]
-},
-{
-    "actions": 2,
-    "cost": 4,
-    "name": "Plaza",
-    "set": "guilds",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Soothsayer",
-    "set": "guilds",
-    "tags": [
-        "gives_junk"
-    ],
-    "types": [
-        "Action",
-        "Attack"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 2,
-    "name": "Stonemason",
-    "set": "guilds",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Tactician",
-    "set": "seaside",
-    "tags": [
-        "counters_handsize"
-    ],
-    "types": [
-        "Action",
-        "Duration"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 4,
-    "name": "Taxman",
-    "set": "guilds",
-    "tags": [
-        "reduces_hand"
-    ],
-    "types": [
-        "Action",
-        "Attack"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 4,
-    "name": "Treasure Map",
-    "set": "guilds",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 3,
-    "name": "Ambassador",
-    "set": "seaside",
-    "tags": [
-        "counters_junk",
-        "gives_junk"
-    ],
-    "types": [
-        "Action",
-        "Attack"
-    ]
-},
-{
-    "actions": 2,
-    "cost": 5,
-    "name": "Bazaar",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 4,
-    "name": "Caravan",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action",
-        "Duration"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 4,
-    "name": "Cutpurse",
-    "set": "seaside",
-    "tags": [
-        "reduces_hand"
-    ],
-    "types": [
-        "Action",
-        "Attack"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 2,
-    "name": "Embargo",
-    "set": "seaside",
-    "tags": [
-        "gives_junk",
-        "punishes_buying"
-    ],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Explorer",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 2,
-    "cost": 3,
-    "name": "Fishing Village",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action",
-        "Duration"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 2,
-    "name": "Haven",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action",
-        "Duration"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 4,
-    "name": "Island",
-    "set": "seaside",
-    "tags": [
-        "counters_junk"
-    ],
-    "types": [
-        "Action",
-        "Victory"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 2,
-    "name": "Lighthouse",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action",
-        "Duration"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 3,
-    "name": "Lookout",
-    "set": "seaside",
-    "tags": [
-        "counters_junk"
-    ],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Merchant Guild",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Merchant Ship",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action",
-        "Duration"
-    ]
-},
-{
-    "actions": 2,
-    "cost": 2,
-    "name": "Native Village",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 4,
-    "name": "Navigator",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Outpost",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action",
-        "Duration"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 2,
-    "name": "Pearl Diver",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 4,
-    "name": "Pirate Ship",
-    "set": "seaside",
-    "tags": [
-        "deck_pooper"
-    ],
-    "types": [
-        "Action",
-        "Attack"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 4,
-    "name": "Salvager",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 4,
-    "name": "Sea Hag",
-    "set": "seaside",
-    "tags": [
-        "gives_junk",
-        "deck_pooper"
-    ],
-    "types": [
-        "Action",
-        "Attack"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 3,
-    "name": "Smugglers",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 5,
-    "name": "Treasury",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 1,
-    "cost": 3,
-    "name": "Warehouse",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action"
-    ]
-},
-{
-    "actions": 0,
-    "cost": 5,
-    "name": "Wharf",
-    "set": "seaside",
-    "tags": [],
-    "types": [
-        "Action",
-        "Duration"
-    ]
-}
+[
+    {
+        "actions": 0, 
+        "cost": 6, 
+        "name": "Fairgrounds", 
+        "set": "cornucopia", 
+        "tags": [], 
+        "types": [
+            "Victory"
+        ]
+    }, 
+    {
+        "actions": 2, 
+        "cost": 4, 
+        "name": "Farming Village", 
+        "set": "cornucopia", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 3, 
+        "name": "Fortune Teller", 
+        "set": "cornucopia", 
+        "tags": [
+            "deck_pooper"
+        ], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 2, 
+        "name": "Hamlet", 
+        "set": "cornucopia", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Harvest", 
+        "set": "cornucopia", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Horn of Plenty", 
+        "set": "cornucopia", 
+        "tags": [], 
+        "types": [
+            "Treasure"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Horse Traders", 
+        "set": "cornucopia", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Reaction"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 5, 
+        "name": "Hunting Party", 
+        "set": "cornucopia", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Jester", 
+        "set": "cornucopia", 
+        "tags": [
+            "gives_junk"
+        ], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 3, 
+        "name": "Menagerie", 
+        "set": "cornucopia", 
+        "tags": [
+            "counters_handsize"
+        ], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Remake", 
+        "set": "cornucopia", 
+        "tags": [
+            "counters_junk"
+        ], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 4, 
+        "name": "Tournament", 
+        "set": "cornucopia", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Young Witch", 
+        "set": "cornucopia", 
+        "tags": [
+            "gives_junk"
+        ], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 6, 
+        "name": "Adventurer", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 4, 
+        "name": "Bureaucrat", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 2, 
+        "name": "Cellar", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 3, 
+        "name": "Chancellor", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 2, 
+        "name": "Chapel", 
+        "set": "dominion", 
+        "tags": [
+            "counters_junk"
+        ], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Council Room", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Feast", 
+        "set": "dominion", 
+        "tags": [
+            "toilet_paper"
+        ], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Festival", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Gardens", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Victory"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Laboratory", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Library", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 5, 
+        "name": "Market", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Militia", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Mine", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 2, 
+        "name": "Moat", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Reaction"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Moneylender", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 2, 
+        "cost": 4, 
+        "name": "Remodel", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Smithy", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 4, 
+        "name": "Spy", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Thief", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 2, 
+        "cost": 4, 
+        "name": "Throne Room", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 2, 
+        "cost": 3, 
+        "name": "Village", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Witch", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 3, 
+        "name": "Woodcutter", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 3, 
+        "name": "Workshop", 
+        "set": "dominion", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 4, 
+        "name": "Advisor", 
+        "set": "guilds", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 5, 
+        "name": "Baker", 
+        "set": "guilds", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Butcher", 
+        "set": "guilds", 
+        "tags": [
+            "counters_junk"
+        ], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 2, 
+        "name": "Candlestick Maker", 
+        "set": "guilds", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 3, 
+        "name": "Doctor", 
+        "set": "guilds", 
+        "tags": [
+            "counters_junk"
+        ], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 4, 
+        "name": "Herald", 
+        "set": "guilds", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Journeyman", 
+        "set": "guilds", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 3, 
+        "name": "Masterpiece", 
+        "set": "guilds", 
+        "tags": [], 
+        "types": [
+            "Treasure"
+        ]
+    }, 
+    {
+        "actions": 2, 
+        "cost": 4, 
+        "name": "Plaza", 
+        "set": "guilds", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Soothsayer", 
+        "set": "guilds", 
+        "tags": [
+            "gives_junk"
+        ], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 2, 
+        "name": "Stonemason", 
+        "set": "guilds", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Taxman", 
+        "set": "guilds", 
+        "tags": [
+            "reduces_hand"
+        ], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Treasure Map", 
+        "set": "guilds", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 3, 
+        "name": "Ambassador", 
+        "set": "seaside", 
+        "tags": [
+            "counters_junk", 
+            "gives_junk"
+        ], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 2, 
+        "cost": 5, 
+        "name": "Bazaar", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 4, 
+        "name": "Caravan", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Duration"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Cutpurse", 
+        "set": "seaside", 
+        "tags": [
+            "reduces_hand"
+        ], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 2, 
+        "name": "Embargo", 
+        "set": "seaside", 
+        "tags": [
+            "gives_junk", 
+            "punishes_buying"
+        ], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Explorer", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 2, 
+        "cost": 3, 
+        "name": "Fishing Village", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Duration"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Ghost Ship", 
+        "set": "seaside", 
+        "tags": [
+            "reduces_hand", 
+            "deck_pooper"
+        ], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 2, 
+        "name": "Haven", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Duration"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Island", 
+        "set": "seaside", 
+        "tags": [
+            "counters_junk"
+        ], 
+        "types": [
+            "Action", 
+            "Victory"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 2, 
+        "name": "Lighthouse", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Duration"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 3, 
+        "name": "Lookout", 
+        "set": "seaside", 
+        "tags": [
+            "counters_junk"
+        ], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Merchant Guild", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Merchant Ship", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Duration"
+        ]
+    }, 
+    {
+        "actions": 2, 
+        "cost": 2, 
+        "name": "Native Village", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Navigator", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Outpost", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Duration"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 2, 
+        "name": "Pearl Diver", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Pirate Ship", 
+        "set": "seaside", 
+        "tags": [
+            "deck_pooper"
+        ], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Salvager", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 4, 
+        "name": "Sea Hag", 
+        "set": "seaside", 
+        "tags": [
+            "gives_junk", 
+            "deck_pooper"
+        ], 
+        "types": [
+            "Action", 
+            "Attack"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 3, 
+        "name": "Smugglers", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Tactician", 
+        "set": "seaside", 
+        "tags": [
+            "counters_handsize"
+        ], 
+        "types": [
+            "Action", 
+            "Duration"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 5, 
+        "name": "Treasury", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 1, 
+        "cost": 3, 
+        "name": "Warehouse", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action"
+        ]
+    }, 
+    {
+        "actions": 0, 
+        "cost": 5, 
+        "name": "Wharf", 
+        "set": "seaside", 
+        "tags": [], 
+        "types": [
+            "Action", 
+            "Duration"
+        ]
+    }
 ]`);
 
 
@@ -698,20 +960,26 @@ function shuffleArray(array) {
 }
 
 
+function hide_all_cards () {
+    //TODO: there's probably a more idiomatic way to hide cards.
+    var displayed_cards = document.getElementsByTagName('figure');
+    var i;
+    for (i = 0; i < displayed_cards.length; i++) {
+          displayed_cards[i].className = 'hidden';
+          }
+}
+
 function select_cards (owned_cards) {
-    if (owned_cards.length == 0) {
-        //TODO: there's probably a more idiomatic way to hide cards.
-        var displayed_cards = document.getElementsByTagName('figure');
-        var i;
-        for (i = 0; i < displayed_cards.length; i++) {
-              displayed_cards[i].className = 'hidden';
-              }
-        return;
-    }
+if (owned_cards.length == 0) {
+    hide_all_cards();
+    return;
+}
+
+var max_tries = 1000;
+for (attempt = 0; attempt < max_tries; attempt++) {
 
     chosen_cards = new Array();
     chosen_names = new Set();
-    chosen_bane = null;
 
     owned_cards = shuffleArray(owned_cards);
 
@@ -723,48 +991,89 @@ function select_cards (owned_cards) {
         chosen_names.add(choice.name);
     }
 
-
-    // add Bane if Young Witch is present:
+    // add Bane if Young Witch is present.
+    // reject the set if no valid bane remains.
+    //
+    if (chosen_names.has('Young Witch')) {
+        var bane = get_bane(owned_cards, chosen_names);
+        if (bane === undefined) {
+            continue;
+        }
+        chosen_cards.push(bane);
+        chosen_names.add(bane.name);
+    }
+    // Test conditions:
+    var chosen_card_types = new Set();
     var i;
     for (i = 0; i < chosen_cards.length; i++) {
-        if (chosen_cards[i].name == 'Young Witch') {
-            chosen_bane = get_bane(owned_cards, chosen_cards, chosen_names);
-            break;
+         var j;
+              for (j = 0; j < chosen_cards[i].types.length; j++) {
+                chosen_card_types.add(chosen_cards[i].types[j]);
+              }
+    }
+
+    // condition: reaction only if there's an attack
+    if (chosen_card_types.has('Reaction') && !chosen_card_types.has('Attack')) {
+        continue;
+    }
+
+    // condition: costs
+    var desiredcosts = document.getElementById('desiredcosts').value;
+
+    var i;
+    for (i = 0; i < chosen_cards.length; i++) {
+        cost = new RegExp(chosen_cards[i].cost)
+        desiredcosts = desiredcosts.replace(cost, '');
+    }
+
+    if (desiredcosts.length > 0) {
+        continue;
+    }
+
+    // condition: attacks
+
+    var attacks = document.querySelector('input[name = "attacks"]:checked').id;
+
+    var bad_set = false;
+    if (attacks == 'attacks_rainbowsandunicorns') {
+        var i;
+        for (i = 0; i < chosen_cards.length; i++) {
+              if (chosen_cards[i].types.indexOf('Attack') != -1) {
+              bad_set = true;
+              break;
+              }
+        }
+        if (bad_set == true) {
+          continue;
         }
     }
 
-    // Test conditions:
+    break;
+    }
 
-    // Sort output:
-    chosen_cards.sort(function(a, b){return a.cost - b.cost});
+    // Sort output, leaving bane as 11th if present
+
+    var first_ten = chosen_cards.slice(0, 10).sort(
+    function(a, b){return a.cost - b.cost});
+    chosen_cards = first_ten.concat(chosen_cards.slice(10));
 
     // insert chosen cards into page:
 
+    document.getElementById('card_10').className = 'hidden'; // bane
     var i;
-    for (i = 0; i< 10; i++) {
+    for (i = 0; i< chosen_cards.length; i++) {
         fig = document.getElementById('card_' + i);
 
         fig.className = '';
         fig.querySelector('figcaption').textContent = chosen_cards[i].name;
         fig.querySelector('.card_cost').textContent = chosen_cards[i].cost;
         fig.querySelector('.card_type').textContent = chosen_cards[i].types;
-        
-    }
 
-    // insert the bane:
-    bane = document.getElementById('bane');
-    bane.className = 'hidden';
-
-    if (chosen_bane != null) {
-        bane.className = '';
-        bane.querySelector('figcaption').textContent = chosen_bane.name;
-        bane.querySelector('.card_cost').textContent = chosen_bane.cost;
-        bane.querySelector('.card_type').textContent = chosen_bane.types;
     }
 }
 
 
-function get_bane (owned_cards, chosen_cards, chosen_names) {
+function get_bane (owned_cards, chosen_names) {
     var i;
     for (i = 0; i < owned_cards.length; i++) {
         var card = owned_cards[i];
@@ -776,6 +1085,7 @@ function get_bane (owned_cards, chosen_cards, chosen_names) {
 
 
 
+          //-->
         </script>
     </head>
 
@@ -894,7 +1204,7 @@ function get_bane (owned_cards, chosen_cards, chosen_names) {
             </li>
 
         </ol>
-                <figure class='hidden' id='bane'><figcaption></figcaption>
+                <figure class='hidden' id='card_10'><figcaption></figcaption>
                     <p class='card_text'></p>
                     <div class='footer'><div class='card_cost'></div><div class='card_type'></div></div></figure>
 
