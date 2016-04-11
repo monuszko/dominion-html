@@ -3336,14 +3336,33 @@ function getownedcards() {
         'empires',
     ];
 
-    var i;
-    for (i = 0; i < existing_sets.length; i++) {
-        var checkbox = document.getElementById('set_' + existing_sets[i]).checked;
-        if (checkbox == true) {
-            owned_sets.add(existing_sets[i]);
-        };
+    console.log('All expansions is ' + parseInt('1'.repeat(existing_sets.length), 2));
+    var checkbox;
+
+    var i = 0;
+    for (i = 0; i < existing_sets.length - 1; i++) {
+        checkbox = document.getElementById('set_' + existing_sets[i]);
+        checkbox.checked = false;
     }
 
+    var magic_number;
+    // Number is converted to binary, 0 - no expansion, 1 - expansion present
+    magic_number = document.getElementById('expansions').value;
+    var remainder;
+    i = 0;
+    while (magic_number > 0) {
+        remainder = magic_number % 2;
+        magic_number = Math.floor(magic_number / 2);
+
+        checkbox = document.getElementById('set_' + existing_sets[i]);
+        if (remainder == 1) {
+            checkbox.checked = true;
+            owned_sets.add(existing_sets[i]);
+        }
+        i++;
+    }
+
+    var i;
     for (i = 0; i < existing_cards.length; i++) {
         if (owned_sets.has(existing_cards[i].set)) {
             owned_cards.push(existing_cards[i]);
@@ -3520,14 +3539,12 @@ if ((chosen_tags['needs_attacks'] >= 1) && !chosen_card_types.has('Attack')) {
 
     var no_flaws = true;
     if (attacks == 'attacks_rainbowsandunicorns') {
-        var i;
-        for (i = 0; i < chosen_cards.length; i++) {
-              if (chosen_cards[i].types.indexOf('Attack') != -1) {
-              no_flaws = false;
-              break;
-              }
+        if (chosen_card_types.has('Attack')) {
+            no_flaws = false;
+            console.log('Attacks forbidden, so rejecting the set:');
+            console.log(chosen_names);
+            }
         }
-    }
 
     if (attacks == 'attacks_noevilgoesunpunished') {
         no_flaws = attacksCountered(chosen_cards, chosen_names, chosen_tags);
@@ -3584,27 +3601,29 @@ function get_bane (owned_cards, chosen_names) {
         <form action=''>
 
             <div>
-                <label for='set_dominion'><input type='checkbox' id='set_dominion' onchange='owned_cards=getownedcards(existing_cards);' />Dominion</label>
+                <label for='expansions'><input type='tel' id='expansions' maxlength=11 value=0 onkeyup='owned_cards=getownedcards(existing_cards);' />
 
-                <label for='set_intrigue'><input type='checkbox' id='set_intrigue' onchange='owned_cards=getownedcards(existing_cards);' />Intrigue</label>
+                <label for='set_dominion'><input type='checkbox' disabled='true' id='set_dominion' onchange='owned_cards=getownedcards(existing_cards);' />D(1)</label>
 
-                <label for='set_seaside'><input type='checkbox' id='set_seaside' onchange='owned_cards=getownedcards(existing_cards);' />Seaside</label>
+                <label for='set_intrigue'><input type='checkbox' disabled='true'  id='set_intrigue' onchange='owned_cards=getownedcards(existing_cards);' />I(2)</label>
 
-                <label for='set_alchemy'><input type='checkbox' id='set_alchemy' onchange='owned_cards=getownedcards(existing_cards);' />Alchemy</label>
+                <label for='set_seaside'><input type='checkbox' disabled='true' id='set_seaside' onchange='owned_cards=getownedcards(existing_cards);' />S(4)</label>
 
-                <label for='set_prosperity'><input type='checkbox' id='set_prosperity' onchange='owned_cards=getownedcards(existing_cards);' />Prosperity</label>
+                <label for='set_alchemy'><input type='checkbox' disabled='true' id='set_alchemy' onchange='owned_cards=getownedcards(existing_cards);' />A(8)</label>
 
-                <label for='set_cornucopia'><input type='checkbox' id='set_cornucopia' onchange='owned_cards=getownedcards(existing_cards);' />Cornucopia</label>
+                <label for='set_prosperity'><input type='checkbox' disabled='true' id='set_prosperity' onchange='owned_cards=getownedcards(existing_cards);' />P(16)</label>
 
-                <label for='set_hinterlands'><input type='checkbox' id='set_hinterlands' onchange='owned_cards=getownedcards(existing_cards);' />Hinterlands</label>
+                <label for='set_cornucopia'><input type='checkbox' disabled='true' id='set_cornucopia' onchange='owned_cards=getownedcards(existing_cards);' />C(32)</label>
 
-                <label for='set_darkages'><input type='checkbox' id='set_darkages' onchange='owned_cards=getownedcards(existing_cards);' />Dark Ages</label>
+                <label for='set_hinterlands'><input type='checkbox' disabled='true' id='set_hinterlands' onchange='owned_cards=getownedcards(existing_cards);' />H(64)</label>
 
-                <label for='set_guilds'><input type='checkbox' id='set_guilds' onchange='owned_cards=getownedcards(existing_cards);' />Guilds</label>
+                <label for='set_darkages'><input type='checkbox' disabled='true' id='set_darkages' onchange='owned_cards=getownedcards(existing_cards);' />DA(128)</label>
 
-                <label for='set_adventures'><input type='checkbox' id='set_adventures' onchange='owned_cards=getownedcards(existing_cards);' />Adventures</label>
+                <label for='set_guilds'><input type='checkbox' disabled='true' id='set_guilds' onchange='owned_cards=getownedcards(existing_cards);' />G(256)</label>
 
-                <label for='set_empires'><input type='checkbox' id='set_empires' onchange='owned_cards=getownedcards(existing_cards);' />Empires</label>
+                <label for='set_adventures'><input type='checkbox' disabled='true' id='set_adventures' onchange='owned_cards=getownedcards(existing_cards);' />V(512)</label>
+
+                <label for='set_empires'><input type='checkbox' disabled='true' id='set_empires' onchange='owned_cards=getownedcards(existing_cards);' />E(1024)</label>
             </div>
 
             <div>
