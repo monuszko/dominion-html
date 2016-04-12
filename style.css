@@ -1,0 +1,81 @@
+.flex_list {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.flex_item {
+    width: 20%;
+    float: left;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+figure {
+    text-align: center;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+figcaption {
+    border-bottom: 1px solid black;
+}
+
+.hidden {
+    display: none;
+}
+
+.card_text {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex: 0 0 auto;
+    border-top: 1px solid black;
+}
+
+.card_cost {
+    float: left;
+    background: yellow;
+    border-radius: 50%;
+    box-shadow: inset 0 0 2px red;
+    width: 1em;
+
+}
+
+[alt]:before {
+    /* needed - do not touch */
+    content: attr(alt);
+    position: absolute;
+    opacity: 0;
+    
+    /* customizable */
+    transition: all 0.15s ease;
+    white-space: pre-wrap;
+    padding: 10px;
+    color: #333;
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px silver;    
+}
+
+[alt]:hover:before {
+    /* needed - do not touch */
+    opacity: 1;
+    
+    /* customizable */
+    background: yellow;
+    margin-top: -50px;
+    margin-left: 20px;    
+    max-width: 200px;
+}
+
+/* fixes occasional flickering */
+[alt]:before {
+    pointer-events: none;
+}
