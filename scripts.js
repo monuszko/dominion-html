@@ -18,12 +18,12 @@ function getownedcards() {
     ];
 
     console.log('All expansions is ' + parseInt('1'.repeat(existing_sets.length), 2));
-    var checkbox;
+    var span;
 
     var i = 0;
-    for (i = 0; i < existing_sets.length - 1; i++) {
-        checkbox = document.getElementById('set_' + existing_sets[i]);
-        checkbox.checked = false;
+    for (i = 0; i < existing_sets.length; i++) {
+        span = document.getElementById('set_' + existing_sets[i]);
+        span.classList.remove('selected');
     }
 
     var magic_number;
@@ -35,9 +35,9 @@ function getownedcards() {
         remainder = magic_number % 2;
         magic_number = Math.floor(magic_number / 2);
 
-        checkbox = document.getElementById('set_' + existing_sets[i]);
+        span = document.getElementById('set_' + existing_sets[i]);
         if (remainder == 1) {
-            checkbox.checked = true;
+            span.classList.add('selected');
             owned_sets.add(existing_sets[i]);
         }
         i++;
@@ -122,7 +122,7 @@ function hide_all_cards () {
     var displayed_cards = document.getElementsByTagName('figure');
     var i;
     for (i = 0; i < displayed_cards.length; i++) {
-          displayed_cards[i].className = 'hidden';
+          displayed_cards[i].classList.add('hidden');
           }
 }
 
@@ -247,12 +247,12 @@ if ((chosen_tags['needs_attacks'] >= 1) && !chosen_card_types.has('Attack')) {
 
     // insert chosen cards into page:
 
-    document.getElementById('card_10').className = 'hidden'; // bane
+    document.getElementById('card_10').classList.add('hidden'); // bane
     var i;
     for (i = 0; i< chosen_cards.length; i++) {
         fig = document.getElementById('card_' + i);
 
-        fig.className = '';
+        fig.classList.remove('hidden');
         fig.setAttribute('alt', chosen_cards[i].text);
         fig.querySelector('figcaption').textContent = chosen_cards[i].name;
         fig.querySelector('.card_cost').textContent = chosen_cards[i].cost;

@@ -11,75 +11,31 @@
 
     <body onload='owned_cards=getownedcards(existing_cards)'> <form action=''>
 
-            <div> <label for='expansions'><input type='tel' id='expansions'
-               maxlength=11 value=0
-               onkeyup='owned_cards=getownedcards(existing_cards);' />
+            <label for='expansions'><input type='tel' id='expansions'
+               maxlength=11 value=0 size='5 em' onkeyup='owned_cards=getownedcards(existing_cards);' />
 
-                <label for='set_dominion'><input type='checkbox'
-               disabled='true' id='set_dominion'
-               onchange='owned_cards=getownedcards(existing_cards);'
-               />D(1)</label>
-
-                <label for='set_intrigue'><input type='checkbox'
-               disabled='true'  id='set_intrigue'
-               onchange='owned_cards=getownedcards(existing_cards);'
-               />I(2)</label>
-
-                <label for='set_seaside'><input type='checkbox' disabled='true'
-               id='set_seaside'
-               onchange='owned_cards=getownedcards(existing_cards);'
-               />S(4)</label>
-
-                <label for='set_alchemy'><input type='checkbox' disabled='true'
-               id='set_alchemy'
-               onchange='owned_cards=getownedcards(existing_cards);'
-               />A(8)</label>
-
-                <label for='set_prosperity'><input type='checkbox'
-               disabled='true' id='set_prosperity'
-               onchange='owned_cards=getownedcards(existing_cards);'
-               />P(16)</label>
-
-                <label for='set_cornucopia'><input type='checkbox'
-               disabled='true' id='set_cornucopia'
-               onchange='owned_cards=getownedcards(existing_cards);'
-               />C(32)</label>
-
-                <label for='set_hinterlands'><input type='checkbox'
-               disabled='true' id='set_hinterlands'
-               onchange='owned_cards=getownedcards(existing_cards);'
-               />H(64)</label>
-
-                <label for='set_darkages'><input type='checkbox'
-               disabled='true' id='set_darkages'
-               onchange='owned_cards=getownedcards(existing_cards);'
-               />DA(128)</label>
-
-                <label for='set_guilds'><input type='checkbox' disabled='true'
-               id='set_guilds'
-               onchange='owned_cards=getownedcards(existing_cards);'
-               />G(256)</label>
-
-                <label for='set_adventures'><input type='checkbox'
-               disabled='true' id='set_adventures'
-               onchange='owned_cards=getownedcards(existing_cards);'
-               />V(512)</label>
-
-                <label for='set_empires'><input type='checkbox' disabled='true'
-               id='set_empires'
-               onchange='owned_cards=getownedcards(existing_cards);'
-               />E(1024)</label> </div>
+                    <span id='set_dominion' class='outer'><strong alt='dominion (Base)'>B</strong><span class='notphone'>ase </span></span><!--
+                 --><span id='set_intrigue' class='outer'><strong alt='Intrigue'>I</strong><span class='notphone'>ntrigue </span></span><!--
+                 --><span id='set_seaside' class='outer'><strong alt='Seaside'>S</strong><span class='notphone'>easide </span></span><!--
+                 --><span id='set_alchemy' class='outer'><strong alt='Alchemy'>A</strong><span class='notphone'>lchemy </span></span><!--
+                 --><span id='set_prosperity' class='outer'><strong alt='Prosperity'>P</strong><span class='notphone'>rosperity </span></span><!--
+                 --><span id='set_cornucopia' class='outer'><strong alt='Cornucopia'>C</strong><span class='notphone'>ornucopia </span></span><!--
+                 --><span id='set_hinterlands' class='outer'><strong alt='Hinterlands'>H</strong><span class='notphone'>interlands </span></span><!--
+                 --><span id='set_darkages' class='outer'><strong alt='Dark Ages'>D</strong><span class='notphone'>ark Ages </span></span><!--
+                 --><span id='set_guilds' class='outer'><strong alt='Guilds'>G</strong><span class='notphone'>uilds </span></span><!--
+                 --><span id='set_adventures' class='outer'><span class='notphone'>ad</span><strong alt='adVentures'>V</strong><span class='notphone'>entures </span></span><!--
+                 --><span id='set_empires' class='outer'><strong alt='Empires'>E</strong><span class='notphone'>mpires </span></span>
 
             <div> <label for='desiredcosts'>Card costs:</label>
-                <input type='tel' maxlength='10' id='desiredcosts' value='2445' />
+                <input type='tel' maxlength='10' size='10em' id='desiredcosts' value='2445' />
             </div>
 
             <div>
                 <fieldset>
-                    <legend>What about attacks ?</legend>
+                    <legend>Attacks</legend>
                     <label for='attacks_unrestricted'><input type='radio' id='attacks_unrestricted' name='attacks' checked />Unrestricted</label>
-                    <label for='attacks_noevilgoesunpunished'><input type='radio' id='attacks_noevilgoesunpunished' name='attacks' />No evil goes unpunished</label>
-                    <label for='attacks_rainbowsandunicorns'><input type='radio' id='attacks_rainbowsandunicorns' name='attacks' />Rainbows and unicorns</label>
+                    <label for='attacks_countered'><input type='radio' id='attacks_countered' name='attacks' />Countered</label>
+                    <label for='attacks_none'><input type='radio' id='attacks_none' name='attacks' />None</label>
                 </fieldset>
             </div>
 
