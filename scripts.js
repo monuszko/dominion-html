@@ -116,6 +116,60 @@ function attacksCountered(chosen_cards, chosen_names, chosen_tags) {
     }
 
 
+function conditionsPassed(chosen_cards, chosen_tags, chosen_card_types) {
+
+    // condition: cards that NEED attack should appear alongside attacks
+    if ((chosen_tags['needs_attacks'] >= 1) && !chosen_card_types.has('Attack')) {
+        console.log(chosen_names);
+        console.log('REJECTING set because it has cards that need attacks but no attacks.');
+        return false;
+    }
+
+    // condition: costs
+    var desiredcosts = document.getElementById('desiredcosts').value;
+
+    var i;
+    for (i = 0; i < chosen_cards.length; i++) {
+        cost = new RegExp(chosen_cards[i].cost)
+        desiredcosts = desiredcosts.replace(cost, '');
+    }
+
+    if (desiredcosts.length > 0) {
+        console.log('Rejecting set - desired costs not present.');
+        return false;
+    }
+
+    // condition: attacks
+    var attacks = document.querySelector('input[name = "attacks"]:checked').id;
+    if (attacks == 'attacks_none') {
+        if (chosen_card_types.has('Attack')) {
+            console.log('Attacks forbidden, so rejecting the set:');
+            console.log(chosen_names);
+            return false
+            }
+        }
+
+    if (attacks == 'attacks_countered') {
+        if (!attacksCountered(chosen_cards, chosen_names, chosen_tags)) {
+            return false;
+        }
+    }
+
+   // condition: Only newbie friendly cards
+    var newbie_friendly = document.getElementById('newbies').checked;
+    if (newbie_friendly == true) {
+        var i;
+        for (i = 0; i < chosen_cards.length; i++) {
+            if (chosen_cards[i].complicated == true){
+                console.log('Rejecting complicated ' + chosen_cards[i].name);
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
 
 function hide_all_cards () {
     //TODO: there's probably a more idiomatic way to hide cards.
@@ -160,8 +214,8 @@ function show_cards (owned_cards) {
         chosen_cards.push(bane);
         chosen_names.add(bane.name);
     }
-    // Test conditions:
-    
+
+    // Check what card types there are. ONLY USED IN ONE PLACE
     var chosen_card_types = new Set();
     var i;
     for (i = 0; i < chosen_cards.length; i++) {
@@ -195,46 +249,10 @@ function show_cards (owned_cards) {
     }
 
 
-// condition: cards that NEED attack should appear alongside attacks
-if ((chosen_tags['needs_attacks'] >= 1) && !chosen_card_types.has('Attack')) {
-    console.log(chosen_names);
-    console.log('REJECTING set because it has cards that need attacks but no attacks.');
-    continue;
-}
-
-    // condition: costs
-    var desiredcosts = document.getElementById('desiredcosts').value;
-
-    var i;
-    for (i = 0; i < chosen_cards.length; i++) {
-        cost = new RegExp(chosen_cards[i].cost)
-        desiredcosts = desiredcosts.replace(cost, '');
-    }
-
-    if (desiredcosts.length > 0) {
+    if (!conditionsPassed(chosen_cards, chosen_tags, chosen_card_types)) {
         continue;
     }
 
-    // condition: attacks
-
-    var attacks = document.querySelector('input[name = "attacks"]:checked').id;
-
-    var no_flaws = true;
-    if (attacks == 'attacks_rainbowsandunicorns') {
-        if (chosen_card_types.has('Attack')) {
-            no_flaws = false;
-            console.log('Attacks forbidden, so rejecting the set:');
-            console.log(chosen_names);
-            }
-        }
-
-    if (attacks == 'attacks_noevilgoesunpunished') {
-        no_flaws = attacksCountered(chosen_cards, chosen_names, chosen_tags);
-    }
-
-    if (no_flaws == false) {
-      continue;
-    }
 
     break;
     }

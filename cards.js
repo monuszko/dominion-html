@@ -11,6 +11,7 @@ const existing_cards = JSON.parse(`
 [
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Amulet", 
         "set": "adventures", 
@@ -27,6 +28,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Artificer", 
         "set": "adventures", 
@@ -40,6 +42,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "gainer"
@@ -58,6 +61,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Caravan Guard", 
         "set": "adventures", 
@@ -74,6 +78,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Coin of the Realm", 
         "set": "adventures", 
@@ -86,6 +91,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Distant Lands", 
         "set": "adventures", 
@@ -99,6 +105,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Dungeon", 
         "set": "adventures", 
@@ -113,6 +120,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Duplicate", 
         "set": "adventures", 
@@ -127,6 +135,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Gear", 
         "set": "adventures", 
@@ -139,6 +148,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 5, 
         "countered_by": [
             "trasher", 
@@ -159,6 +169,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Guide", 
         "set": "adventures", 
@@ -174,10 +185,12 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 5, 
         "countered_by": [
             "gainer", 
-            "trasher"
+            "trasher", 
+            "trash_for_benefit"
         ], 
         "name": "Haunted Woods", 
         "set": "adventures", 
@@ -191,6 +204,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 6, 
         "name": "Hireling", 
         "set": "adventures", 
@@ -203,6 +217,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Lost City", 
         "set": "adventures", 
@@ -214,6 +229,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Magpie", 
         "set": "adventures", 
@@ -225,6 +241,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 4, 
         "name": "Messenger", 
         "set": "adventures", 
@@ -239,6 +256,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Miser", 
         "set": "adventures", 
@@ -253,6 +271,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 2, 
         "name": "Page", 
         "set": "adventures", 
@@ -265,6 +284,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 2, 
         "name": "Peasant", 
         "set": "adventures", 
@@ -279,6 +299,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Port", 
         "set": "adventures", 
@@ -290,6 +311,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Ranger", 
         "set": "adventures", 
@@ -301,6 +323,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Ratcatcher", 
         "set": "adventures", 
@@ -315,6 +338,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Raze", 
         "set": "adventures", 
@@ -329,6 +353,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "draw_to_x", 
@@ -348,6 +373,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Royal Carriage", 
         "set": "adventures", 
@@ -360,6 +386,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Storyteller", 
         "set": "adventures", 
@@ -371,6 +398,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "gainer", 
@@ -391,6 +419,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Transmogrify", 
         "set": "adventures", 
@@ -405,6 +434,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Treasure Trove", 
         "set": "adventures", 
@@ -416,6 +446,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Wine Merchant", 
         "set": "adventures", 
@@ -430,6 +461,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Alchemist", 
         "set": "alchemy", 
@@ -441,6 +473,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Apothecary", 
         "set": "alchemy", 
@@ -454,6 +487,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Apprentice", 
         "set": "alchemy", 
@@ -467,6 +501,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 3, 
         "countered_by": [
             "trasher", 
@@ -487,6 +522,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Golem", 
         "set": "alchemy", 
@@ -498,6 +534,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Herbalist", 
         "set": "alchemy", 
@@ -511,6 +548,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Philosopher's Stone", 
         "set": "alchemy", 
@@ -522,6 +560,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 6, 
         "name": "Possession", 
         "set": "alchemy", 
@@ -533,6 +572,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 2, 
         "countered_by": [
             "sifter", 
@@ -551,6 +591,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 0, 
         "name": "Transmute", 
         "set": "alchemy", 
@@ -564,6 +605,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 2, 
         "name": "University", 
         "set": "alchemy", 
@@ -577,6 +619,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 0, 
         "name": "Vineyard", 
         "set": "alchemy", 
@@ -590,6 +633,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 6, 
         "name": "Fairgrounds", 
         "set": "cornucopia", 
@@ -603,6 +647,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Farming Village", 
         "set": "cornucopia", 
@@ -616,6 +661,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 3, 
         "countered_by": [
             "sifter", 
@@ -636,6 +682,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Hamlet", 
         "set": "cornucopia", 
@@ -647,6 +694,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Harvest", 
         "set": "cornucopia", 
@@ -660,6 +708,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Horn of Plenty", 
         "set": "cornucopia", 
@@ -674,6 +723,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Horse Traders", 
         "set": "cornucopia", 
@@ -688,6 +738,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Hunting Party", 
         "set": "cornucopia", 
@@ -699,6 +750,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 5, 
         "countered_by": [
             "silver_generator", 
@@ -718,6 +770,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 3, 
         "name": "Menagerie", 
         "set": "cornucopia", 
@@ -732,6 +785,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Remake", 
         "set": "cornucopia", 
@@ -745,6 +799,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 4, 
         "name": "Tournament", 
         "set": "cornucopia", 
@@ -758,6 +813,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 4, 
         "countered_by": [
             "mass_trasher", 
@@ -777,6 +833,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 6, 
         "name": "Altar", 
         "set": "darkages", 
@@ -791,6 +848,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Armory", 
         "set": "darkages", 
@@ -804,6 +862,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Band of Misfits", 
         "set": "darkages", 
@@ -815,6 +874,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Bandit Camp", 
         "set": "darkages", 
@@ -828,6 +888,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Beggar", 
         "set": "darkages", 
@@ -842,6 +903,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Catacombs", 
         "set": "darkages", 
@@ -855,6 +917,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Count", 
         "set": "darkages", 
@@ -869,6 +932,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Counterfeit", 
         "set": "darkages", 
@@ -883,6 +947,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "likes_diversity", 
@@ -903,6 +968,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Death Cart", 
         "set": "darkages", 
@@ -919,6 +985,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Feodum", 
         "set": "darkages", 
@@ -932,6 +999,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 3, 
         "name": "Forager", 
         "set": "darkages", 
@@ -947,6 +1015,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": true, 
         "cost": 4, 
         "name": "Fortress", 
         "set": "darkages", 
@@ -960,6 +1029,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Graverobber", 
         "set": "darkages", 
@@ -974,6 +1044,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": true, 
         "cost": 3, 
         "name": "Hermit", 
         "set": "darkages", 
@@ -988,6 +1059,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 6, 
         "name": "Hunting Grounds", 
         "set": "darkages", 
@@ -1001,6 +1073,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Ironmonger", 
         "set": "darkages", 
@@ -1012,6 +1085,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Junk Dealer", 
         "set": "darkages", 
@@ -1027,6 +1101,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 5, 
         "countered_by": [
             "draw_to_x", 
@@ -1046,6 +1121,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "countered_by": [
             "trasher", 
@@ -1066,6 +1142,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 3, 
         "name": "Market Square", 
         "set": "darkages", 
@@ -1080,6 +1157,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Mystic", 
         "set": "darkages", 
@@ -1094,6 +1172,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "silver_generator"
@@ -1111,6 +1190,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 1, 
         "name": "Poor House", 
         "set": "darkages", 
@@ -1125,6 +1205,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Procession", 
         "set": "darkages", 
@@ -1138,6 +1219,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 4, 
         "name": "Rats", 
         "set": "darkages", 
@@ -1151,6 +1233,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [], 
         "name": "Rebuild", 
@@ -1166,6 +1249,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 5, 
         "countered_by": [
             "gainer"
@@ -1183,6 +1267,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Sage", 
         "set": "darkages", 
@@ -1194,6 +1279,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 4, 
         "name": "Scavenger", 
         "set": "darkages", 
@@ -1207,6 +1293,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Squire", 
         "set": "darkages", 
@@ -1223,6 +1310,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 3, 
         "name": "Storeroom", 
         "set": "darkages", 
@@ -1236,6 +1324,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 4, 
         "countered_by": [
             "draw_to_x", 
@@ -1254,6 +1343,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Vagrant", 
         "set": "darkages", 
@@ -1265,6 +1355,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Wandering Minstrel", 
         "set": "darkages", 
@@ -1276,6 +1367,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 6, 
         "name": "Adventurer", 
         "set": "dominion", 
@@ -1289,6 +1381,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "countered_by": [
             "trash_for_benefit", 
@@ -1309,6 +1402,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Cellar", 
         "set": "dominion", 
@@ -1322,6 +1416,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 3, 
         "name": "Chancellor", 
         "set": "dominion", 
@@ -1335,6 +1430,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 2, 
         "countered_by": [
             "treasure_trasher", 
@@ -1354,6 +1450,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Council Room", 
         "set": "dominion", 
@@ -1365,6 +1462,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Feast", 
         "set": "dominion", 
@@ -1378,6 +1476,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Festival", 
         "set": "dominion", 
@@ -1391,6 +1490,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Gardens", 
         "set": "dominion", 
@@ -1402,6 +1502,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Laboratory", 
         "set": "dominion", 
@@ -1413,6 +1514,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Library", 
         "set": "dominion", 
@@ -1426,6 +1528,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Market", 
         "set": "dominion", 
@@ -1439,6 +1542,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "countered_by": [
             "draw_to_x", 
@@ -1458,6 +1562,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Mine", 
         "set": "dominion", 
@@ -1471,6 +1576,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Moat", 
         "set": "dominion", 
@@ -1486,6 +1592,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Moneylender", 
         "set": "dominion", 
@@ -1501,6 +1608,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Remodel", 
         "set": "dominion", 
@@ -1514,6 +1622,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Smithy", 
         "set": "dominion", 
@@ -1525,17 +1634,16 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "countered_by": [
-            "M_mostly_harmless",
+            "M_mostly_harmless", 
             "sifter", 
             "deck_inspector"
         ], 
         "name": "Spy", 
         "set": "dominion", 
-        "tags": [
-            ""
-        ], 
+        "tags": [], 
         "text": "+1 Card\\n+1 Action\\n\\nEach player (including you) reveals the top card of his deck and either discards it or puts it back, your choice.", 
         "types": [
             "Action", 
@@ -1544,6 +1652,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "countered_by": [
             "virtual_coin"
@@ -1562,6 +1671,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Throne Room", 
         "set": "dominion", 
@@ -1573,6 +1683,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Village", 
         "set": "dominion", 
@@ -1584,6 +1695,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "mass_trasher", 
@@ -1606,6 +1718,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Woodcutter", 
         "set": "dominion", 
@@ -1619,6 +1732,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Workshop", 
         "set": "dominion", 
@@ -1632,6 +1746,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Advisor", 
         "set": "guilds", 
@@ -1643,6 +1758,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Baker", 
         "set": "guilds", 
@@ -1656,6 +1772,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Butcher", 
         "set": "guilds", 
@@ -1671,6 +1788,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Candlestick Maker", 
         "set": "guilds", 
@@ -1684,6 +1802,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 3, 
         "name": "Doctor", 
         "set": "guilds", 
@@ -1698,6 +1817,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Herald", 
         "set": "guilds", 
@@ -1711,6 +1831,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Journeyman", 
         "set": "guilds", 
@@ -1724,6 +1845,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Masterpiece", 
         "set": "guilds", 
@@ -1737,6 +1859,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Merchant Guild", 
         "set": "guilds", 
@@ -1750,6 +1873,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": true, 
         "cost": 4, 
         "name": "Plaza", 
         "set": "guilds", 
@@ -1763,6 +1887,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "mass_trasher", 
@@ -1784,6 +1909,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 2, 
         "name": "Stonemason", 
         "set": "guilds", 
@@ -1797,6 +1923,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "countered_by": [
             "steals_treasure", 
@@ -1816,6 +1943,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 6, 
         "name": "Border Village", 
         "set": "hinterlands", 
@@ -1827,6 +1955,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Cache", 
         "set": "hinterlands", 
@@ -1838,6 +1967,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Cartographer", 
         "set": "hinterlands", 
@@ -1851,6 +1981,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Crossroads", 
         "set": "hinterlands", 
@@ -1862,6 +1993,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Develop", 
         "set": "hinterlands", 
@@ -1875,6 +2007,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Duchess", 
         "set": "hinterlands", 
@@ -1888,6 +2021,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Embassy", 
         "set": "hinterlands", 
@@ -1901,6 +2035,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 6, 
         "name": "Farmland", 
         "set": "hinterlands", 
@@ -1912,6 +2047,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Fool's Gold", 
         "set": "hinterlands", 
@@ -1924,6 +2060,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Haggler", 
         "set": "hinterlands", 
@@ -1938,6 +2075,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Highway", 
         "set": "hinterlands", 
@@ -1951,6 +2089,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "spam_filter"
@@ -1968,6 +2107,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Inn", 
         "set": "hinterlands", 
@@ -1981,6 +2121,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Jack of All Trades", 
         "set": "hinterlands", 
@@ -1997,6 +2138,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Mandarin", 
         "set": "hinterlands", 
@@ -2008,6 +2150,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "draw_to_x", 
@@ -2026,6 +2169,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "countered_by": [
             "M_alt_treasure", 
@@ -2045,6 +2189,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Nomad Camp", 
         "set": "hinterlands", 
@@ -2058,6 +2203,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Oasis", 
         "set": "hinterlands", 
@@ -2071,6 +2217,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 3, 
         "countered_by": [
             "deck_inspector", 
@@ -2089,6 +2236,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Scheme", 
         "set": "hinterlands", 
@@ -2100,6 +2248,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Silk Road", 
         "set": "hinterlands", 
@@ -2111,6 +2260,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Spice Merchant", 
         "set": "hinterlands", 
@@ -2126,6 +2276,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Stables", 
         "set": "hinterlands", 
@@ -2137,6 +2288,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Trader", 
         "set": "hinterlands", 
@@ -2153,6 +2305,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Tunnel", 
         "set": "hinterlands", 
@@ -2167,6 +2320,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Baron", 
         "set": "intrigue", 
@@ -2181,6 +2335,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Bridge", 
         "set": "intrigue", 
@@ -2194,6 +2349,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Conspirator", 
         "set": "intrigue", 
@@ -2207,6 +2363,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Coppersmith", 
         "set": "intrigue", 
@@ -2218,6 +2375,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Courtyard", 
         "set": "intrigue", 
@@ -2229,6 +2387,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Duke", 
         "set": "intrigue", 
@@ -2240,6 +2399,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Great Hall", 
         "set": "intrigue", 
@@ -2252,6 +2412,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 6, 
         "name": "Harem", 
         "set": "intrigue", 
@@ -2266,6 +2427,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Ironworks", 
         "set": "intrigue", 
@@ -2277,6 +2439,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 3, 
         "countered_by": [], 
         "name": "Masquerade", 
@@ -2292,6 +2455,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Mining Village", 
         "set": "intrigue", 
@@ -2303,6 +2467,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "likes_being_discarded", 
@@ -2322,6 +2487,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Nobles", 
         "set": "intrigue", 
@@ -2336,6 +2502,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Pawn", 
         "set": "intrigue", 
@@ -2349,6 +2516,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "copper_strategy", 
@@ -2365,6 +2533,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Scout", 
         "set": "intrigue", 
@@ -2378,6 +2547,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Secret Chamber", 
         "set": "intrigue", 
@@ -2393,6 +2563,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Shanty Town", 
         "set": "intrigue", 
@@ -2404,6 +2575,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Steward", 
         "set": "intrigue", 
@@ -2418,6 +2590,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 3, 
         "countered_by": [
             "deck_inspector"
@@ -2435,6 +2608,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "likes_being_discarded", 
@@ -2457,6 +2631,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Trading Post", 
         "set": "intrigue", 
@@ -2471,6 +2646,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Tribute", 
         "set": "intrigue", 
@@ -2482,6 +2658,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Upgrade", 
         "set": "intrigue", 
@@ -2495,6 +2672,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 3, 
         "name": "Wishing Well", 
         "set": "intrigue", 
@@ -2506,6 +2684,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 7, 
         "name": "Bank", 
         "set": "prosperity", 
@@ -2517,6 +2696,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Bishop", 
         "set": "prosperity", 
@@ -2532,6 +2712,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 5, 
         "name": "City", 
         "set": "prosperity", 
@@ -2543,6 +2724,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Contraband", 
         "set": "prosperity", 
@@ -2554,6 +2736,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Counting House", 
         "set": "prosperity", 
@@ -2567,6 +2750,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 7, 
         "name": "Expand", 
         "set": "prosperity", 
@@ -2580,6 +2764,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 7, 
         "name": "Forge", 
         "set": "prosperity", 
@@ -2594,6 +2779,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 6, 
         "countered_by": [
             "draw_to_x", 
@@ -2615,6 +2801,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 6, 
         "name": "Grand Market", 
         "set": "prosperity", 
@@ -2628,6 +2815,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 6, 
         "name": "Hoard", 
         "set": "prosperity", 
@@ -2639,6 +2827,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 7, 
         "name": "King's Court", 
         "set": "prosperity", 
@@ -2652,6 +2841,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Loan", 
         "set": "prosperity", 
@@ -2665,6 +2855,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Mint", 
         "set": "prosperity", 
@@ -2678,6 +2869,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Monument", 
         "set": "prosperity", 
@@ -2692,6 +2884,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "mass_trasher", 
@@ -2711,6 +2904,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 8, 
         "name": "Peddler", 
         "set": "prosperity", 
@@ -2724,6 +2918,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Quarry", 
         "set": "prosperity", 
@@ -2735,6 +2930,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "sifter", 
@@ -2751,6 +2947,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 2, 
         "name": "Royal Seal", 
         "set": "prosperity", 
@@ -2762,6 +2959,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Talisman", 
         "set": "prosperity", 
@@ -2773,6 +2971,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 3, 
         "name": "Trade Route", 
         "set": "prosperity", 
@@ -2787,6 +2986,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Vault", 
         "set": "prosperity", 
@@ -2802,6 +3002,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Venture", 
         "set": "prosperity", 
@@ -2815,6 +3016,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Watchtower", 
         "set": "prosperity", 
@@ -2830,6 +3032,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Worker's Village", 
         "set": "prosperity", 
@@ -2841,6 +3044,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 3, 
         "countered_by": [
             "handsize_attack", 
@@ -2864,6 +3068,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Bazaar", 
         "set": "seaside", 
@@ -2877,6 +3082,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Caravan", 
         "set": "seaside", 
@@ -2889,6 +3095,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "countered_by": [
             "draw_to_x", 
@@ -2908,6 +3115,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 2, 
         "countered_by": [
             "spam_filter", 
@@ -2926,6 +3134,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Explorer", 
         "set": "seaside", 
@@ -2939,6 +3148,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Fishing Village", 
         "set": "seaside", 
@@ -2953,6 +3163,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [
             "deck_inspector", 
@@ -2973,6 +3184,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Haven", 
         "set": "seaside", 
@@ -2985,6 +3197,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Island", 
         "set": "seaside", 
@@ -2999,6 +3212,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Lighthouse", 
         "set": "seaside", 
@@ -3014,6 +3228,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": true, 
         "cost": 3, 
         "name": "Lookout", 
         "set": "seaside", 
@@ -3028,6 +3243,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Merchant Ship", 
         "set": "seaside", 
@@ -3042,6 +3258,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 2, 
+        "complicated": true, 
         "cost": 2, 
         "name": "Native Village", 
         "set": "seaside", 
@@ -3053,6 +3270,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 4, 
         "name": "Navigator", 
         "set": "seaside", 
@@ -3067,6 +3285,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": true, 
         "cost": 5, 
         "name": "Outpost", 
         "set": "seaside", 
@@ -3079,6 +3298,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 2, 
         "name": "Pearl Diver", 
         "set": "seaside", 
@@ -3090,6 +3310,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "countered_by": [
             "virtual_coin"
@@ -3108,6 +3329,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Salvager", 
         "set": "seaside", 
@@ -3121,6 +3343,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "countered_by": [
             "trasher", 
@@ -3143,6 +3366,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Smugglers", 
         "set": "seaside", 
@@ -3156,6 +3380,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Tactician", 
         "set": "seaside", 
@@ -3168,6 +3393,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 4, 
         "name": "Treasure Map", 
         "set": "seaside", 
@@ -3179,6 +3405,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 5, 
         "name": "Treasury", 
         "set": "seaside", 
@@ -3192,6 +3419,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 1, 
+        "complicated": false, 
         "cost": 3, 
         "name": "Warehouse", 
         "set": "seaside", 
@@ -3205,6 +3433,7 @@ const existing_cards = JSON.parse(`
     }, 
     {
         "actions": 0, 
+        "complicated": false, 
         "cost": 5, 
         "countered_by": [], 
         "name": "Wharf", 
