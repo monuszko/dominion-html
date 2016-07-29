@@ -1,7 +1,6 @@
 owned_cards = Array();
 
-function getownedcards() {
-    owned_cards = [];
+function getownedsets() {
     owned_sets = new Set();
     existing_sets = [
         'dominion',
@@ -42,7 +41,11 @@ function getownedcards() {
         }
         i++;
     }
+    return owned_sets;
+}
 
+function getownedcards(owned_sets, existing_cards) {
+    owned_cards = [];
     var i;
     for (i = 0; i < existing_cards.length; i++) {
         if (owned_sets.has(existing_cards[i].set)) {
@@ -50,6 +53,17 @@ function getownedcards() {
         }
     }
     return owned_cards;
+}
+
+function getownednotcards(owned_sets, existing_notcards) {
+    owned_notcards = [];
+    var i;
+    for (i = 0; i < existing_notcards.length; i++) {
+        if (owned_sets.has(existing_notcards[i].set)) {
+            owned_notcards.push(existing_notcards[i]);
+        }
+    }
+    return owned_notcards;
 }
 
 
@@ -180,7 +194,10 @@ function hide_all_cards () {
           }
 }
 
-function show_cards (owned_cards) {
+function show_kingdom (owned_sets) {
+    owned_cards = getownedcards(owned_sets, existing_cards);
+    owned_notcards = getownednotcards(owned_sets, existing_notcards);
+
     // Hide cards if less than one expansion selected
     if (owned_cards.length < 13) {
         hide_all_cards();
@@ -191,9 +208,11 @@ function show_cards (owned_cards) {
     for (attempt = 0; attempt < max_tries; attempt++) {
 
     chosen_cards = new Array();
+    chosen_notcards = new Array();
     chosen_names = new Set();
 
     owned_cards = shuffleArray(owned_cards);
+    owned_notcards = shuffleArray(owned_notcards);
 
     // Select the cards:
     var i;
@@ -201,6 +220,15 @@ function show_cards (owned_cards) {
         choice = owned_cards[i];
         chosen_cards.push(choice);
         chosen_names.add(choice.name);
+    }
+
+    // Select events/landmarks:
+    if (owned_notcards.length > 0) {
+        var i;
+        for (i = 0; i < 2; i++){
+            choice = owned_notcards[i];
+            chosen_notcards.push(choice);
+        }
     }
 
     // add Bane if Young Witch is present.
@@ -214,6 +242,8 @@ function show_cards (owned_cards) {
         chosen_cards.push(bane);
         chosen_names.add(bane.name);
     }
+    // Add events/landmarks
+
 
     // Check what card types there are. ONLY USED IN ONE PLACE
     var chosen_card_types = new Set();
@@ -266,6 +296,8 @@ function show_cards (owned_cards) {
     // insert chosen cards into page:
 
     document.getElementById('card_10').classList.add('hidden'); // bane
+    document.getElementById('card_11').classList.add('hidden'); // event/landm1
+    document.getElementById('card_12').classList.add('hidden'); // event/landm2
     var i;
     for (i = 0; i< chosen_cards.length; i++) {
         fig = document.getElementById('card_' + i);
@@ -277,6 +309,22 @@ function show_cards (owned_cards) {
         fig.querySelector('.card_type').textContent = chosen_cards[i].types;
 
     }
+    if (chosen_notcards.length > 0) {
+        fig = document.getElementById('card_11');
+        fig.classList.remove('hidden');
+        fig.setAttribute('alt', chosen_notcards[0].text);
+        fig.querySelector('figcaption').textContent = chosen_notcards[0].name;
+        fig.querySelector('.card_cost').textContent = chosen_notcards[0].cost;
+        fig.querySelector('.card_type').textContent = chosen_notcards[0].types;
+
+        fig = document.getElementById('card_12');
+        fig.classList.remove('hidden');
+        fig.setAttribute('alt', chosen_notcards[1].text);
+        fig.querySelector('figcaption').textContent = chosen_notcards[1].name;
+        fig.querySelector('.card_cost').textContent = chosen_notcards[1].cost;
+        fig.querySelector('.card_type').textContent = chosen_notcards[1].types;
+    }
+    
 }
 
 
