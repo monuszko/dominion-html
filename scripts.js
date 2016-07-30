@@ -1,48 +1,42 @@
 owned_cards = Array();
 
+
 function getownedsets() {
     owned_sets = new Set();
-    existing_sets = [
-        'dominion',
-        'intrigue',
-        'seaside',
-        'alchemy',
-        'prosperity',
-        'cornucopia',
-        'hinterlands',
-        'darkages',
-        'guilds',
-        'adventures',
-        'empires',
-    ];
+    expansions = {
+        'b': 'dominion', //base
+        'i': 'intrigue',
+        's': 'seaside',
+        'a': 'alchemy',
+        'p': 'prosperity',
+        'c': 'cornucopia',
+        'h': 'hinterlands',
+        'd': 'darkages',
+        'g': 'guilds',
+        'v': 'adventures',
+        'e': 'empires',
+    }
 
-    console.log('All expansions is ' + parseInt('1'.repeat(existing_sets.length), 2));
-    var span;
-
-    var i = 0;
-    for (i = 0; i < existing_sets.length; i++) {
-        span = document.getElementById('set_' + existing_sets[i]);
+    for (var key in expansions) {
+        span = document.getElementById('set_' + expansions[key]);
         span.classList.remove('selected');
     }
 
-    var magic_number;
-    // Number is converted to binary, 0 - no expansion, 1 - expansion present
-    magic_number = document.getElementById('expansions').value;
-    var remainder;
+    letters = document.getElementById('expansions').value;
     i = 0;
-    while (magic_number > 0) {
-        remainder = magic_number % 2;
-        magic_number = Math.floor(magic_number / 2);
-
-        span = document.getElementById('set_' + existing_sets[i]);
-        if (remainder == 1) {
+    for (i = 0; i < letters.length; i++) {
+        if (expansions.hasOwnProperty(letters[i])) {
+            expansion = expansions[letters[i]];
+            owned_sets.add(expansion)
+            span = document.getElementById('set_' + expansion);
             span.classList.add('selected');
-            owned_sets.add(existing_sets[i]);
         }
-        i++;
     }
+
+    
     return owned_sets;
 }
+
 
 function getownedcards(owned_sets, existing_cards) {
     owned_cards = [];
