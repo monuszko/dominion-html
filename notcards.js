@@ -3,6 +3,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 0, 
+            "type": "event",
         "name": "Alms", 
         "set": "adventures", 
         "tags": ["gainer"], 
@@ -11,6 +12,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 0, 
+            "type": "event",
         "name": "Borrow", 
         "set": "adventures", 
         "tags": ["virtual_coin"], 
@@ -19,6 +21,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 0, 
+        "type": "event",
         "name": "Quest", 
         "set": "adventures", 
         "tags": ["gainer"], 
@@ -27,6 +30,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 1, 
+        "type": "event",
         "name": "Save", 
         "set": "adventures", 
         "tags": [], 
@@ -35,6 +39,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 2, 
+        "type": "event",
         "name": "Scouting Party", 
         "set": "adventures", 
         "tags": ["sifter"], 
@@ -43,6 +48,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 2, 
+        "type": "event",
         "name": "Travelling Fair", 
         "set": "adventures", 
         "tags": [], 
@@ -51,6 +57,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 3, 
+        "type": "event",
         "name": "Bonfire", 
         "set": "adventures", 
         "tags": ["early_trasher"], 
@@ -59,6 +66,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 3, 
+        "type": "event",
         "name": "Expedition", 
         "set": "adventures", 
         "tags": [], 
@@ -67,6 +75,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 3, 
+        "type": "event",
         "name": "Ferry", 
         "set": "adventures", 
         "tags": [], 
@@ -75,6 +84,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 3, 
+        "type": "event",
         "name": "Plan", 
         "set": "adventures", 
         "tags": [], 
@@ -83,6 +93,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 4, 
+        "type": "event",
         "name": "Mission", 
         "set": "adventures", 
         "tags": [], 
@@ -91,6 +102,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": true, 
         "cost": 4, 
+        "type": "event",
         "name": "Pilgrimage", 
         "set": "adventures", 
         "tags": ["gainer"], 
@@ -99,6 +111,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 5, 
+        "type": "event",
         "name": "Ball", 
         "set": "adventures", 
         "tags": ["gainer"], 
@@ -107,6 +120,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 5, 
+        "type": "event",
         "name": "Raid", 
         "set": "adventures", 
         "tags": ["gainer"], 
@@ -115,6 +129,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 5, 
+        "type": "event",
         "name": "Seaway", 
         "set": "adventures", 
         "tags": ["gainer"], 
@@ -123,6 +138,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 5, 
+        "type": "event",
         "name": "Trade", 
         "set": "adventures", 
         "tags": ["gainer"], 
@@ -131,6 +147,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 6, 
+        "type": "event",
         "name": "Lost Arts", 
         "set": "adventures", 
         "tags": [], 
@@ -139,6 +156,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 6, 
+        "type": "event",
         "name": "Training", 
         "set": "adventures", 
         "tags": ["virtual_coin"], 
@@ -147,6 +165,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 7, 
+        "type": "event",
         "name": "Inheritance", 
         "set": "adventures", 
         "tags": [], 
@@ -155,10 +174,290 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false, 
         "cost": 8, 
+        "type": "event",
         "name": "Pathfinding", 
         "set": "adventures", 
         "tags": [], 
         "text": "Move your +1 Card token to an Action Supply pile (when you play card from that pile, you first get +1 Card)."
+    },
+    {
+        "complicated": false, 
+        "cost": 0, 
+        "type": "event",
+        "name": "Advance", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "You may trash an Action card from your hand. If you do, gain an Action card costing up to 6 Coin."
+    },
+    {
+        "complicated": false, 
+        "cost": 2, 
+        "type": "event",
+        "name": "Delve", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "+1 Buy\\n\\nGain a Silver."
+    },
+    {
+        "complicated": false, 
+        "cost": 2, 
+        "type": "event",
+        "name": "Tax", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "Add 2 Debt to Supply pile.\\n\\n\\nSetup: add 1 Debt to each Supply pile. When a player buys a card, they take the Debt from its pile."
+    },
+    {
+        "complicated": false, 
+        "cost": 4, 
+        "type": "event",
+        "name": "Ritual", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "Gain a Curse. If you do, trash a card from your hand. +1 Victory per 1 Coin it cost."
+    },
+    {
+        "complicated": false, 
+        "cost": 4, 
+        "type": "event",
+        "name": "Salt the earth", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "+1 Victory.\\n\\nTrash a Victory card from the Supply."
+    },
+    {
+        "complicated": false, 
+        "cost": 5, 
+        "type": "event",
+        "name": "Windfall", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "If your deck and discard pile are empty, gain 3 Golds."
+    },
+    {
+        "complicated": false, 
+        "cost": 6, 
+        "type": "event",
+        "name": "Conquest", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "Gain 2 Silvers. +1 Victory per Silver you've gained this turn."
+    },
+    {
+        "complicated": false, 
+        "cost": 14, 
+        "type": "event",
+        "name": "Dominate", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "Gain a Province. If you do, +9 Victory."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Aqueduct", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When you gain a Treasure, move 1 Victory from its pile to this. When you gain a Victory card, take the Victory from this.\\n\\n\\nSetup: Put 8 Victory on the Silver and Gold piles."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Arena", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "At the start of your Buy phase, you may discard an Action card. If you do, take 2 Victory from here.\\n\\n\\nSetup: Put 6 Victory here per player."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Bandit Fort", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When scoring, -2 Victory for each Silver and each Gold you have."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Basilica", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When you buy a card, if you have 2 Coin or more left, take 2 Victory from here.\\n\\n\\nSetup: Put 6 Victory here per player."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Baths", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When you end your turn without having gained a card, take 2 Victory from here.\\n\\n\\nSetup: Put 6 Victory here per player."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Baths", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When you end your turn without having gained a card, take 2 Victory from here.\\n\\n\\nSetup: Put 6 Victory here per player."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Battlefield", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When you gain a Victory card, take 2 Victory from here.\\n\\n\\nSetup: Put 6 Victory here per player."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Colonnade", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When you buy an Action card, if you have a copy of it in play, take 2 Victory from here.\\n\\n\\nSetup: Put 6 Victory here per player."
+    },
+    {
+        "complicated": true, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Defiled Shrine", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When you gain an Action, move 1 Victory from its pile to this. When you buy a Curse, take the Victory from this.\\n\\n\\nSetup: Put 2 Victory on each non-Gathering Action Supply pile."
+    },
+    {
+        "complicated": true, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Defiled Shrine", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When you gain an Action, move 1 Victory from its pile to this. When you buy a Curse, take the Victory from this.\\n\\n\\nSetup: Put 2 Victory on each non-Gathering Action Supply pile."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Fountain", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When scoring, 15 Victory if you have at least 10 Coppers."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Keep", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When scoring, 5 Victory per differently named Treasure you have, that you have more copies of than each other player, or tied for most."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Labyrinth", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When you gain a 2nd card in one of your turns, take 2 Victory from here.\\n\\n\\nSetup: Put 6 Victory here per player."
+    },
+    {
+        "complicated": true, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Mountain Pass", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When you are the first player to gain a Province, after this turn, each player bids once, up to 40 Debt, ending with you. High bidder gets +8 Victory and takes the Debt they bid."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Museum", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When scoring, 2 Victory per differently named card you have."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Obelisk", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When scoring, 2 Victory per card you have from the chosen pile.\\n\\n\\nSetup: Choose a random Action supply pile."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Orchard", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When scoring, 4 Victory per differently named Action card you have 3 or more copies of."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Palace", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When scoring, 3 Victory per set you have of Copper - Silver - Gold."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Tomb", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When you trash a card, +1 Victory."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Tower", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When scoring, 1 Victory per non-Victory card you have from an empty Supply pile."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Triumphal Arch", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When scoring, 3 Victory per copy you have of the 2nd most common Action card among your cards (if it's a tie, count either)."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Wall", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When scoring, -1 Victory per card you have after the first 15."
+    },
+    {
+        "complicated": false, 
+        "cost": -1, 
+        "type": "landmark",
+        "name": "Wolf Den", 
+        "set": "empires", 
+        "tags": [], 
+        "text": "When scoring, -3 Victory per card you have exactly one copy of."
     }
 ]
 `);

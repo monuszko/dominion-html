@@ -223,6 +223,7 @@ function show_kingdom (owned_sets) {
     }
 
     // Select events/landmarks:
+    // TODO: no duplicate event/landmark
     if (owned_notcards.length > 0) {
         var i;
         for (i = 0; i < 2; i++){
