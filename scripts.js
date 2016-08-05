@@ -291,8 +291,8 @@ function show_kingdom (owned_sets) {
     // insert chosen cards into page:
 
     document.getElementById('card_10').classList.add('hidden'); // bane
-    document.getElementById('card_11').classList.add('hidden'); // event/landm1
-    document.getElementById('card_12').classList.add('hidden'); // event/landm2
+    document.getElementById('notcard_1').classList.add('hidden'); // event/landm1
+    document.getElementById('notcard_2').classList.add('hidden'); // event/landm2
     var i;
     for (i = 0; i< chosen_cards.length; i++) {
         fig = document.getElementById('card_' + i);
@@ -305,14 +305,14 @@ function show_kingdom (owned_sets) {
 
     }
     if (chosen_notcards.length > 0) {
-        fig = document.getElementById('card_11');
+        fig = document.getElementById('notcard_1');
         fig.classList.remove('hidden');
         fig.setAttribute('alt', chosen_notcards[0].text);
         fig.querySelector('figcaption').textContent = chosen_notcards[0].name;
         fig.querySelector('.card_cost').textContent = chosen_notcards[0].cost;
         fig.querySelector('.card_type').textContent = chosen_notcards[0].types;
 
-        fig = document.getElementById('card_12');
+        fig = document.getElementById('notcard_2');
         fig.classList.remove('hidden');
         fig.setAttribute('alt', chosen_notcards[1].text);
         fig.querySelector('figcaption').textContent = chosen_notcards[1].name;

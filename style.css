@@ -1,33 +1,33 @@
-.flex_list {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
 
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-}
-
-.flex_item {
-    width: 20%;
-    float: left;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+.container {
+    width: 80%;
+    margin: 30px auto;
+    overflow: hidden;
 }
 
 figure {
-    width: 60%;
+    float: left;
     text-align: center;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
+    width: 15%;
+    margin: 2% 2% 2%;
 }
 
 figcaption {
     border-bottom: 1px solid black;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+figure#card_10 {
+    clear: left;
+    border: 1px solid red;
+}
+
+figure#notcard_1 {
+    clear: left;
 }
 
 .hidden {
@@ -42,6 +42,22 @@ figcaption {
     .notphone {
         display: none;
     }
+}
+
+@media only screen and (max-width: 940px) {
+    figure {width: 20%;}
+}
+
+@media only screen and (max-width: 720px) {
+    figure {width: 28%;}
+}
+
+@media only screen and (max-width: 530px) {
+    figure {width: 45%;}
+}
+
+@media only screen and (max-width: 320px) {
+    figure {width: 96%;}
 }
 
 .card_text {
