@@ -2,6 +2,15 @@ const existing_notcards = JSON.parse(`
 [
     {
         "complicated": false, 
+        "cost": 5, 
+            "type": "event",
+        "name": "Summon", 
+        "set": "promos", 
+        "tags": ["gainer"], 
+        "text": "Gain an Action card costing up to 4 Coin. Set it aside. If you do, then at the start of your next turn, play it."
+    }, 
+    {
+        "complicated": false, 
         "cost": 0, 
             "type": "event",
         "name": "Alms", 

@@ -1,6 +1,20 @@
 owned_cards = Array();
 
 
+function abbrev(words) {
+    var abbrev = [];
+    var j;
+    for (j = 0; j < words.length; j++) {
+        first_letter = words[j][0];
+        last_letter = words[j].slice(-1);
+        middle = '<span class="notphone">' + words[j].slice(1, -1) + '</span>';
+        abbrev.push(first_letter + middle + last_letter);
+    }
+    abbrev = abbrev.join('-');
+    return abbrev
+}
+
+
 function getownedsets() {
     owned_sets = new Set();
     expansions = {
@@ -17,33 +31,62 @@ function getownedsets() {
         'e': 'empires',
     }
 
+    user_input = document.getElementById('expansions').value.toLowerCase();
     for (var key in expansions) {
         span = document.getElementById('set_' + expansions[key]);
         span.classList.remove('selected');
-    }
 
-    letters = document.getElementById('expansions').value;
-    i = 0;
-    for (i = 0; i < letters.length; i++) {
-        if (expansions.hasOwnProperty(letters[i])) {
-            expansion = expansions[letters[i]];
+        if (user_input.indexOf(key) != -1) {
+            expansion = expansions[key];
             owned_sets.add(expansion)
             span = document.getElementById('set_' + expansion);
             span.classList.add('selected');
         }
     }
-
-    
     return owned_sets;
 }
 
 
-function getownedcards(owned_sets, existing_cards) {
+function getpromonames() {
+promos = {
+    1: 'Envoy',
+    2: 'Black Market',
+    3: 'Stash',
+    4: 'Walled Village',
+    5: 'Governor',
+    6: 'Prince',
+    7: 'Summon'
+    }
+
+    promo_names = new Set();
+    user_input = document.getElementById('expansions').value.toLowerCase();
+
+    for (var key in promos) {
+        if (promos.hasOwnProperty(key)) {
+            span = document.getElementById('promo_' + key);
+            if (user_input.indexOf(key) != -1) {
+                span.classList.add('selected');
+                promo_names.add(promos[key]);
+            }
+            else {
+                span.classList.remove('selected');
+            }
+        }
+    }
+    return promo_names
+}
+
+function getownedcards(owned_sets, existing_cards, promo_names) {
     owned_cards = [];
+
     var i;
     for (i = 0; i < existing_cards.length; i++) {
-        if (owned_sets.has(existing_cards[i].set)) {
-            owned_cards.push(existing_cards[i]);
+        this_card = existing_cards[i];
+        if (owned_sets.has(this_card.set)) {
+            owned_cards.push(this_card);
+        }
+    else if (promo_names.has(this_card.name)) {
+            owned_cards.push(this_card);
         }
     }
     return owned_cards;
@@ -53,9 +96,15 @@ function getownednotcards(owned_sets, existing_notcards) {
     owned_notcards = [];
     var i;
     for (i = 0; i < existing_notcards.length; i++) {
-        if (owned_sets.has(existing_notcards[i].set)) {
-            owned_notcards.push(existing_notcards[i]);
+        this_notcard = existing_notcards[i];
+        if (owned_sets.has(this_card.set)) {
+            owned_notcards.push(this_card);
         }
+        else if (user_input.indexOf(promos[this_notcard.name]) != -1) {
+                owned_notcards.push(this_notcard);
+                span = document.getElementById('promo_' + promos[this_notcard.name]);
+                span.classList.add('selected');
+            }
     }
     return owned_notcards;
 }
@@ -174,7 +223,6 @@ function conditionsPassed(chosen_cards, chosen_tags, chosen_card_types) {
             }
         }
     }
-
     return true;
 }
 
@@ -188,8 +236,8 @@ function hide_all_cards () {
           }
 }
 
-function show_kingdom (owned_sets) {
-    owned_cards = getownedcards(owned_sets, existing_cards);
+function show_kingdom (owned_sets, promo_names) {
+    owned_cards = getownedcards(owned_sets, existing_cards, promo_names);
     owned_notcards = getownednotcards(owned_sets, existing_notcards);
 
     // Hide cards if less than one expansion selected
@@ -301,7 +349,7 @@ function show_kingdom (owned_sets) {
         fig.setAttribute('alt', chosen_cards[i].text);
         fig.querySelector('figcaption').textContent = chosen_cards[i].name;
         fig.querySelector('.card_cost').textContent = chosen_cards[i].cost;
-        fig.querySelector('.card_type').textContent = chosen_cards[i].types;
+        fig.querySelector('.card_type').innerHTML = abbrev(chosen_cards[i].types);
 
     }
     if (chosen_notcards.length > 0) {
@@ -310,14 +358,12 @@ function show_kingdom (owned_sets) {
         fig.setAttribute('alt', chosen_notcards[0].text);
         fig.querySelector('figcaption').textContent = chosen_notcards[0].name;
         fig.querySelector('.card_cost').textContent = chosen_notcards[0].cost;
-        fig.querySelector('.card_type').textContent = chosen_notcards[0].types;
 
         fig = document.getElementById('notcard_2');
         fig.classList.remove('hidden');
         fig.setAttribute('alt', chosen_notcards[1].text);
         fig.querySelector('figcaption').textContent = chosen_notcards[1].name;
         fig.querySelector('.card_cost').textContent = chosen_notcards[1].cost;
-        fig.querySelector('.card_type').textContent = chosen_notcards[1].types;
     }
     
 }

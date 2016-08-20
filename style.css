@@ -9,10 +9,14 @@ figure {
     float: left;
     text-align: center;
     border: 1px solid black;
-    display: flex;
-    flex-direction: column;
     width: 15%;
-    margin: 2% 2% 2%;
+    margin: 1% 1% 1%;
+}
+
+div.stretchy-wrapper {
+    width: 100%;
+    padding-bottom: 130%; /* 59mm x 91mm - Dominion card size */
+    position: relative;
 }
 
 figcaption {
