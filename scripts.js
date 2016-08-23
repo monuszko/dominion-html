@@ -97,8 +97,8 @@ function getownednotcards(owned_sets, existing_notcards) {
     var i;
     for (i = 0; i < existing_notcards.length; i++) {
         this_notcard = existing_notcards[i];
-        if (owned_sets.has(this_card.set)) {
-            owned_notcards.push(this_card);
+        if (owned_sets.has(this_notcard.set)) {
+            owned_notcards.push(this_notcard);
         }
         else if (user_input.indexOf(promos[this_notcard.name]) != -1) {
                 owned_notcards.push(this_notcard);
@@ -187,7 +187,7 @@ function conditionsPassed(chosen_cards, chosen_tags, chosen_card_types) {
 
     var i;
     for (i = 0; i < chosen_cards.length; i++) {
-        cost = new RegExp(chosen_cards[i].cost)
+        cost = chosen_cards[i].cost;
         desiredcosts = desiredcosts.replace(cost, '');
     }
 
