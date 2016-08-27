@@ -172,6 +172,29 @@ function attacksCountered(chosen_cards, chosen_names, chosen_tags) {
         return true;
     }
 
+function costsPresent(chosen_cards) {
+    var desiredcosts = document.getElementById('desiredcosts').value;
+
+    var i;
+    for (i = 0; i < chosen_cards.length; i++) {
+        cost = chosen_cards[i].cost;
+        desiredcosts = desiredcosts.replace(cost, '').toLowerCase();
+        if (chosen_cards[i].hasOwnProperty('potion')) {
+            desiredcosts = desiredcosts.replace('p', '');
+        }
+        if (chosen_cards[i].debt > 0) {
+            desiredcosts = desiredcosts.replace('d', '');
+            // TODO: SPECIAL_generates_debt
+            // TODO: disable Fortune and other second dual cards
+        }
+    }
+
+    if (desiredcosts.length > 0) {
+        console.log('Rejecting set - desired costs not present.');
+        return false;
+    }
+    return true;
+}
 
 function conditionsPassed(chosen_cards, chosen_tags, chosen_card_types) {
 
@@ -183,16 +206,7 @@ function conditionsPassed(chosen_cards, chosen_tags, chosen_card_types) {
     }
 
     // condition: costs
-    var desiredcosts = document.getElementById('desiredcosts').value;
-
-    var i;
-    for (i = 0; i < chosen_cards.length; i++) {
-        cost = chosen_cards[i].cost;
-        desiredcosts = desiredcosts.replace(cost, '');
-    }
-
-    if (desiredcosts.length > 0) {
-        console.log('Rejecting set - desired costs not present.');
+    if (!costsPresent(chosen_cards)) {
         return false;
     }
 
@@ -235,6 +249,25 @@ function hide_all_cards () {
           displayed_cards[i].classList.add('hidden');
           }
 }
+
+
+function paintPaper(source, target) {
+    target.classList.remove('hidden');
+    target.setAttribute('alt', source.text);
+    target.querySelector('figcaption').textContent = source.name;
+    target.querySelector('.card_type').innerHTML = source.type || abbrev(source.types);
+
+    target.querySelector('.coin_cost').textContent = source.cost || '';
+    target.querySelector('.coin_cost').textContent += source.cost_extra || '';
+    target.querySelector('.debt_cost').textContent = source.debt || '';
+    if (source.hasOwnProperty('potion')) {
+        target.querySelector('.potion').classList.remove('hidden');
+    }
+    else {
+        target.querySelector('.potion').classList.add('hidden');
+    }
+}
+
 
 function show_kingdom (owned_sets, promo_names) {
     owned_cards = getownedcards(owned_sets, existing_cards, promo_names);
@@ -326,8 +359,12 @@ function show_kingdom (owned_sets, promo_names) {
         continue;
     }
 
-
     break;
+    }
+
+    if (attempt == max_tries) {
+        hide_all_cards();
+        return;
     }
 
     // Sort output, leaving bane as 11th if present
@@ -339,31 +376,38 @@ function show_kingdom (owned_sets, promo_names) {
     // insert chosen cards into page:
 
     document.getElementById('card_10').classList.add('hidden'); // bane
-    document.getElementById('notcard_1').classList.add('hidden'); // event/landm1
-    document.getElementById('notcard_2').classList.add('hidden'); // event/landm2
+    document.getElementById('notcard_0').classList.add('hidden'); // event/landm1
+    document.getElementById('notcard_1').classList.add('hidden'); // event/landm2
     var i;
-    for (i = 0; i< chosen_cards.length; i++) {
+    for (i = 0; i < chosen_cards.length; i++) {
         fig = document.getElementById('card_' + i);
 
+        paintPaper(chosen_cards[i], fig);
+/*
         fig.classList.remove('hidden');
         fig.setAttribute('alt', chosen_cards[i].text);
+
         fig.querySelector('figcaption').textContent = chosen_cards[i].name;
-        fig.querySelector('.card_cost').textContent = chosen_cards[i].cost;
+        fig.querySelector('.coin_cost').textContent = chosen_cards[i].cost;
+        if (chosen_cards[i].debt > 0) {
+            fig.querySelector('.debt_cost').textContent = chosen_cards[i].debt;
+        }
         fig.querySelector('.card_type').innerHTML = abbrev(chosen_cards[i].types);
+        */
 
     }
-    if (chosen_notcards.length > 0) {
-        fig = document.getElementById('notcard_1');
-        fig.classList.remove('hidden');
-        fig.setAttribute('alt', chosen_notcards[0].text);
-        fig.querySelector('figcaption').textContent = chosen_notcards[0].name;
-        fig.querySelector('.card_cost').textContent = chosen_notcards[0].cost;
+    var j;
+    for (j = 0; j < chosen_notcards.length; j++) {
+        fig = document.getElementById('notcard_' + j);
+        paintPaper(chosen_notcards[j], fig);
 
-        fig = document.getElementById('notcard_2');
+        /*
         fig.classList.remove('hidden');
-        fig.setAttribute('alt', chosen_notcards[1].text);
-        fig.querySelector('figcaption').textContent = chosen_notcards[1].name;
-        fig.querySelector('.card_cost').textContent = chosen_notcards[1].cost;
+        fig.setAttribute('alt', chosen_notcards[j].text);
+
+        fig.querySelector('figcaption').textContent = chosen_notcards[j].name;
+        fig.querySelector('.coin_cost').textContent = chosen_notcards[j].cost;
+        */
     }
     
 }

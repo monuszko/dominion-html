@@ -15,7 +15,7 @@ figure {
 
 div.stretchy-wrapper {
     width: 100%;
-    padding-bottom: 130%; /* 59mm x 91mm - Dominion card size */
+    padding-bottom: 134%; /* 59mm x 91mm - Dominion card size */
     position: relative;
 }
 
@@ -30,7 +30,7 @@ figure#card_10 {
     border: 1px solid red;
 }
 
-figure#notcard_1 {
+figure#notcard_0 {
     clear: left;
 }
 
@@ -73,12 +73,29 @@ figure#notcard_1 {
     border-top: 1px solid black;
 }
 
-.card_cost {
+.coin_cost {
     float: left;
     background: yellow;
     border-radius: 50%;
     box-shadow: inset 0 0 2px red;
     width: 1em;
+    font-weight: bold;
+}
+
+.potion {
+    float: left;
+    color: blue;
+    font-weight: bold;
+}
+
+.debt_cost {
+    float: left;
+    background: red;
+    border-radius: 50%;
+    box-shadow: inset 0 0 2px red;
+    width: 1em;
+    color: white;
+    font-weight: bold;
 
 }
 

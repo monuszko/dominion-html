@@ -543,6 +543,7 @@ const existing_cards = JSON.parse(`
         "actions": 1,
         "complicated": false,
         "cost": 3,
+        "potion": true,
         "name": "Alchemist",
         "set": "alchemy",
         "tags": [],
@@ -555,6 +556,7 @@ const existing_cards = JSON.parse(`
         "actions": 1,
         "complicated": false,
         "cost": 2,
+        "potion": true,
         "name": "Apothecary",
         "set": "alchemy",
         "tags": [
@@ -583,6 +585,7 @@ const existing_cards = JSON.parse(`
         "actions": 1,
         "complicated": false,
         "cost": 3,
+        "potion": true,
         "countered_by": [
             "trasher",
             "mass_trasher",
@@ -604,6 +607,7 @@ const existing_cards = JSON.parse(`
         "actions": 0,
         "complicated": false,
         "cost": 4,
+        "potion": true,
         "name": "Golem",
         "set": "alchemy",
         "tags": [],
@@ -630,6 +634,7 @@ const existing_cards = JSON.parse(`
         "actions": 1,
         "complicated": false,
         "cost": 3,
+        "potion": true,
         "name": "Philosopher's Stone",
         "set": "alchemy",
         "tags": [],
@@ -642,6 +647,7 @@ const existing_cards = JSON.parse(`
         "actions": 0,
         "complicated": true,
         "cost": 6,
+        "potion": true,
         "name": "Possession",
         "set": "alchemy",
         "tags": [],
@@ -654,6 +660,7 @@ const existing_cards = JSON.parse(`
         "actions": 1,
         "complicated": true,
         "cost": 2,
+        "potion": true,
         "countered_by": [
             "sifter",
             "deck_inspector"
@@ -673,6 +680,7 @@ const existing_cards = JSON.parse(`
         "actions": 0,
         "complicated": true,
         "cost": 0,
+        "potion": true,
         "name": "Transmute",
         "set": "alchemy",
         "tags": [
@@ -687,6 +695,7 @@ const existing_cards = JSON.parse(`
         "actions": 2,
         "complicated": false,
         "cost": 2,
+        "potion": true,
         "name": "University",
         "set": "alchemy",
         "tags": [
@@ -701,6 +710,7 @@ const existing_cards = JSON.parse(`
         "actions": 0,
         "complicated": false,
         "cost": 0,
+        "potion": true,
         "name": "Vineyard",
         "set": "alchemy",
         "tags": [
@@ -1884,6 +1894,7 @@ const existing_cards = JSON.parse(`
         "actions": 0,
         "complicated": true,
         "cost": 3,
+        "cost_extra": "+",
         "name": "Doctor",
         "set": "guilds",
         "tags": [
@@ -1899,6 +1910,7 @@ const existing_cards = JSON.parse(`
         "actions": 1,
         "complicated": false,
         "cost": 4,
+        "cost_extra": "+",
         "name": "Herald",
         "set": "guilds",
         "tags": [
@@ -1927,6 +1939,7 @@ const existing_cards = JSON.parse(`
         "actions": 0,
         "complicated": false,
         "cost": 3,
+        "cost_extra": "+",
         "name": "Masterpiece",
         "set": "guilds",
         "tags": [
@@ -1991,6 +2004,7 @@ const existing_cards = JSON.parse(`
         "actions": 0,
         "complicated": true,
         "cost": 2,
+        "cost_extra": "+",
         "name": "Stonemason",
         "set": "guilds",
         "tags": [
@@ -2986,6 +3000,7 @@ const existing_cards = JSON.parse(`
         "actions": 1,
         "complicated": false,
         "cost": 8,
+        "cost_extra": "+",
         "name": "Peddler",
         "set": "prosperity",
         "tags": [
@@ -3525,6 +3540,374 @@ const existing_cards = JSON.parse(`
         "types": [
             "Action",
             "Duration"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 0,
+        "debt": 4,
+        "countered_by": [],
+        "name": "Engineer",
+        "set": "empires",
+        "tags": [
+            "trash_for_benefit",
+            "toilet_paper"
+        ],
+        "text": "Gain a card costing up to 4 Coin. You may trash this. If you do, gain a card costing up to 4 Coin.",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 0,
+        "debt": 8,
+        "countered_by": [],
+        "name": "City Quarter",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+2 Actions\\n\\nReveal your hand. +1 Card per Action card revealed.",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 0,
+        "debt": 8,
+        "countered_by": [],
+        "name": "Overlord",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "Play this as if it were an Action card in the Supply costing up to 5 Coin. This is that card until it leaves play.",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 0,
+        "debt": 8,
+        "countered_by": [],
+        "name": "Royal Blacksmith",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+5 Cards\\n\\nReveal your hand; discard the Coppers.",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 8,
+        "debt": 8,
+        "countered_by": [],
+        "name": "Fortune",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+1 Buy\\n\\nWhen you play this, double your Coin if you haven't yet this turn.\\n\\n\\nWhen you gain this, gain a Gold per Gladiator you have in play.",
+        "types": [
+            "Treasure"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 2,
+        "countered_by": [],
+        "name": "Encampment",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+2 Cards\\n+2 Actions\\n\\nYou may reveal a Gold or Plunder from your hand. If you do not, set this aside, and return it to the Supply at the start of Clean-up.",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 2,
+        "countered_by": [],
+        "name": "Patrician",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+1 Card\\n+1 Action\\n\\nReveal the top card of your deck. If it costs 5 Coin or more, put it into your hand.",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 2,
+        "countered_by": [],
+        "name": "Settlers",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+1 Card\\n+1 Action\\n\\nLook through your discard pile. You may reveal a Copper from it and put it into your hand.",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": true,
+        "cost": 3,
+        "countered_by": [],
+        "name": "Castles",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "Sort the Castle pile by cost, putting the more expensive Castles on the bottom. For a 2-player game, use only one of each Castle. Only the top card of the pile can be gained or bought.",
+        "types": [
+            "Victory",
+            "Castle"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 3,
+        "countered_by": [],
+        "name": "Catapult",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+1 Coin\\n\\nTrash a card from your hand. If it costs 3 Coin or more, each other player gains a Curse. If it's a Treasure, each other player discards down to 3 cards in hand.",
+        "types": [
+            "Action",
+            "Attack"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 3,
+        "countered_by": [],
+        "name": "Charriot Race",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+1 Action\\n\\nReveal the top card of your deck and put it into your hand. The player to your left reveals the top card of their deck. If your card costs more, +1 Coin and +1 Victory.",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 3,
+        "countered_by": [],
+        "name": "Enchantress",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "Until your next turn, the first time each other player plays an Action card on their turn, they get +1 Card, +1 Action instead of following its instructions. At the start of your next turn, +2 Cards.",
+        "types": [
+            "Action",
+            "Attack",
+            "Duration"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": true,
+        "cost": 3,
+        "countered_by": [],
+        "name": "Farmers\' Market",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+1 Buy\\n\\nIf there are 4 VP or more on the Farmers\' Market Suppply pile, take them and trash this. Otherwise, add 1 VP to the pile and then +1 Coin per 1 VP on the pile.",
+        "types": [
+            "Action",
+            "Gathering"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": true,
+        "cost": 3,
+        "countered_by": [],
+        "name": "Gladiator",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+2 Coin\\n\\nReveal a card from your hand. The player to your left may reveal a copy from their hand. If they do not, +1 Coin and trash a Gladiator from the Supply.",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": true,
+        "cost": 4,
+        "countered_by": [],
+        "name": "Sacrifice",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "Trash a card from your hand. If it's an...\\nAction card, +2 Cards, +2 Actions\\nTreasure card, +2 Coin\\nVictory card, +2 VP",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": true,
+        "cost": 4,
+        "countered_by": [],
+        "name": "Temple",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+1 VP\\n\\nTrash from 1 to 3 differently named cards from your hand. Add 1 VP to the Temple supply pile.\\n\\n\\nWhen you gain this, take the VP from the Temple Supply pile.",
+        "types": [
+            "Action",
+            "Gathering"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": true,
+        "cost": 4,
+        "countered_by": [],
+        "name": "Villa",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+2 Actions\\n+1 Buy\\n+1 Coin\\n\\n\\nWhen you gain this, put it into your hand, +1 Action and if it's in your Buy phase return to your Action phase.",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": true,
+        "cost": 5,
+        "countered_by": [],
+        "name": "Archive",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+1 Action\\n\\nSet aside the top 3 cards of your deck face down (you may look at them). Now and at the start of your next two turns, put one into your hand.",
+        "types": [
+            "Action",
+            "Duration"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 5,
+        "countered_by": [],
+        "name": "Capital",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "6 Coin\\n\\n+1 Buy\\n\\n\\nWhen you discard this from play, take 6 Debt, and then you may pay off Debt.",
+        "types": [
+            "Treasure"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": true,
+        "cost": 5,
+        "countered_by": [],
+        "name": "Charm",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "When you play this, choose one: +1 Buy and +2 Coin; or the next time you buy a card this turn, you may also gain a differently named card with the same cost.",
+        "types": [
+            "Treasure"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 5,
+        "countered_by": [],
+        "name": "Crown",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "If it's your Action phase, you may play an Action from your hand twice. If it's your Buy phase, you may play a Treasure from your hand twice.",
+        "types": [
+            "Action",
+            "Treasure"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 5,
+        "countered_by": [],
+        "name": "Forum",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+3 Cards\\n+1 Action\\n\\nDiscard 2 cards\\n\\n\\nWhen you buy this, +1 Buy.",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 5,
+        "countered_by": [],
+        "name": "Groundskeeper",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "+1 Card\\n+1 Action\\n\\n\\nWhile this is in play, when you gain a Victory card, +1 VP.",
+        "types": [
+            "Action"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 5,
+        "countered_by": [],
+        "name": "Legionary",
+        "set": "empires",
+        "tags": [
+            "virtual_coin"
+        ],
+        "text": "+3 Coin\\n\\nYou may reveal a Gold from your hand. If you do, each other player discards down to 2 cards in hand, then draws a card.",
+        "types": [
+            "Action",
+            "Attack"
+        ]
+    },
+    {
+        "actions": 0,
+        "complicated": false,
+        "cost": 5,
+        "countered_by": [],
+        "name": "Wild Hunt",
+        "set": "empires",
+        "tags": [
+        ],
+        "text": "Choose one: +3 Cards and add 1 VP to the Wild Hunt Supply pile; or gain an Estate, and if you do, take the VP from the pile.",
+        "types": [
+            "Action",
+            "Gathering"
         ]
     }
 ]
