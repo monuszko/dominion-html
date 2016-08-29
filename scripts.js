@@ -253,19 +253,39 @@ function hide_all_cards () {
 
 function paintPaper(source, target) {
     target.classList.remove('hidden');
+    target.classList.remove('reaction', 'treasure', 'duration', 'victory', 'reserve');
+
     target.setAttribute('alt', source.text);
     target.querySelector('figcaption').textContent = source.name;
-    target.querySelector('.card_type').innerHTML = source.type || abbrev(source.types);
+    target.querySelector('.card_type').innerHTML = abbrev(source.types);
 
     target.querySelector('.coin_cost').textContent = source.cost || '';
     target.querySelector('.coin_cost').textContent += source.cost_extra || '';
     target.querySelector('.debt_cost').textContent = source.debt || '';
+
     if (source.hasOwnProperty('potion')) {
         target.querySelector('.potion').classList.remove('hidden');
     }
     else {
         target.querySelector('.potion').classList.add('hidden');
     }
+    
+    if (source.types.indexOf('Reaction') != -1) {
+        target.classList.add('reaction');
+    }
+    else if (source.types.indexOf('Reserve') != -1) {
+        target.classList.add('reserve');
+    }
+    else if (source.types.indexOf('Treasure') != -1) {
+        target.classList.add('treasure');
+    }
+    else if (source.types.indexOf('Victory') != -1) {
+        target.classList.add('victory');
+    }
+    else if (source.types.indexOf('Duration') != -1) {
+        target.classList.add('duration');
+    }
+
 }
 
 
@@ -383,31 +403,11 @@ function show_kingdom (owned_sets, promo_names) {
         fig = document.getElementById('card_' + i);
 
         paintPaper(chosen_cards[i], fig);
-/*
-        fig.classList.remove('hidden');
-        fig.setAttribute('alt', chosen_cards[i].text);
-
-        fig.querySelector('figcaption').textContent = chosen_cards[i].name;
-        fig.querySelector('.coin_cost').textContent = chosen_cards[i].cost;
-        if (chosen_cards[i].debt > 0) {
-            fig.querySelector('.debt_cost').textContent = chosen_cards[i].debt;
-        }
-        fig.querySelector('.card_type').innerHTML = abbrev(chosen_cards[i].types);
-        */
-
     }
     var j;
     for (j = 0; j < chosen_notcards.length; j++) {
         fig = document.getElementById('notcard_' + j);
         paintPaper(chosen_notcards[j], fig);
-
-        /*
-        fig.classList.remove('hidden');
-        fig.setAttribute('alt', chosen_notcards[j].text);
-
-        fig.querySelector('figcaption').textContent = chosen_notcards[j].name;
-        fig.querySelector('.coin_cost').textContent = chosen_notcards[j].cost;
-        */
     }
     
 }

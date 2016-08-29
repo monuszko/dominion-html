@@ -11,7 +11,9 @@ figure {
     border: 1px solid black;
     width: 15%;
     margin: 1% 1% 1%;
+    background: #afb4ae;
 }
+
 
 div.stretchy-wrapper {
     width: 100%;
@@ -23,7 +25,50 @@ figcaption {
     border-bottom: 1px solid black;
     text-overflow: ellipsis;
     overflow: hidden;
+    background: #f4eece;
 }
+
+figure.reaction figcaption {
+    background: #80b1d2;
+}
+
+figure.reaction .footer {
+    background: #80b1d2;
+}
+
+figure.treasure figcaption {
+    background: #fbd953;
+}
+
+figure.treasure .footer {
+    background: #fbd953;
+}
+
+figure.victory figcaption {
+    background: #aade89;
+}
+
+figure.victory .footer {
+    background: #aade89;
+}
+
+figure.duration figcaption {
+    background: #e98923;
+}
+
+figure.duration .footer {
+    background: #e98923;
+}
+
+figure.reserve figcaption {
+    background: #cca65f;
+}
+
+figure.reserve .footer {
+    background: #cca65f;
+}
+
+
 
 figure#card_10 {
     clear: left;
@@ -71,28 +116,29 @@ figure#notcard_0 {
 .footer {
     flex: 0 0 auto;
     border-top: 1px solid black;
+    background: #f4eece;
 }
 
 .coin_cost {
     float: left;
-    background: yellow;
+    background: #fce11e;
     border-radius: 50%;
-    box-shadow: inset 0 0 2px red;
+    box-shadow: inset 0 0 2px #b64b26;
     width: 1em;
     font-weight: bold;
 }
 
 .potion {
     float: left;
-    color: blue;
+    color: #0f5f92;
     font-weight: bold;
 }
 
 .debt_cost {
     float: left;
-    background: red;
+    background: #b64b26;
     border-radius: 50%;
-    box-shadow: inset 0 0 2px red;
+    box-shadow: inset 0 0 2px #b64b26;
     width: 1em;
     color: white;
     font-weight: bold;
