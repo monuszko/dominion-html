@@ -172,6 +172,7 @@ function attacksCountered(chosen_cards, chosen_names, chosen_tags) {
         return true;
     }
 
+
 function costsPresent(chosen_cards) {
     var desiredcosts = document.getElementById('desiredcosts').value;
 

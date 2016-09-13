@@ -14,18 +14,41 @@ figure {
     background: #afb4ae;
 }
 
-
 div.stretchy-wrapper {
-    width: 100%;
     padding-bottom: 134%; /* 59mm x 91mm - Dominion card size */
     position: relative;
 }
 
 figcaption {
+    width: 100%;
     border-bottom: 1px solid black;
     text-overflow: ellipsis;
     overflow: hidden;
     background: #f4eece;
+}
+
+.card_image {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 0;
+    background: #999999;
+}
+
+.card_text {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer {
+    border-top: 1px solid black;
+    background: #f4eece;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 0;
 }
 
 figure.reaction figcaption {
@@ -36,12 +59,20 @@ figure.reaction .footer {
     background: #80b1d2;
 }
 
+figure.reaction .card_text {
+    box-shadow: inset 0px 0px 45px 10px #80b1d2;
+}
+
 figure.treasure figcaption {
     background: #fbd953;
 }
 
 figure.treasure .footer {
     background: #fbd953;
+}
+
+figure.treasure .card_text {
+    box-shadow: inset 0px 0px 45px 10px #fbd953;
 }
 
 figure.victory figcaption {
@@ -52,12 +83,20 @@ figure.victory .footer {
     background: #aade89;
 }
 
+figure.victory .card_text {
+    box-shadow: inset 0px 0px 45px 10px #aade89;
+}
+
 figure.duration figcaption {
     background: #e98923;
 }
 
 figure.duration .footer {
     background: #e98923;
+}
+
+figure.duration .card_text {
+    box-shadow: inset 0px 0px 45px 10px #e98923;
 }
 
 figure.reserve figcaption {
@@ -68,6 +107,9 @@ figure.reserve .footer {
     background: #cca65f;
 }
 
+figure.reserve .card_text {
+    box-shadow: inset 0px 0px 45px 10px #cca65f;
+}
 
 
 figure#card_10 {
@@ -109,15 +151,7 @@ figure#notcard_0 {
     figure {width: 96%;}
 }
 
-.card_text {
-    flex: 1 0 auto;
-}
 
-.footer {
-    flex: 0 0 auto;
-    border-top: 1px solid black;
-    background: #f4eece;
-}
 
 .coin_cost {
     float: left;
@@ -150,14 +184,16 @@ figure#notcard_0 {
     content: attr(alt);
     position: absolute;
     opacity: 0;
+    /* fixes occasional flickering */
+    pointer-events: none;
     
     /* customizable */
     transition: all 0.15s ease;
     white-space: pre-wrap;
     padding: 10px;
-    color: #333;
     border-radius: 10px;
     box-shadow: 2px 2px 1px silver;    
+    z-index: 1;
 }
 
 [alt]:hover:before {
@@ -169,9 +205,6 @@ figure#notcard_0 {
     margin-top: 50px;
     margin-left: 20px;    
     max-width: 200px;
+    z-index: 1;
 }
 
-/* fixes occasional flickering */
-[alt]:before {
-    pointer-events: none;
-}
