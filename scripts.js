@@ -1,3 +1,16 @@
+EXPANSIONS = {
+    'b': 'dominion', //base
+    'i': 'intrigue',
+    's': 'seaside',
+    'a': 'alchemy',
+    'p': 'prosperity',
+    'c': 'cornucopia',
+    'h': 'hinterlands',
+    'd': 'darkages',
+    'g': 'guilds',
+    'v': 'adventures',
+    'e': 'empires',
+}
 owned_cards = Array();
 
 
@@ -17,27 +30,14 @@ function abbrev(words) {
 
 function getownedsets() {
     owned_sets = new Set();
-    expansions = {
-        'b': 'dominion', //base
-        'i': 'intrigue',
-        's': 'seaside',
-        'a': 'alchemy',
-        'p': 'prosperity',
-        'c': 'cornucopia',
-        'h': 'hinterlands',
-        'd': 'darkages',
-        'g': 'guilds',
-        'v': 'adventures',
-        'e': 'empires',
-    }
-
-    user_input = document.getElementById('expansions').value.toLowerCase();
-    for (var key in expansions) {
-        span = document.getElementById('set_' + expansions[key]);
+    which_sets = document.getElementById('expansions').value.toLowerCase();
+    how_many = document.getElementById('howmany').value.toLowerCase();
+    for (var key in EXPANSIONS) {
+        span = document.getElementById('set_' + EXPANSIONS[key]);
         span.classList.remove('selected');
 
-        if (user_input.indexOf(key) != -1) {
-            expansion = expansions[key];
+        if (which_sets.indexOf(key) != -1 || how_many.indexOf(key) != -1) {
+            expansion = EXPANSIONS[key];
             owned_sets.add(expansion)
             span = document.getElementById('set_' + expansion);
             span.classList.add('selected');
@@ -124,6 +124,38 @@ function shuffleArray(array) {
     return array;
 }
 
+function hasExpCounts(chosen_cards) {
+    var howmany = document.getElementById('howmany').value;
+    var actual_count;
+    var min_count;
+    var exact_count;
+    var reg;
+    if (howmany.length == 0) {
+        return true;
+    }
+
+    for (key in EXPANSIONS) {
+        actual_count = 0;
+        for (var card_nr in chosen_cards) {
+            if (chosen_cards[card_nr].set == EXPANSIONS[key]) {
+                actual_count += 1;
+            }
+        }
+        reg = new RegExp(key.toLowerCase(), "g");
+        min_count = (howmany.match(reg) || []).length;
+        reg = new RegExp(key.toUpperCase(), "g");
+        exact_count = (howmany.match(reg) || []).length;
+
+        if (min_count && actual_count < min_count) {
+            return false;
+        }
+        if (exact_count && exact_count != actual_count) {
+            return false;
+        }
+    }
+    return true;
+}
+
 function attackCountered(attack_card, chosen_tags) {
     var counters = attack_card.countered_by;
 
@@ -205,9 +237,14 @@ function conditionsPassed(chosen_cards, chosen_tags, chosen_card_types) {
         console.log('REJECTING set because it has cards that need attacks but no attacks.');
         return false;
     }
+    // TODO: Can be generated in the first pass.
 
     // condition: costs
     if (!costsPresent(chosen_cards)) {
+        return false;
+    }
+
+    if (!hasExpCounts(chosen_cards)) {
         return false;
     }
 
@@ -238,6 +275,7 @@ function conditionsPassed(chosen_cards, chosen_tags, chosen_card_types) {
             }
         }
     }
+    // TODO: Can be generated in the first pass.
     return true;
 }
 
