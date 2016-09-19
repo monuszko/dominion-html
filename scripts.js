@@ -27,7 +27,6 @@ function abbrev(words) {
     return abbrev
 }
 
-
 function getownedsets() {
     owned_sets = new Set();
     which_sets = document.getElementById('expansions').value.toLowerCase();
@@ -342,7 +341,7 @@ function show_kingdom (owned_sets, promo_names) {
     for (attempt = 0; attempt < max_tries; attempt++) {
 
     chosen_cards = new Array();
-    chosen_notcards = new Array();
+    var chosen_notcards = new Array();
     chosen_names = new Set();
 
     owned_cards = shuffleArray(owned_cards);
@@ -358,13 +357,9 @@ function show_kingdom (owned_sets, promo_names) {
 
     // Select events/landmarks:
     // TODO: no duplicate event/landmark
-    if (owned_notcards.length > 0) {
-        var i;
-        for (i = 0; i < 2; i++){
-            choice = owned_notcards[i];
-            chosen_notcards.push(choice);
-        }
-    }
+    add_notcards(owned_notcards, chosen_notcards);
+    may_add_colony_platinum(chosen_cards);
+    may_add_shelters(chosen_cards);
 
     // add Bane if Young Witch is present.
     // reject the set if no valid bane remains.
@@ -463,5 +458,79 @@ function get_bane (owned_cards, chosen_names) {
 }
 
 
+function may_add_colony_platinum(chosen_cards) {
+    var colony_platinum = document.getElementById('colony_platinum');
+    colony_platinum.classList.add('hidden');
+    var prosperity = document.querySelector('input[name = "prosperity"]:checked').id;
+    if (prosperity == 'prosperity_never') {
+        // Do nothing
+    }
+    else if (prosperity =='prosperity_1') {
+        for (var card_nr in chosen_cards) {
+            if (chosen_cards[card_nr].set == 'prosperity') {
+                colony_platinum.classList.remove('hidden');
+                break;
+            }
+        }
+    }
+    else if (prosperity =='prosperity_proportional') {
+        var to_check = Math.floor(Math.random() * 10);
+        if (chosen_cards[to_check].set == 'prosperity') {
+            colony_platinum.classList.remove('hidden');
+        }
+    }
+    else if (prosperity =='prosperity_always') {
+        colony_platinum.classList.remove('hidden');
+
+    }
+}
+
+function may_add_shelters(chosen_cards) {
+    var shelters = document.getElementById('shelters');
+    shelters.classList.add('hidden');
+    var darkages = document.querySelector('input[name = "darkages"]:checked').id;
+    if (darkages == 'darkages_never') {
+        // Do nothing
+    }
+    else if (darkages =='darkages_1') {
+        for (var card_nr in chosen_cards) {
+            if (chosen_cards[card_nr].set == 'darkages') {
+                shelters.classList.remove('hidden');
+                break;
+            }
+        }
+    }
+    else if (darkages =='darkages_proportional') {
+        var to_check = Math.floor(Math.random() * 10);
+        if (chosen_cards[to_check].set == 'darkages') {
+            shelters.classList.remove('hidden');
+        }
+    }
+    else if (darkages =='darkages_always') {
+        shelters.classList.remove('hidden');
+
+    }
+}
+
+function add_notcards(owned_notcards, chosen_notcards) {
+    if (owned_notcards.length > 0) {
+        var notcards = document.querySelector('input[name = "notcards"]:checked').id;
+        var notcard_count;
+        if (notcards == 'notcards_0') {
+            notcard_count = 0;
+        }
+        else if (notcards == 'notcards_random') {
+            notcard_count = Math.floor(Math.random() * 3);
+        }
+        else {
+            notcard_count = 2;
+        }
+        var i;
+        for (i = 0; i < notcard_count; i++){
+            choice = owned_notcards[i];
+            chosen_notcards.push(choice);
+        }
+    }
+}
 
           //-->

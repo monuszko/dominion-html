@@ -181,7 +181,7 @@ figure#notcard_0 {
 
 [alt]:before {
     /* needed - do not touch */
-    content: attr(alt);
+    content: attr(alt); /* tooltips using 'title' can't be stylized! */
     position: absolute;
     opacity: 0;
     /* fixes occasional flickering */

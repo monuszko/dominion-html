@@ -46,12 +46,37 @@
             </div>
 
             <div>
+
                 <fieldset>
                     <legend>Attacks</legend>
-                    <label for='attacks_unrestricted'><input type='radio' id='attacks_unrestricted' name='attacks' checked />Unrestricted</label>
-                    <label for='attacks_countered'><input type='radio' id='attacks_countered' name='attacks' />Countered</label>
-                    <label for='attacks_none'><input type='radio' id='attacks_none' name='attacks' />None</label>
+                    <label for='attacks_unrestricted'><input type='radio' id='attacks_unrestricted' name='attacks' checked>Unrestricted</label>
+                    <label for='attacks_countered'><input type='radio' id='attacks_countered' name='attacks'>Countered</label>
+                    <label for='attacks_none'><input type='radio' id='attacks_none' name='attacks'>None</label>
                 </fieldset>
+
+                <fieldset>
+                    <legend>Colony/Platinum</legend>
+                    <label for='prosperity_never'><input type='radio' id='prosperity_never' name='prosperity'>never</label>
+                    <label for='prosperity_1'><input type='radio' id='prosperity_1' name='prosperity'>1+</label>
+                    <label for='prosperity_proportional'><input type='radio' id='prosperity_proportional' name='prosperity' checked>proportional</label>
+                    <label for='prosperity_always'><input type='radio' id='prosperity_always' name='prosperity'>always</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Shelters</legend>
+                    <label for='darkages_never'><input type='radio' id='darkages_never' name='darkages'>never</label>
+                    <label for='darkages_1'><input type='radio' id='darkages_1' name='darkages'>1+</label>
+                    <label for='darkages_proportional'><input type='radio' id='darkages_proportional' name='darkages' checked>proportional</label>
+                    <label for='darkages_always'><input type='radio' id='darkages_always' name='darkages'>always</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Events/Landmarks</legend>
+                    <label for='notcards_0'><input type='radio' id='notcards_0' name='notcards'>0</label>
+                    <label for='notcards_random'><input type='radio' id='notcards_random' name='notcards' checked>random</label>
+                    <label for='notcards_2'><input type='radio' id='notcards_2' name='notcards'>2</label>
+                </fieldset>
+
                     <label for='newbies'><input type='checkbox' id='newbies' />Newbie friendly?</label>
             </div>
 
@@ -221,6 +246,44 @@
                     <span class='card_type'></span>
                     </div>
                 </div></figure>
+
+                <div id="colony_platinum" class="hidden">
+                    <figure class='victory'>
+                        <div class="stretchy-wrapper">
+                            <div class='card_image'><figcaption>Colony</figcaption></div>
+                        <div class='card_text'></div>
+                    <div class='footer'>
+                        <span class='coin_cost'>11</span>
+                        <span class="potion"></span>
+                        <span class='debt_cost'></span>
+                        <span class='card_type'>Victory</span>
+                        </div>
+                    </div></figure>
+
+                    <figure class='treasure'>
+                        <div class="stretchy-wrapper">
+                            <div class='card_image'><figcaption>Platinum</figcaption></div>
+                        <div class='card_text'></div>
+                    <div class='footer'>
+                        <span class='coin_cost'>9</span>
+                        <span class="potion"></span>
+                        <span class='debt_cost'></span>
+                        <span class='card_type'>Treasure</span>
+                        </div>
+                    </div></figure>
+                </div>
+
+                    <figure class='hidden' id='shelters'>
+                        <div class="stretchy-wrapper">
+                        <div class='card_image'><figcaption>Shelters</figcaption></div>
+                        <div class='card_text'></div>
+                        <div class='footer'>
+                        <span class='coin_cost'>1</span>
+                        <span class="potion"></span>
+                        <span class='debt_cost'></span>
+                        <span class='card_type'>Shelter</span>
+                        </div>
+                    </div></figure>
 
             </div>
     </body>
