@@ -3607,21 +3607,6 @@ const existing_cards = JSON.parse(`
     {
         "actions": 0,
         "complicated": false,
-        "cost": 8,
-        "debt": 8,
-        "countered_by": [],
-        "name": "Fortune",
-        "set": "empires",
-        "tags": [
-        ],
-        "text": "+1 Buy\\n\\nWhen you play this, double your Coin if you haven't yet this turn.\\n\\n\\nWhen you gain this, gain a Gold per Gladiator you have in play.",
-        "types": [
-            "Treasure"
-        ]
-    },
-    {
-        "actions": 0,
-        "complicated": false,
         "cost": 2,
         "countered_by": [],
         "name": "Encampment",

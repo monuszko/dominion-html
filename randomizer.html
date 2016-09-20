@@ -28,21 +28,26 @@
                  --><span id='set_empires' class='outer'><strong alt='Empires'>E</strong><span class='notphone'>mpires </span></span>
                  <br>
                  Promos:
-                 <span id="promo_1"><strong>1</strong><span class='notphone'>Envoy </span></span><!--
-                 --><span id="promo_2"><strong>2</strong><span class='notphone'>Black Market </span></span><!--
-                 --><span id="promo_3"><strong>3</strong><span class='notphone'>Stash </span></span><!--
-                 --><span id="promo_4"><strong>4</strong><span class='notphone'>Walled Village </span></span><!--
-                 --><span id="promo_5"><strong>5</strong><span class='notphone'>Governor </span></span><!--
-                 --><span id="promo_6"><strong>6</strong><span class='notphone'>Prince </span></span><!--
-                 --><span id="promo_7"><strong>7</strong><span class='notphone'>Summon </span></span>
+                 <span id="promo_1"><strong alt='Envoy'>1</strong><span class='notphone'>Envoy </span></span><!--
+                 --><span id="promo_2"><strong alt='Black Market'>2</strong><span class='notphone'>Black Market </span></span><!--
+                 --><span id="promo_3"><strong alt='Stash'>3</strong><span class='notphone'>Stash </span></span><!--
+                 --><span id="promo_4"><strong alt='Walled Village'>4</strong><span class='notphone'>Walled Village </span></span><!--
+                 --><span id="promo_5"><strong alt='Governor'>5</strong><span class='notphone'>Governor </span></span><!--
+                 --><span id="promo_6"><strong alt='Prince'>6</strong><span class='notphone'>Prince </span></span><!--
+                 --><span id="promo_7"><strong alt='Summon'>7</strong><span class='notphone'>Summon </span></span>
 
             <div>
                 <input maxlength='10' size='10em' id='howmany' value='' onkeyup='owned_sets=getownedsets();' />
-                <label for='howmany'>How many</label>
+                <label for='howmany'><span alt='sbb - minimum 1 card from seaside and 2 from base,
+hhhh - minimum 4 cards from Hinterlands,
+DDDD - EXACTLY 4 from Dark Ages.'>How many</span></label>
             </div>
             <div>
-                <input maxlength='10' size='10em' id='desiredcosts' value='2445' />
-                <label for='desiredcosts'>Card costs</label>
+                <input maxlength='10' size='10em' id='neededcosts' value='2445' />
+                <label for='neededcosts'><span alt='233 - at least one card costing 2 and two costing 3,
+dd - minimum 2 cards with debt,
+p - potion,
+PPP - EXACTLY 3 potions.'>Card costs</span></label>
             </div>
 
             <div>
@@ -57,7 +62,7 @@
                 <fieldset>
                     <legend>Colony/Platinum</legend>
                     <label for='prosperity_never'><input type='radio' id='prosperity_never' name='prosperity'>never</label>
-                    <label for='prosperity_1'><input type='radio' id='prosperity_1' name='prosperity'>1+</label>
+                    <label for='prosperity_1'><input type='radio' id='prosperity_1' name='prosperity'>6+ cost</label>
                     <label for='prosperity_proportional'><input type='radio' id='prosperity_proportional' name='prosperity' checked>proportional</label>
                     <label for='prosperity_always'><input type='radio' id='prosperity_always' name='prosperity'>always</label>
                 </fieldset>
@@ -65,7 +70,7 @@
                 <fieldset>
                     <legend>Shelters</legend>
                     <label for='darkages_never'><input type='radio' id='darkages_never' name='darkages'>never</label>
-                    <label for='darkages_1'><input type='radio' id='darkages_1' name='darkages'>1+</label>
+                    <label for='darkages_1'><input type='radio' id='darkages_1' name='darkages'>1+ card</label>
                     <label for='darkages_proportional'><input type='radio' id='darkages_proportional' name='darkages' checked>proportional</label>
                     <label for='darkages_always'><input type='radio' id='darkages_always' name='darkages'>always</label>
                 </fieldset>

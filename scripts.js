@@ -205,24 +205,45 @@ function attacksCountered(chosen_cards, chosen_names, chosen_tags) {
 
 
 function costsPresent(chosen_cards) {
-    var desiredcosts = document.getElementById('desiredcosts').value;
+    var neededcosts = document.getElementById('neededcosts').value;
+    var total_potions = 0;
+    var exact_potions = 0;
+    var total_debts = 0;
+    var exact_debts = 0;
 
     var i;
     for (i = 0; i < chosen_cards.length; i++) {
         cost = chosen_cards[i].cost;
-        desiredcosts = desiredcosts.replace(cost, '').toLowerCase();
+        neededcosts = neededcosts.replace(cost, '');
+
         if (chosen_cards[i].hasOwnProperty('potion')) {
-            desiredcosts = desiredcosts.replace('p', '');
+            if (neededcosts.indexOf('P') != -1) {
+                exact_potions += 1;
+            }
+            neededcosts = neededcosts.replace(/p/i, '');
+            total_potions += 1;
         }
         if (chosen_cards[i].debt > 0) {
-            desiredcosts = desiredcosts.replace('d', '');
+            if (neededcosts.indexOf('D') != -1) {
+                exact_debts += 1;
+            }
+            neededcosts = neededcosts.replace(/d/i, '');
+            total_debts += 1;
             // TODO: SPECIAL_generates_debt
             // TODO: disable Fortune and other second dual cards
         }
     }
 
-    if (desiredcosts.length > 0) {
-        console.log('Rejecting set - desired costs not present.');
+    if (exact_potions > 0 && exact_potions != total_potions) {
+        console.log('Rejecting set - user wants exact number of potions.');
+        return false;
+    }
+    if (exact_debts > 0 && exact_debts != total_debts) {
+        console.log('Rejecting set - user wants exact number of debts.');
+        return false;
+    }
+    if (neededcosts.length > 0) {
+        console.log('Rejecting set - needed costs not present.');
         return false;
     }
     return true;
@@ -467,7 +488,7 @@ function may_add_colony_platinum(chosen_cards) {
     }
     else if (prosperity =='prosperity_1') {
         for (var card_nr in chosen_cards) {
-            if (chosen_cards[card_nr].set == 'prosperity') {
+            if (chosen_cards[card_nr].cost >= 6) {
                 colony_platinum.classList.remove('hidden');
                 break;
             }
