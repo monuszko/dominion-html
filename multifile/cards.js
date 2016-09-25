@@ -1181,7 +1181,7 @@ const existing_cards = JSON.parse(`
         "set": "darkages",
         "tags": [
             "trasher",
-            "early_Trasher",
+            "early_trasher",
             "virtual_coin"
         ],
         "text": "+1 Card\\n+1 Action\\n+1 Coin\\n\\nTrash a card from your hand.",

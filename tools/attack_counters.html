@@ -1,0 +1,70 @@
+ <!DOCTYPE html> <html>
+
+        <head>
+        <title>Display counters for each attack</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="../multifile/style.css" />
+        <style>
+        .unfinished {
+            color: red;
+        }
+        </style>
+        <script src="../multifile/notcards.js" type="text/javascript"></script>
+        <script src="../multifile/cards.js" type="text/javascript"></script>
+        
+        <script type="text/javascript">
+        function display_counters() {
+
+        var attack_list = document.createElement('ul');
+        for (var attack of existing_cards) {
+            if (attack.types.indexOf('Attack') == -1) {
+                continue;
+            }
+            var list_item = document.createElement('li');
+            var li_span = document.createElement('span');
+            li_span.appendChild(document.createTextNode(attack.name))
+            li_span.setAttribute('alt', attack.text);
+            list_item.appendChild(li_span);
+
+            var tag_list = document.createElement('dl');
+            for (var cont_nr in attack.countered_by) {
+                var counter_tag = attack.countered_by[cont_nr];
+
+                var definition_term = document.createElement('dt');
+                var term_text = document.createTextNode(counter_tag);
+                definition_term.appendChild(term_text);
+                tag_list.appendChild(definition_term);
+
+                var definition_definition = document.createElement('dd');
+                for (var card_nr in existing_cards) {
+                    var counter_card = existing_cards[card_nr];
+                    if (counter_card.tags.indexOf(counter_tag) == -1) {
+                        continue;
+                    }
+                    var span = document.createElement('span');
+                    var span_text = document.createTextNode(counter_card.name + ', ');
+                    span.appendChild(span_text);
+                    span.setAttribute('alt', counter_card.text);
+
+                    definition_definition.appendChild(span);
+                }
+                tag_list.appendChild(definition_definition);
+            }
+            if (tag_list.children.length == 0) {
+                list_item.classList.add('unfinished');
+            }
+            list_item.appendChild(tag_list);
+            attack_list.appendChild(list_item);
+        }
+        document.body.appendChild(attack_list);
+        }
+        </script>
+        </head>
+
+
+        <body onload="display_counters()">
+            <p>When attacks:countered is selected, the randomizer makes sure every Attack card comes with another card which at least nominally counters it. For example, curse giving attacks like Witch will come with some kind of trasher. This is based on a system of tags. Each attack card has a list of tags called "countered_by", and each card has a list "tags". This dynamically generated page helps to assign the right tags to cards. Suspicious attacks seemingly without counters are marked red - they may have unfinished json data. Open <q>cards.js</q> and edit them.</p>
+            <p>You should be able to hover over card names to see their descriptions.</p>
+            <p>Tag definitions have a separate dynamically generated page - <q>tag_descriptions.html.</q>
+        </body>
+</html>

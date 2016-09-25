@@ -194,6 +194,7 @@ figure#notcard_0 {
     border-radius: 10px;
     box-shadow: 2px 2px 1px silver;    
     z-index: 1;
+    max-width: 200px; /* don't remove, briefly visible before expands */
 }
 
 [alt]:hover:before {
