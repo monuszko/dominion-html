@@ -313,6 +313,8 @@ function hide_all_cards () {
 function paintPaper(source, target) {
     target.classList.remove('hidden');
     target.classList.remove('reaction', 'treasure', 'duration', 'victory', 'reserve');
+    target.classList.remove('dominion', 'intrigue', 'seaside', 'alchemy', 'prosperity', 'cornucopia', 'hinterlands', 'darkages', 'guilds', 'adventures', 'empires');
+    target.classList.add(source.set);
 
     target.setAttribute('alt', source.text);
     target.querySelector('figcaption').textContent = source.name;

@@ -111,6 +111,49 @@ figure.reserve .card_text {
     box-shadow: inset 0px 0px 45px 10px #cca65f;
 }
 
+figure.dominion {
+    outline: 3px solid #7A603D;
+}
+
+figure.intrigue {
+    outline: 3px solid #9C9897;
+}
+
+figure.seaside {
+    outline: 3px solid #03A0CD;
+}
+
+figure.alchemy {
+    outline: 3px solid #9164A2;
+}
+
+figure.prosperity {
+    outline: 3px solid #ADAB5E;
+}
+
+figure.cornucopia {
+    outline: 3px solid #E99758;
+}
+
+figure.hinterlands {
+    outline: 3px solid #96B864;
+}
+
+figure.darkages {
+    outline: 3px solid #B6603F;
+}
+
+figure.guilds {
+    outline: 2px solid #E47D7F;
+}
+
+figure.adventures {
+    outline: 2px solid #8A8077;
+}
+
+figure.empires {
+    outline: 2px solid #D2A842;
+}
 
 figure#card_10 {
     clear: left;
