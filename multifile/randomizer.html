@@ -37,12 +37,10 @@
                  --><span id="promo_7"><strong alt='Summon'>7</strong><span class='notphone'>Summon </span></span>
 
             <div>
-                <input maxlength='10' size='10em' id='howmany' value='' onkeyup='owned_sets=getownedsets();' />
                 <label for='howmany'><span alt='sbb - minimum 1 card from seaside and 2 from base,
 hhhh - minimum 4 cards from Hinterlands,
 DDDD - EXACTLY 4 from Dark Ages.'>How many</span></label>
-            </div>
-            <div>
+                <input maxlength='10' size='10em' id='howmany' value='' onkeyup='owned_sets=getownedsets();' />
                 <input maxlength='10' size='10em' id='neededcosts' value='2445' />
                 <label for='neededcosts'><span alt='233 - at least one card costing 2 and two costing 3,
 dd - minimum 2 cards with debt,
@@ -59,28 +57,6 @@ PPP - EXACTLY 3 potions.'>Card costs</span></label>
                     <label for='attacks_none'><input type='radio' id='attacks_none' name='attacks'>None</label>
                 </fieldset>
 
-                <fieldset>
-                    <legend>Colony/Platinum</legend>
-                    <label for='prosperity_never'><input type='radio' id='prosperity_never' name='prosperity'>never</label>
-                    <label for='prosperity_1'><input type='radio' id='prosperity_1' name='prosperity'>6+ cost</label>
-                    <label for='prosperity_proportional'><input type='radio' id='prosperity_proportional' name='prosperity' checked>proportional</label>
-                    <label for='prosperity_always'><input type='radio' id='prosperity_always' name='prosperity'>always</label>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Shelters</legend>
-                    <label for='darkages_never'><input type='radio' id='darkages_never' name='darkages'>never</label>
-                    <label for='darkages_1'><input type='radio' id='darkages_1' name='darkages'>1+ card</label>
-                    <label for='darkages_proportional'><input type='radio' id='darkages_proportional' name='darkages' checked>proportional</label>
-                    <label for='darkages_always'><input type='radio' id='darkages_always' name='darkages'>always</label>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Events/Landmarks</legend>
-                    <label for='notcards_0'><input type='radio' id='notcards_0' name='notcards'>0</label>
-                    <label for='notcards_random'><input type='radio' id='notcards_random' name='notcards' checked>random</label>
-                    <label for='notcards_2'><input type='radio' id='notcards_2' name='notcards'>2</label>
-                </fieldset>
 
                     <label for='newbies'><input type='checkbox' id='newbies' />Newbie friendly?</label>
             </div>
@@ -253,7 +229,7 @@ PPP - EXACTLY 3 potions.'>Card costs</span></label>
                 </div></figure>
 
                 <div id="colony_platinum" class="hidden">
-                    <figure class='victory'>
+                    <figure class='victory prosperity'>
                         <div class="stretchy-wrapper">
                             <div class='card_image'><figcaption>Colony</figcaption></div>
                         <div class='card_text'></div>
@@ -265,7 +241,7 @@ PPP - EXACTLY 3 potions.'>Card costs</span></label>
                         </div>
                     </div></figure>
 
-                    <figure class='treasure'>
+                    <figure class='treasure prosperity'>
                         <div class="stretchy-wrapper">
                             <div class='card_image'><figcaption>Platinum</figcaption></div>
                         <div class='card_text'></div>
@@ -278,7 +254,7 @@ PPP - EXACTLY 3 potions.'>Card costs</span></label>
                     </div></figure>
                 </div>
 
-                    <figure class='hidden' id='shelters'>
+                    <figure class='hidden darkages' id='shelters'>
                         <div class="stretchy-wrapper">
                         <div class='card_image'><figcaption>Shelters</figcaption></div>
                         <div class='card_text'></div>
@@ -291,5 +267,27 @@ PPP - EXACTLY 3 potions.'>Card costs</span></label>
                     </div></figure>
 
             </div>
+                <fieldset>
+                    <legend>Colony/Platinum</legend>
+                    <label for='prosperity_never'><input type='radio' id='prosperity_never' name='prosperity'>never</label>
+                    <label for='prosperity_1'><input type='radio' id='prosperity_1' name='prosperity'>6+ cost</label>
+                    <label for='prosperity_proportional'><input type='radio' id='prosperity_proportional' name='prosperity' checked>proportional</label>
+                    <label for='prosperity_always'><input type='radio' id='prosperity_always' name='prosperity'>always</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Shelters</legend>
+                    <label for='darkages_never'><input type='radio' id='darkages_never' name='darkages'>never</label>
+                    <label for='darkages_1'><input type='radio' id='darkages_1' name='darkages'>1+ card</label>
+                    <label for='darkages_proportional'><input type='radio' id='darkages_proportional' name='darkages' checked>proportional</label>
+                    <label for='darkages_always'><input type='radio' id='darkages_always' name='darkages'>always</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Events/Landmarks</legend>
+                    <label for='notcards_0'><input type='radio' id='notcards_0' name='notcards'>0</label>
+                    <label for='notcards_random'><input type='radio' id='notcards_random' name='notcards' checked>random</label>
+                    <label for='notcards_2'><input type='radio' id='notcards_2' name='notcards'>2</label>
+                </fieldset>
     </body>
 </html>
