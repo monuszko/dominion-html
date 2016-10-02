@@ -1,4 +1,4 @@
-EXPANSIONS = {
+LETTER_TO_SET = {
     'b': 'dominion', //base
     'i': 'intrigue',
     's': 'seaside',
@@ -11,6 +11,23 @@ EXPANSIONS = {
     'v': 'adventures',
     'e': 'empires',
 }
+
+
+SET_TO_LETTER = {
+    'dominion': 'b', //base
+    'intrigue': 'i',
+    'seaside': 's',
+    'alchemy': 'a',
+    'prosperity': 'p',
+    'cornucopia': 'c',
+    'hinterlands': 'h',
+    'darkages': 'd',
+    'guilds': 'g',
+    'adventures': 'v',
+    'empires': 'e',
+}
+
+
 owned_cards = Array();
 
 
@@ -27,20 +44,30 @@ function abbrev(words) {
     return abbrev
 }
 
-function getownedsets() {
+function get_owned_sets() {
     owned_sets = new Set();
     which_sets = document.getElementById('expansions').value.toLowerCase();
     how_many = document.getElementById('howmany').value.toLowerCase();
-    for (var key in EXPANSIONS) {
-        span = document.getElementById('set_' + EXPANSIONS[key]);
+    costs = document.getElementById('neededcosts').value.toLowerCase();
+    for (var key in LETTER_TO_SET) {
+        span = document.getElementById('set_' + LETTER_TO_SET[key]);
         span.classList.remove('selected');
 
         if (which_sets.indexOf(key) != -1 || how_many.indexOf(key) != -1) {
-            expansion = EXPANSIONS[key];
+            expansion = LETTER_TO_SET[key];
             owned_sets.add(expansion)
             span = document.getElementById('set_' + expansion);
             span.classList.add('selected');
         }
+        if (costs.indexOf('p') != -1) {
+            owned_sets.add('alchemy');
+            document.getElementById('set_alchemy').classList.add('selected');
+        }
+        if (costs.indexOf('d') != -1) {
+            owned_sets.add('empires');
+            document.getElementById('set_empires').classList.add('selected');
+        }
+        // TODO: add overpay and cost 7,8... once the dust has settled.
     }
     return owned_sets;
 }
@@ -123,37 +150,153 @@ function shuffleArray(array) {
     return array;
 }
 
-function hasExpCounts(chosen_cards) {
-    var howmany = document.getElementById('howmany').value;
-    var actual_count;
-    var min_count;
-    var exact_count;
-    var reg;
-    if (howmany.length == 0) {
+
+// TODO: smells of object method!
+function costs_it_replaces(card, needed_costs) {
+    var costs = '';
+    if (needed_costs.indexOf(card.cost) != -1) {
+        costs += card.cost;
+    }
+    // TODO: potion makes more sense as a tag
+    if (card.potion == true) {
+        if (needed_costs.indexOf('p') != -1) {
+            costs += 'p';
+        }
+        else if (needed_costs.indexOf('P') != -1) {
+            costs += 'P';
+        }
+    }
+    if (card.debt > 0) {
+        if (needed_costs.indexOf('d') != -1) {
+            costs += 'd';
+        }
+        else if (needed_costs.indexOf('D') != -1) {
+            costs += 'D';
+        }
+    }
+    return costs;
+}
+
+
+// TODO: smells of object method!
+function sets_it_replaces(card, needed_sets) {
+    var sets = '';
+    var letter = SET_TO_LETTER[card.set];
+    if (needed_sets.indexOf(letter) != -1) {
+        sets += letter;
+    }
+    else if (needed_sets.indexOf(letter.toUpperCase()) != -1) {
+        sets += letter.toUpperCase();
+    }
+    return sets;
+}
+
+
+// TODO: smells of object method!
+function card_is_banned(card, banned_sets, banned_costs, newbie_friendly) {
+    if (newbie_friendly && card.complicated) {
         return true;
     }
+    if (banned_sets.has(card.set)) {
+        return true;
+    }
+    if (card.potion && banned_costs.has('potion')) {
+        return true;
+    }
+    if (card.debt && banned_costs.has('debt')) {
+        return true;
+    }
+    return false;
+}
 
-    for (key in EXPANSIONS) {
-        actual_count = 0;
-        for (var card_nr in chosen_cards) {
-            if (chosen_cards[card_nr].set == EXPANSIONS[key]) {
-                actual_count += 1;
+
+// Requirements like costs or expansions can be checked independently
+// on a card-by-card basis, meaning they can be fulfilled on the first run!
+function get_ten_cards(owned_cards) {
+
+    // TODO: make bulletproof:
+    // TODO: user entering sssSSS
+    var success = false;
+    var cards_not_requested = [];
+    var needed_costs = document.getElementById('neededcosts').value;
+    var needed_sets = document.getElementById('howmany').value;
+    var newbie_friendly = document.getElementById('newbies').checked;
+
+    var banned_sets = new Set(); // user inputs uppercase set letters
+    var banned_costs = new Set(); // P/D; no uppercase digits (yet!)
+
+    for (var card of owned_cards) {
+        if (card_is_banned(card, banned_sets, banned_costs, newbie_friendly)) {
+            continue;
+        }
+
+
+        var costs_replaced = costs_it_replaces(card, needed_costs);
+        var sets_replaced = sets_it_replaces(card, needed_sets);
+        // is this NOT one of the requested cards ?
+        if (!(costs_replaced || sets_replaced)) {
+
+            if (cards_not_requested.length + chosen_cards.length < 10) {
+            // not requested, but not banned either
+            // can be used to pad requested cards with
+            cards_not_requested.push(card);
             }
         }
-        reg = new RegExp(key.toLowerCase(), "g");
-        min_count = (howmany.match(reg) || []).length;
-        reg = new RegExp(key.toUpperCase(), "g");
-        exact_count = (howmany.match(reg) || []).length;
+        else {
 
-        if (min_count && actual_count < min_count) {
-            return false;
+            // yes, one of the requested cards!
+            chosen_cards.push(card);
+            chosen_names.add(card.name);
+
+            // substract SETS of the card from user's input string
+            for (var ch of sets_replaced) {
+                needed_sets = needed_sets.replace(ch, '');
+                if ((ch != ch.toLowerCase()) &&
+                        (needed_sets.indexOf(ch) == -1)) {
+                    // If uppercase letters just ran out, it means
+                    // we've just found the last card from that set
+                    // (and user requested EXACTLY as many)
+                    banned_sets.add(card.set);
+                }
+            }
+
+            // substract COSTS of the card from user's input string
+            for (var ch of costs_replaced) {
+                needed_costs = needed_costs.replace(ch, '');
+                if ((costs_replaced.indexOf('P') != -1) &&
+                        (needed_costs.indexOf('P') == -1)) {
+                    banned_costs.add('potion');
+                }
+                if ((costs_replaced.indexOf('D') != -1) &&
+                        (needed_costs.indexOf('D') == -1)) {
+                    banned_costs.add('debt');
+                }
+            }
+
         }
-        if (exact_count && exact_count != actual_count) {
-            return false;
+
+        if ((needed_costs.length == 0) && (needed_sets.length == 0)) {
+            if (chosen_cards.length + cards_not_requested.length >= 10) {
+                success = true;
+                break;
+            }
         }
     }
-    return true;
+
+    if (!success) {
+        return [];
+    }
+    // time to pad the result with cards which weren't requested
+    // but are okay to have.
+
+    for (ncard of cards_not_requested.slice(0, 10 - chosen_cards.length)) {
+        chosen_cards.push(ncard);
+        chosen_names.add(ncard.name);
+    }
+    // slice in case user requests too many cards (costs/sets)
+    return chosen_cards.slice(0, 10);
 }
+
 
 function attackCountered(attack_card, chosen_tags) {
     var counters = attack_card.countered_by;
@@ -175,11 +318,12 @@ function attackCountered(attack_card, chosen_tags) {
 
     var counters_itself;
     var i;
-    for (i=0; i <counters.length; i++) {
+    for (i=0; i < counters.length; i++) {
             counters_itself = 0;
             if (attack_card.tags.indexOf(counters[i]) > -1) {
                 counters_itself = 1;
             }
+            // TODO: attacks countered by events
             if (chosen_tags[counters[i]] - counters_itself > 0) {
                 console.log(attack_card.name + ' countered by ' + counters[i]);
                 return true;
@@ -204,67 +348,14 @@ function attacksCountered(chosen_cards, chosen_names, chosen_tags) {
     }
 
 
-function costsPresent(chosen_cards) {
-    var neededcosts = document.getElementById('neededcosts').value;
-    var total_potions = 0;
-    var exact_potions = 0;
-    var total_debts = 0;
-    var exact_debts = 0;
-
-    var i;
-    for (i = 0; i < chosen_cards.length; i++) {
-        cost = chosen_cards[i].cost;
-        neededcosts = neededcosts.replace(cost, '');
-
-        if (chosen_cards[i].hasOwnProperty('potion')) {
-            if (neededcosts.indexOf('P') != -1) {
-                exact_potions += 1;
-            }
-            neededcosts = neededcosts.replace(/p/i, '');
-            total_potions += 1;
-        }
-        if (chosen_cards[i].debt > 0) {
-            if (neededcosts.indexOf('D') != -1) {
-                exact_debts += 1;
-            }
-            neededcosts = neededcosts.replace(/d/i, '');
-            total_debts += 1;
-            // TODO: SPECIAL_generates_debt
-            // TODO: disable Fortune and other second dual cards
-        }
-    }
-
-    if (exact_potions > 0 && exact_potions != total_potions) {
-        console.log('Rejecting set - user wants exact number of potions.');
-        return false;
-    }
-    if (exact_debts > 0 && exact_debts != total_debts) {
-        console.log('Rejecting set - user wants exact number of debts.');
-        return false;
-    }
-    if (neededcosts.length > 0) {
-        console.log('Rejecting set - needed costs not present.');
-        return false;
-    }
-    return true;
-}
-
+// Check more sophisticated conditions, card relationships etc.
+// These can't really be done on the first run.
 function conditionsPassed(chosen_cards, chosen_tags, chosen_card_types) {
 
     // condition: cards that NEED attack should appear alongside attacks
     if ((chosen_tags['needs_attacks'] >= 1) && !chosen_card_types.has('Attack')) {
         console.log(chosen_names);
         console.log('REJECTING set because it has cards that need attacks but no attacks.');
-        return false;
-    }
-    // TODO: Can be generated in the first pass.
-
-    // condition: costs
-    if (!costsPresent(chosen_cards)) {
-        return false;
-    }
-
-    if (!hasExpCounts(chosen_cards)) {
         return false;
     }
 
@@ -277,35 +368,21 @@ function conditionsPassed(chosen_cards, chosen_tags, chosen_card_types) {
             return false
             }
         }
+    // TODO: The above can be checked on first run, but is it worth it ?
 
     if (attacks == 'attacks_countered') {
         if (!attacksCountered(chosen_cards, chosen_names, chosen_tags)) {
             return false;
         }
     }
-
-   // condition: Only newbie friendly cards
-    var newbie_friendly = document.getElementById('newbies').checked;
-    if (newbie_friendly == true) {
-        var i;
-        for (i = 0; i < chosen_cards.length; i++) {
-            if (chosen_cards[i].complicated == true){
-                console.log('Rejecting complicated ' + chosen_cards[i].name);
-                return false;
-            }
-        }
-    }
-    // TODO: Can be generated in the first pass.
     return true;
 }
 
 
 function hide_all_cards () {
-    //TODO: there's probably a more idiomatic way to hide cards.
     var displayed_cards = document.getElementsByTagName('figure');
-    var i;
-    for (i = 0; i < displayed_cards.length; i++) {
-          displayed_cards[i].classList.add('hidden');
+    for (var dcard of displayed_cards) {
+          dcard.classList.add('hidden');
           }
 }
 
@@ -313,7 +390,7 @@ function hide_all_cards () {
 function paintPaper(source, target) {
     target.classList.remove('hidden');
     target.classList.remove('reaction', 'treasure', 'duration', 'victory', 'reserve');
-    target.classList.remove('dominion', 'intrigue', 'seaside', 'alchemy', 'prosperity', 'cornucopia', 'hinterlands', 'darkages', 'guilds', 'adventures', 'empires');
+    target.classList.remove('promos', 'dominion', 'intrigue', 'seaside', 'alchemy', 'prosperity', 'cornucopia', 'hinterlands', 'darkages', 'guilds', 'adventures', 'empires');
     target.classList.add(source.set);
 
     target.setAttribute('alt', source.text);
@@ -370,12 +447,9 @@ function show_kingdom (owned_sets, promo_names) {
     owned_cards = shuffleArray(owned_cards);
     owned_notcards = shuffleArray(owned_notcards);
 
-    // Select the cards:
-    var i;
-    for (i = 0; i < 10; i++){
-        choice = owned_cards[i];
-        chosen_cards.push(choice);
-        chosen_names.add(choice.name);
+    chosen_cards = get_ten_cards(owned_cards);
+    if (!chosen_cards) {
+        continue;
     }
 
     // Select events/landmarks:
@@ -431,7 +505,6 @@ function show_kingdom (owned_sets, promo_names) {
         }
     }
 
-
     if (!conditionsPassed(chosen_cards, chosen_tags, chosen_card_types)) {
         continue;
     }
@@ -439,13 +512,13 @@ function show_kingdom (owned_sets, promo_names) {
     break;
     }
 
+    // TODO: move it somewhere
     if (attempt == max_tries) {
         hide_all_cards();
         return;
     }
 
     // Sort output, leaving bane as 11th if present
-
     var first_ten = chosen_cards.slice(0, 10).sort(
     function(a, b){return a.cost - b.cost});
     chosen_cards = first_ten.concat(chosen_cards.slice(10));
@@ -458,7 +531,6 @@ function show_kingdom (owned_sets, promo_names) {
     var i;
     for (i = 0; i < chosen_cards.length; i++) {
         fig = document.getElementById('card_' + i);
-
         paintPaper(chosen_cards[i], fig);
     }
     var j;
@@ -470,6 +542,8 @@ function show_kingdom (owned_sets, promo_names) {
 }
 
 
+// TODO: possible bugs when no card fits
+// TODO: possible bug with cost requesting feature
 function get_bane (owned_cards, chosen_names) {
     var i;
     for (i = 0; i < owned_cards.length; i++) {
@@ -507,6 +581,7 @@ function may_add_colony_platinum(chosen_cards) {
 
     }
 }
+
 
 function may_add_shelters(chosen_cards) {
     var shelters = document.getElementById('shelters');
@@ -556,4 +631,3 @@ function add_notcards(owned_notcards, chosen_notcards) {
     }
 }
 
-          //-->

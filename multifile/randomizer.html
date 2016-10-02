@@ -10,10 +10,10 @@
         </head>
 
 
-    <body onload='owned_sets=getownedsets();promo_names=getpromonames();'> <form action=''>
+    <body onload='owned_sets=get_owned_sets();promo_names=getpromonames();'> <form action=''>
 
             <label for='expansions'><input type='tel' id='expansions'
-               maxlength=11 value="b" size='5 em' onkeyup='owned_sets=getownedsets();promo_names=getpromonames();' />
+               maxlength=11 value="b" size='5 em' onkeyup='owned_sets=get_owned_sets();promo_names=getpromonames();' />
 
                     <span id='set_dominion' class='outer'><strong alt='dominion (Base)'>B</strong><span class='notphone'>ase </span></span><!--
                  --><span id='set_intrigue' class='outer'><strong alt='Intrigue'>I</strong><span class='notphone'>ntrigue </span></span><!--
@@ -40,8 +40,8 @@
                 <label for='howmany'><span alt='sbb - minimum 1 card from seaside and 2 from base,
 hhhh - minimum 4 cards from Hinterlands,
 DDDD - EXACTLY 4 from Dark Ages.'>How many</span></label>
-                <input maxlength='10' size='10em' id='howmany' value='' onkeyup='owned_sets=getownedsets();' />
-                <input maxlength='10' size='10em' id='neededcosts' value='2445' />
+                <input maxlength='10' size='10em' id='howmany' value='' onkeyup='owned_sets=get_owned_sets();' />
+                <input maxlength='10' size='10em' id='neededcosts' value='2445' onkeyup='owned_sets=get_owned_sets();' />
                 <label for='neededcosts'><span alt='233 - at least one card costing 2 and two costing 3,
 dd - minimum 2 cards with debt,
 p - potion,

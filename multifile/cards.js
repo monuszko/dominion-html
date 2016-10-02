@@ -7,6 +7,8 @@
 // the trick with backticks `` is Template Strings / NoSubstitutionTemplate,
 // from EcmaScript6.
 //
+
+// TODO: The "actions" property turned out to be a dud.
 const existing_cards = JSON.parse(`
 [
     {
