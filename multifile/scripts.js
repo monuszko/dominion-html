@@ -10,6 +10,7 @@ LETTER_TO_SET = {
     'g': 'guilds',
     'v': 'adventures',
     'e': 'empires',
+    'o': 'promos',
 }
 
 
@@ -25,7 +26,18 @@ SET_TO_LETTER = {
     'guilds': 'g',
     'adventures': 'v',
     'empires': 'e',
+    'promos': 'o',
 }
+
+PROMOS = {
+    1: 'Envoy',
+    2: 'Black Market',
+    3: 'Stash',
+    4: 'Walled Village',
+    5: 'Governor',
+    6: 'Prince',
+    7: 'Summon'
+    }
 
 
 owned_cards = Array();
@@ -74,25 +86,16 @@ function get_owned_sets() {
 
 
 function getpromonames() {
-promos = {
-    1: 'Envoy',
-    2: 'Black Market',
-    3: 'Stash',
-    4: 'Walled Village',
-    5: 'Governor',
-    6: 'Prince',
-    7: 'Summon'
-    }
 
     promo_names = new Set();
     user_input = document.getElementById('expansions').value.toLowerCase();
 
-    for (var key in promos) {
-        if (promos.hasOwnProperty(key)) {
+    for (var key in PROMOS) {
+        if (PROMOS.hasOwnProperty(key)) {
             span = document.getElementById('promo_' + key);
             if (user_input.indexOf(key) != -1) {
                 span.classList.add('selected');
-                promo_names.add(promos[key]);
+                promo_names.add(PROMOS[key]);
             }
             else {
                 span.classList.remove('selected');
@@ -126,9 +129,9 @@ function getownednotcards(owned_sets, existing_notcards) {
         if (owned_sets.has(this_notcard.set)) {
             owned_notcards.push(this_notcard);
         }
-        else if (user_input.indexOf(promos[this_notcard.name]) != -1) {
+        else if (user_input.indexOf(PROMOS[this_notcard.name]) != -1) {
                 owned_notcards.push(this_notcard);
-                span = document.getElementById('promo_' + promos[this_notcard.name]);
+                span = document.getElementById('promo_' + PROMOS[this_notcard.name]);
                 span.classList.add('selected');
             }
     }
@@ -187,6 +190,14 @@ function sets_it_replaces(card, needed_sets) {
     }
     else if (needed_sets.indexOf(letter.toUpperCase()) != -1) {
         sets += letter.toUpperCase();
+    }
+    else if (card.set == 'promos') {
+        for (i in PROMOS) {
+            if (PROMOS[i].name == card.name) {
+                sets += i;
+                break;
+            }
+        }
     }
     return sets;
 }
@@ -453,7 +464,6 @@ function show_kingdom (owned_sets, promo_names) {
     }
 
     // Select events/landmarks:
-    // TODO: no duplicate event/landmark
     add_notcards(owned_notcards, chosen_notcards);
     may_add_colony_platinum(chosen_cards);
     may_add_shelters(chosen_cards);
@@ -535,6 +545,8 @@ function show_kingdom (owned_sets, promo_names) {
     }
     var j;
     for (j = 0; j < chosen_notcards.length; j++) {
+        console.log('j' + j);
+        console.log(chosen_notcards.length);
         fig = document.getElementById('notcard_' + j);
         paintPaper(chosen_notcards[j], fig);
     }
@@ -614,19 +626,19 @@ function add_notcards(owned_notcards, chosen_notcards) {
     if (owned_notcards.length > 0) {
         var notcards = document.querySelector('input[name = "notcards"]:checked').id;
         var notcard_count;
-        if (notcards == 'notcards_0') {
-            notcard_count = 0;
-        }
-        else if (notcards == 'notcards_random') {
+        if (notcards == 'notcards_random') {
             notcard_count = Math.floor(Math.random() * 3);
         }
         else {
-            notcard_count = 2;
+            notcard_count = notcards.slice(-1);
         }
-        var i;
-        for (i = 0; i < notcard_count; i++){
-            choice = owned_notcards[i];
-            chosen_notcards.push(choice);
+        console.log('NOTCARD COUNBT' + notcard_count);
+        for (var i in owned_notcards) {
+            if (i == notcard_count) {
+                break
+            }
+            chosen_notcards.push(owned_notcards[i]);
+
         }
     }
 }
