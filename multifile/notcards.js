@@ -3,7 +3,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 5,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Summon",
         "set": "promos",
         "tags": ["gainer"],
@@ -12,7 +12,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 0,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Alms",
         "set": "adventures",
         "tags": ["gainer"],
@@ -21,7 +21,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 0,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Borrow",
         "set": "adventures",
         "tags": ["virtual_coin"],
@@ -30,7 +30,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 0,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Quest",
         "set": "adventures",
         "tags": ["gainer"],
@@ -39,7 +39,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 1,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Save",
         "set": "adventures",
         "tags": [],
@@ -48,7 +48,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 2,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Scouting Party",
         "set": "adventures",
         "tags": ["sifter"],
@@ -57,7 +57,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 2,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Travelling Fair",
         "set": "adventures",
         "tags": [],
@@ -66,7 +66,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 3,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Bonfire",
         "set": "adventures",
         "tags": ["early_trasher"],
@@ -75,7 +75,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 3,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Expedition",
         "set": "adventures",
         "tags": [],
@@ -84,7 +84,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 3,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Ferry",
         "set": "adventures",
         "tags": [],
@@ -93,7 +93,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 3,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Plan",
         "set": "adventures",
         "tags": [],
@@ -102,7 +102,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 4,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Mission",
         "set": "adventures",
         "tags": [],
@@ -111,7 +111,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": true,
         "cost": 4,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Pilgrimage",
         "set": "adventures",
         "tags": ["gainer"],
@@ -120,7 +120,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 5,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Ball",
         "set": "adventures",
         "tags": ["gainer"],
@@ -129,7 +129,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 5,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Raid",
         "set": "adventures",
         "tags": ["gainer"],
@@ -138,7 +138,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 5,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Seaway",
         "set": "adventures",
         "tags": ["gainer"],
@@ -147,7 +147,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 5,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Trade",
         "set": "adventures",
         "tags": ["gainer"],
@@ -156,7 +156,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 6,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Lost Arts",
         "set": "adventures",
         "tags": [],
@@ -165,7 +165,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 6,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Training",
         "set": "adventures",
         "tags": ["virtual_coin"],
@@ -174,7 +174,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 7,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Inheritance",
         "set": "adventures",
         "tags": [],
@@ -183,7 +183,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 8,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Pathfinding",
         "set": "adventures",
         "tags": [],
@@ -192,7 +192,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 0,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Advance",
         "set": "empires",
         "tags": [],
@@ -201,7 +201,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 2,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Delve",
         "set": "empires",
         "tags": [],
@@ -210,7 +210,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 2,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Tax",
         "set": "empires",
         "tags": [],
@@ -219,7 +219,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 4,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Ritual",
         "set": "empires",
         "tags": [],
@@ -228,7 +228,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 4,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Salt the earth",
         "set": "empires",
         "tags": [],
@@ -237,7 +237,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 5,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Windfall",
         "set": "empires",
         "tags": [],
@@ -246,7 +246,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 6,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Conquest",
         "set": "empires",
         "tags": [],
@@ -255,7 +255,7 @@ const existing_notcards = JSON.parse(`
     {
         "complicated": false,
         "cost": 14,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Dominate",
         "set": "empires",
         "tags": [],
@@ -263,7 +263,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Aqueduct",
         "set": "empires",
         "tags": [],
@@ -271,7 +271,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Arena",
         "set": "empires",
         "tags": [],
@@ -279,7 +279,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Bandit Fort",
         "set": "empires",
         "tags": [],
@@ -287,7 +287,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Basilica",
         "set": "empires",
         "tags": [],
@@ -295,7 +295,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Baths",
         "set": "empires",
         "tags": [],
@@ -303,7 +303,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Baths",
         "set": "empires",
         "tags": [],
@@ -311,7 +311,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Battlefield",
         "set": "empires",
         "tags": [],
@@ -319,7 +319,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Colonnade",
         "set": "empires",
         "tags": [],
@@ -327,7 +327,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": true,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Defiled Shrine",
         "set": "empires",
         "tags": [],
@@ -335,7 +335,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": true,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Defiled Shrine",
         "set": "empires",
         "tags": [],
@@ -343,7 +343,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Fountain",
         "set": "empires",
         "tags": [],
@@ -351,7 +351,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Keep",
         "set": "empires",
         "tags": [],
@@ -359,7 +359,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Labyrinth",
         "set": "empires",
         "tags": [],
@@ -367,7 +367,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": true,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Mountain Pass",
         "set": "empires",
         "tags": [],
@@ -375,7 +375,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Museum",
         "set": "empires",
         "tags": [],
@@ -383,7 +383,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Obelisk",
         "set": "empires",
         "tags": [],
@@ -391,7 +391,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Orchard",
         "set": "empires",
         "tags": [],
@@ -399,7 +399,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Palace",
         "set": "empires",
         "tags": [],
@@ -407,7 +407,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Tomb",
         "set": "empires",
         "tags": [],
@@ -415,7 +415,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Tower",
         "set": "empires",
         "tags": [],
@@ -423,7 +423,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Triumphal Arch",
         "set": "empires",
         "tags": [],
@@ -431,7 +431,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Wall",
         "set": "empires",
         "tags": [],
@@ -439,7 +439,7 @@ const existing_notcards = JSON.parse(`
     },
     {
         "complicated": false,
-        "types": ["landmark"],
+        "types": ["Landmark"],
         "name": "Wolf Den",
         "set": "empires",
         "tags": [],
@@ -449,7 +449,7 @@ const existing_notcards = JSON.parse(`
         "complicated": false,
         "cost": 0,
         "debt": 5,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Triumph",
         "set": "empires",
         "tags": [],
@@ -459,7 +459,7 @@ const existing_notcards = JSON.parse(`
         "complicated": false,
         "cost": 0,
         "debt": 8,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Annex",
         "set": "empires",
         "tags": [],
@@ -469,7 +469,7 @@ const existing_notcards = JSON.parse(`
         "complicated": true,
         "cost": 0,
         "debt": 8,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Donate",
         "set": "empires",
         "tags": [],
@@ -479,7 +479,7 @@ const existing_notcards = JSON.parse(`
         "complicated": false,
         "cost": 4,
         "debt": 3,
-        "types": ["event"],
+        "types": ["Event"],
         "name": "Wedding",
         "set": "empires",
         "tags": [],

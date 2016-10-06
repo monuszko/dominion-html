@@ -14,10 +14,65 @@ figure {
     background: #afb4ae;
 }
 
+
 div.stretchy-wrapper {
-    padding-bottom: 134%; /* 59mm x 91mm - Dominion card size */
+    padding-bottom: 160%; /* 59mm x 91mm - Dominion card size */
     position: relative;
 }
+
+figure.horizontal {
+    width: 25%;
+}
+
+figure.horizontal div.stretchy-wrapper {
+    padding-bottom: 58%; /* 59mm x 91mm - Dominion card size */
+}
+
+figure.horizontal figcaption {
+    width: 50%;
+    margin: 0 auto;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+figure.horizontal .card_image {
+    height: 66%;
+}
+
+figure.horizontal .card_text {
+    height: 34%;
+}
+
+.ribbon-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 45%;
+    overflow: hidden;
+}
+
+.ribbon {
+    background: #f4eece;
+    color: black;
+    text-align: center;
+    position: absolute;
+    font: 13px Sans-Serif;
+    transform: rotate(45deg);
+    position: relative;
+    left: -15%;
+    top: 22%;
+    width: 150%;
+
+}
+
+.header {
+    background: #51433A;
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+
 
 figcaption {
     width: 100%;
@@ -40,6 +95,7 @@ figcaption {
     height: 50%;
     position: absolute;
     bottom: 0;
+    border-top: 1px dashed black;
 }
 
 .footer {
@@ -48,7 +104,6 @@ figcaption {
     width: 100%;
     position: absolute;
     bottom: 0;
-    z-index: 0;
 }
 
 figure.reaction figcaption {
@@ -163,6 +218,18 @@ figure#card_10 {
     clear: left;
 }
 
+figure.landmark figcaption {
+    background: #439D5D;
+}
+
+figure.landmark .card_text {
+    background: #439D5D;
+}
+
+figure.landmark .ribbon {
+    background: #439D5D;
+}
+
 /* image background is base64-encoded SVG text "Bane" */
 figure#card_10 .card_image {
   background: url("data:image/svg+xml;base64, PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZlcnNpb249JzEuMScgaGVpZ2h0PSczNXB4JyB3aWR0aD0nNjBweCc+IDx0ZXh0IHg9JzE1JyB5PScxNScgZmlsbD0ncmVkJyBmb250LXNpemU9JzIwJyB0cmFuc2Zvcm09J3JvdGF0ZSgyMCknPkJhbmU8L3RleHQ+IDwvc3ZnPgo=") #999999 0;
@@ -189,23 +256,29 @@ span#m_in_promos {
 
 @media only screen and (max-width: 940px) {
     figure {width: 20%;}
+    .ribbon {font: 13px Sans-Serif;}
+    figure.horizontal {width: 30%;}
 }
 
 @media only screen and (max-width: 720px) {
     figure {width: 28%;}
+    .ribbon {font: 12px Sans-Serif;}
+    figure.horizontal {width: 43%;}
 }
 
 @media only screen and (max-width: 530px) {
     figure {width: 45%;}
+    .ribbon {font: 11px Sans-Serif;}
+    figure.horizontal {width: 69%;}
 }
 
 @media only screen and (max-width: 320px) {
     figure {width: 96%;}
+    .ribbon {font: 10px Sans-Serif;}
+    figure.horizontal {width: 96%;}
 }
 
-
-
-.coin_cost {
+span.coin_cost {
     float: left;
     background: #fce11e;
     border-radius: 50%;
@@ -214,13 +287,13 @@ span#m_in_promos {
     font-weight: bold;
 }
 
-.potion {
+span.potion {
     float: left;
     color: #0f5f92;
     font-weight: bold;
 }
 
-.debt_cost {
+span.debt_cost {
     float: left;
     background: #b64b26;
     border-radius: 50%;

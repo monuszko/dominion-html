@@ -28,6 +28,7 @@ SET_TO_LETTER = {
     'empires': 'e',
     'promos': 'o',
 }
+// TODO: The above can probably be replaced with one Map.
 
 PROMOS = {
     1: 'Envoy',
@@ -43,6 +44,7 @@ PROMOS = {
 owned_cards = Array();
 
 
+// TODO: abbreviate only if multiple types
 function abbrev(words) {
     var abbrev = [];
     var j;
@@ -400,7 +402,7 @@ function hide_all_cards () {
 
 function paintPaper(source, target) {
     target.classList.remove('hidden');
-    target.classList.remove('reaction', 'treasure', 'duration', 'victory', 'reserve');
+    target.classList.remove('reaction', 'treasure', 'duration', 'victory', 'reserve', 'landmark');
     target.classList.remove('promos', 'dominion', 'intrigue', 'seaside', 'alchemy', 'prosperity', 'cornucopia', 'hinterlands', 'darkages', 'guilds', 'adventures', 'empires');
     target.classList.add(source.set);
 
@@ -408,15 +410,19 @@ function paintPaper(source, target) {
     target.querySelector('figcaption').textContent = source.name;
     target.querySelector('.card_type').innerHTML = abbrev(source.types);
 
-    target.querySelector('.coin_cost').textContent = source.cost || '';
+    target.querySelector('.coin_cost').textContent = source.cost;
     target.querySelector('.coin_cost').textContent += source.cost_extra || '';
     target.querySelector('.debt_cost').textContent = source.debt || '';
-
-    if (source.hasOwnProperty('potion')) {
-        target.querySelector('.potion').classList.remove('hidden');
-    }
-    else {
-        target.querySelector('.potion').classList.add('hidden');
+    if (!target.classList.contains('horizontal')) {
+        if (source.cost == 0) {
+            target.querySelector('.coin_cost').textContent = '';
+        }
+        if (source.hasOwnProperty('potion')) {
+            target.querySelector('.potion').classList.remove('hidden');
+        }
+        else {
+            target.querySelector('.potion').classList.add('hidden');
+        }
     }
     
     if (source.types.indexOf('Reaction') != -1) {
@@ -433,6 +439,9 @@ function paintPaper(source, target) {
     }
     else if (source.types.indexOf('Duration') != -1) {
         target.classList.add('duration');
+    }
+    else if (source.types.indexOf('Landmark') != -1) {
+        target.classList.add('landmark');
     }
 
 }
@@ -545,8 +554,6 @@ function show_kingdom (owned_sets, promo_names) {
     }
     var j;
     for (j = 0; j < chosen_notcards.length; j++) {
-        console.log('j' + j);
-        console.log(chosen_notcards.length);
         fig = document.getElementById('notcard_' + j);
         paintPaper(chosen_notcards[j], fig);
     }
@@ -622,6 +629,7 @@ function may_add_shelters(chosen_cards) {
     }
 }
 
+
 function add_notcards(owned_notcards, chosen_notcards) {
     if (owned_notcards.length > 0) {
         var notcards = document.querySelector('input[name = "notcards"]:checked').id;
@@ -632,7 +640,6 @@ function add_notcards(owned_notcards, chosen_notcards) {
         else {
             notcard_count = notcards.slice(-1);
         }
-        console.log('NOTCARD COUNBT' + notcard_count);
         for (var i in owned_notcards) {
             if (i == notcard_count) {
                 break
