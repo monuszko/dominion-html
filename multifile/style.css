@@ -239,7 +239,7 @@ figure#card_10 .card_image {
     display: none;
 }
 
-.selected {
+span.selected {
     color: red;
 }
 

@@ -10,22 +10,21 @@
         </head>
 
 
-    <body onload='owned_sets=get_owned_sets();promo_names=getpromonames();'> <form action=''>
+    <body onload='owned_sets=get_owned_sets();promo_names=get_promo_names();'><form action=''>
 
-            <label for='expansions'><input type='tel' id='expansions'
-               maxlength=11 value="b" size='5 em' onkeyup='owned_sets=get_owned_sets();promo_names=getpromonames();' />
+            <label for='expansions'><input type='tel' id='expansions' maxlength=11 value="b" size='5' onkeyup='owned_sets=get_owned_sets();promo_names=get_promo_names();' />
 
-                    <span id='set_dominion' class='outer'><strong alt='dominion (Base)'>B</strong><span class='notphone'>ase </span></span><!--
-                 --><span id='set_intrigue' class='outer'><strong alt='Intrigue'>I</strong><span class='notphone'>ntrigue </span></span><!--
-                 --><span id='set_seaside' class='outer'><strong alt='Seaside'>S</strong><span class='notphone'>easide </span></span><!--
-                 --><span id='set_alchemy' class='outer'><strong alt='Alchemy'>A</strong><span class='notphone'>lchemy </span></span><!--
-                 --><span id='set_prosperity' class='outer'><strong alt='Prosperity'>P</strong><span class='notphone'>rosperity </span></span><!--
-                 --><span id='set_cornucopia' class='outer'><strong alt='Cornucopia'>C</strong><span class='notphone'>ornucopia </span></span><!--
-                 --><span id='set_hinterlands' class='outer'><strong alt='Hinterlands'>H</strong><span class='notphone'>interlands </span></span><!--
-                 --><span id='set_darkages' class='outer'><strong alt='Dark Ages'>D</strong><span class='notphone'>ark Ages </span></span><!--
-                 --><span id='set_guilds' class='outer'><strong alt='Guilds'>G</strong><span class='notphone'>uilds </span></span><!--
-                 --><span id='set_adventures' class='outer'><span class='notphone'>ad</span><strong alt='adVentures'>V</strong><span class='notphone'>entures </span></span><!--
-                 --><span id='set_empires' class='outer'><strong alt='Empires'>E</strong><span class='notphone'>mpires </span></span>
+                    <span id='set_dominion'><strong alt='dominion (Base)'>B</strong><span class='notphone'>ase </span></span><!--
+                 --><span id='set_intrigue'><strong alt='Intrigue'>I</strong><span class='notphone'>ntrigue </span></span><!--
+                 --><span id='set_seaside'><strong alt='Seaside'>S</strong><span class='notphone'>easide </span></span><!--
+                 --><span id='set_alchemy'><strong alt='Alchemy'>A</strong><span class='notphone'>lchemy </span></span><!--
+                 --><span id='set_prosperity'><strong alt='Prosperity'>P</strong><span class='notphone'>rosperity </span></span><!--
+                 --><span id='set_cornucopia'><strong alt='Cornucopia'>C</strong><span class='notphone'>ornucopia </span></span><!--
+                 --><span id='set_hinterlands'><strong alt='Hinterlands'>H</strong><span class='notphone'>interlands </span></span><!--
+                 --><span id='set_darkages'><strong alt='Dark Ages'>D</strong><span class='notphone'>ark Ages </span></span><!--
+                 --><span id='set_guilds'><strong alt='Guilds'>G</strong><span class='notphone'>uilds </span></span><!--
+                 --><span id='set_adventures'><span class='notphone'>ad</span><strong alt='adVentures'>V</strong><span class='notphone'>entures </span></span><!--
+                 --><span id='set_empires'><strong alt='Empires'>E</strong><span class='notphone'>mpires </span></span>
                  <br>
                  Pr<span id='set_promos'><strong>o<span id='m_in_promos'>m</span>o</strong></span>s:
                  <span id="promo_1"><strong alt='Envoy'>1</strong><span class='notphone'>Envoy </span></span><!--
@@ -35,6 +34,7 @@
                  --><span id="promo_5"><strong alt='Governor'>5</strong><span class='notphone'>Governor </span></span><!--
                  --><span id="promo_6"><strong alt='Prince'>6</strong><span class='notphone'>Prince </span></span><!--
                  --><span id="promo_7"><strong alt='Summon'>7</strong><span class='notphone'>Summon </span></span>
+            </label>
 
             <div>
                 <label for='howmany'><span alt='sbb - minimum 1 card from seaside and 2 from base,
@@ -52,8 +52,8 @@ PPP - EXACTLY 3 potions.'>Card costs</span></label>
 
                 <fieldset>
                     <legend>Attacks</legend>
-                    <label for='attacks_unrestricted'><input type='radio' id='attacks_unrestricted' name='attacks' checked>Unrestricted</label>
-                    <label for='attacks_countered'><input type='radio' id='attacks_countered' name='attacks'>Countered</label>
+                    <label for='attacks_unrestricted'><input type='radio' id='attacks_unrestricted' name='attacks'>Unrestricted</label>
+                    <label for='attacks_countered'><input type='radio' id='attacks_countered' name='attacks' checked>Countered</label>
                     <label for='attacks_none'><input type='radio' id='attacks_none' name='attacks'>None</label>
                 </fieldset>
 
