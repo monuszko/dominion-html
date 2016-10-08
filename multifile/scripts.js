@@ -47,6 +47,9 @@ owned_cards = Array();
 // TODO: abbreviate only if multiple types
 function abbrev(words) {
     var abbrev = [];
+    if (words.length < 2) {
+        return words;
+    }
     for (var word of words) {
         first_letter = word[0];
         last_letter = word.slice(-1);
@@ -388,7 +391,7 @@ function conditionsPassed(chosen_cards, chosen_names, chosen_tags, chosen_card_t
 }
 
 
-function hide_all_cards () {
+function hide_all_cards() {
     var displayed_cards = document.getElementsByTagName('figure');
     for (var dcard of displayed_cards) {
           dcard.classList.add('hidden');
@@ -399,7 +402,9 @@ function hide_all_cards () {
 function paintPaper(source, target) {
     target.classList.remove('hidden');
     target.classList.remove('reaction', 'treasure', 'duration', 'victory', 'reserve', 'landmark');
-    target.classList.remove('promos', 'dominion', 'intrigue', 'seaside', 'alchemy', 'prosperity', 'cornucopia', 'hinterlands', 'darkages', 'guilds', 'adventures', 'empires');
+    for (set in SET_TO_LETTER) {
+        target.classList.remove(set);
+    }
     target.classList.add(source.set);
 
     target.setAttribute('alt', source.text);
@@ -447,9 +452,8 @@ function show_kingdom (owned_sets, promo_names) {
     var owned_cards = get_owned_cards(owned_sets, existing_cards, promo_names);
     var owned_notcards = get_owned_notcards(owned_sets, existing_notcards, promo_names);
 
-    // Hide cards if less than one expansion selected
+    hide_all_cards();
     if (owned_cards.length < 13) {
-        hide_all_cards();
         return;
     }
 
@@ -469,7 +473,6 @@ function show_kingdom (owned_sets, promo_names) {
     var chosen_cards = stuff.chosen_cards;
     var chosen_names = stuff.chosen_names;
 
-
     // Select events/landmarks:
     add_notcards(owned_notcards, chosen_notcards);
     may_add_colony_platinum(chosen_cards);
@@ -485,6 +488,7 @@ function show_kingdom (owned_sets, promo_names) {
         }
         chosen_cards.push(bane);
         chosen_names.add(bane.name);
+        document.getElementById('card-10').classList.remove('hidden');
     }
     // Add events/landmarks
 
@@ -530,15 +534,11 @@ function show_kingdom (owned_sets, promo_names) {
     }
 
     // Sort output, leaving bane as 11th if present
-    var first_ten = chosen_cards.slice(0, 10).sort(
-    function(a, b){return a.cost - b.cost});
-    chosen_cards = first_ten.concat(chosen_cards.slice(10));
+    chosen_cards = chosen_cards.slice(0, 10).sort(function(a, b){
+        return a.cost - b.cost});
 
     // insert chosen cards into page:
 
-    document.getElementById('card-10').classList.add('hidden'); // bane
-    document.getElementById('notcard-0').classList.add('hidden'); // event/landm1
-    document.getElementById('notcard-1').classList.add('hidden'); // event/landm2
     var i;
     for (i = 0; i < chosen_cards.length; i++) {
         fig = document.getElementById('card-' + i);
@@ -555,7 +555,7 @@ function show_kingdom (owned_sets, promo_names) {
 
 // TODO: possible bugs when no card fits
 // TODO: possible bug with cost requesting feature
-function get_bane (owned_cards, chosen_names) {
+function get_bane(owned_cards, chosen_names) {
     for (var card of owned_cards) {
         if ((card.cost == 2 || card.cost == 3) && !chosen_names.has(card.name)) {
             return card;
@@ -565,36 +565,35 @@ function get_bane (owned_cards, chosen_names) {
 
 
 function may_add_colony_platinum(chosen_cards) {
-    var colony_platinum = document.getElementById('colony-platinum');
-    colony_platinum.classList.add('hidden');
     var prosperity = document.querySelector('input[name = "prosperity"]:checked').id;
     if (prosperity == 'prosperity-never') {
         // Do nothing
     }
-    else if (prosperity =='prosperity-1') {
+    else if (prosperity == 'prosperity-1') {
         for (var card of chosen_cards) {
             if (card.cost >= 6) {
-                colony_platinum.classList.remove('hidden');
+                document.getElementById('Colony').classList.remove('hidden');
+                document.getElementById('Platinum').classList.remove('hidden');
                 break;
             }
         }
     }
-    else if (prosperity =='prosperity-proportional') {
+    else if (prosperity == 'prosperity-proportional') {
         var to_check = Math.floor(Math.random() * 10);
         if (chosen_cards[to_check].set == 'prosperity') {
-            colony_platinum.classList.remove('hidden');
+            document.getElementById('Colony').classList.remove('hidden');
+            document.getElementById('Platinum').classList.remove('hidden');
         }
     }
-    else if (prosperity =='prosperity-always') {
-        colony_platinum.classList.remove('hidden');
-
+    else if (prosperity == 'prosperity-always') {
+        document.getElementById('Colony').classList.remove('hidden');
+        document.getElementById('Platinum').classList.remove('hidden');
     }
 }
 
 
 function may_add_shelters(chosen_cards) {
     var shelters = document.getElementById('shelters');
-    shelters.classList.add('hidden');
     var darkages = document.querySelector('input[name = "darkages"]:checked').id;
     if (darkages == 'darkages-never') {
         // Do nothing
