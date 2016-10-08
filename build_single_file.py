@@ -2,7 +2,7 @@
 import os
 
 
-html_file = open('multifile/randomizer.html', 'r')
+html_file = open('multifile/dominion.html', 'r')
 template = html_file.readlines()
 html_file.close()
 

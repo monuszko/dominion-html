@@ -60,25 +60,25 @@ function abbrev(words) {
 function get_owned_sets() {
     var owned_sets = new Set();
     var which_sets = document.getElementById('expansions').value.toLowerCase();
-    var how_many = document.getElementById('howmany').value.toLowerCase();
-    var costs = document.getElementById('neededcosts').value.toLowerCase();
+    var needed_sets = document.getElementById('per-set').value.toLowerCase();
+    var needed_costs = document.getElementById('per-cost').value.toLowerCase();
     for (var key in LETTER_TO_SET) {
-        var span = document.getElementById('set_' + LETTER_TO_SET[key]);
+        var span = document.getElementById('set-' + LETTER_TO_SET[key]);
         span.classList.remove('selected');
 
-        if (which_sets.indexOf(key) != -1 || how_many.indexOf(key) != -1) {
+        if (which_sets.indexOf(key) != -1 || needed_sets.indexOf(key) != -1) {
             var expansion = LETTER_TO_SET[key];
             owned_sets.add(expansion)
-            var span = document.getElementById('set_' + expansion);
+            var span = document.getElementById('set-' + expansion);
             span.classList.add('selected');
         }
-        if (costs.indexOf('p') != -1) {
+        if (needed_costs.indexOf('p') != -1) {
             owned_sets.add('alchemy');
-            document.getElementById('set_alchemy').classList.add('selected');
+            document.getElementById('set-alchemy').classList.add('selected');
         }
-        if (costs.indexOf('d') != -1) {
+        if (needed_costs.indexOf('d') != -1) {
             owned_sets.add('empires');
-            document.getElementById('set_empires').classList.add('selected');
+            document.getElementById('set-empires').classList.add('selected');
         }
         // TODO: add overpay and cost 7,8... once the dust has settled.
     }
@@ -91,7 +91,7 @@ function get_promo_names() {
     var user_input = document.getElementById('expansions').value.toLowerCase();
     for (var promo_name of PROMOS.keys()) {
         var digit = PROMOS.get(promo_name);
-        var span = document.getElementById('promo_' + digit);
+        var span = document.getElementById('promo-' + digit);
         if (user_input.indexOf(digit) != -1) {
             span.classList.add('selected');
             promo_names.add(promo_name);
@@ -125,7 +125,7 @@ function get_owned_notcards(owned_sets, existing_notcards, promo_names) {
         }
         else if (promo_names.has(notcard.name)) {
                 owned_notcards.push(notcard);
-                var span = document.getElementById('promo_' + PROMOS[notcard.name]);
+                var span = document.getElementById('promo-' + PROMOS[notcard.name]);
                 span.classList.add('selected');
             }
     }
@@ -225,8 +225,8 @@ function get_ten_cards(owned_cards) {
     var cards_not_requested = [];
     var chosen_names = new Set();
     var success = false;
-    var needed_costs = document.getElementById('neededcosts').value;
-    var needed_sets = document.getElementById('howmany').value;
+    var needed_costs = document.getElementById('per-cost').value;
+    var needed_sets = document.getElementById('per-set').value;
     var newbie_friendly = document.getElementById('newbies').checked;
 
     var banned_sets = new Set(); // user inputs uppercase set letters
@@ -370,7 +370,7 @@ function conditionsPassed(chosen_cards, chosen_names, chosen_tags, chosen_card_t
 
     // condition: attacks
     var attacks = document.querySelector('input[name = "attacks"]:checked').id;
-    if (attacks == 'attacks_none') {
+    if (attacks == 'attacks-none') {
         if (chosen_card_types.has('Attack')) {
             console.log('Attacks forbidden, so rejecting the set:');
             console.log(chosen_names);
@@ -379,7 +379,7 @@ function conditionsPassed(chosen_cards, chosen_names, chosen_tags, chosen_card_t
         }
     // TODO: The above can be checked on first run, but is it worth it ?
 
-    if (attacks == 'attacks_countered') {
+    if (attacks == 'attacks-countered') {
         if (!attacksCountered(chosen_cards, chosen_names, chosen_tags)) {
             return false;
         }
@@ -404,14 +404,14 @@ function paintPaper(source, target) {
 
     target.setAttribute('alt', source.text);
     target.querySelector('figcaption').textContent = source.name;
-    target.querySelector('.card_type').innerHTML = abbrev(source.types);
+    target.querySelector('.card-type').innerHTML = abbrev(source.types);
 
-    target.querySelector('.coin_cost').textContent = source.cost;
-    target.querySelector('.coin_cost').textContent += source.cost_extra || '';
-    target.querySelector('.debt_cost').textContent = source.debt || '';
+    target.querySelector('.coin-cost').textContent = source.cost;
+    target.querySelector('.coin-cost').textContent += source.cost_extra || '';
+    target.querySelector('.debt-cost').textContent = source.debt || '';
     if (!target.classList.contains('horizontal')) {
         if (source.cost == 0) {
-            target.querySelector('.coin_cost').textContent = '';
+            target.querySelector('.coin-cost').textContent = '';
         }
         if (source.hasOwnProperty('potion')) {
             target.querySelector('.potion').classList.remove('hidden');
@@ -536,17 +536,17 @@ function show_kingdom (owned_sets, promo_names) {
 
     // insert chosen cards into page:
 
-    document.getElementById('card_10').classList.add('hidden'); // bane
-    document.getElementById('notcard_0').classList.add('hidden'); // event/landm1
-    document.getElementById('notcard_1').classList.add('hidden'); // event/landm2
+    document.getElementById('card-10').classList.add('hidden'); // bane
+    document.getElementById('notcard-0').classList.add('hidden'); // event/landm1
+    document.getElementById('notcard-1').classList.add('hidden'); // event/landm2
     var i;
     for (i = 0; i < chosen_cards.length; i++) {
-        fig = document.getElementById('card_' + i);
+        fig = document.getElementById('card-' + i);
         paintPaper(chosen_cards[i], fig);
     }
     var j;
     for (j = 0; j < chosen_notcards.length; j++) {
-        fig = document.getElementById('notcard_' + j);
+        fig = document.getElementById('notcard-' + j);
         paintPaper(chosen_notcards[j], fig);
     }
     
@@ -565,13 +565,13 @@ function get_bane (owned_cards, chosen_names) {
 
 
 function may_add_colony_platinum(chosen_cards) {
-    var colony_platinum = document.getElementById('colony_platinum');
+    var colony_platinum = document.getElementById('colony-platinum');
     colony_platinum.classList.add('hidden');
     var prosperity = document.querySelector('input[name = "prosperity"]:checked').id;
-    if (prosperity == 'prosperity_never') {
+    if (prosperity == 'prosperity-never') {
         // Do nothing
     }
-    else if (prosperity =='prosperity_1') {
+    else if (prosperity =='prosperity-1') {
         for (var card of chosen_cards) {
             if (card.cost >= 6) {
                 colony_platinum.classList.remove('hidden');
@@ -579,13 +579,13 @@ function may_add_colony_platinum(chosen_cards) {
             }
         }
     }
-    else if (prosperity =='prosperity_proportional') {
+    else if (prosperity =='prosperity-proportional') {
         var to_check = Math.floor(Math.random() * 10);
         if (chosen_cards[to_check].set == 'prosperity') {
             colony_platinum.classList.remove('hidden');
         }
     }
-    else if (prosperity =='prosperity_always') {
+    else if (prosperity =='prosperity-always') {
         colony_platinum.classList.remove('hidden');
 
     }
@@ -596,10 +596,10 @@ function may_add_shelters(chosen_cards) {
     var shelters = document.getElementById('shelters');
     shelters.classList.add('hidden');
     var darkages = document.querySelector('input[name = "darkages"]:checked').id;
-    if (darkages == 'darkages_never') {
+    if (darkages == 'darkages-never') {
         // Do nothing
     }
-    else if (darkages =='darkages_1') {
+    else if (darkages =='darkages-1') {
         for (var card of chosen_cards) {
             if (card.set == 'darkages') {
                 shelters.classList.remove('hidden');
@@ -607,13 +607,13 @@ function may_add_shelters(chosen_cards) {
             }
         }
     }
-    else if (darkages =='darkages_proportional') {
+    else if (darkages =='darkages-proportional') {
         var to_check = Math.floor(Math.random() * 10);
         if (chosen_cards[to_check].set == 'darkages') {
             shelters.classList.remove('hidden');
         }
     }
-    else if (darkages =='darkages_always') {
+    else if (darkages =='darkages-always') {
         shelters.classList.remove('hidden');
 
     }
@@ -624,7 +624,7 @@ function add_notcards(owned_notcards, chosen_notcards) {
     if (owned_notcards.length > 0) {
         var notcards = document.querySelector('input[name = "notcards"]:checked').id;
         var notcard_count;
-        if (notcards == 'notcards_random') {
+        if (notcards == 'notcards-random') {
             notcard_count = Math.floor(Math.random() * 3);
         }
         else {
