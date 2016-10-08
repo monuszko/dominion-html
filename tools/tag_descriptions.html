@@ -46,6 +46,7 @@
                 "indirect_interaction": "Introduces some kind of indirect interaction other than Attack.",
                 "VP_generator": "Generates Victory Point tokens.",
                 "toilet_paper": "Trashes *itself* for some benefit.",
+                "complicated": "Completely arbitrary - this card is likely to confuse newbies. It has either complex rules or is tricky to play right.",
             }
 
         for (var card of existing_cards) {
@@ -85,5 +86,6 @@
 
         <body onload="display_tags()">
             <p>Summary of tag descriptions. Hover over tag names to see their definitions. For counter system to work tags need to be applied consistently. Tags without descriptions are marked <span class="unfinished">red</span>.</p>
+            <p><em>This page is dynamically generated with Javascript. If it's broken and and you can't see a list, it means either it can't find the source files in "multifile" directory, or .json data is messed up. Likely a comma where it doesn't belong. Check the Javascript console.</em></p>
         </body>
 </html>

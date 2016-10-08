@@ -13,7 +13,6 @@ const existing_cards = JSON.parse(`
 [
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Envoy",
         "set": "promos",
@@ -26,12 +25,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 3,
         "name": "Black Market",
         "set": "promos",
         "tags": [
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+2 Coin\\n\\nReveal the top 3 cards of the Black Market deck. You may buy one of them immediately. But the unbought cards at the bottom of the Black Market deck in any order.",
         "types": [
@@ -40,7 +39,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 2,
         "name": "Stash",
         "set": "promos",
@@ -53,7 +51,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Walled Village",
         "set": "promos",
@@ -66,12 +63,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "name": "Governor",
         "set": "promos",
         "tags": [
-            "gainer"
+            "gainer",
+            "complicated"
         ],
         "text": "+1 Action\\n\\nChoose one; you get the version in parentheses: Each player gets +1 (+3) Cards; or each player gains a Silver (Gold), or each player may trash a card from his hand and gain a card costing exactly 1 Coin (2 Coin) more.",
         "types": [
@@ -80,7 +77,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 8,
         "name": "Prince",
         "set": "promos",
@@ -93,7 +89,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
         "name": "Amulet",
         "set": "adventures",
@@ -110,7 +105,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "name": "Artificer",
         "set": "adventures",
@@ -124,7 +118,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "gainer"
@@ -143,7 +136,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 3,
         "name": "Caravan Guard",
         "set": "adventures",
@@ -160,7 +152,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 2,
         "name": "Coin of the Realm",
         "set": "adventures",
@@ -173,7 +164,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Distant Lands",
         "set": "adventures",
@@ -187,7 +177,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 3,
         "name": "Dungeon",
         "set": "adventures",
@@ -202,7 +191,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Duplicate",
         "set": "adventures",
@@ -217,7 +205,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
         "name": "Gear",
         "set": "adventures",
@@ -230,7 +217,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "countered_by": [
             "trasher",
@@ -241,7 +227,8 @@ const existing_cards = JSON.parse(`
         "set": "adventures",
         "tags": [
             "junk_attack",
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "Turn over your Journey token (it starts face up). If it's face down, +1 Coin. If it's face up, +5 Coin and each other player reveals the top card of his deck, trashes it if it costs from 3 Coin to 6 Coin, and otherwise discards it and gains a Curse.",
         "types": [
@@ -251,7 +238,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 3,
         "name": "Guide",
         "set": "adventures",
@@ -267,7 +253,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "countered_by": [
             "gainer",
@@ -276,7 +261,9 @@ const existing_cards = JSON.parse(`
         ],
         "name": "Haunted Woods",
         "set": "adventures",
-        "tags": [],
+        "tags": [
+            "complicated"
+        ],
         "text": "Until your next turn, when any other player buys a card, he puts his hand on top of his deck in any order.\\nAt the start of your next turn:\\n+3 Cards.",
         "types": [
             "Action",
@@ -286,7 +273,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 6,
         "name": "Hireling",
         "set": "adventures",
@@ -299,7 +285,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 5,
         "name": "Lost City",
         "set": "adventures",
@@ -311,7 +296,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "name": "Magpie",
         "set": "adventures",
@@ -323,13 +307,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 4,
         "name": "Messenger",
         "set": "adventures",
         "tags": [
             "virtual_coin",
-            "gainer"
+            "gainer",
+            "complicated"
         ],
         "text": "+1 Buy\\n+2 Coin\\n\\nYou may put your deck into your discard pile.\\n\\n\\nWhen this is your first buy in a turn, gain a card costing up to 4 Coin, and each other player gains a copy of it.",
         "types": [
@@ -338,7 +322,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Miser",
         "set": "adventures",
@@ -353,11 +336,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 2,
         "name": "Page",
         "set": "adventures",
-        "tags": [],
+        "tags": [
+            "complicated"
+        ],
         "text": "+1 Card\\n+1 Action\\n\\nWhen you discard this from play, you may exchange it for a Treasure Hunter.",
         "types": [
             "Action",
@@ -366,12 +350,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 2,
         "name": "Peasant",
         "set": "adventures",
         "tags": [
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+1 Buy\\n+1 Coin\\n\\n\\nWhen you discard this from play, you may exchange it for a Soldier.",
         "types": [
@@ -381,7 +365,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "name": "Port",
         "set": "adventures",
@@ -393,7 +376,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Ranger",
         "set": "adventures",
@@ -405,7 +387,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 2,
         "name": "Ratcatcher",
         "set": "adventures",
@@ -420,7 +401,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 2,
         "name": "Raze",
         "set": "adventures",
@@ -435,7 +415,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "draw_to_x",
@@ -455,7 +434,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "name": "Royal Carriage",
         "set": "adventures",
@@ -468,11 +446,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 5,
         "name": "Storyteller",
         "set": "adventures",
-        "tags": [],
+        "tags": [
+            "complicated"
+        ],
         "text": "+1 Action\\n+1 Coin\\n\\nPlay up to 3 Treasures from your hand. Pay all of your Coins; +1 Card per Coin paid.",
         "types": [
             "Action"
@@ -480,7 +459,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "gainer",
@@ -501,7 +479,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "name": "Transmogrify",
         "set": "adventures",
@@ -516,7 +493,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "name": "Treasure Trove",
         "set": "adventures",
@@ -528,7 +504,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Wine Merchant",
         "set": "adventures",
@@ -543,7 +518,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 3,
         "potion": true,
         "name": "Alchemist",
@@ -556,7 +530,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 2,
         "potion": true,
         "name": "Apothecary",
@@ -571,12 +544,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 5,
         "name": "Apprentice",
         "set": "alchemy",
         "tags": [
-            "trash_for_benefit"
+            "trash_for_benefit",
+            "complicated"
         ],
         "text": "+1 Action\\n\\nTrash a card from your hand. +1 Card per Coins it costs. +2 cards if it has Potion in its cost.",
         "types": [
@@ -585,7 +558,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 3,
         "potion": true,
         "countered_by": [
@@ -607,7 +579,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "potion": true,
         "name": "Golem",
@@ -620,7 +591,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 2,
         "name": "Herbalist",
         "set": "alchemy",
@@ -634,7 +604,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 3,
         "potion": true,
         "name": "Philosopher's Stone",
@@ -647,12 +616,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 6,
         "potion": true,
         "name": "Possession",
         "set": "alchemy",
-        "tags": [],
+        "tags": [
+            "complicated"
+        ],
         "text": "The player to your left takes an extra turn after this one, in which you can see all cards he can and make all decisions for him. Any cards he would gain on that turn, you gain instead; any cards of his that are trashed are set aside and returned to his discard pile at end of turn.",
         "types": [
             "Action"
@@ -660,7 +630,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 2,
         "potion": true,
         "countered_by": [
@@ -670,7 +639,8 @@ const existing_cards = JSON.parse(`
         "name": "Scrying Pool",
         "set": "alchemy",
         "tags": [
-            "sifter"
+            "sifter",
+            "complicated"
         ],
         "text": "+1 Action\\n\\nEach player (including you) reveals the top card of his deck and either discards it or puts it back, your choice. Then reveal cards from the top of your deck until you reveal one that isn't an Action. Put all your revealed cards into your hand.",
         "types": [
@@ -680,13 +650,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 0,
         "potion": true,
         "name": "Transmute",
         "set": "alchemy",
         "tags": [
-            "trash_for_benefit"
+            "trash_for_benefit",
+            "complicated"
         ],
         "text": "Trash a card from your hand.\\nIf it's an...\\nAction card, gain a Duchy\\nTreasure card, gain a Transmute\\nVictory card, gain a Gold",
         "types": [
@@ -695,7 +665,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 2,
         "potion": true,
         "name": "University",
@@ -710,7 +679,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 0,
         "potion": true,
         "name": "Vineyard",
@@ -725,12 +693,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 6,
         "name": "Fairgrounds",
         "set": "cornucopia",
         "tags": [
-            "likes_diversity"
+            "likes_diversity",
+            "complicated"
         ],
         "text": "Worth 2 Victory for every 5 differently named cards in your deck (rounded down).",
         "types": [
@@ -739,7 +707,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 4,
         "name": "Farming Village",
         "set": "cornucopia",
@@ -753,7 +720,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
         "countered_by": [
             "sifter",
@@ -774,7 +740,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 2,
         "name": "Hamlet",
         "set": "cornucopia",
@@ -786,12 +751,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "name": "Harvest",
         "set": "cornucopia",
         "tags": [
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "Reveal the top 4 cards of your deck, then discard them. +1 Coin per differently named card revealed.",
         "types": [
@@ -800,13 +765,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "name": "Horn of Plenty",
         "set": "cornucopia",
         "tags": [
             "likes_diversity",
-            "gainer"
+            "gainer",
+            "complicated"
         ],
         "text": "0 Coin\\nWhen you play this, gain a card costing up to 1 Coin per differently named card you have in play, counting this. If it's a Victory card, trash this.",
         "types": [
@@ -815,7 +780,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Horse Traders",
         "set": "cornucopia",
@@ -830,11 +794,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 5,
         "name": "Hunting Party",
         "set": "cornucopia",
-        "tags": [],
+        "tags": [
+            "complicated"
+        ],
         "text": "+1 Card\\n+1 Action\\nReveal your hand. Reveal cards from your deck until you reveal a card that isn't a duplicate of one in your hand. Put it into your hand and discard the rest.",
         "types": [
             "Action"
@@ -842,7 +807,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "countered_by": [
             "silver_generator",
@@ -852,7 +816,8 @@ const existing_cards = JSON.parse(`
         "name": "Jester",
         "set": "cornucopia",
         "tags": [
-            "junk_attack"
+            "junk_attack",
+            "complicated"
         ],
         "text": "+2 Coin\\n\\nEach other player discards the top card of his deck. If it's a Victory card, he gains a Curse. Otherwise either he gains a copy of the discarded card or you do, your choice.",
         "types": [
@@ -862,13 +827,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 3,
         "name": "Menagerie",
         "set": "cornucopia",
         "tags": [
             "counters_handsize",
-            "likes_diversity"
+            "likes_diversity",
+            "complicated"
         ],
         "text": "+1 Card\\n\\nReveal your hand. If there are no duplicate cards in it, +3 Cards. Otherwise, +1 Card.",
         "types": [
@@ -877,7 +842,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Remake",
         "set": "cornucopia",
@@ -891,12 +855,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 4,
         "name": "Tournament",
         "set": "cornucopia",
         "tags": [
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+1 Action\\n\\nEach player may reveal a Province from his hand.\\nIf you do, discard it and gain a Prize (from the Prize pile) or a Duchy, putting it on top of your deck.\\nIf no-one else does, +1 Card, +1 Coin.",
         "types": [
@@ -905,7 +869,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 4,
         "countered_by": [
             "mass_trasher",
@@ -915,7 +878,8 @@ const existing_cards = JSON.parse(`
         "name": "Young Witch",
         "set": "cornucopia",
         "tags": [
-            "junk_attack"
+            "junk_attack",
+            "complicated"
         ],
         "text": "+2 Cards\\n\\nDiscard 2 cards. Each other player may reveal a Bane card from his hand. If he doesn't, he gains a Curse.\\n\\n\\nSetup: Add an extra Kingdom card pile costing 2 Coin or 3 Coin to the Supply. Cards from that pile are Bane cards.",
         "types": [
@@ -925,7 +889,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 6,
         "name": "Altar",
         "set": "darkages",
@@ -940,7 +903,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Armory",
         "set": "darkages",
@@ -954,7 +916,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Band of Misfits",
         "set": "darkages",
@@ -966,7 +927,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 5,
         "name": "Bandit Camp",
         "set": "darkages",
@@ -980,7 +940,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 2,
         "name": "Beggar",
         "set": "darkages",
@@ -995,12 +954,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "name": "Catacombs",
         "set": "darkages",
         "tags": [
-            "likes_being_trashed"
+            "likes_being_trashed",
+            "complicated"
         ],
         "text": "Look at the top 3 cards of your deck. Choose one: Put them into your hand; or discard them and +3 Cards.\\n\\n\\nWhen you trash this, gain a cheaper card.",
         "types": [
@@ -1009,13 +968,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "name": "Count",
         "set": "darkages",
         "tags": [
             "mass_trasher",
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "Choose one: Discard 2 cards; or put a card from your hand on top of your deck; or gain a Copper.\\n\\nChoose one: +3 Coin; or trash your hand; or gain a Duchy.",
         "types": [
@@ -1024,7 +983,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Counterfeit",
         "set": "darkages",
@@ -1039,7 +997,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "likes_diversity",
@@ -1060,7 +1017,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Death Cart",
         "set": "darkages",
@@ -1077,7 +1033,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "name": "Feodum",
         "set": "darkages",
@@ -1091,14 +1046,14 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 3,
         "name": "Forager",
         "set": "darkages",
         "tags": [
             "trasher",
             "early_trasher",
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+1 Action\\n+1 Buy\\nTrash a card from your hand. +1 Per differently named Treasure in the trash.",
         "types": [
@@ -1107,12 +1062,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": true,
         "cost": 4,
         "name": "Fortress",
         "set": "darkages",
         "tags": [
-            "likes_being_trashed"
+            "likes_being_trashed",
+            "complicated"
         ],
         "text": "+1 Card\\n+2 Actions\\n\\n\\nWhen you trash this, put it into your hand.",
         "types": [
@@ -1121,13 +1076,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "name": "Graverobber",
         "set": "darkages",
         "tags": [
             "trash_for_benefit",
-            "gainer"
+            "gainer",
+            "complicated"
         ],
         "text": "Choose one: Gain a card from the trash costing from 3 Coin to 6 Coin, putting it on top of your deck; or trash an Action card from your hand and gain a card costing up to 3 Coin more than it.",
         "types": [
@@ -1136,13 +1091,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": true,
         "cost": 3,
         "name": "Hermit",
         "set": "darkages",
         "tags": [
             "trasher",
-            "gainer"
+            "gainer",
+            "complicated"
         ],
         "text": "Look through your discard pile. You may trash a card from your discard pile or hand that is not a Treasure.\\nGain a card costing up to 3 Coin.\\n\\n\\nWhen you discard this from play, if you did not buy any cards this turn, trash this and gain a Madman from the Madman pile.",
         "types": [
@@ -1151,12 +1106,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 6,
         "name": "Hunting Grounds",
         "set": "darkages",
         "tags": [
-            "likes_being_trashed"
+            "likes_being_trashed",
+            "complicated"
         ],
         "text": "+4 Cards\\n\\n\\nWhen you trash this, gain a Duchy or 3 Estates.",
         "types": [
@@ -1165,7 +1120,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 4,
         "name": "Ironmonger",
         "set": "darkages",
@@ -1177,7 +1131,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "name": "Junk Dealer",
         "set": "darkages",
@@ -1193,7 +1146,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "countered_by": [
             "draw_to_x",
@@ -1202,7 +1154,8 @@ const existing_cards = JSON.parse(`
         "name": "Knights",
         "set": "darkages",
         "tags": [
-            "handsize_attack"
+            "handsize_attack",
+            "complicated"
         ],
         "text": "(varies)\\nEach other player reveals the top 2 cards of his deck, trashes one of them costing from 3 Coin to 6 Coin, and discards the rest. If a Knight is trashed by this, trash this card.",
         "types": [
@@ -1213,7 +1166,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "countered_by": [
             "trasher",
@@ -1234,12 +1186,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 3,
         "name": "Market Square",
         "set": "darkages",
         "tags": [
-            "likes_being_discarded"
+            "likes_being_discarded",
+            "complicated"
         ],
         "text": "+1 Card\\n+1 Action\\n+1 Buy\\n\\n\\nWhen one of your cards is trashed, you may discard this from your hand. If you do, gain a Gold.",
         "types": [
@@ -1249,13 +1201,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 5,
         "name": "Mystic",
         "set": "darkages",
         "tags": [
             "deck_inspector",
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+1 Action\\n+2 Coins\\n\\nName a card.\\nReveal the top card of your deck. If it's the named card, put it into your hand.",
         "types": [
@@ -1264,7 +1216,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "silver_generator"
@@ -1282,13 +1233,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 1,
         "name": "Poor House",
         "set": "darkages",
         "tags": [
             "virtual_coin",
-            "likes_being_discarded"
+            "likes_being_discarded",
+            "complicated"
         ],
         "text": "+4 Coin\\n\\nReveal your hand. -1 Coin per Treasure card in your hand, to a minimum of 0 Coin.",
         "types": [
@@ -1297,7 +1248,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 4,
         "name": "Procession",
         "set": "darkages",
@@ -1311,12 +1261,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 4,
         "name": "Rats",
         "set": "darkages",
         "tags": [
-            "likes_being_trashed"
+            "likes_being_trashed",
+            "complicated"
         ],
         "text": "+1 Card\\n+1 Action\\n\\nGain a Rats. Trash a card from your hand other than a Rats (or reveal your hand of all Rats).\\n\\n\\nWhen you trash this, +1 Card.",
         "types": [
@@ -1325,9 +1275,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
-        "countered_by": [],
         "name": "Rebuild",
         "set": "darkages",
         "tags": [
@@ -1341,7 +1289,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "countered_by": [
             "gainer"
@@ -1349,7 +1296,8 @@ const existing_cards = JSON.parse(`
         "name": "Rogue",
         "set": "darkages",
         "tags": [
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+2 Coin\\n\\nIf there are any cards in the trash costing from 3 Coin to 6 Coin, gain one of them. Otherwise, each other player reveals the top 2 cards of his deck, trashes one of them costing from 3 Coin to 6 Coin, and discards the rest.",
         "types": [
@@ -1359,7 +1307,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 3,
         "name": "Sage",
         "set": "darkages",
@@ -1371,12 +1318,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 4,
         "name": "Scavenger",
         "set": "darkages",
         "tags": [
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+2 Coin\\nYou may put your deck into your discard pile. Look through your discard pile and put one card from it on top of your deck.",
         "types": [
@@ -1385,7 +1332,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 2,
         "name": "Squire",
         "set": "darkages",
@@ -1402,12 +1348,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 3,
         "name": "Storeroom",
         "set": "darkages",
         "tags": [
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+1 Buy\\n\\nDiscard any number of cards. +1 Card per card discarded.\\nDiscard any number of cards. +1 Coin per card discarded the second time.",
         "types": [
@@ -1416,7 +1362,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 4,
         "countered_by": [
             "draw_to_x",
@@ -1425,7 +1370,8 @@ const existing_cards = JSON.parse(`
         "name": "Urchin",
         "set": "darkages",
         "tags": [
-            "handsize_attack"
+            "handsize_attack",
+            "complicated"
         ],
         "text": "+1 Card\\n+1 Action\\n\\nEach other player discards down to 4 cards in hand.\\n\\n\\nWhen you play another attack card with this in play, you may trash this. If you do, gain a Mercenary from the Mercenary pile.",
         "types": [
@@ -1435,7 +1381,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 2,
         "name": "Vagrant",
         "set": "darkages",
@@ -1447,7 +1392,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 4,
         "name": "Wandering Minstrel",
         "set": "darkages",
@@ -1459,7 +1403,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 6,
         "name": "Adventurer",
         "set": "dominion",
@@ -1473,7 +1416,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "countered_by": [
             "trash_for_benefit",
@@ -1494,7 +1436,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 2,
         "name": "Cellar",
         "set": "dominion",
@@ -1508,12 +1449,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 3,
         "name": "Chancellor",
         "set": "dominion",
         "tags": [
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+2 Coins\\n\\nYou may immediately put your deck into your discard pile.",
         "types": [
@@ -1522,7 +1463,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 2,
         "countered_by": [
             "treasure_trasher",
@@ -1533,7 +1473,8 @@ const existing_cards = JSON.parse(`
         "tags": [
             "overpowered",
             "mass_trasher",
-            "early_trasher"
+            "early_trasher",
+            "complicated"
         ],
         "text": "Trash up to 4 cards from your hand.",
         "types": [
@@ -1542,7 +1483,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Council Room",
         "set": "dominion",
@@ -1554,7 +1494,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Feast",
         "set": "dominion",
@@ -1568,7 +1507,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 5,
         "name": "Festival",
         "set": "dominion",
@@ -1582,7 +1520,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Gardens",
         "set": "dominion",
@@ -1594,7 +1531,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Laboratory",
         "set": "dominion",
@@ -1606,7 +1542,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Library",
         "set": "dominion",
@@ -1620,7 +1555,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "name": "Market",
         "set": "dominion",
@@ -1634,7 +1568,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "countered_by": [
             "draw_to_x",
@@ -1654,7 +1587,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Mine",
         "set": "dominion",
@@ -1668,7 +1600,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 2,
         "name": "Moat",
         "set": "dominion",
@@ -1684,7 +1615,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Moneylender",
         "set": "dominion",
@@ -1700,7 +1630,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 4,
         "name": "Remodel",
         "set": "dominion",
@@ -1714,7 +1643,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Smithy",
         "set": "dominion",
@@ -1726,7 +1654,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "countered_by": [
             "M_mostly_harmless",
@@ -1744,7 +1671,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "countered_by": [
             "virtual_coin"
@@ -1763,7 +1689,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 4,
         "name": "Throne Room",
         "set": "dominion",
@@ -1775,7 +1700,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 3,
         "name": "Village",
         "set": "dominion",
@@ -1787,7 +1711,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "mass_trasher",
@@ -1810,7 +1733,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
         "name": "Woodcutter",
         "set": "dominion",
@@ -1824,7 +1746,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
         "name": "Workshop",
         "set": "dominion",
@@ -1838,7 +1759,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "name": "Advisor",
         "set": "guilds",
@@ -1850,12 +1770,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 5,
         "name": "Baker",
         "set": "guilds",
         "tags": [
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "\\n+1 Card\\n+1 Action\\nTake a Coin token.\\n\\n\\nSetup: Each player takes a Coin token.",
         "types": [
@@ -1864,7 +1784,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Butcher",
         "set": "guilds",
@@ -1880,7 +1799,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 2,
         "name": "Candlestick Maker",
         "set": "guilds",
@@ -1894,14 +1812,14 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 3,
         "cost_extra": "+",
         "name": "Doctor",
         "set": "guilds",
         "tags": [
             "mass_trasher",
-            "deck_inspector"
+            "deck_inspector",
+            "complicated"
         ],
         "text": "Name a card. Reveal the top 3 cards of your deck. Trash the matches. Put the rest back on top in any order.\\n\\n\\nWhen you buy this, you may overpay for it. For each 1 Coin you overpaid, look at the top card of your deck; trash it, discard it, or put it back.",
         "types": [
@@ -1910,7 +1828,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "cost_extra": "+",
         "name": "Herald",
@@ -1925,7 +1842,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Journeyman",
         "set": "guilds",
@@ -1939,7 +1855,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
         "cost_extra": "+",
         "name": "Masterpiece",
@@ -1954,12 +1869,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "name": "Merchant Guild",
         "set": "guilds",
         "tags": [
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+1 Buy\\n+1 Coin\\n\\n\\nWhile this is in play, when you buy a card, take a Coin token.",
         "types": [
@@ -1968,12 +1883,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": true,
         "cost": 4,
         "name": "Plaza",
         "set": "guilds",
         "tags": [
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+1 Card\\n+2 Actions\\nYou may discard a Treasure card. If you do, take a Coin token.",
         "types": [
@@ -1982,7 +1897,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "mass_trasher",
@@ -2004,13 +1918,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 2,
         "cost_extra": "+",
         "name": "Stonemason",
         "set": "guilds",
         "tags": [
-            "trash_for_benefit"
+            "trash_for_benefit",
+            "complicated"
         ],
         "text": "Trash a card from your hand. Gain 2 cards costing less than it.\\n\\n\\nWhen you buy this, you may overpay for it. If you do, gain 2 Action cards each costing the amount you overpaid.",
         "types": [
@@ -2019,7 +1933,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "countered_by": [
             "steals_treasure",
@@ -2039,7 +1952,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 6,
         "name": "Border Village",
         "set": "hinterlands",
@@ -2051,7 +1963,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "name": "Cache",
         "set": "hinterlands",
@@ -2063,7 +1974,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "name": "Cartographer",
         "set": "hinterlands",
@@ -2077,7 +1987,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 2,
         "name": "Crossroads",
         "set": "hinterlands",
@@ -2089,7 +1998,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
         "name": "Develop",
         "set": "hinterlands",
@@ -2103,7 +2011,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 2,
         "name": "Duchess",
         "set": "hinterlands",
@@ -2117,7 +2024,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Embassy",
         "set": "hinterlands",
@@ -2131,7 +2037,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 6,
         "name": "Farmland",
         "set": "hinterlands",
@@ -2143,7 +2048,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 2,
         "name": "Fool's Gold",
         "set": "hinterlands",
@@ -2156,7 +2060,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Haggler",
         "set": "hinterlands",
@@ -2171,7 +2074,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "name": "Highway",
         "set": "hinterlands",
@@ -2185,7 +2087,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "spam_filter"
@@ -2203,12 +2104,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": true,
         "cost": 5,
         "name": "Inn",
         "set": "hinterlands",
         "tags": [
-            "sifter"
+            "sifter",
+            "complicated"
         ],
         "text": "+2 Cards\\n+2 Actions\\nDiscard 2 cards\\n\\n\\nWhen you gain this, look through your discard pile (including this), reveal any number of Action cards from it, and shuffle them into your deck.",
         "types": [
@@ -2217,7 +2118,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Jack of All Trades",
         "set": "hinterlands",
@@ -2234,7 +2134,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Mandarin",
         "set": "hinterlands",
@@ -2246,7 +2145,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "draw_to_x",
@@ -2265,7 +2163,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "countered_by": [
             "M_alt_treasure",
@@ -2285,7 +2182,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Nomad Camp",
         "set": "hinterlands",
@@ -2299,7 +2195,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 3,
         "name": "Oasis",
         "set": "hinterlands",
@@ -2313,7 +2208,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 3,
         "countered_by": [
             "deck_inspector",
@@ -2322,7 +2216,8 @@ const existing_cards = JSON.parse(`
         "name": "Oracle",
         "set": "hinterlands",
         "tags": [
-            "deck_inspector"
+            "deck_inspector",
+            "complicated"
         ],
         "text": "Each player (including you) reveals the top 2 cards of his deck, and you choose one: either he discards them, or he puts them back on top in an order he chooses.\\n\\n+2 Cards",
         "types": [
@@ -2332,7 +2227,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 3,
         "name": "Scheme",
         "set": "hinterlands",
@@ -2344,7 +2238,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Silk Road",
         "set": "hinterlands",
@@ -2356,7 +2249,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "name": "Spice Merchant",
         "set": "hinterlands",
@@ -2372,7 +2264,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "name": "Stables",
         "set": "hinterlands",
@@ -2384,7 +2275,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Trader",
         "set": "hinterlands",
@@ -2401,7 +2291,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
         "name": "Tunnel",
         "set": "hinterlands",
@@ -2416,7 +2305,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Baron",
         "set": "intrigue",
@@ -2431,7 +2319,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Bridge",
         "set": "intrigue",
@@ -2445,7 +2332,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "name": "Conspirator",
         "set": "intrigue",
@@ -2459,7 +2345,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Coppersmith",
         "set": "intrigue",
@@ -2471,7 +2356,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 2,
         "name": "Courtyard",
         "set": "intrigue",
@@ -2483,7 +2367,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Duke",
         "set": "intrigue",
@@ -2495,7 +2378,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 3,
         "name": "Great Hall",
         "set": "intrigue",
@@ -2508,7 +2390,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 6,
         "name": "Harem",
         "set": "intrigue",
@@ -2523,7 +2404,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "name": "Ironworks",
         "set": "intrigue",
@@ -2535,9 +2415,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
-        "countered_by": [],
         "name": "Masquerade",
         "set": "intrigue",
         "tags": [
@@ -2551,7 +2429,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 4,
         "name": "Mining Village",
         "set": "intrigue",
@@ -2563,7 +2440,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "likes_being_discarded",
@@ -2583,7 +2459,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 5,
         "name": "Nobles",
         "set": "intrigue",
@@ -2598,7 +2473,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 2,
         "name": "Pawn",
         "set": "intrigue",
@@ -2612,7 +2486,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "copper_strategy",
@@ -2629,7 +2502,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "name": "Scout",
         "set": "intrigue",
@@ -2643,7 +2515,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 2,
         "name": "Secret Chamber",
         "set": "intrigue",
@@ -2659,7 +2530,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 3,
         "name": "Shanty Town",
         "set": "intrigue",
@@ -2671,7 +2541,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Steward",
         "set": "intrigue",
@@ -2686,7 +2555,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 3,
         "countered_by": [
             "deck_inspector"
@@ -2694,7 +2562,8 @@ const existing_cards = JSON.parse(`
         "name": "Swindler",
         "set": "intrigue",
         "tags": [
-            "junk_attack"
+            "junk_attack",
+            "complicated"
         ],
         "text": "+2 Coins\\n\\nEach other player trashes the top card of his deck and gains a card with the same cost that you choose.",
         "types": [
@@ -2704,7 +2573,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "likes_being_discarded",
@@ -2727,7 +2595,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Trading Post",
         "set": "intrigue",
@@ -2742,7 +2609,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 5,
         "name": "Tribute",
         "set": "intrigue",
@@ -2754,7 +2620,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "name": "Upgrade",
         "set": "intrigue",
@@ -2768,11 +2633,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 3,
         "name": "Wishing Well",
         "set": "intrigue",
-        "tags": [],
+        "tags": [
+            "complicated"
+        ],
         "text": "+1 Card\\n+1 Action\\n\\nName a card. Reveal the top card of your deck. If it's the named card, put it into your hand.",
         "types": [
             "Action"
@@ -2780,7 +2646,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 7,
         "name": "Bank",
         "set": "prosperity",
@@ -2792,7 +2657,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Bishop",
         "set": "prosperity",
@@ -2808,7 +2672,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 5,
         "name": "City",
         "set": "prosperity",
@@ -2820,7 +2683,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "name": "Contraband",
         "set": "prosperity",
@@ -2832,7 +2694,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Counting House",
         "set": "prosperity",
@@ -2846,7 +2707,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 7,
         "name": "Expand",
         "set": "prosperity",
@@ -2860,7 +2720,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 7,
         "name": "Forge",
         "set": "prosperity",
@@ -2875,7 +2734,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 6,
         "countered_by": [
             "draw_to_x",
@@ -2897,7 +2755,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 6,
         "name": "Grand Market",
         "set": "prosperity",
@@ -2911,7 +2768,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 6,
         "name": "Hoard",
         "set": "prosperity",
@@ -2923,7 +2779,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 7,
         "name": "King's Court",
         "set": "prosperity",
@@ -2937,7 +2792,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 3,
         "name": "Loan",
         "set": "prosperity",
@@ -2951,7 +2805,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Mint",
         "set": "prosperity",
@@ -2965,7 +2818,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Monument",
         "set": "prosperity",
@@ -2980,7 +2832,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "mass_trasher",
@@ -3000,7 +2851,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 8,
         "cost_extra": "+",
         "name": "Peddler",
@@ -3015,7 +2865,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Quarry",
         "set": "prosperity",
@@ -3027,7 +2876,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "sifter",
@@ -3044,11 +2892,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 2,
         "name": "Royal Seal",
         "set": "prosperity",
-        "tags": [],
+        "tags": [
+            "complicated"
+        ],
         "text": "2 Coin\\n\\n\\nWhile this is in play, when you gain a card, you may put that card on top of your deck.",
         "types": [
             "Treasure"
@@ -3056,7 +2905,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "name": "Talisman",
         "set": "prosperity",
@@ -3068,13 +2916,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 3,
         "name": "Trade Route",
         "set": "prosperity",
         "tags": [
             "trasher",
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+1 Buy\\n+1 Coin per token on the Trade Route mat.\\nTrash a card from your hand.\\n\\n\\nSetup: Put a token on each Victory card Supply pile. When a card is gained from that pile, move the token to the Trade Route mat.",
         "types": [
@@ -3083,7 +2931,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "name": "Vault",
         "set": "prosperity",
@@ -3099,7 +2946,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Venture",
         "set": "prosperity",
@@ -3113,7 +2959,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
         "name": "Watchtower",
         "set": "prosperity",
@@ -3129,7 +2974,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 4,
         "name": "Worker's Village",
         "set": "prosperity",
@@ -3141,7 +2985,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
         "countered_by": [
             "handsize_attack",
@@ -3165,7 +3008,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 5,
         "name": "Bazaar",
         "set": "seaside",
@@ -3179,7 +3021,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 4,
         "name": "Caravan",
         "set": "seaside",
@@ -3192,7 +3033,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "countered_by": [
             "draw_to_x",
@@ -3212,7 +3052,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 2,
         "countered_by": [
             "spam_filter",
@@ -3222,7 +3061,8 @@ const existing_cards = JSON.parse(`
         "name": "Embargo",
         "set": "seaside",
         "tags": [
-            "junk_attack"
+            "junk_attack",
+            "complicated"
         ],
         "text": "+2 Coins\\n\\nTrash this card. Put an Embargo token on top of a Supply pile.\\n\\n\\nWhen a player buys a card, he gains a Curse card per Embargo token on that pile.",
         "types": [
@@ -3231,7 +3071,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Explorer",
         "set": "seaside",
@@ -3245,7 +3084,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": false,
         "cost": 3,
         "name": "Fishing Village",
         "set": "seaside",
@@ -3260,7 +3098,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "countered_by": [
             "deck_inspector",
@@ -3281,7 +3118,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 2,
         "name": "Haven",
         "set": "seaside",
@@ -3294,7 +3130,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Island",
         "set": "seaside",
@@ -3309,7 +3144,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 2,
         "name": "Lighthouse",
         "set": "seaside",
@@ -3325,13 +3159,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": true,
         "cost": 3,
         "name": "Lookout",
         "set": "seaside",
         "tags": [
             "trasher",
-            "deck_inspector"
+            "deck_inspector",
+            "complicated"
         ],
         "text": "+1 Action\\n\\nLook at the top 3 cards of your deck. Trash one of them. Discard one of them. Put the other one on top of your deck.",
         "types": [
@@ -3340,7 +3174,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Merchant Ship",
         "set": "seaside",
@@ -3355,11 +3188,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 2,
-        "complicated": true,
         "cost": 2,
         "name": "Native Village",
         "set": "seaside",
-        "tags": [],
+        "tags": [
+            "complicated"
+        ],
         "text": "+2 Actions\\n\\nChoose one: Set aside the top card of your deck on your Native Village mat; or put all the cards from your mat into your hand. You may look at the cards on your mat at any time; return them to your deck at the end of the game.",
         "types": [
             "Action"
@@ -3367,13 +3201,13 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 4,
         "name": "Navigator",
         "set": "seaside",
         "tags": [
             "deck_inspector",
-            "virtual_coin"
+            "virtual_coin",
+            "complicated"
         ],
         "text": "+2 Coins\\n\\nLook at the top 5 cards of your deck. Either discard all of them, or put them back on top of your deck in any order.",
         "types": [
@@ -3382,11 +3216,12 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
         "name": "Outpost",
         "set": "seaside",
-        "tags": [],
+        "tags": [
+            "complicated"
+        ],
         "text": "You only draw 3 cards (instead of 5) in this turn's Clean-up phase. Take an extra turn after this one. This can't cause you to take more than two consecutive turns.",
         "types": [
             "Action",
@@ -3395,7 +3230,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 2,
         "name": "Pearl Diver",
         "set": "seaside",
@@ -3407,7 +3241,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "countered_by": [
             "virtual_coin"
@@ -3426,7 +3259,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Salvager",
         "set": "seaside",
@@ -3440,7 +3272,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "countered_by": [
             "trasher",
@@ -3463,7 +3294,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
         "name": "Smugglers",
         "set": "seaside",
@@ -3477,7 +3307,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
         "name": "Tactician",
         "set": "seaside",
@@ -3490,7 +3319,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 4,
         "name": "Treasure Map",
         "set": "seaside",
@@ -3502,7 +3330,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 5,
         "name": "Treasury",
         "set": "seaside",
@@ -3516,7 +3343,6 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 1,
-        "complicated": false,
         "cost": 3,
         "name": "Warehouse",
         "set": "seaside",
@@ -3530,9 +3356,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
-        "countered_by": [],
         "name": "Wharf",
         "set": "seaside",
         "tags": [
@@ -3546,10 +3370,8 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 0,
         "debt": 4,
-        "countered_by": [],
         "name": "Engineer",
         "set": "empires",
         "tags": [
@@ -3563,10 +3385,8 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 0,
         "debt": 8,
-        "countered_by": [],
         "name": "City Quarter",
         "set": "empires",
         "tags": [
@@ -3578,10 +3398,8 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 0,
         "debt": 8,
-        "countered_by": [],
         "name": "Overlord",
         "set": "empires",
         "tags": [
@@ -3593,10 +3411,8 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 0,
         "debt": 8,
-        "countered_by": [],
         "name": "Royal Blacksmith",
         "set": "empires",
         "tags": [
@@ -3608,9 +3424,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 2,
-        "countered_by": [],
         "name": "Encampment",
         "set": "empires",
         "tags": [
@@ -3622,9 +3436,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 2,
-        "countered_by": [],
         "name": "Patrician",
         "set": "empires",
         "tags": [
@@ -3636,9 +3448,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 2,
-        "countered_by": [],
         "name": "Settlers",
         "set": "empires",
         "tags": [
@@ -3650,12 +3460,11 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 3,
-        "countered_by": [],
         "name": "Castles",
         "set": "empires",
         "tags": [
+            "complicated"
         ],
         "text": "Sort the Castle pile by cost, putting the more expensive Castles on the bottom. For a 2-player game, use only one of each Castle. Only the top card of the pile can be gained or bought.",
         "types": [
@@ -3665,9 +3474,15 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
-        "countered_by": [],
+        "countered_by": [
+            "mass_trasher",
+            "trasher",
+            "spam_filter",
+            "draw_to_x",
+            "likes_being_discarded",
+            "counters_handsize"
+        ],
         "name": "Catapult",
         "set": "empires",
         "tags": [
@@ -3680,9 +3495,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
-        "countered_by": [],
         "name": "Charriot Race",
         "set": "empires",
         "tags": [
@@ -3694,9 +3507,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 3,
-        "countered_by": [],
         "name": "Enchantress",
         "set": "empires",
         "tags": [
@@ -3710,12 +3521,11 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 3,
-        "countered_by": [],
         "name": "Farmers\' Market",
         "set": "empires",
         "tags": [
+            "complicated"
         ],
         "text": "+1 Buy\\n\\nIf there are 4 VP or more on the Farmers\' Market Suppply pile, take them and trash this. Otherwise, add 1 VP to the pile and then +1 Coin per 1 VP on the pile.",
         "types": [
@@ -3725,12 +3535,11 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 3,
-        "countered_by": [],
         "name": "Gladiator",
         "set": "empires",
         "tags": [
+            "complicated"
         ],
         "text": "+2 Coin\\n\\nReveal a card from your hand. The player to your left may reveal a copy from their hand. If they do not, +1 Coin and trash a Gladiator from the Supply.",
         "types": [
@@ -3739,12 +3548,11 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 4,
-        "countered_by": [],
         "name": "Sacrifice",
         "set": "empires",
         "tags": [
+            "complicated"
         ],
         "text": "Trash a card from your hand. If it's an...\\nAction card, +2 Cards, +2 Actions\\nTreasure card, +2 Coin\\nVictory card, +2 VP",
         "types": [
@@ -3753,12 +3561,11 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 4,
-        "countered_by": [],
         "name": "Temple",
         "set": "empires",
         "tags": [
+            "complicated"
         ],
         "text": "+1 VP\\n\\nTrash from 1 to 3 differently named cards from your hand. Add 1 VP to the Temple supply pile.\\n\\n\\nWhen you gain this, take the VP from the Temple Supply pile.",
         "types": [
@@ -3768,12 +3575,11 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 4,
-        "countered_by": [],
         "name": "Villa",
         "set": "empires",
         "tags": [
+            "complicated"
         ],
         "text": "+2 Actions\\n+1 Buy\\n+1 Coin\\n\\n\\nWhen you gain this, put it into your hand, +1 Action and if it's in your Buy phase return to your Action phase.",
         "types": [
@@ -3782,12 +3588,11 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
-        "countered_by": [],
         "name": "Archive",
         "set": "empires",
         "tags": [
+            "complicated"
         ],
         "text": "+1 Action\\n\\nSet aside the top 3 cards of your deck face down (you may look at them). Now and at the start of your next two turns, put one into your hand.",
         "types": [
@@ -3797,9 +3602,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
-        "countered_by": [],
         "name": "Capital",
         "set": "empires",
         "tags": [
@@ -3811,12 +3614,11 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": true,
         "cost": 5,
-        "countered_by": [],
         "name": "Charm",
         "set": "empires",
         "tags": [
+            "complicated"
         ],
         "text": "When you play this, choose one: +1 Buy and +2 Coin; or the next time you buy a card this turn, you may also gain a differently named card with the same cost.",
         "types": [
@@ -3825,9 +3627,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
-        "countered_by": [],
         "name": "Crown",
         "set": "empires",
         "tags": [
@@ -3840,9 +3640,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
-        "countered_by": [],
         "name": "Forum",
         "set": "empires",
         "tags": [
@@ -3854,9 +3652,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
-        "countered_by": [],
         "name": "Groundskeeper",
         "set": "empires",
         "tags": [
@@ -3868,9 +3664,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
-        "countered_by": [],
         "name": "Legionary",
         "set": "empires",
         "tags": [
@@ -3884,9 +3678,7 @@ const existing_cards = JSON.parse(`
     },
     {
         "actions": 0,
-        "complicated": false,
         "cost": 5,
-        "countered_by": [],
         "name": "Wild Hunt",
         "set": "empires",
         "tags": [

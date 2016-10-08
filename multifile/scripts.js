@@ -199,7 +199,7 @@ function sets_it_replaces(card, needed_sets) {
 
 // TODO: smells of object method!
 function card_is_banned(card, banned_sets, banned_costs, newbie_friendly) {
-    if (newbie_friendly && card.complicated) {
+    if (newbie_friendly && card.tags.indexOf('complicated') != -1) {
         return true;
     }
     if (banned_sets.has(card.set)) {
@@ -310,7 +310,7 @@ function get_ten_cards(owned_cards) {
 
 
 function attackCountered(attack_card, chosen_tags, chosen_names) {
-    var counters = attack_card.countered_by;
+    var counters = attack_card.countered_by || [];
 
     if (counters.indexOf('M_mostly_harmless') > -1) {
         console.log(attack_card.name + ' is mostly harmless.');
