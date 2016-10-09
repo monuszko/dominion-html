@@ -240,7 +240,6 @@ function get_ten_cards(owned_cards) {
             continue;
         }
 
-
         var costs_replaced = costs_it_replaces(card, needed_costs);
         var sets_replaced = sets_it_replaces(card, needed_sets);
         // is this NOT one of the requested cards ?
@@ -308,7 +307,7 @@ function get_ten_cards(owned_cards) {
         'chosen_cards': chosen_cards.slice(0, 10),
         'chosen_names': chosen_names,
         'success': success,
-    }
+    };
 }
 
 
@@ -444,101 +443,16 @@ function paintPaper(source, target) {
     else if (source.types.indexOf('Landmark') != -1) {
         target.classList.add('landmark');
     }
-
 }
 
 
-function show_kingdom (owned_sets, promo_names) {
-    var owned_cards = get_owned_cards(owned_sets, existing_cards, promo_names);
-    var owned_notcards = get_owned_notcards(owned_sets, existing_notcards, promo_names);
-
-    hide_all_cards();
-    if (owned_cards.length < 13) {
-        return;
-    }
-
-    var max_tries = 1000;
-    for (attempt = 0; attempt < max_tries; attempt++) {
-
-    var chosen_notcards = new Array();
-    var chosen_names = new Set();
-
-    var owned_cards = shuffleArray(owned_cards);
-    var owned_notcards = shuffleArray(owned_notcards);
-
-    var stuff = get_ten_cards(owned_cards);
-    if (!stuff.success) {
-        continue;
-    }
-    var chosen_cards = stuff.chosen_cards;
-    var chosen_names = stuff.chosen_names;
-
-    // Select events/landmarks:
-    add_notcards(owned_notcards, chosen_notcards);
-    may_add_colony_platinum(chosen_cards);
-    may_add_shelters(chosen_cards);
-
-    // add Bane if Young Witch is present.
-    // reject the set if no valid bane remains.
-    //
-    if (chosen_names.has('Young Witch')) {
-        var bane = get_bane(owned_cards, chosen_names);
-        if (bane === undefined) {
-            continue;
-        }
-        chosen_cards.push(bane);
-        chosen_names.add(bane.name);
-        document.getElementById('card-10').classList.remove('hidden');
-    }
-    // Add events/landmarks
-
-
-    // Check what card types there are. ONLY USED IN ONE PLACE
-    var chosen_card_types = new Set();
-    for (var card of chosen_cards) {
-              for (var tag of card.types) {
-                chosen_card_types.add(tag);
-              }
-    }
-
-    // Count appearances of all card tags and put them into array:
-    var chosen_tags = new Array()
-
-    if (chosen_card_types.has('Treasure')) {
-    chosen_tags['M_alt_treasure'] = 1;
-    }
-
-    for (var card of chosen_cards) {
-        for (var tag of card.tags) {
-            if (chosen_tags[tag] === undefined)
-            {
-                chosen_tags[tag] = 1;
-            }
-            else  {
-                chosen_tags[tag] += 1;
-            }
-        }
-    }
-
-    if (!conditionsPassed(chosen_cards, chosen_names, chosen_tags, chosen_card_types)) {
-        continue;
-    }
-
-    break;
-    }
-
-    // TODO: move it somewhere
-    if (attempt == max_tries) {
-        hide_all_cards();
-        return;
-    }
-
+function present_results(chosen_cards, chosen_notcards) {
     // Sort output, leaving bane as 11th if present
-    chosen_cards = chosen_cards.slice(0, 10).sort(function(a, b){
+    var first_ten = chosen_cards.slice(0, 10).sort(function(a, b){
         return a.cost - b.cost});
+    chosen_cards = first_ten.concat(chosen_cards.slice(10));
 
     // insert chosen cards into page:
-
     var i;
     for (i = 0; i < chosen_cards.length; i++) {
         fig = document.getElementById('card-' + i);
@@ -549,7 +463,83 @@ function show_kingdom (owned_sets, promo_names) {
         fig = document.getElementById('notcard-' + j);
         paintPaper(chosen_notcards[j], fig);
     }
-    
+}
+
+
+function get_stats(chosen_cards) {
+    // Check what card types there are. ONLY USED IN ONE PLACE
+    var chosen_card_types = new Set();
+    var chosen_tags = new Array()
+
+    for (var card of chosen_cards) {
+        for (var typ of card.types) {
+            chosen_card_types.add(typ);
+        }
+        for (var tag of card.tags) {
+            if (chosen_tags[tag] === undefined)
+            {
+                chosen_tags[tag] = 1;
+            }
+            else  {
+                chosen_tags[tag] += 1;
+            }
+        }
+    }
+    if (chosen_card_types.has('Treasure')) {
+        chosen_tags['M_alt_treasure'] = 1;
+    }
+    return {'card_types': chosen_card_types, 'tags': chosen_card_types};
+}
+
+
+function show_kingdom(owned_sets, promo_names) {
+    var max_tries = 1000;
+    var owned_cards = get_owned_cards(owned_sets, existing_cards, promo_names);
+    var owned_notcards = get_owned_notcards(owned_sets, existing_notcards, promo_names);
+
+    hide_all_cards();
+    if (owned_cards.length < 13) {
+        return;
+    }
+
+    for (attempt = 0; attempt < max_tries; attempt++) {
+        var chosen_notcards = new Array();
+
+        var owned_cards = shuffleArray(owned_cards);
+        var owned_notcards = shuffleArray(owned_notcards);
+
+        var stuff = get_ten_cards(owned_cards);
+        if (!stuff.success) {
+            continue;
+        }
+        var chosen_cards = stuff.chosen_cards;
+        var chosen_names = stuff.chosen_names;
+
+        // Select events/landmarks:
+        add_notcards(owned_notcards, chosen_notcards);
+        may_add_colony_platinum(chosen_cards);
+        may_add_shelters(chosen_cards);
+
+        if (chosen_names.has('Young Witch')) {
+            var bane = get_bane(owned_cards, chosen_names);
+            if (bane === undefined) {
+                continue;
+            }
+            chosen_cards.push(bane);
+            chosen_names.add(bane.name);
+        }
+
+        var stats = get_stats(chosen_cards);
+        if (!conditionsPassed(chosen_cards, chosen_names, stats.tags, stats.card_types)) {
+            continue;
+        }
+        break;
+    }
+    if (attempt == max_tries) {
+        hide_all_cards();
+        return;
+    }
+    present_results(chosen_cards, chosen_notcards);
 }
 
 
