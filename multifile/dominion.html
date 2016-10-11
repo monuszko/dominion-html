@@ -48,25 +48,12 @@ p - potion,
 PPP - EXACTLY 3 potions.">Per cost</span></label>
             </div>
 
-            <div>
-
-                <fieldset>
-                    <legend>Attacks</legend>
-                    <label for="attacks-unrestricted"><input type="radio" id="attacks-unrestricted" name="attacks">Unrestricted</label>
-                    <label for="attacks-countered"><input type="radio" id="attacks-countered" name="attacks" checked>Countered</label>
-                    <label for="attacks-none"><input type="radio" id="attacks-none" name="attacks">None</label>
-                </fieldset>
-
-
-                    <label for="newbies"><input type="checkbox" id="newbies" />Newbie friendly?</label>
-            </div>
-
             <div class="button">
                 <button type="button" onclick="show_kingdom(owned_sets, promo_names)">Randomize</button>
             </div>
         </form>
 
-        <div class="container">
+        <div id="card-container">
 
                 <figure class="hidden" id="card-0">
                     <div class="stretchy-wrapper">
@@ -277,7 +264,17 @@ PPP - EXACTLY 3 potions.">Per cost</span></label>
                     </div>
                 </figure>
 
-            </div>
+        </div>
+        <div id="clickable-container">
+                <label for="newbies"><input type="checkbox" id="newbies" />Newbie friendly?</label>
+
+                <fieldset>
+                    <legend>Attacks</legend>
+                    <label for="attacks-unrestricted"><input type="radio" id="attacks-unrestricted" name="attacks">Unrestricted</label>
+                    <label for="attacks-countered"><input type="radio" id="attacks-countered" name="attacks" checked>Countered</label>
+                    <label for="attacks-none"><input type="radio" id="attacks-none" name="attacks">None</label>
+                </fieldset>
+
                 <fieldset>
                     <legend>Colony/Platinum</legend>
                     <label for="prosperity-never"><input type="radio" id="prosperity-never" name="prosperity">never</label>
@@ -301,5 +298,6 @@ PPP - EXACTLY 3 potions.">Per cost</span></label>
                     <label for="notcards-2"><input type="radio" id="notcards-2" name="notcards">2</label>
                     <label for="notcards-random"><input type="radio" id="notcards-random" name="notcards" checked>random</label>
                 </fieldset>
+        </div>
     </body>
 </html>

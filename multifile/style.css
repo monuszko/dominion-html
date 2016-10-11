@@ -1,15 +1,21 @@
 
-.container {
-    width: 80%;
-    margin: 30px auto;
+#card-container {
+    width: 50%;
+    margin: auto;
     overflow: hidden;
+    float: left;
+}
+
+#clickable-container {
+    min-width: 20%;
+    float: right;
 }
 
 figure {
     float: left;
     text-align: center;
     border: 1px solid black;
-    width: 15%;
+    width: 17.5%;
     margin: 1% 1% 1%;
     background: #afb4ae;
 }
@@ -21,7 +27,7 @@ div.stretchy-wrapper {
 }
 
 figure.horizontal {
-    width: 25%;
+    width: 30%;
 }
 
 figure.horizontal div.stretchy-wrapper {
@@ -255,27 +261,31 @@ span#m-in-promos {
 }
 
 @media only screen and (max-width: 940px) {
-    figure {width: 20%;}
+    figure {width: 22%;}
     .ribbon {font: 13px Sans-Serif;}
-    figure.horizontal {width: 30%;}
+    figure.horizontal {width: 33%;}
+    div#clickable-container {float: left}
 }
 
 @media only screen and (max-width: 720px) {
-    figure {width: 28%;}
+    figure {width: 30%;}
     .ribbon {font: 12px Sans-Serif;}
-    figure.horizontal {width: 43%;}
+    figure.horizontal {width: 45%;}
+    div#clickable-container {float: left}
 }
 
 @media only screen and (max-width: 530px) {
-    figure {width: 45%;}
+    figure {width: 46%;}
     .ribbon {font: 11px Sans-Serif;}
     figure.horizontal {width: 69%;}
+    div#clickable-container {float: left}
 }
 
 @media only screen and (max-width: 320px) {
     figure {width: 96%;}
     .ribbon {font: 10px Sans-Serif;}
     figure.horizontal {width: 96%;}
+    div#clickable-container {float: left}
 }
 
 span.coin-cost {
