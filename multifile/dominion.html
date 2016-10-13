@@ -10,9 +10,9 @@
         </head>
 
 
-    <body onload="owned_sets=get_owned_sets();promo_names=get_promo_names();"><form action="">
-
-            <label for="expansions"><input id="expansions" maxlength=11 value="b" size="5" onkeyup="owned_sets=get_owned_sets();promo_names=get_promo_names();" />
+    <body>
+        <form action="">
+            <label for="expansions"><input id="expansions" maxlength=11 value="b" size="5"/>
 
                     <span id="set-dominion"><strong alt="dominion (Base)">B</strong><span class="notphone">ase </span></span><!--
                  --><span id="set-intrigue"><strong alt="Intrigue">I</strong><span class="notphone">ntrigue </span></span><!--
@@ -40,8 +40,8 @@
                 <label for="per-set"><span alt="sbb - minimum 1 card from seaside and 2 from base,
 hhhh - minimum 4 cards from Hinterlands,
 DDDD - EXACTLY 4 from Dark Ages.">Per set</span></label>
-                <input maxlength="10" size="10em" id="per-set" value="" onkeyup="owned_sets=get_owned_sets();" />
-                <input maxlength="10" size="10em" id="per-cost" value="2445" onkeyup="owned_sets=get_owned_sets();" />
+                <input maxlength="10" size="10em" id="per-set" value=""/>
+                <input maxlength="10" size="10em" id="per-cost" value="2445"/>
                 <label for="per-cost"><span alt="233 - at least one card costing 2 and two costing 3,
 dd - minimum 2 cards with debt,
 p - potion,
@@ -49,7 +49,7 @@ PPP - EXACTLY 3 potions.">Per cost</span></label>
             </div>
 
             <div class="button">
-                <button type="button" onclick="show_kingdom(owned_sets, promo_names)">Randomize</button>
+                <button type="button" id="btn-randomize">Randomize</button>
             </div>
         </form>
 

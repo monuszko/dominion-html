@@ -629,3 +629,24 @@ function add_notcards(owned_notcards, chosen_notcards) {
     }
 }
 
+
+// set global variables and attach event listeners:
+window.onload = function() {
+        var owned_sets=get_owned_sets();
+        var promo_names=get_promo_names();
+
+        document.getElementById('btn-randomize').addEventListener('click',
+                function() {show_kingdom(owned_sets, promo_names)});
+
+        document.getElementById('expansions').addEventListener('keyup',
+        function() {
+            owned_sets = get_owned_sets();
+            promo_names = get_promo_names();
+        });
+
+        document.getElementById('per-set').addEventListener('keyup',
+        function() {owned_sets = get_owned_sets();});
+
+        document.getElementById('per-cost').addEventListener('keyup',
+        function() {owned_sets = get_owned_sets();});
+    };
