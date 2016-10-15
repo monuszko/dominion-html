@@ -31,9 +31,10 @@ with open('singlefile/dominion.html', 'w') as output:
         elif '<link rel="stylesheet"' in line:
             continue
         elif '</head>' in line:
-            insert_files(output, ('style.css',), 'style')
+            insert_files(output, ('style.css',), wrap='style')
+        elif '</body>' in line:
             js_files = ('cards.js', 'notcards.js', 'scripts.js')
-            insert_files(output, js_files, 'script')
+            insert_files(output, js_files, wrap='script')
         output.write(line)
 
 
