@@ -119,6 +119,7 @@ function get_owned_cards(owned_sets, existing_cards, promo_names) {
     return owned_cards;
 }
 
+
 function get_owned_notcards(owned_sets, existing_notcards, promo_names) {
     var owned_notcards = [];
     for (var notcard of existing_notcards) {
@@ -139,7 +140,7 @@ function get_owned_notcards(owned_sets, existing_notcards, promo_names) {
  * Randomize array element order in-place.
  * Using Durstenfeld shuffle algorithm.
  */
-function shuffleArray(array) {
+function shuffled_array(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var temp = array[i];
@@ -457,29 +458,31 @@ function present_results(chosen) {
 }
 
 
-function get_stats(chosen) {
+// TODO: method on chosen ?
+function get_stats(cards) {
     // Check what card types there are. ONLY USED IN ONE PLACE
-    chosen.card_types = new Set();
-    chosen.tags = new Array()
+    var card_types = new Set();
+    var tags = new Array()
 
-    for (var card of chosen.cards) {
+    for (var card of cards) {
         for (var typ of card.types) {
-            chosen.card_types.add(typ);
+            card_types.add(typ);
+            if (typ == 'Treasure') {
+                // TODO: the tag seems currently unused.
+                tags['SPECIAL_alt_treasure'] = 1;
+            }
         }
         for (var tag of card.tags) {
-            if (chosen.tags[tag] === undefined)
+            if (tags[tag] === undefined)
             {
-                chosen.tags[tag] = 1;
+                tags[tag] = 1;
             }
             else  {
-                chosen.tags[tag] += 1;
+                tags[tag] += 1;
             }
         }
     }
-    if (chosen.card_types.has('Treasure')) {
-        chosen.tags['M_alt_treasure'] = 1;
-    }
-    return chosen;
+    return [tags, card_types];
 }
 
 
@@ -493,7 +496,7 @@ function show_kingdom(owned_sets, promo_names) {
 
     hide_all_cards();
     if (chosen.owned_cards.length < 13) {
-        return {};
+        return chosen;
     }
 
     for (attempt = 0; attempt < max_tries; attempt++) {
@@ -510,20 +513,20 @@ function show_kingdom(owned_sets, promo_names) {
         // owned_notcards are shuffled.
         //
         // D A N G E R !!!!
-        chosen.owned_cards = shuffleArray(chosen.owned_cards);
-        chosen.owned_notcards = shuffleArray(chosen.owned_notcards);
+        chosen.owned_cards = shuffled_array(chosen.owned_cards);
+        chosen.owned_notcards = shuffled_array(chosen.owned_notcards);
 
         var chosen = get_ten_cards(chosen);
         if (!chosen.success) {
             continue;
         }
         // Select events/landmarks:
-        add_notcards(chosen);
-        may_add_colony_platinum(chosen);
-        may_add_shelters(chosen);
+        chosen.notcards = get_chosen_notcards(chosen.owned_notcards);
+        may_add_colony_platinum(chosen.cards);
+        may_add_shelters(chosen.cards);
 
         if (chosen.names.has('Young Witch')) {
-            var bane = get_bane(chosen);
+            var bane = get_bane(chosen.owned_cards, chosen.names);
             if (bane === undefined) {
                 continue;
             }
@@ -531,8 +534,7 @@ function show_kingdom(owned_sets, promo_names) {
             chosen.names.add(bane.name);
         }
 
-        // TODO: actually USE stats
-        var stats = get_stats(chosen);
+        [chosen.tags, chosen.card_types] = get_stats(chosen.cards);
         if (!conditionsPassed(chosen)) {
             continue;
         }
@@ -540,7 +542,7 @@ function show_kingdom(owned_sets, promo_names) {
     }
     if (attempt == max_tries) {
         hide_all_cards();
-        return {};
+        return chosen;
     }
     present_results(chosen);
     return chosen;
@@ -549,22 +551,22 @@ function show_kingdom(owned_sets, promo_names) {
 
 // TODO: possible bugs when no card fits
 // TODO: possible bug with cost requesting feature
-function get_bane(chosen) {
-    for (var card of chosen.owned_cards) {
-        if ((card.cost == 2 || card.cost == 3) && !chosen.names.has(card.name)) {
+function get_bane(owned_cards, card_names) {
+    for (var card of owned_cards) {
+        if ((card.cost == 2 || card.cost == 3) && !card_names.has(card.name)) {
             return card;
         }
     }
 }
 
 
-function may_add_colony_platinum(chosen) {
+function may_add_colony_platinum(chosen_cards) {
     var prosperity = document.querySelector('input[name = "prosperity"]:checked').id;
     if (prosperity == 'prosperity-never') {
         // Do nothing
     }
     else if (prosperity == 'prosperity-1') {
-        for (var card of chosen.cards) {
+        for (var card of chosen_cards) {
             if (card.cost >= 6) {
                 document.getElementById('colony').classList.remove('hidden');
                 document.getElementById('platinum').classList.remove('hidden');
@@ -574,7 +576,7 @@ function may_add_colony_platinum(chosen) {
     }
     else if (prosperity == 'prosperity-proportional') {
         var to_check = Math.floor(Math.random() * 10);
-        if (chosen.cards[to_check].set == 'prosperity') {
+        if (chosen_cards[to_check].set == 'prosperity') {
             document.getElementById('colony').classList.remove('hidden');
             document.getElementById('platinum').classList.remove('hidden');
         }
@@ -586,14 +588,14 @@ function may_add_colony_platinum(chosen) {
 }
 
 
-function may_add_shelters(chosen) {
+function may_add_shelters(chosen_cards) {
     var shelters = document.getElementById('shelters');
     var darkages = document.querySelector('input[name = "darkages"]:checked').id;
     if (darkages == 'darkages-never') {
         // Do nothing
     }
     else if (darkages =='darkages-1') {
-        for (var card of chosen.cards) {
+        for (var card of chosen_cards) {
             if (card.set == 'darkages') {
                 shelters.classList.remove('hidden');
                 break;
@@ -602,19 +604,20 @@ function may_add_shelters(chosen) {
     }
     else if (darkages =='darkages-proportional') {
         var to_check = Math.floor(Math.random() * 10);
-        if (chosen.cards[to_check].set == 'darkages') {
+        if (chosen_cards[to_check].set == 'darkages') {
             shelters.classList.remove('hidden');
         }
     }
     else if (darkages =='darkages-always') {
         shelters.classList.remove('hidden');
-
     }
 }
 
 
-function add_notcards(chosen) {
-    if (chosen.owned_notcards.length > 0) {
+// TODO: make this a method ?
+function get_chosen_notcards(owned_notcards) {
+    var chosen_notcards = [];
+    if (owned_notcards.length > 0) {
         var notcards = document.querySelector('input[name = "notcards"]:checked').id;
         var notcard_count;
         if (notcards == 'notcards-random') {
@@ -623,15 +626,15 @@ function add_notcards(chosen) {
         else {
             notcard_count = notcards.slice(-1);
         }
-        for (var i in chosen.owned_notcards) {
+        for (var i in owned_notcards) {
             if (i == notcard_count) {
                 break
             }
-            chosen.notcards.push(chosen.owned_notcards[i]);
+            chosen_notcards.push(owned_notcards[i]);
         }
     }
+    return chosen_notcards;
 }
-
 
 
 // TODO: find a way to reuse code from get_ten_cards() ?
@@ -662,7 +665,7 @@ function swipe(figure, chosen) {
         chosen.names.delete(chosen.cards[old_index].name);
         chosen.names.add(new_card.name);
         chosen.cards[old_index] = new_card;
-        var stats = get_stats(chosen);
+        [chosen.tags, chosen.card_types] = get_stats(chosen.cards);
         if (!conditionsPassed(chosen)) {
             continue;
         }
