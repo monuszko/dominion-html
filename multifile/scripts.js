@@ -152,7 +152,7 @@ function shuffled_array(array) {
 
 
 // TODO: smells of object method!
-function costs_it_replaces(card, needed_costs) {
+function costs_it_removes(card, needed_costs) {
     var costs = '';
     if (needed_costs.indexOf(card.cost) != -1) {
         costs += card.cost;
@@ -179,7 +179,7 @@ function costs_it_replaces(card, needed_costs) {
 
 
 // TODO: smells of object method!
-function sets_it_replaces(card, needed_sets) {
+function sets_it_removes(card, needed_sets) {
     var sets = '';
     var letter = SET_TO_LETTER[card.set];
     if (needed_sets.indexOf(letter) != -1) {
@@ -205,96 +205,95 @@ function card_is_banned(card, chosen, newbie_friendly) {
     if (newbie_friendly && card.tags.indexOf('complicated') != -1) {
         return true;
     }
-    if (chosen.banned_sets.has(card.set)) {
+    if (chosen.banned_sets.has(SET_TO_LETTER[card.set])) {
         return true;
     }
-    if (card.potion && chosen.banned_costs.has('potion')) {
+    if (card.potion && chosen.banned_costs.has('p')) {
         return true;
     }
-    if (card.debt && chosen.banned_costs.has('debt')) {
+    if (card.debt && chosen.banned_costs.has('d')) {
         return true;
     }
     return false;
 }
 
 
+function chars_removed(removed_in, removed) {
+    for (ch of removed) {
+        removed_in = removed_in.replace(ch, '');
+    }
+    return removed_in;
+}
+
+
+// if set of the processed card is on the list of EXACT set requirements
+// AND the card finishes the requirement, ban the set. More would exceed
+// the EXACT requirement.
+function updated_banned(banned, chars_removed, requirement_string) {
+    var exact_requirements = chars_removed.replace(/[^A-Z]/g, '');
+    for (ch of exact_requirements) {
+        if (requirement_string.indexOf(ch) == -1) {
+            banned.add(ch.toLowerCase());
+        }
+    }
+    return banned;
+}
+
+
+// return true if the string contains the SAME LETTER in upper and lowercase.
+// It makes no sense to request EXACTLY 3 Seaside AND 3+ Seaside cards.
+function upper_with_lower(text) {
+    return (new Set(text).size != new Set(text.toLowerCase()).size);
+}
+
+
 // Requirements like costs or expansions can be checked independently
 // on a card-by-card basis, meaning they can be fulfilled on the first run!
 function get_ten_cards(chosen) {
-
-    // TODO: make bulletproof:
-    // TODO: user entering sssSSS
-
-
     var cards_not_requested = [];
     var needed_costs = document.getElementById('per-cost').value;
     var needed_sets = document.getElementById('per-set').value;
     var newbie_friendly = document.getElementById('newbies').checked;
 
+    if (upper_with_lower(needed_costs) || upper_with_lower(needed_sets)) {
+        return chosen;
+    }
 
     for (var card of chosen.owned_cards) {
         if (card_is_banned(card, chosen, newbie_friendly)) {
             continue;
         }
 
-        var costs_replaced = costs_it_replaces(card, needed_costs);
-        var sets_replaced = sets_it_replaces(card, needed_sets);
-        // is this NOT one of the requested cards ?
-        if (!(costs_replaced || sets_replaced)) {
+        var costs_removed = costs_it_removes(card, needed_costs);
+        var sets_removed = sets_it_removes(card, needed_sets);
 
-            if (cards_not_requested.length + chosen.cards.length < 10) {
-            // not requested, but not banned either
-            // can be used to pad requested cards with
-            cards_not_requested.push(card);
+        if (needed_costs || needed_sets) {
+            if (costs_removed || sets_removed) {
+                chosen.cards.push(card);
+                chosen.names.add(card.name);
+                
+                needed_sets = chars_removed(needed_sets, sets_removed);
+                chosen.banned_sets = updated_banned(chosen.banned_sets, sets_removed, needed_sets);
+                needed_costs = chars_removed(needed_costs, costs_removed);
+                chosen.banned_costs = updated_banned(chosen.banned_costs, costs_removed, needed_costs);
+            }
+            else {
+                cards_not_requested.push(card);
             }
         }
         else {
-
-            // yes, one of the requested cards!
-            chosen.cards.push(card);
-            chosen.names.add(card.name);
-
-            // substract SETS of the card from user's input string
-            for (var ch of sets_replaced) {
-                needed_sets = needed_sets.replace(ch, '');
-                if ((ch != ch.toLowerCase()) &&
-                        (needed_sets.indexOf(ch) == -1)) {
-                    // If uppercase letters just ran out, it means
-                    // we've just found the last card from that set
-                    // (and user requested EXACTLY as many)
-                    chosen.banned_sets.add(card.set);
-                }
-            }
-
-            // substract COSTS of the card from user's input string
-            for (var ch of costs_replaced) {
-                needed_costs = needed_costs.replace(ch, '');
-                if ((costs_replaced.indexOf('P') != -1) &&
-                        (needed_costs.indexOf('P') == -1)) {
-                    chosen.banned_costs.add('potion');
-                }
-                if ((costs_replaced.indexOf('D') != -1) &&
-                        (needed_costs.indexOf('D') == -1)) {
-                    chosen.banned_costs.add('debt');
-                }
-            }
-
-        }
-
-        if ((needed_costs.length == 0) && (needed_sets.length == 0)) {
             if (chosen.cards.length + cards_not_requested.length >= 10) {
                 chosen.success = true;
-                break;
+                break
+            }
+            else {
+                chosen.cards.push(card);
+                chosen.names.add(card.name);
             }
         }
-    }
-
-    if (!chosen.success) {
-        return chosen;
     }
     // time to pad the result with cards which weren't requested
     // but are okay to have.
-
     for (ncard of cards_not_requested.slice(0, 10 - chosen.cards.length)) {
         chosen.cards.push(ncard);
         chosen.names.add(ncard.name);
@@ -441,15 +440,16 @@ function paintPaper(source, target) {
 
 
 function present_results(chosen) {
-    // Sort output, leaving bane as 11th if present
-    var first_ten = chosen.cards.slice(0, 10).sort(function(a, b){
+    // Sort before displaying, leaving bane as 11th if present
+    // and the source array unchanged
+    var result = chosen.cards.slice(0, 10).sort(function(a, b){
         return a.cost - b.cost});
-    chosen.cards = first_ten.concat(chosen.cards.slice(10));
+    result = result.concat(chosen.cards.slice(10));
 
     // insert chosen cards into page:
-    for (var i = 0; i < chosen.cards.length; i++) {
+    for (var i = 0; i < result.length; i++) {
         fig = document.getElementById('card-' + i);
-        paintPaper(chosen.cards[i], fig);
+        paintPaper(result[i], fig);
     }
     for (var i = 0; i < chosen.notcards.length; i++) {
         fig = document.getElementById('notcard-' + i);
