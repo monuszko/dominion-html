@@ -200,6 +200,18 @@ function sets_it_removes(card, needed_sets) {
 }
 
 
+function types_it_removes(card, needed_types) {
+    var types = '';
+    if (card.types.indexOf('Event') != -1 ||
+            card.types.indexOf('Landmark') != -1) {
+        types += 'N';
+        // N is for Notcard. Dominion rules say the new horizontal cards
+        // are not affected by rules referring to *cards*.
+    }
+    return types;
+}
+
+
 // TODO: smells of object method!
 function card_is_banned(card, chosen, newbie_friendly) {
     if (newbie_friendly && card.tags.indexOf('complicated') != -1) {
@@ -212,6 +224,20 @@ function card_is_banned(card, chosen, newbie_friendly) {
         return true;
     }
     if (card.debt && chosen.banned_costs.has('d')) {
+        return true;
+    }
+    if (is_notcard(card) && chosen.banned_types.has('n')) {
+        return true;
+    }
+    return false;
+}
+
+
+// Dominion rules state the horizontal cards - Events and Landmarks - are not
+// affected by card text using the word "card".
+function is_notcard(card) {
+    if (card.types.indexOf('Event') != -1 ||
+            card.types.indexOf('Landmark') != -1) {
         return true;
     }
     return false;
@@ -250,56 +276,79 @@ function upper_with_lower(text) {
 // Requirements like costs or expansions can be checked independently
 // on a card-by-card basis, meaning they can be fulfilled on the first run!
 function get_ten_cards(chosen) {
-    var cards_not_requested = [];
     var needed_costs = document.getElementById('per-cost').value;
     var needed_sets = document.getElementById('per-set').value;
+    var needed_types = get_notcard_string(chosen.owned_notcards);
     var newbie_friendly = document.getElementById('newbies').checked;
 
+   //TODO: move this to card_is_banned
+    if (needed_types.indexOf('N') == -1) {
+        // like in Roman numerals, there's no number for 'zero',
+        // so events/landmarks have to be banned if zero is wanted.
+        chosen.banned_types.add('n');
+    }
+    // TODO: get_user_input(), bad_user_input();
     if (upper_with_lower(needed_costs) || upper_with_lower(needed_sets)) {
         return chosen;
     }
 
-    for (var card of chosen.owned_cards) {
+    var common_pool = chosen.owned_cards.concat(chosen.owned_notcards);
+    common_pool = shuffled_array(common_pool);
+    for (var card of common_pool) {
+        if (!(needed_costs || needed_sets || needed_types)) {
+            chosen.success = true;
+            break;
+        }
+        if (chosen.cards.length == 10) {
+            break;
+        }
         if (card_is_banned(card, chosen, newbie_friendly)) {
             continue;
         }
-
         var costs_removed = costs_it_removes(card, needed_costs);
         var sets_removed = sets_it_removes(card, needed_sets);
+        var types_removed = types_it_removes(card, needed_types);
 
-        if (needed_costs || needed_sets) {
-            if (costs_removed || sets_removed) {
-                chosen.cards.push(card);
-                chosen.names.add(card.name);
-                
-                needed_sets = chars_removed(needed_sets, sets_removed);
-                chosen.banned_sets = updated_banned(chosen.banned_sets, sets_removed, needed_sets);
-                needed_costs = chars_removed(needed_costs, costs_removed);
-                chosen.banned_costs = updated_banned(chosen.banned_costs, costs_removed, needed_costs);
+        if (costs_removed || sets_removed || types_removed) {
+            
+            needed_sets = chars_removed(needed_sets, sets_removed);
+            needed_costs = chars_removed(needed_costs, costs_removed);
+            needed_types = chars_removed(needed_types, types_removed);
+
+            chosen.banned_sets = updated_banned(chosen.banned_sets, sets_removed, needed_sets);
+            chosen.banned_costs = updated_banned(chosen.banned_costs, costs_removed, needed_costs);
+            chosen.banned_types = updated_banned(chosen.banned_types, types_removed, needed_types);
+
+            var output_array = chosen.cards;
+            if (is_notcard(card)) {
+                output_array = chosen.notcards;
             }
-            else {
-                cards_not_requested.push(card);
-            }
+            output_array.push(card);
+            chosen.names.add(card.name);
         }
-        else {
-            if (chosen.cards.length + cards_not_requested.length >= 10) {
-                chosen.success = true;
-                break
-            }
-            else {
-                chosen.cards.push(card);
-                chosen.names.add(card.name);
-            }
-        }
+    }
+    for (nc of chosen.notcards) {
+        console.log(nc.name);
+    }
+    if (!chosen.success) {
+        return chosen;
     }
     // time to pad the result with cards which weren't requested
     // but are okay to have.
-    for (ncard of cards_not_requested.slice(0, 10 - chosen.cards.length)) {
-        chosen.cards.push(ncard);
-        chosen.names.add(ncard.name);
+    for (card of common_pool) {
+        if (chosen.cards.length == 10) {
+            chosen.success = true;
+            break;
+        }
+        if (chosen.names.has(card.name)) {
+            continue;
+        }
+        if (card_is_banned(card, chosen, newbie_friendly)) {
+            continue;
+        }
+        chosen.cards.push(card);
+        chosen.names.add(card.name);
     }
-    // slice in case user requests too many cards (costs/sets)
-    chosen.cards = chosen.cards.slice(0, 10);
     return chosen;
 }
 
@@ -325,6 +374,7 @@ function attackCountered(attack_card, chosen) {
     var counters_itself;
     for (var counter of counters) {
             counters_itself = 0;
+            // TODO: don't use tags.indexOf, use tags[]
             if (attack_card.tags.indexOf(counter) > -1) {
                 counters_itself = 1;
             }
@@ -506,6 +556,7 @@ function show_kingdom(owned_sets, promo_names) {
         chosen.notcards = new Array();
         chosen.banned_sets = new Set(); // user inputs uppercase set letters
         chosen.banned_costs = new Set(); // P/D; no uppercase digits (yet!)
+        chosen.banned_types = new Set();
 
         // D A N G E R !!!!
         //
@@ -521,7 +572,6 @@ function show_kingdom(owned_sets, promo_names) {
             continue;
         }
         // Select events/landmarks:
-        chosen.notcards = get_chosen_notcards(chosen.owned_notcards);
         may_add_colony_platinum(chosen.cards);
         may_add_shelters(chosen.cards);
 
@@ -614,26 +664,18 @@ function may_add_shelters(chosen_cards) {
 }
 
 
-// TODO: make this a method ?
-function get_chosen_notcards(owned_notcards) {
-    var chosen_notcards = [];
-    if (owned_notcards.length > 0) {
-        var notcards = document.querySelector('input[name = "notcards"]:checked').id;
-        var notcard_count;
-        if (notcards == 'notcards-random') {
-            notcard_count = Math.floor(Math.random() * 3);
-        }
-        else {
-            notcard_count = notcards.slice(-1);
-        }
-        for (var i in owned_notcards) {
-            if (i == notcard_count) {
-                break
-            }
-            chosen_notcards.push(owned_notcards[i]);
-        }
+function get_notcard_string(owned_notcards) {
+    var notcard_count;
+    if (owned_notcards.length < 0) {
+        return '';
     }
-    return chosen_notcards;
+    var notcards = document.querySelector('input[name = "notcards"]:checked').id;
+    notcard_count = notcards.slice(-1);
+    if (isNaN(notcard_count)) {
+        notcard_count = Math.floor(Math.random() * 3);
+    }
+    // Internet Explorer currently doesn't support string.repeat(n)
+    return Array(notcard_count + 1).join('N');
 }
 
 
