@@ -58,28 +58,23 @@ function abbrev(words) {
 }
 
 
-function get_owned_sets() {
+function get_owned_sets(user_input) {
     var owned_sets = new Set();
-    var which_sets = document.getElementById('expansions').value.toLowerCase();
-    var needed_sets = document.getElementById('per-set').value.toLowerCase();
-    var needed_costs = document.getElementById('per-cost').value.toLowerCase();
-    for (var key in LETTER_TO_SET) {
-        var span = document.getElementById('set-' + LETTER_TO_SET[key]);
-        span.classList.remove('selected');
+    var which_sets = user_input['expansions'];
+    var needed_sets = user_input['per-set'];
+    var needed_costs = user_input['per-cost'];
 
-        if (which_sets.indexOf(key) != -1 || needed_sets.indexOf(key) != -1) {
-            var expansion = LETTER_TO_SET[key];
+    for (var letter in LETTER_TO_SET) {
+
+        if (which_sets.indexOf(letter) != -1 || needed_sets.indexOf(letter) != -1) {
+            var expansion = LETTER_TO_SET[letter];
             owned_sets.add(expansion)
-            var span = document.getElementById('set-' + expansion);
-            span.classList.add('selected');
         }
         if (needed_costs.indexOf('p') != -1) {
             owned_sets.add('alchemy');
-            document.getElementById('set-alchemy').classList.add('selected');
         }
         if (needed_costs.indexOf('d') != -1) {
             owned_sets.add('empires');
-            document.getElementById('set-empires').classList.add('selected');
         }
         // TODO: add overpay and cost 7,8... once the dust has settled.
     }
@@ -87,28 +82,51 @@ function get_owned_sets() {
 }
 
 
-function get_promo_names() {
-    var promo_names = new Set();
-    var user_input = document.getElementById('expansions').value.toLowerCase();
-    for (var promo_name of PROMOS.keys()) {
-        var digit = PROMOS.get(promo_name);
-        var span = document.getElementById('promo-' + digit);
-        if (user_input.indexOf(digit) != -1) {
+// TODO: maybe a method .add_set() should take care of this.
+function mark_owned_sets(owned_sets) {
+    for (var set in SET_TO_LETTER) {
+        var span = document.getElementById('set-' + set);
+        if (owned_sets.has(set)) {
             span.classList.add('selected');
-            promo_names.add(promo_name);
         }
         else {
-             span.classList.remove('selected');
+            span.classList.remove('selected');
+        }
+    }
+}
+
+
+function get_promo_names(user_input) {
+    var promo_names = new Set();
+    for (var promo_name of PROMOS.keys()) {
+        var digit = PROMOS.get(promo_name);
+        if (user_input['expansions'].indexOf(digit) != -1) {
+            promo_names.add(promo_name);
         }
     }
     return promo_names;
 }
 
 
-function get_owned_cards(owned_sets, existing_cards, promo_names) {
+function mark_owned_promos(promo_names) {
+    for (promo_name of PROMOS.keys()) {
+        var digit = PROMOS.get(promo_name);
+        var span = document.getElementById('promo-' + digit);
+
+        if (promo_names.has(promo_name)) {
+            span.classList.add('selected');
+        }
+        else {
+            span.classList.remove('selected');
+        }
+    }
+}
+
+
+function get_owned_cards(owned_sets, promo_names) {
     var owned_cards = [];
 
-    for (var this_card of existing_cards) {
+    for (var this_card of EXISTING_CARDS) {
         if (owned_sets.has(this_card.set)) {
             owned_cards.push(this_card);
         }
@@ -120,9 +138,9 @@ function get_owned_cards(owned_sets, existing_cards, promo_names) {
 }
 
 
-function get_owned_notcards(owned_sets, existing_notcards, promo_names) {
+function get_owned_notcards(owned_sets, promo_names) {
     var owned_notcards = [];
-    for (var notcard of existing_notcards) {
+    for (var notcard of EXISTING_NOTCARDS) {
         if (owned_sets.has(notcard.set)) {
             owned_notcards.push(notcard);
         }
@@ -229,6 +247,11 @@ function card_is_banned(card, chosen, newbie_friendly) {
     if (is_notcard(card) && chosen.banned_types.has('n')) {
         return true;
     }
+    // like in Roman numerals, there's no number for 'zero',
+    // so events/landmarks have to be banned if zero is wanted.
+    if (is_notcard(card) && chosen.notcard_count == 0) {
+        return true;
+    }
     return false;
 }
 
@@ -275,24 +298,19 @@ function upper_with_lower(text) {
 
 // Requirements like costs or expansions can be checked independently
 // on a card-by-card basis, meaning they can be fulfilled on the first run!
-function get_ten_cards(chosen) {
-    var needed_costs = document.getElementById('per-cost').value;
-    var needed_sets = document.getElementById('per-set').value;
-    var needed_types = get_notcard_string(chosen.owned_notcards);
-    var newbie_friendly = document.getElementById('newbies').checked;
+function get_ten_cards(chosen, user_input) {
+    var needed_costs = user_input['per-cost'];
+    var needed_sets = user_input['per-set'];
 
-   //TODO: move this to card_is_banned
-    if (needed_types.indexOf('N') == -1) {
-        // like in Roman numerals, there's no number for 'zero',
-        // so events/landmarks have to be banned if zero is wanted.
-        chosen.banned_types.add('n');
-    }
-    // TODO: get_user_input(), bad_user_input();
+    // Internet Explored doesn't support string.repeat(n):
+    var needed_types = Array(chosen.notcard_count + 1).join('N');
+
+    // TODO: bad_user_input();
     if (upper_with_lower(needed_costs) || upper_with_lower(needed_sets)) {
         return chosen;
     }
 
-    var common_pool = chosen.owned_cards.concat(chosen.owned_notcards);
+    var common_pool = user_input['owned_cards'].concat(user_input['owned_notcards']);
     common_pool = shuffled_array(common_pool);
     for (var card of common_pool) {
         if (!(needed_costs || needed_sets || needed_types)) {
@@ -302,7 +320,7 @@ function get_ten_cards(chosen) {
         if (chosen.cards.length == 10) {
             break;
         }
-        if (card_is_banned(card, chosen, newbie_friendly)) {
+        if (card_is_banned(card, chosen, user_input['newbie_friendly'])) {
             continue;
         }
         var costs_removed = costs_it_removes(card, needed_costs);
@@ -327,9 +345,6 @@ function get_ten_cards(chosen) {
             chosen.names.add(card.name);
         }
     }
-    for (nc of chosen.notcards) {
-        console.log(nc.name);
-    }
     if (!chosen.success) {
         return chosen;
     }
@@ -343,7 +358,7 @@ function get_ten_cards(chosen) {
         if (chosen.names.has(card.name)) {
             continue;
         }
-        if (card_is_banned(card, chosen, newbie_friendly)) {
+        if (card_is_banned(card, chosen, user_input['newbie_friendly'])) {
             continue;
         }
         chosen.cards.push(card);
@@ -536,16 +551,15 @@ function get_stats(cards) {
 }
 
 
-function show_kingdom(owned_sets, promo_names) {
+function show_kingdom(user_input) {
     var max_tries = 1000;
 
     // chosen - stores context of a single "Randomize" button press
     var chosen = new Object();
-    chosen.owned_cards = get_owned_cards(owned_sets, existing_cards, promo_names);
-    chosen.owned_notcards = get_owned_notcards(owned_sets, existing_notcards, promo_names);
+    chosen.notcard_count = get_notcard_count(user_input['owned_notcards'], user_input['notcards']);
 
     hide_all_cards();
-    if (chosen.owned_cards.length < 13) {
+    if (user_input['owned_cards'].length < 13) {
         return chosen;
     }
 
@@ -564,16 +578,16 @@ function show_kingdom(owned_sets, promo_names) {
         // owned_notcards are shuffled.
         //
         // D A N G E R !!!!
-        chosen.owned_cards = shuffled_array(chosen.owned_cards);
-        chosen.owned_notcards = shuffled_array(chosen.owned_notcards);
+        chosen.owned_cards = shuffled_array(user_input['owned_cards']);
+        chosen.owned_notcards = shuffled_array(user_input['owned_notcards']);
 
-        var chosen = get_ten_cards(chosen);
+        var chosen = get_ten_cards(chosen, user_input);
         if (!chosen.success) {
             continue;
         }
         // Select events/landmarks:
-        may_add_colony_platinum(chosen.cards);
-        may_add_shelters(chosen.cards);
+        may_add_colony_platinum(chosen.cards, user_input['prosperity']);
+        may_add_shelters(chosen.cards, user_input['darkages']);
 
         if (chosen.names.has('Young Witch')) {
             var bane = get_bane(chosen.owned_cards, chosen.names);
@@ -610,8 +624,7 @@ function get_bane(owned_cards, card_names) {
 }
 
 
-function may_add_colony_platinum(chosen_cards) {
-    var prosperity = document.querySelector('input[name = "prosperity"]:checked').id;
+function may_add_colony_platinum(chosen_cards, prosperity) {
     if (prosperity == 'prosperity-never') {
         // Do nothing
     }
@@ -638,9 +651,7 @@ function may_add_colony_platinum(chosen_cards) {
 }
 
 
-function may_add_shelters(chosen_cards) {
-    var shelters = document.getElementById('shelters');
-    var darkages = document.querySelector('input[name = "darkages"]:checked').id;
+function may_add_shelters(chosen_cards, darkages) {
     if (darkages == 'darkages-never') {
         // Do nothing
     }
@@ -664,24 +675,22 @@ function may_add_shelters(chosen_cards) {
 }
 
 
-function get_notcard_string(owned_notcards) {
+function get_notcard_count(owned_notcards, notcards) {
     var notcard_count;
-    if (owned_notcards.length < 0) {
-        return '';
+    if (owned_notcards.length == 0) {
+        return 0;
     }
-    var notcards = document.querySelector('input[name = "notcards"]:checked').id;
     notcard_count = notcards.slice(-1);
     if (isNaN(notcard_count)) {
         notcard_count = Math.floor(Math.random() * 3);
     }
-    // Internet Explorer currently doesn't support string.repeat(n)
-    return Array(notcard_count + 1).join('N');
+    return parseInt(notcard_count);
 }
 
 
 // TODO: find a way to reuse code from get_ten_cards() ?
 // This is a bit messy and doesn't respect costs/sets.
-function swipe(figure, chosen) {
+function swipe(figure, chosen, user_input) {
     if (!/^card-[0-9]$/.test(figure.id)) {
         return chosen;
     }
@@ -699,9 +708,7 @@ function swipe(figure, chosen) {
         if (chosen.names.has(new_card.name)) {
             continue;
         }
-        // TODO: does newbie_friendly belong into chosen ?
-        var newbie_friendly = document.getElementById('newbies').checked;
-        if (card_is_banned(new_card, chosen, newbie_friendly)) {
+        if (card_is_banned(new_card, chosen, user_input['newbie_friendly'])) {
             continue;
         }
         chosen.names.delete(chosen.cards[old_index].name);
@@ -726,33 +733,71 @@ function swipe(figure, chosen) {
 function click_handler(evnt) {
     var clicked = evnt.currentTarget;
     if (clicked.id == 'btn-randomize') {
-        chosen = show_kingdom(owned_sets, promo_names);
+        chosen = show_kingdom(user_input);
+    }
+    else if (clicked.type == 'radio') {
+        user_input[clicked.name] = clicked.id;
     }
     else {
-        chosen = swipe(clicked, chosen);
+        chosen = swipe(clicked, chosen, user_input);
     }
 }
 
 
+function get_user_input() {
+    user_input = {
+    'expansions': document.getElementById('expansions').value,
+    'per-cost': document.getElementById('per-cost').value,
+    'per-set': document.getElementById('per-set').value,
+    'notcards': document.querySelector('input[name = "notcards"]:checked').id,
+    'prosperity': document.querySelector('input[name = "prosperity"]:checked').id,
+    'darkages': document.querySelector('input[name = "darkages"]:checked').id,
+    'recalculate': function () {
+        this['owned_sets'] = get_owned_sets(user_input);
+        this['promo_names'] = get_promo_names(user_input);
+        this['owned_cards'] = get_owned_cards(user_input['owned_sets'], user_input['promo_names']);
+        this['owned_notcards'] = get_owned_notcards(user_input['owned_sets'], user_input['promo_names']);
+        }
+    }
+    user_input.recalculate();
+    return user_input;
+}
+
 // set global variables and attach event listeners:
-var owned_sets = get_owned_sets();
-var promo_names = get_promo_names();
+var user_input = get_user_input();
+mark_owned_sets(user_input['owned_sets']);
+mark_owned_promos(user_input['promo_names']);
 var chosen;
 
 
+for (radio of document.querySelectorAll('input[type = radio]')) {
+    radio.addEventListener('click', click_handler);
+}
+
 document.getElementById('btn-randomize').addEventListener('click',
         click_handler);
+
 document.getElementById('expansions').addEventListener('keyup',
     function() {
-    owned_sets = get_owned_sets();
-    promo_names = get_promo_names();
-});
+        user_input['expansions'] = document.getElementById('expansions').value;
+        user_input.recalculate()
+        mark_owned_sets(user_input['owned_sets']);
+        mark_owned_promos(user_input['promo_names']);
+    });
 
 document.getElementById('per-set').addEventListener('keyup',
-    function() {owned_sets = get_owned_sets();});
+    function() {
+        user_input['per-set'] = document.getElementById('per-set').value;
+        user_input.recalculate();
+        mark_owned_sets(user_input['owned_sets']);
+    });
 
 document.getElementById('per-cost').addEventListener('keyup',
-    function() {owned_sets = get_owned_sets();});
+    function() {
+        user_input['per-cost'] = document.getElementById('per-cost').value;
+        user_input.recalculate();
+        mark_owned_sets(user_input['owned_sets']);
+    });
 
 for (var fig of document.getElementsByTagName('figure')) {
     fig.addEventListener('click', click_handler);

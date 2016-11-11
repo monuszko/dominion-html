@@ -1,4 +1,4 @@
-const existing_notcards = JSON.parse(`
+const EXISTING_NOTCARDS = JSON.parse(`
 [
     {
         "complicated": false,

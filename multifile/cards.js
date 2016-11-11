@@ -9,7 +9,7 @@
 //
 
 // TODO: The "actions" property turned out to be a dud.
-const existing_cards = JSON.parse(`
+const EXISTING_CARDS = JSON.parse(`
 [
     {
         "actions": 0,
