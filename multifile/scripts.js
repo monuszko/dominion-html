@@ -61,8 +61,8 @@ function abbrev(words) {
 function get_owned_sets(user_input) {
     var owned_sets = new Set();
     var which_sets = user_input['expansions'];
-    var needed_sets = user_input['per-set'];
-    var needed_costs = user_input['per-cost'];
+    var needed_sets = user_input['per-set'].toLowerCase();
+    var needed_costs = user_input['per-cost'].toLowerCase();
 
     for (var letter in LETTER_TO_SET) {
 
@@ -298,12 +298,11 @@ function upper_with_lower(text) {
 
 // Requirements like costs or expansions can be checked independently
 // on a card-by-card basis, meaning they can be fulfilled on the first run!
-function get_ten_cards(chosen, user_input) {
+function get_required_cards(chosen, user_input) {
     var needed_costs = user_input['per-cost'];
     var needed_sets = user_input['per-set'];
 
-    // Internet Explored doesn't support string.repeat(n):
-    var needed_types = Array(chosen.notcard_count + 1).join('N');
+    var needed_types = 'N'.repeat(chosen.notcard_count);
 
     // TODO: bad_user_input();
     if (upper_with_lower(needed_costs) || upper_with_lower(needed_sets)) {
@@ -311,7 +310,8 @@ function get_ten_cards(chosen, user_input) {
     }
 
     var common_pool = user_input['owned_cards'].concat(user_input['owned_notcards']);
-    common_pool = shuffled_array(common_pool);
+    chosen.common_pool = shuffled_array(common_pool);
+
     for (var card of common_pool) {
         if (!(needed_costs || needed_sets || needed_types)) {
             chosen.success = true;
@@ -345,12 +345,13 @@ function get_ten_cards(chosen, user_input) {
             chosen.names.add(card.name);
         }
     }
-    if (!chosen.success) {
-        return chosen;
-    }
+    return chosen;
+}
+
     // time to pad the result with cards which weren't requested
     // but are okay to have.
-    for (card of common_pool) {
+function up_to_ten(chosen, user_input) {
+    for (card of chosen.common_pool) {
         if (chosen.cards.length == 10) {
             chosen.success = true;
             break;
@@ -572,25 +573,15 @@ function show_kingdom(user_input) {
         chosen.banned_costs = new Set(); // P/D; no uppercase digits (yet!)
         chosen.banned_types = new Set();
 
-        // D A N G E R !!!!
-        //
-        // Several places of the program RELY on the fact owned_cards and
-        // owned_notcards are shuffled.
-        //
-        // D A N G E R !!!!
-        chosen.owned_cards = shuffled_array(user_input['owned_cards']);
-        chosen.owned_notcards = shuffled_array(user_input['owned_notcards']);
-
-        var chosen = get_ten_cards(chosen, user_input);
+        var chosen = get_required_cards(chosen, user_input);
         if (!chosen.success) {
             continue;
         }
-        // Select events/landmarks:
-        may_add_colony_platinum(chosen.cards, user_input['prosperity']);
-        may_add_shelters(chosen.cards, user_input['darkages']);
+        var chosen = up_to_ten(chosen, user_input);
 
+        // Select events/landmarks:
         if (chosen.names.has('Young Witch')) {
-            var bane = get_bane(chosen.owned_cards, chosen.names);
+            var bane = get_bane(chosen.common_pool, chosen.names);
             if (bane === undefined) {
                 continue;
             }
@@ -615,8 +606,11 @@ function show_kingdom(user_input) {
 
 // TODO: possible bugs when no card fits
 // TODO: possible bug with cost requesting feature
-function get_bane(owned_cards, card_names) {
-    for (var card of owned_cards) {
+function get_bane(cards, card_names) {
+    for (var card of cards) {
+        if (is_notcard(card)) {
+            continue;
+        }
         if ((card.cost == 2 || card.cost == 3) && !card_names.has(card.name)) {
             return card;
         }
@@ -688,44 +682,49 @@ function get_notcard_count(owned_notcards, notcards) {
 }
 
 
-// TODO: find a way to reuse code from get_ten_cards() ?
-// This is a bit messy and doesn't respect costs/sets.
 function swipe(figure, chosen, user_input) {
-    if (!/^card-[0-9]$/.test(figure.id)) {
-        return chosen;
-    }
-    var highest = [];
-    for (var card of chosen.cards) {
-        highest.push(chosen.owned_cards.indexOf(card));
-    }
-    highest = Math.max(...highest);
+    var figure_index = figure.id.match(/\d+/)[0];
+    var card_name = figure.querySelector('figcaption').textContent;
+    var card_index = chosen.cards.findIndex(c => c['name'] == card_name);
+    var old_card = chosen.cards[card_index];
 
-    var old_index = figure.id.match(/\d+/)[0];
+    var sets_without_card = '';
+    var costs_without_card = '';
+    var types_without_card = '';
+    for (var i in chosen.cards) {
+        if (i == card_index) {
+            continue;
+        }
+        sets_without_card += sets_it_removes(chosen.cards[i], user_input['per-set']);
+        costs_without_card += costs_it_removes(chosen.cards[i], user_input['per-cost']);
+        types_without_card += types_it_removes(chosen.cards[i], card, 'N'.repeat(chosen.notcard_count));
+    }
+    console.log('Totals without card:');
+    var total = [sets_without_card, costs_without_card, types_without_card].join(' ');
+    console.log('Requirement inputs:');
+    var input = [user_input['per-set'], user_input['per-cost'], 'N'.repeat(chosen.notcard_count)].join(' ');
+    console.log(total);
+    console.log(input);
 
-    var success = false;
-    for (var i = highest + 1; i < chosen.owned_cards.length; i++) {
-        var new_card = chosen.owned_cards[i];
-        if (chosen.names.has(new_card.name)) {
-            continue;
-        }
-        if (card_is_banned(new_card, chosen, user_input['newbie_friendly'])) {
-            continue;
-        }
-        chosen.names.delete(chosen.cards[old_index].name);
-        chosen.names.add(new_card.name);
-        chosen.cards[old_index] = new_card;
-        [chosen.tags, chosen.card_types] = get_stats(chosen.cards);
-        if (!conditionsPassed(chosen)) {
-            continue;
-        }
-        success = true;
-        break;
-    }
-    if (!success) {
-        return chosen;
-    }
-    var target = document.getElementById(figure.id);
-    paintPaper(new_card, target);
+
+    //TODO: bug with bane/potion
+    //TODO: bug with NN
+    var sets_only_here = chars_removed(user_input['per-set'], sets_without_card);
+    console.log('Sets only this card meets:');
+    console.log(sets_only_here);
+
+    var costs_only_here = chars_removed(user_input['per-cost'], costs_without_card);
+    console.log('Costs only this card meets:');
+    console.log(costs_only_here);
+
+    var types_only_here = chars_removed('N'.repeat(chosen.notcard_count), types_without_card);
+    console.log('Types only this card meets:');
+    console.log(types_only_here);
+
+
+    
+
+
     return chosen;
 }
 
@@ -752,7 +751,7 @@ function get_user_input() {
     'notcards': document.querySelector('input[name = "notcards"]:checked').id,
     'prosperity': document.querySelector('input[name = "prosperity"]:checked').id,
     'darkages': document.querySelector('input[name = "darkages"]:checked').id,
-    'recalculate': function () {
+    recalculate () {
         this['owned_sets'] = get_owned_sets(user_input);
         this['promo_names'] = get_promo_names(user_input);
         this['owned_cards'] = get_owned_cards(user_input['owned_sets'], user_input['promo_names']);
@@ -762,6 +761,7 @@ function get_user_input() {
     user_input.recalculate();
     return user_input;
 }
+
 
 // set global variables and attach event listeners:
 var user_input = get_user_input();
