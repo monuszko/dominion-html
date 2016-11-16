@@ -58,6 +58,7 @@ figure.horizontal .card-text {
     overflow: hidden;
 }
 
+/* TODO: regression, ribbon stopped working ! */
 .ribbon {
     background: #f4eece;
     color: black;
@@ -78,7 +79,6 @@ figure.horizontal .card-text {
     width: 100%;
     top: 0;
 }
-
 
 figcaption {
     width: 100%;
@@ -237,7 +237,7 @@ figure.landmark .ribbon {
 }
 
 /* image background is base64-encoded SVG text "Bane" */
-figure#card-10 .card-image {
+figure.bane .card-image {
   background: url("data:image/svg+xml;base64, PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZlcnNpb249JzEuMScgaGVpZ2h0PSczNXB4JyB3aWR0aD0nNjBweCc+IDx0ZXh0IHg9JzE1JyB5PScxNScgZmlsbD0ncmVkJyBmb250LXNpemU9JzIwJyB0cmFuc2Zvcm09J3JvdGF0ZSgyMCknPkJhbmU8L3RleHQ+IDwvc3ZnPgo=") #999999 0;
 }
 

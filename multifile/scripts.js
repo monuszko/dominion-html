@@ -41,6 +41,27 @@ PROMOS = new Map([
     ]);
 
 
+// ECMAScript doesn't specify that Array.sort() is stable, and Chrome uses
+// QuickSort instead of InsertionSort for lists > 10, so I need to roll my own.
+function nice_and_stable_insertion_sort(alist, key) {
+    var len = alist.length;
+    var position, currentvalue;
+
+    for (var index = 1; index < len; index++) {
+        currentvalue = alist[index];
+        position = index;
+        while (position > 0 && key(alist[position-1]) > key(currentvalue)) {
+            alist[position] = alist[position-1];
+            position -= 1;
+        }
+        alist[position] = currentvalue;
+    }
+    return alist;
+}
+
+
+
+
 // TODO: abbreviate only if multiple types
 function abbrev(words) {
     var abbrev = [];
@@ -135,22 +156,6 @@ function get_owned_cards(owned_sets, promo_names) {
         }
     }
     return owned_cards;
-}
-
-
-function get_owned_notcards(owned_sets, promo_names) {
-    var owned_notcards = [];
-    for (var notcard of EXISTING_NOTCARDS) {
-        if (owned_sets.has(notcard.set)) {
-            owned_notcards.push(notcard);
-        }
-        else if (promo_names.has(notcard.name)) {
-                owned_notcards.push(notcard);
-                var span = document.getElementById('promo-' + PROMOS[notcard.name]);
-                span.classList.add('selected');
-            }
-    }
-    return owned_notcards;
 }
 
 
@@ -309,10 +314,9 @@ function get_required_cards(chosen, user_input) {
         return chosen;
     }
 
-    var common_pool = user_input['owned_cards'].concat(user_input['owned_notcards']);
-    chosen.common_pool = shuffled_array(common_pool);
+    chosen.random_pool = shuffled_array(user_input['owned_cards']);
 
-    for (var card of common_pool) {
+    for (var card of chosen.random_pool) {
         if (!(needed_costs || needed_sets || needed_types)) {
             chosen.success = true;
             break;
@@ -337,11 +341,7 @@ function get_required_cards(chosen, user_input) {
             chosen.banned_costs = updated_banned(chosen.banned_costs, costs_removed, needed_costs);
             chosen.banned_types = updated_banned(chosen.banned_types, types_removed, needed_types);
 
-            var output_array = chosen.cards;
-            if (is_notcard(card)) {
-                output_array = chosen.notcards;
-            }
-            output_array.push(card);
+            chosen.cards.push(card);
             chosen.names.add(card.name);
         }
     }
@@ -351,8 +351,8 @@ function get_required_cards(chosen, user_input) {
     // time to pad the result with cards which weren't requested
     // but are okay to have.
 function up_to_ten(chosen, user_input) {
-    for (card of chosen.common_pool) {
-        if (chosen.cards.length == 10) {
+    for (card of chosen.random_pool) {
+        if (chosen.cards.length == 10 + chosen.notcard_count) {
             chosen.success = true;
             break;
         }
@@ -457,9 +457,9 @@ function hide_all_cards() {
 }
 
 
-function paintPaper(source, target) {
+function paintPaper(source, target, roles) {
     target.classList.remove('hidden');
-    target.classList.remove('reaction', 'treasure', 'duration', 'victory', 'reserve', 'landmark');
+    target.classList.remove('reaction', 'treasure', 'duration', 'victory', 'reserve', 'landmark', 'bane', 'horizontal');
     for (set in SET_TO_LETTER) {
         target.classList.remove(set);
     }
@@ -472,7 +472,11 @@ function paintPaper(source, target) {
     target.querySelector('.coin-cost').textContent = source.cost;
     target.querySelector('.coin-cost').textContent += source.cost_extra || '';
     target.querySelector('.debt-cost').textContent = source.debt || '';
-    if (!target.classList.contains('horizontal')) {
+
+    if (is_notcard(source)) {
+        target.classList.add('horizontal');
+    }
+    else {
         if (source.cost == 0) {
             target.querySelector('.coin-cost').textContent = '';
         }
@@ -482,6 +486,10 @@ function paintPaper(source, target) {
         else {
             target.querySelector('.potion').classList.add('hidden');
         }
+    }
+
+    if (roles[source.name] == 'bane') {
+        target.classList.add('bane');
     }
     
     if (source.types.indexOf('Reaction') != -1) {
@@ -506,20 +514,24 @@ function paintPaper(source, target) {
 
 
 function present_results(chosen) {
-    // Sort before displaying, leaving bane as 11th if present
-    // and the source array unchanged
-    var result = chosen.cards.slice(0, 10).sort(function(a, b){
-        return a.cost - b.cost});
-    result = result.concat(chosen.cards.slice(10));
+    var result = chosen.cards;
+    
+    function card_role(x) {
+        if (is_notcard(x)) {
+            return 2;
+        }
+        else if (chosen.roles[x.name] == 'bane') {
+            return 1;
+        }
+        return 0;
+    }
 
+    result = nice_and_stable_insertion_sort(result, function(a){return a.cost;});
+    result = nice_and_stable_insertion_sort(result, card_role);
     // insert chosen cards into page:
     for (var i = 0; i < result.length; i++) {
         fig = document.getElementById('card-' + i);
-        paintPaper(result[i], fig);
-    }
-    for (var i = 0; i < chosen.notcards.length; i++) {
-        fig = document.getElementById('notcard-' + i);
-        paintPaper(chosen.notcards[i], fig);
+        paintPaper(result[i], fig, chosen.roles);
     }
 }
 
@@ -557,7 +569,7 @@ function show_kingdom(user_input) {
 
     // chosen - stores context of a single "Randomize" button press
     var chosen = new Object();
-    chosen.notcard_count = get_notcard_count(user_input['owned_notcards'], user_input['notcards']);
+    chosen.notcard_count = get_notcard_count(user_input['owned_cards'], user_input['notcards']);
 
     hide_all_cards();
     if (user_input['owned_cards'].length < 13) {
@@ -567,8 +579,9 @@ function show_kingdom(user_input) {
     for (attempt = 0; attempt < max_tries; attempt++) {
         chosen.cards = new Array();
         chosen.names = new Set();
+        chosen.roles = new Object(); // Metadata: bane, black market choices...
+        chosen.swiped_names = new Set();
         chosen.success = false;
-        chosen.notcards = new Array();
         chosen.banned_sets = new Set(); // user inputs uppercase set letters
         chosen.banned_costs = new Set(); // P/D; no uppercase digits (yet!)
         chosen.banned_types = new Set();
@@ -581,10 +594,11 @@ function show_kingdom(user_input) {
 
         // Select events/landmarks:
         if (chosen.names.has('Young Witch')) {
-            var bane = get_bane(chosen.common_pool, chosen.names);
-            if (bane === undefined) {
+            var bane = get_bane(chosen.random_pool, chosen.names);
+            if (!bane) {
                 continue;
             }
+            chosen.roles[bane.name] = 'bane';
             chosen.cards.push(bane);
             chosen.names.add(bane.name);
         }
@@ -618,6 +632,7 @@ function get_bane(cards, card_names) {
 }
 
 
+// TODO: regression, stopped working!
 function may_add_colony_platinum(chosen_cards, prosperity) {
     if (prosperity == 'prosperity-never') {
         // Do nothing
@@ -645,6 +660,7 @@ function may_add_colony_platinum(chosen_cards, prosperity) {
 }
 
 
+// TODO: regression, stopped working!
 function may_add_shelters(chosen_cards, darkages) {
     if (darkages == 'darkages-never') {
         // Do nothing
@@ -669,9 +685,12 @@ function may_add_shelters(chosen_cards, darkages) {
 }
 
 
-function get_notcard_count(owned_notcards, notcards) {
+// get the number of notcards that will be used in this
+// Dominion game. It may vary when 'random' is selected.
+function get_notcard_count(owned_cards, notcards) {
     var notcard_count;
-    if (owned_notcards.length == 0) {
+    var num_owned = owned_cards.filter(is_notcard).length;
+    if (num_owned == 0) {
         return 0;
     }
     notcard_count = notcards.slice(-1);
@@ -697,7 +716,7 @@ function swipe(figure, chosen, user_input) {
         }
         sets_without_card += sets_it_removes(chosen.cards[i], user_input['per-set']);
         costs_without_card += costs_it_removes(chosen.cards[i], user_input['per-cost']);
-        types_without_card += types_it_removes(chosen.cards[i], card, 'N'.repeat(chosen.notcard_count));
+        types_without_card += types_it_removes(chosen.cards[i], 'N'.repeat(chosen.notcard_count));
     }
     console.log('Totals without card:');
     var total = [sets_without_card, costs_without_card, types_without_card].join(' ');
@@ -708,7 +727,6 @@ function swipe(figure, chosen, user_input) {
 
 
     //TODO: bug with bane/potion
-    //TODO: bug with NN
     var sets_only_here = chars_removed(user_input['per-set'], sets_without_card);
     console.log('Sets only this card meets:');
     console.log(sets_only_here);
@@ -722,10 +740,24 @@ function swipe(figure, chosen, user_input) {
     console.log(types_only_here);
 
 
-    
 
 
+    new_card_requirements = [sets_only_here, costs_only_here, types_only_here];
+    new_card = chosen.cards.find(passes_swipe_tests(new_card_requirements));
+    chosen.cards['card_index'] = new_card ? new_card : old_card;
+
+    if (new_card) {
+        chosen.names.remove(old_card.name);
+        chosen.swiped_names.add(old_card.name);
+        chosen.names.add(new_card.name);
+        paintPaper(new_card, card_index, chosen.roles);
+    }
     return chosen;
+}
+
+
+function passes_swipe_tests(card_requirements) {
+    return true;
 }
 
 
@@ -755,7 +787,6 @@ function get_user_input() {
         this['owned_sets'] = get_owned_sets(user_input);
         this['promo_names'] = get_promo_names(user_input);
         this['owned_cards'] = get_owned_cards(user_input['owned_sets'], user_input['promo_names']);
-        this['owned_notcards'] = get_owned_notcards(user_input['owned_sets'], user_input['promo_names']);
         }
     }
     user_input.recalculate();
