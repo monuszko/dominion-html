@@ -1,3 +1,4 @@
+/* TODO: tweak font sizes and breakpoints */
 
 #card-container {
     width: 50%;
@@ -19,7 +20,6 @@ figure {
     margin: 1% 1% 1%;
     background: #afb4ae;
 }
-
 
 div.stretchy-wrapper {
     padding-bottom: 160%; /* 59mm x 91mm - Dominion card size */
@@ -49,8 +49,17 @@ figure.horizontal .card-text {
     height: 34%;
 }
 
-.ribbon-wrapper {
+.card-type-wrapper {
+    border-top: 1px solid black;
+    background: #f4eece;
+    width: 100%;
     position: absolute;
+    bottom: 0;
+}
+
+figure.horizontal .card-type-wrapper {
+    position: absolute;
+    background: unset;
     top: 0;
     right: 0;
     width: 20%;
@@ -58,8 +67,7 @@ figure.horizontal .card-text {
     overflow: hidden;
 }
 
-/* TODO: regression, ribbon stopped working ! */
-.ribbon {
+figure.horizontal .card-type {
     background: #f4eece;
     color: black;
     text-align: center;
@@ -104,19 +112,11 @@ figcaption {
     border-top: 1px dashed black;
 }
 
-.footer {
-    border-top: 1px solid black;
-    background: #f4eece;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-}
-
 figure.reaction figcaption {
     background: #80b1d2;
 }
 
-figure.reaction .footer {
+figure.reaction .card-type {
     background: #80b1d2;
 }
 
@@ -128,7 +128,7 @@ figure.treasure figcaption {
     background: #fbd953;
 }
 
-figure.treasure .footer {
+figure.treasure .card-type {
     background: #fbd953;
 }
 
@@ -140,7 +140,7 @@ figure.victory figcaption {
     background: #aade89;
 }
 
-figure.victory .footer {
+figure.victory .card-type {
     background: #aade89;
 }
 
@@ -152,7 +152,7 @@ figure.duration figcaption {
     background: #e98923;
 }
 
-figure.duration .footer {
+figure.duration .card-type {
     background: #e98923;
 }
 
@@ -164,7 +164,7 @@ figure.reserve figcaption {
     background: #cca65f;
 }
 
-figure.reserve .footer {
+figure.reserve .card-type {
     background: #cca65f;
 }
 
@@ -232,7 +232,7 @@ figure.landmark .card-text {
     background: #439D5D;
 }
 
-figure.landmark .ribbon {
+figure.landmark .card-type {
     background: #439D5D;
 }
 
@@ -262,30 +262,42 @@ span#m-in-promos {
 
 @media only screen and (max-width: 940px) {
     figure {width: 22%;}
-    .ribbon {font: 13px Sans-Serif;}
+    div.card-type-wrapper > div.card-type {font: 13px Sans-Serif;}
     figure.horizontal {width: 33%;}
     div#clickable-container {float: left}
 }
 
 @media only screen and (max-width: 720px) {
     figure {width: 30%;}
-    .ribbon {font: 12px Sans-Serif;}
+    div.card-type-wrapper > div.card-type {font: 12px Sans-Serif;}
     figure.horizontal {width: 45%;}
     div#clickable-container {float: left}
 }
 
 @media only screen and (max-width: 530px) {
     figure {width: 46%;}
-    .ribbon {font: 11px Sans-Serif;}
+    div.card-type-wrapper > div.card-type {font: 11px Sans-Serif;}
     figure.horizontal {width: 69%;}
     div#clickable-container {float: left}
 }
 
 @media only screen and (max-width: 320px) {
     figure {width: 96%;}
-    .ribbon {font: 10px Sans-Serif;}
+    div.card-type-wrapper > div.card-type {font: 10px Sans-Serif;}
     figure.horizontal {width: 96%;}
     div#clickable-container {float: left}
+}
+
+.card-costs {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+figure.horizontal .card-costs {
+    top: 3%;
+    left: 2%;
 }
 
 span.coin-cost {
@@ -311,7 +323,6 @@ span.debt-cost {
     width: 1em;
     color: white;
     font-weight: bold;
-
 }
 
 [alt]:before {
@@ -328,7 +339,7 @@ span.debt-cost {
     padding: 10px;
     border-radius: 10px;
     box-shadow: 2px 2px 1px silver;    
-    z-index: 1;
+    z-index: 10;
     max-width: 200px; /* don't remove, briefly visible before expands */
 }
 
@@ -341,6 +352,6 @@ span.debt-cost {
     margin-top: 50px;
     margin-left: 20px;    
     max-width: 200px;
-    z-index: 1;
+    z-index: 10;
 }
 

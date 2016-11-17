@@ -473,19 +473,19 @@ function paintPaper(source, target, roles) {
     target.querySelector('.coin-cost').textContent += source.cost_extra || '';
     target.querySelector('.debt-cost').textContent = source.debt || '';
 
-    if (is_notcard(source)) {
-        target.classList.add('horizontal');
+    if (source.hasOwnProperty('potion')) {
+        target.querySelector('.potion').classList.remove('hidden');
     }
     else {
-        if (source.cost == 0) {
-            target.querySelector('.coin-cost').textContent = '';
-        }
-        if (source.hasOwnProperty('potion')) {
-            target.querySelector('.potion').classList.remove('hidden');
-        }
-        else {
-            target.querySelector('.potion').classList.add('hidden');
-        }
+        target.querySelector('.potion').classList.add('hidden');
+    }
+
+    if (source.cost == 0 && (source.potion || source.debt)) {
+        target.querySelector('.coin-cost').textContent='';
+    }
+
+    if (is_notcard(source)) {
+        target.classList.add('horizontal');
     }
 
     if (roles[source.name] == 'bane') {
@@ -592,7 +592,6 @@ function show_kingdom(user_input) {
         }
         var chosen = up_to_ten(chosen, user_input);
 
-        // Select events/landmarks:
         if (chosen.names.has('Young Witch')) {
             var bane = get_bane(chosen.random_pool, chosen.names);
             if (!bane) {
@@ -602,6 +601,8 @@ function show_kingdom(user_input) {
             chosen.cards.push(bane);
             chosen.names.add(bane.name);
         }
+        may_add_colony_platinum(chosen.cards, user_input['prosperity']);
+        may_add_shelters(chosen.cards, user_input['darkages']);
 
         [chosen.tags, chosen.card_types] = get_stats(chosen.cards);
         if (!conditionsPassed(chosen)) {
@@ -619,7 +620,6 @@ function show_kingdom(user_input) {
 
 
 // TODO: possible bugs when no card fits
-// TODO: possible bug with cost requesting feature
 function get_bane(cards, card_names) {
     for (var card of cards) {
         if (is_notcard(card)) {
@@ -632,7 +632,6 @@ function get_bane(cards, card_names) {
 }
 
 
-// TODO: regression, stopped working!
 function may_add_colony_platinum(chosen_cards, prosperity) {
     if (prosperity == 'prosperity-never') {
         // Do nothing
@@ -660,7 +659,6 @@ function may_add_colony_platinum(chosen_cards, prosperity) {
 }
 
 
-// TODO: regression, stopped working!
 function may_add_shelters(chosen_cards, darkages) {
     if (darkages == 'darkages-never') {
         // Do nothing
