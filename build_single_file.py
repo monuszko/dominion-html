@@ -33,8 +33,10 @@ with open('singlefile/dominion.html', 'w') as output:
         elif '</head>' in line:
             insert_files(output, ('style.css',), wrap='style')
         elif '</body>' in line:
-            js_files = ('cards.js', 'notcards.js', 'scripts.js')
+            js_files = ('cards.js', 'scripts.js')
             insert_files(output, js_files, wrap='script')
+        elif '<title>' in line:
+            line = line.replace('(Development) ', '');
         output.write(line)
 
 

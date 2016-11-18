@@ -457,7 +457,8 @@ function hide_all_cards() {
 }
 
 
-function paintPaper(source, target, roles) {
+function paintCard(source, target_index, roles) {
+    var target = document.getElementById('card-' + target_index);
     target.classList.remove('hidden');
     target.classList.remove('reaction', 'treasure', 'duration', 'victory', 'reserve', 'landmark', 'bane', 'horizontal');
     for (set in SET_TO_LETTER) {
@@ -530,8 +531,7 @@ function present_results(chosen) {
     result = nice_and_stable_insertion_sort(result, card_role);
     // insert chosen cards into page:
     for (var i = 0; i < result.length; i++) {
-        fig = document.getElementById('card-' + i);
-        paintPaper(result[i], fig, chosen.roles);
+        paintCard(result[i], i, chosen.roles);
     }
 }
 
@@ -592,6 +592,7 @@ function show_kingdom(user_input) {
         }
         var chosen = up_to_ten(chosen, user_input);
 
+        // TODO: bug with bane+potion
         if (chosen.names.has('Young Witch')) {
             var bane = get_bane(chosen.random_pool, chosen.names);
             if (!bane) {
@@ -700,7 +701,12 @@ function get_notcard_count(owned_cards, notcards) {
 
 
 function swipe(figure, chosen, user_input) {
-    var figure_index = figure.id.match(/\d+/)[0];
+    var figure_index = figure.id.match(/\d+/);
+    if (!figure_index) {
+        return chosen;
+    }
+    figure_index = figure_index[0];
+
     var card_name = figure.querySelector('figcaption').textContent;
     var card_index = chosen.cards.findIndex(c => c['name'] == card_name);
     var old_card = chosen.cards[card_index];
@@ -716,45 +722,78 @@ function swipe(figure, chosen, user_input) {
         costs_without_card += costs_it_removes(chosen.cards[i], user_input['per-cost']);
         types_without_card += types_it_removes(chosen.cards[i], 'N'.repeat(chosen.notcard_count));
     }
-    console.log('Totals without card:');
-    var total = [sets_without_card, costs_without_card, types_without_card].join(' ');
-    console.log('Requirement inputs:');
-    var input = [user_input['per-set'], user_input['per-cost'], 'N'.repeat(chosen.notcard_count)].join(' ');
-    console.log(total);
-    console.log(input);
 
-
-    //TODO: bug with bane/potion
     var sets_only_here = chars_removed(user_input['per-set'], sets_without_card);
-    console.log('Sets only this card meets:');
-    console.log(sets_only_here);
-
     var costs_only_here = chars_removed(user_input['per-cost'], costs_without_card);
-    console.log('Costs only this card meets:');
-    console.log(costs_only_here);
-
     var types_only_here = chars_removed('N'.repeat(chosen.notcard_count), types_without_card);
-    console.log('Types only this card meets:');
-    console.log(types_only_here);
-
-
-
-
-    new_card_requirements = [sets_only_here, costs_only_here, types_only_here];
-    new_card = chosen.cards.find(passes_swipe_tests(new_card_requirements));
-    chosen.cards['card_index'] = new_card ? new_card : old_card;
+    new_card_requirements = [sets_only_here, costs_only_here, types_only_here, chosen.roles[old_card.name]];
+    if (sets_only_here) {
+        chosen.banned_sets.delete(sets_only_here.toLowerCase());
+    }
+    if (costs_only_here) {
+        chosen.banned_costs.delete(costs_only_here.toLowerCase());
+    }
+    if (types_only_here) {
+        chosen.banned_types.delete(types_only_here.toLowerCase());
+    }
+    new_card = chosen.random_pool.find(passes_swipe_tests, new_card_requirements);
+    chosen.cards[card_index] = new_card ? new_card : old_card;
+    chosen.banned_sets.add(sets_only_here.toLowerCase());
+    chosen.banned_costs.add(costs_only_here.toLowerCase());
+    chosen.banned_types.add(types_only_here.toLowerCase());
+    //TODO: What if cost is 2 characters ?
 
     if (new_card) {
-        chosen.names.remove(old_card.name);
+        chosen.names.delete(old_card.name);
         chosen.swiped_names.add(old_card.name);
         chosen.names.add(new_card.name);
-        paintPaper(new_card, card_index, chosen.roles);
+        if (chosen.roles[old_card.name] == 'bane') {
+            delete chosen.roles[old_card.name];
+            chosen.roles[new_card.name] = 'bane';
+        }
+        paintCard(new_card, figure_index, chosen.roles);
     }
     return chosen;
 }
 
 
-function passes_swipe_tests(card_requirements) {
+// TODO: pass all arguments so that it doesn't rely on globals
+function passes_swipe_tests(card, thisArg) {
+    var requirements = this;
+    if (chosen.names.has(card.name)) {
+        return false;
+    }
+    if (chosen.swiped_names.has(card.name)) {
+        return false;
+    }
+    if (card_is_banned(card, chosen, user_input['newbie_friendly'])) {
+        return false;
+    }
+    if (!has_all_requirements(card, this)) {
+        return false;
+    }
+    if (this[3] == 'bane') {
+        if (card.cost != 2 && card.cost != 3) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+function has_all_requirements(card, requirements) {
+    var sets_removed = sets_it_removes(card, user_input['per-set']);
+    if (chars_removed(requirements[0], sets_removed)) {
+        return false;
+    }
+    var costs_removed = costs_it_removes(card, user_input['per-cost']);
+    if (chars_removed(requirements[1], costs_removed)) {
+        return false;
+    }
+    var types_removed = types_it_removes(card, 'N'.repeat(chosen.notcard_count));
+    if (chars_removed(requirements[2], types_removed)) {
+        return false
+    }
     return true;
 }
 
