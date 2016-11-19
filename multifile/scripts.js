@@ -41,6 +41,105 @@ PROMOS = new Map([
     ]);
 
 
+function get_user_input() {
+
+    user_input = {
+        'expansions': document.getElementById('expansions').value,
+        'per-cost': document.getElementById('per-cost').value,
+        'per-set': document.getElementById('per-set').value,
+        'notcards': document.querySelector('input[name = "notcards"]:checked').id,
+        'prosperity': document.querySelector('input[name = "prosperity"]:checked').id,
+        'darkages': document.querySelector('input[name = "darkages"]:checked').id,
+        recalculate () {
+            this['owned_sets'] = this.get_owned_sets();
+            this['promo_names'] = this.get_promo_names();
+            this['owned_cards'] = this.get_owned_cards();
+            this.mark_owned_sets();
+            this.mark_owned_promos();
+        },
+
+        get_owned_sets() {
+            var owned_sets = new Set();
+
+            var which_sets = this['expansions'];
+            var needed_sets = this['per-set'].toLowerCase();
+            var needed_costs = this['per-cost'].toLowerCase();
+
+            for (var letter in LETTER_TO_SET) {
+
+                if (which_sets.includes(letter) || needed_sets.includes(letter)) {
+                    var expansion = LETTER_TO_SET[letter];
+                    owned_sets.add(expansion)
+                }
+                if (needed_costs.includes('p')) {
+                    owned_sets.add('alchemy');
+                }
+                if (needed_costs.includes('d')) {
+                    owned_sets.add('empires');
+                }
+                // TODO: add overpay and cost 7,8... once the dust has settled.
+            }
+            return owned_sets;
+        },
+
+        get_promo_names() {
+            var promo_names = new Set();
+
+            for (var promo_name of PROMOS.keys()) {
+                var digit = PROMOS.get(promo_name);
+                if (user_input['expansions'].includes(digit)) {
+                    promo_names.add(promo_name);
+                }
+            }
+            return promo_names;
+        },
+
+        get_owned_cards() {
+            var owned_cards = [];
+
+            for (var card of EXISTING_CARDS) {
+                if (this['owned_sets'].has(card.set)) {
+                    owned_cards.push(card);
+                }
+            else if (this['promo_names'].has(card.name)) {
+                    owned_cards.push(card);
+                }
+            }
+            return owned_cards;
+        },
+
+        mark_owned_sets () {
+            for (var set in SET_TO_LETTER) {
+                var span = document.getElementById('set-' + set);
+                if (this['owned_sets'].has(set)) {
+                    span.classList.add('selected');
+                }
+                else {
+                    span.classList.remove('selected');
+                }
+            }
+        },
+
+        mark_owned_promos () {
+            for (promo_name of PROMOS.keys()) {
+                var digit = PROMOS.get(promo_name);
+                var span = document.getElementById('promo-' + digit);
+
+                if (this['promo_names'].has(promo_name)) {
+                    span.classList.add('selected');
+                }
+                else {
+                    span.classList.remove('selected');
+                }
+            }
+        },
+    }
+
+    user_input.recalculate();
+    return user_input;
+}
+
+
 // ECMAScript doesn't specify that Array.sort() is stable, and Chrome uses
 // QuickSort instead of InsertionSort for lists > 10, so I need to roll my own.
 function nice_and_stable_insertion_sort(alist, key) {
@@ -79,84 +178,11 @@ function abbrev(words) {
 }
 
 
-function get_owned_sets(user_input) {
-    var owned_sets = new Set();
-    var which_sets = user_input['expansions'];
-    var needed_sets = user_input['per-set'].toLowerCase();
-    var needed_costs = user_input['per-cost'].toLowerCase();
-
-    for (var letter in LETTER_TO_SET) {
-
-        if (which_sets.indexOf(letter) != -1 || needed_sets.indexOf(letter) != -1) {
-            var expansion = LETTER_TO_SET[letter];
-            owned_sets.add(expansion)
-        }
-        if (needed_costs.indexOf('p') != -1) {
-            owned_sets.add('alchemy');
-        }
-        if (needed_costs.indexOf('d') != -1) {
-            owned_sets.add('empires');
-        }
-        // TODO: add overpay and cost 7,8... once the dust has settled.
-    }
-    return owned_sets;
-}
 
 
-// TODO: maybe a method .add_set() should take care of this.
-function mark_owned_sets(owned_sets) {
-    for (var set in SET_TO_LETTER) {
-        var span = document.getElementById('set-' + set);
-        if (owned_sets.has(set)) {
-            span.classList.add('selected');
-        }
-        else {
-            span.classList.remove('selected');
-        }
-    }
-}
 
 
-function get_promo_names(user_input) {
-    var promo_names = new Set();
-    for (var promo_name of PROMOS.keys()) {
-        var digit = PROMOS.get(promo_name);
-        if (user_input['expansions'].indexOf(digit) != -1) {
-            promo_names.add(promo_name);
-        }
-    }
-    return promo_names;
-}
 
-
-function mark_owned_promos(promo_names) {
-    for (promo_name of PROMOS.keys()) {
-        var digit = PROMOS.get(promo_name);
-        var span = document.getElementById('promo-' + digit);
-
-        if (promo_names.has(promo_name)) {
-            span.classList.add('selected');
-        }
-        else {
-            span.classList.remove('selected');
-        }
-    }
-}
-
-
-function get_owned_cards(owned_sets, promo_names) {
-    var owned_cards = [];
-
-    for (var this_card of EXISTING_CARDS) {
-        if (owned_sets.has(this_card.set)) {
-            owned_cards.push(this_card);
-        }
-    else if (promo_names.has(this_card.name)) {
-            owned_cards.push(this_card);
-        }
-    }
-    return owned_cards;
-}
 
 
 /**
@@ -177,23 +203,23 @@ function shuffled_array(array) {
 // TODO: smells of object method!
 function costs_it_removes(card, needed_costs) {
     var costs = '';
-    if (needed_costs.indexOf(card.cost) != -1) {
+    if (needed_costs.includes(card.cost)) {
         costs += card.cost;
     }
     // TODO: potion makes more sense as a tag
-    if (card.potion == true) {
-        if (needed_costs.indexOf('p') != -1) {
+    if (card.potion) {
+        if (needed_costs.includes('p')) {
             costs += 'p';
         }
-        else if (needed_costs.indexOf('P') != -1) {
+        else if (needed_costs.includes('P')) {
             costs += 'P';
         }
     }
     if (card.debt > 0) {
-        if (needed_costs.indexOf('d') != -1) {
+        if (needed_costs.includes('d')) {
             costs += 'd';
         }
-        else if (needed_costs.indexOf('D') != -1) {
+        else if (needed_costs.includes('D')) {
             costs += 'D';
         }
     }
@@ -205,10 +231,10 @@ function costs_it_removes(card, needed_costs) {
 function sets_it_removes(card, needed_sets) {
     var sets = '';
     var letter = SET_TO_LETTER[card.set];
-    if (needed_sets.indexOf(letter) != -1) {
+    if (needed_sets.includes(letter)) {
         sets += letter;
     }
-    else if (needed_sets.indexOf(letter.toUpperCase()) != -1) {
+    else if (needed_sets.includes(letter.toUpperCase())) {
         sets += letter.toUpperCase();
     }
     else if (card.set == 'promos') {
@@ -286,7 +312,7 @@ function chars_removed(removed_in, removed) {
 function updated_banned(banned, chars_removed, requirement_string) {
     var exact_requirements = chars_removed.replace(/[^A-Z]/g, '');
     for (ch of exact_requirements) {
-        if (requirement_string.indexOf(ch) == -1) {
+        if (!requirement_string.includes(ch)) {
             banned.add(ch.toLowerCase());
         }
     }
@@ -700,12 +726,9 @@ function get_notcard_count(owned_cards, notcards) {
 }
 
 
+// TODO: keyboard swipe, swipe without conditions
 function swipe(figure, chosen, user_input) {
-    var figure_index = figure.id.match(/\d+/);
-    if (!figure_index) {
-        return chosen;
-    }
-    figure_index = figure_index[0];
+    var figure_index = figure.id.match(/\d+/)[0];
 
     var card_name = figure.querySelector('figcaption').textContent;
     var card_index = chosen.cards.findIndex(c => c['name'] == card_name);
@@ -798,6 +821,8 @@ function has_all_requirements(card, requirements) {
 }
 
 
+
+
 function click_handler(evnt) {
     var clicked = evnt.currentTarget;
     if (clicked.id == 'btn-randomize') {
@@ -806,37 +831,25 @@ function click_handler(evnt) {
     else if (clicked.type == 'radio') {
         user_input[clicked.name] = clicked.id;
     }
-    else {
+    else if (clicked.id.startsWith('card-')) {
         chosen = swipe(clicked, chosen, user_input);
     }
 }
 
-
-function get_user_input() {
-    user_input = {
-    'expansions': document.getElementById('expansions').value,
-    'per-cost': document.getElementById('per-cost').value,
-    'per-set': document.getElementById('per-set').value,
-    'notcards': document.querySelector('input[name = "notcards"]:checked').id,
-    'prosperity': document.querySelector('input[name = "prosperity"]:checked').id,
-    'darkages': document.querySelector('input[name = "darkages"]:checked').id,
-    recalculate () {
-        this['owned_sets'] = get_owned_sets(user_input);
-        this['promo_names'] = get_promo_names(user_input);
-        this['owned_cards'] = get_owned_cards(user_input['owned_sets'], user_input['promo_names']);
-        }
-    }
+function keyUpHandler(evnt) {
+    var input_id = evnt.currentTarget.id;
+    user_input[input_id] = document.getElementById(input_id).value;
     user_input.recalculate();
-    return user_input;
 }
-
 
 // set global variables and attach event listeners:
 var user_input = get_user_input();
-mark_owned_sets(user_input['owned_sets']);
-mark_owned_promos(user_input['promo_names']);
 var chosen;
 
+
+for (text_input of document.querySelectorAll('input[type = text]')) {
+    text_input.addEventListener('keyup', keyUpHandler);
+}
 
 for (radio of document.querySelectorAll('input[type = radio]')) {
     radio.addEventListener('click', click_handler);
@@ -844,28 +857,6 @@ for (radio of document.querySelectorAll('input[type = radio]')) {
 
 document.getElementById('btn-randomize').addEventListener('click',
         click_handler);
-
-document.getElementById('expansions').addEventListener('keyup',
-    function() {
-        user_input['expansions'] = document.getElementById('expansions').value;
-        user_input.recalculate()
-        mark_owned_sets(user_input['owned_sets']);
-        mark_owned_promos(user_input['promo_names']);
-    });
-
-document.getElementById('per-set').addEventListener('keyup',
-    function() {
-        user_input['per-set'] = document.getElementById('per-set').value;
-        user_input.recalculate();
-        mark_owned_sets(user_input['owned_sets']);
-    });
-
-document.getElementById('per-cost').addEventListener('keyup',
-    function() {
-        user_input['per-cost'] = document.getElementById('per-cost').value;
-        user_input.recalculate();
-        mark_owned_sets(user_input['owned_sets']);
-    });
 
 for (var fig of document.getElementsByTagName('figure')) {
     fig.addEventListener('click', click_handler);
