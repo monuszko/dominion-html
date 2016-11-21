@@ -28,25 +28,24 @@ SET_TO_LETTER = {
     'empires': 'e',
     'promos': 'o',
 }
-// TODO: The above can probably be replaced with one Map.
 
-PROMOS = new Map([
-    ['Envoy', 1],
-    ['Black Market', 2],
-    ['Stash', 3],
-    ['Walled Village', 4],
-    ['Governor', 5],
-    ['Prince', 6],
-    ['Summon', 7],
-    ]);
+PROMOS =  {
+    'Envoy': 1,
+    'Black Market': 2,
+    'Stash': 3,
+    'Walled Village': 4,
+    'Governor': 5,
+    'Prince': 6,
+    'Summon': 7,
+}
 
 
 function get_user_input() {
 
     user_input = {
         'expansions': document.getElementById('expansions').value,
-        'per-cost': document.getElementById('per-cost').value,
-        'per-set': document.getElementById('per-set').value,
+        'costs': document.getElementById('costs').value,
+        'sets': document.getElementById('sets').value,
         'notcards': document.querySelector('input[name = "notcards"]:checked').id,
         'prosperity': document.querySelector('input[name = "prosperity"]:checked').id,
         'darkages': document.querySelector('input[name = "darkages"]:checked').id,
@@ -58,14 +57,14 @@ function get_user_input() {
             this.mark_owned_promos();
         },
 
-        get_owned_sets() {
+        get_owned_sets () {
             var owned_sets = new Set();
 
             var which_sets = this['expansions'];
-            var needed_sets = this['per-set'].toLowerCase();
-            var needed_costs = this['per-cost'].toLowerCase();
+            var needed_sets = this['sets'].toLowerCase();
+            var needed_costs = this['costs'].toLowerCase();
 
-            for (var letter in LETTER_TO_SET) {
+            for (var letter of Object.keys(LETTER_TO_SET)) {
 
                 if (which_sets.includes(letter) || needed_sets.includes(letter)) {
                     var expansion = LETTER_TO_SET[letter];
@@ -82,11 +81,11 @@ function get_user_input() {
             return owned_sets;
         },
 
-        get_promo_names() {
+        get_promo_names () {
             var promo_names = new Set();
 
-            for (var promo_name of PROMOS.keys()) {
-                var digit = PROMOS.get(promo_name);
+            for (var promo_name of Object.keys(PROMOS)) {
+                var digit = PROMOS[promo_name];
                 if (user_input['expansions'].includes(digit)) {
                     promo_names.add(promo_name);
                 }
@@ -94,7 +93,7 @@ function get_user_input() {
             return promo_names;
         },
 
-        get_owned_cards() {
+        get_owned_cards () {
             var owned_cards = [];
 
             for (var card of EXISTING_CARDS) {
@@ -108,8 +107,20 @@ function get_user_input() {
             return owned_cards;
         },
 
+        is_bad () {
+            if (this['owned_cards'].length < 13) {
+                return true;
+            }
+            for (var id of ['sets', 'costs']) {
+                if (upper_with_lower(this[id])) {
+                    return true;
+                }
+            }
+            return false;
+        },
+
         mark_owned_sets () {
-            for (var set in SET_TO_LETTER) {
+            for (var set of Object.keys(SET_TO_LETTER)) {
                 var span = document.getElementById('set-' + set);
                 if (this['owned_sets'].has(set)) {
                     span.classList.add('selected');
@@ -121,8 +132,8 @@ function get_user_input() {
         },
 
         mark_owned_promos () {
-            for (promo_name of PROMOS.keys()) {
-                var digit = PROMOS.get(promo_name);
+            for (var promo_name of Object.keys(PROMOS)) {
+                var digit = PROMOS[promo_name];
                 var span = document.getElementById('promo-' + digit);
 
                 if (this['promo_names'].has(promo_name)) {
@@ -132,7 +143,7 @@ function get_user_input() {
                     span.classList.remove('selected');
                 }
             }
-        },
+        }
     }
 
     user_input.recalculate();
@@ -159,9 +170,6 @@ function nice_and_stable_insertion_sort(alist, key) {
 }
 
 
-
-
-// TODO: abbreviate only if multiple types
 function abbrev(words) {
     var abbrev = [];
     if (words.length < 2) {
@@ -176,13 +184,6 @@ function abbrev(words) {
     abbrev = abbrev.join('-');
     return abbrev
 }
-
-
-
-
-
-
-
 
 
 /**
@@ -238,7 +239,7 @@ function sets_it_removes(card, needed_sets) {
         sets += letter.toUpperCase();
     }
     else if (card.set == 'promos') {
-        for (var promo of PROMOS.keys()) {
+        for (var promo of Object.keys(PROMOS)) {
             if (PROMOS[promo] == card.name) {
                 sets += promo;
                 break;
@@ -299,7 +300,7 @@ function is_notcard(card) {
 
 
 function chars_removed(removed_in, removed) {
-    for (ch of removed) {
+    for (var ch of removed) {
         removed_in = removed_in.replace(ch, '');
     }
     return removed_in;
@@ -311,7 +312,7 @@ function chars_removed(removed_in, removed) {
 // the EXACT requirement.
 function updated_banned(banned, chars_removed, requirement_string) {
     var exact_requirements = chars_removed.replace(/[^A-Z]/g, '');
-    for (ch of exact_requirements) {
+    for (var ch of exact_requirements) {
         if (!requirement_string.includes(ch)) {
             banned.add(ch.toLowerCase());
         }
@@ -326,19 +327,13 @@ function upper_with_lower(text) {
     return (new Set(text).size != new Set(text.toLowerCase()).size);
 }
 
-
 // Requirements like costs or expansions can be checked independently
 // on a card-by-card basis, meaning they can be fulfilled on the first run!
 function get_required_cards(chosen, user_input) {
-    var needed_costs = user_input['per-cost'];
-    var needed_sets = user_input['per-set'];
+    var needed_costs = user_input['costs'];
+    var needed_sets = user_input['sets'];
 
     var needed_types = 'N'.repeat(chosen.notcard_count);
-
-    // TODO: bad_user_input();
-    if (upper_with_lower(needed_costs) || upper_with_lower(needed_sets)) {
-        return chosen;
-    }
 
     chosen.random_pool = shuffled_array(user_input['owned_cards']);
 
@@ -377,7 +372,7 @@ function get_required_cards(chosen, user_input) {
     // time to pad the result with cards which weren't requested
     // but are okay to have.
 function up_to_ten(chosen, user_input) {
-    for (card of chosen.random_pool) {
+    for (var card of chosen.random_pool) {
         if (chosen.cards.length == 10 + chosen.notcard_count) {
             chosen.success = true;
             break;
@@ -420,7 +415,6 @@ function attackCountered(attack_card, chosen) {
             if (attack_card.tags.indexOf(counter) > -1) {
                 counters_itself = 1;
             }
-            // TODO: attacks countered by events
             if (chosen.tags[counter] - counters_itself > 0) {
                 console.log(attack_card.name + ' countered by ' + counter);
                 return true;
@@ -487,7 +481,7 @@ function paintCard(source, target_index, roles) {
     var target = document.getElementById('card-' + target_index);
     target.classList.remove('hidden');
     target.classList.remove('reaction', 'treasure', 'duration', 'victory', 'reserve', 'landmark', 'bane', 'horizontal');
-    for (set in SET_TO_LETTER) {
+    for (var set of Object.keys(SET_TO_LETTER)) {
         target.classList.remove(set);
     }
     target.classList.add(source.set);
@@ -500,7 +494,7 @@ function paintCard(source, target_index, roles) {
     target.querySelector('.coin-cost').textContent += source.cost_extra || '';
     target.querySelector('.debt-cost').textContent = source.debt || '';
 
-    if (source.hasOwnProperty('potion')) {
+    if (source.potion) {
         target.querySelector('.potion').classList.remove('hidden');
     }
     else {
@@ -598,13 +592,14 @@ function show_kingdom(user_input) {
     chosen.notcard_count = get_notcard_count(user_input['owned_cards'], user_input['notcards']);
 
     hide_all_cards();
-    if (user_input['owned_cards'].length < 13) {
+    if (user_input.is_bad()) {
         return chosen;
     }
 
-    for (attempt = 0; attempt < max_tries; attempt++) {
+    for (var attempt = 0; attempt < max_tries; attempt++) {
         chosen.cards = new Array();
         chosen.names = new Set();
+        // TODO: Black market!
         chosen.roles = new Object(); // Metadata: bane, black market choices...
         chosen.swiped_names = new Set();
         chosen.success = false;
@@ -726,6 +721,57 @@ function get_notcard_count(owned_cards, notcards) {
 }
 
 
+// For a card, get a map with sets/costs/types only the card satisfies.
+// The point - without this card, user-specified cost/set/type conditions
+// are no longer met. A replacement for that card will have to meet them all!
+function get_only_here(cards, card_index, user_input, notcard_count) {
+    // Step 1: for each requirement, get sum of requirements for all cards
+    // chosen so far except this particualr card.
+    var only_here = {
+        'sets': '',
+        'costs': '',
+        'types': ''
+    }
+
+    for (var i in cards) {
+        if (i == card_index) {
+            continue;
+        }
+        only_here['sets'] += sets_it_removes(cards[i], user_input['sets']);
+        only_here['costs'] += costs_it_removes(cards[i], user_input['costs']);
+
+        only_here['types'] += types_it_removes(cards[i], 'N'.repeat(chosen.notcard_count));
+    }
+
+    // Step 2: all_met_requirements - requirement_of_this_card
+
+    only_here['sets'] = chars_removed(user_input['sets'], only_here['sets']);
+    only_here['costs'] = chars_removed(user_input['costs'], only_here['costs']);
+    only_here['types'] = chars_removed('N'.repeat(notcard_count), only_here['types']);
+    return only_here;
+}
+
+
+// TODO: BUG!!! Swiping when notcards present.
+function unban_all_reqs(only_here, chosen) {
+    for (var word of Object.keys(only_here)) {
+        for (ch of only_here[word]) {
+            chosen['banned_' + word].delete(ch.toLowerCase());
+        }
+    }
+}
+
+
+function ban_all_reqs(only_here, chosen) {
+    for (var word of Object.keys(only_here)) {
+        var set = chosen['banned_' + word];
+        for (ch of only_here[word]) {
+            set.add(ch.toLowerCase());
+        }
+    }
+}
+
+
 // TODO: keyboard swipe, swipe without conditions
 function swipe(figure, chosen, user_input) {
     var figure_index = figure.id.match(/\d+/)[0];
@@ -734,37 +780,15 @@ function swipe(figure, chosen, user_input) {
     var card_index = chosen.cards.findIndex(c => c['name'] == card_name);
     var old_card = chosen.cards[card_index];
 
-    var sets_without_card = '';
-    var costs_without_card = '';
-    var types_without_card = '';
-    for (var i in chosen.cards) {
-        if (i == card_index) {
-            continue;
-        }
-        sets_without_card += sets_it_removes(chosen.cards[i], user_input['per-set']);
-        costs_without_card += costs_it_removes(chosen.cards[i], user_input['per-cost']);
-        types_without_card += types_it_removes(chosen.cards[i], 'N'.repeat(chosen.notcard_count));
-    }
+    only_here = get_only_here(chosen.cards, card_index, user_input, chosen.notcard_count);
 
-    var sets_only_here = chars_removed(user_input['per-set'], sets_without_card);
-    var costs_only_here = chars_removed(user_input['per-cost'], costs_without_card);
-    var types_only_here = chars_removed('N'.repeat(chosen.notcard_count), types_without_card);
-    new_card_requirements = [sets_only_here, costs_only_here, types_only_here, chosen.roles[old_card.name]];
-    if (sets_only_here) {
-        chosen.banned_sets.delete(sets_only_here.toLowerCase());
-    }
-    if (costs_only_here) {
-        chosen.banned_costs.delete(costs_only_here.toLowerCase());
-    }
-    if (types_only_here) {
-        chosen.banned_types.delete(types_only_here.toLowerCase());
-    }
+    new_card_requirements = [only_here['sets'], only_here['costs'], only_here['types'], chosen.roles[old_card.name]];
+
+    unban_all_reqs(only_here, chosen);
+
     new_card = chosen.random_pool.find(passes_swipe_tests, new_card_requirements);
     chosen.cards[card_index] = new_card ? new_card : old_card;
-    chosen.banned_sets.add(sets_only_here.toLowerCase());
-    chosen.banned_costs.add(costs_only_here.toLowerCase());
-    chosen.banned_types.add(types_only_here.toLowerCase());
-    //TODO: What if cost is 2 characters ?
+    ban_all_reqs(only_here, chosen);
 
     if (new_card) {
         chosen.names.delete(old_card.name);
@@ -781,6 +805,7 @@ function swipe(figure, chosen, user_input) {
 
 
 // TODO: pass all arguments so that it doesn't rely on globals
+// TODO: conditionsPassed
 function passes_swipe_tests(card, thisArg) {
     var requirements = this;
     if (chosen.names.has(card.name)) {
@@ -805,11 +830,11 @@ function passes_swipe_tests(card, thisArg) {
 
 
 function has_all_requirements(card, requirements) {
-    var sets_removed = sets_it_removes(card, user_input['per-set']);
+    var sets_removed = sets_it_removes(card, user_input['sets']);
     if (chars_removed(requirements[0], sets_removed)) {
         return false;
     }
-    var costs_removed = costs_it_removes(card, user_input['per-cost']);
+    var costs_removed = costs_it_removes(card, user_input['costs']);
     if (chars_removed(requirements[1], costs_removed)) {
         return false;
     }
@@ -819,8 +844,6 @@ function has_all_requirements(card, requirements) {
     }
     return true;
 }
-
-
 
 
 function click_handler(evnt) {
@@ -847,11 +870,11 @@ var user_input = get_user_input();
 var chosen;
 
 
-for (text_input of document.querySelectorAll('input[type = text]')) {
+for (var text_input of document.querySelectorAll('input[type = text]')) {
     text_input.addEventListener('keyup', keyUpHandler);
 }
 
-for (radio of document.querySelectorAll('input[type = radio]')) {
+for (var radio of document.querySelectorAll('input[type = radio]')) {
     radio.addEventListener('click', click_handler);
 }
 
