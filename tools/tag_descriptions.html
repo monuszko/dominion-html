@@ -9,7 +9,6 @@
             color: red;
         }
         </style>
-        <script src="../multifile/notcards.js" type="text/javascript"></script>
         <script src="../multifile/cards.js" type="text/javascript"></script>
         
         <script type="text/javascript">
@@ -49,7 +48,7 @@
                 "complicated": "Completely arbitrary - this card is likely to confuse newbies. It has either complex rules or is tricky to play right.",
             }
 
-        for (var card of existing_cards) {
+        for (var card of EXISTING_CARDS) {
             for (var tag of card.tags) {
                 all_tags.add(tag);
             }
@@ -67,7 +66,7 @@
                 li_span.classList.add('unfinished');
             }
             var cards = document.createElement('p');
-            for (card of existing_cards) {
+            for (card of EXISTING_CARDS) {
                 if (card.tags.indexOf(tag) != -1) {
                     var card_span = document.createElement('span');
                     card_span.appendChild(document.createTextNode(card.name + ', '));

@@ -9,7 +9,7 @@
 
     <body>
         <form action="">
-            <label for="expansions"><input type="text" id="expansions" maxlength=11 value="b" size="5"/>
+            <label for="expansions"><input type="text" id="expansions" autofocus='true' maxlength=11 value="b" size="5"/>
 
                     <span id="set-dominion"><strong alt="dominion (Base)">B</strong><span class="notphone">ase </span></span><!--
                  --><span id="set-intrigue"><strong alt="Intrigue">I</strong><span class="notphone">ntrigue </span></span><!--
@@ -43,10 +43,12 @@ DDDD - EXACTLY 4 from Dark Ages.">Per set</span></label>
 dd - minimum 2 cards with debt,
 p - potion,
 PPP - EXACTLY 3 potions.">Per cost</span></label>
+                <input type="text" maxlength="1" size="1" id="swipe" value=""/>
+                <label for="swipe">to swipe</label>
             </div>
 
             <div class="button">
-                <button type="button" id="btn-randomize">Randomize</button>
+                <button type="button" id="btn-randomize" tabindex="-1">Randomize</button>
             </div>
         </form>
 

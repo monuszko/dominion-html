@@ -263,8 +263,8 @@ function types_it_removes(card, needed_types) {
 
 
 // TODO: smells of object method!
-function card_is_banned(card, chosen, newbie_friendly) {
-    if (newbie_friendly && card.tags.indexOf('complicated') != -1) {
+function card_is_banned(card, chosen, newbies) {
+    if (newbies && card.tags.indexOf('complicated') != -1) {
         return true;
     }
     if (chosen.banned_sets.has(SET_TO_LETTER[card.set])) {
@@ -345,7 +345,7 @@ function get_required_cards(chosen, user_input) {
         if (chosen.cards.length == 10) {
             break;
         }
-        if (card_is_banned(card, chosen, user_input['newbie_friendly'])) {
+        if (card_is_banned(card, chosen, user_input['newbies'])) {
             continue;
         }
         var costs_removed = costs_it_removes(card, needed_costs);
@@ -380,7 +380,7 @@ function up_to_ten(chosen, user_input) {
         if (chosen.names.has(card.name)) {
             continue;
         }
-        if (card_is_banned(card, chosen, user_input['newbie_friendly'])) {
+        if (card_is_banned(card, chosen, user_input['newbies'])) {
             continue;
         }
         chosen.cards.push(card);
@@ -752,7 +752,6 @@ function get_only_here(cards, card_index, user_input, notcard_count) {
 }
 
 
-// TODO: BUG!!! Swiping when notcards present.
 function unban_all_reqs(only_here, chosen) {
     for (var word of Object.keys(only_here)) {
         for (ch of only_here[word]) {
@@ -814,7 +813,7 @@ function passes_swipe_tests(card, thisArg) {
     if (chosen.swiped_names.has(card.name)) {
         return false;
     }
-    if (card_is_banned(card, chosen, user_input['newbie_friendly'])) {
+    if (card_is_banned(card, chosen, user_input['newbies'])) {
         return false;
     }
     if (!has_all_requirements(card, this)) {
@@ -854,28 +853,84 @@ function click_handler(evnt) {
     else if (clicked.type == 'radio') {
         user_input[clicked.name] = clicked.id;
     }
+    else if (clicked.type == 'checkbox') {
+        user_input[clicked.id] = clicked.id;
+    }
     else if (clicked.id.startsWith('card-')) {
         chosen = swipe(clicked, chosen, user_input);
+        lastFocusedInput.focus();
     }
 }
 
-function keyUpHandler(evnt) {
+
+function normalTextInput(evnt) {
     var input_id = evnt.currentTarget.id;
     user_input[input_id] = document.getElementById(input_id).value;
     user_input.recalculate();
 }
 
+
+function swipeTextInput(evnt) {
+    if (evnt.keyCode == 13) {
+        var val = evnt.currentTarget.value;
+        if (!isNaN(val)) {
+            val = val - 1 >= 0 ? val -1 : 9;
+        }
+        else if (val == 'a') {
+            val = 10;
+        }
+        else {
+            val = 11;
+        }
+        var cards = document.querySelectorAll("figure[id^='card-']:not(.hidden)");
+        val = Math.min(cards.length - 1, val);
+        if (val > -1) {
+            var to_swipe = document.getElementById('card-' + val);
+            chosen = swipe(to_swipe, chosen, user_input);
+        }
+    }
+}
+
+
+function keyUpHandler(evnt) {
+    if (evnt.keyCode == 13) {
+        if (evnt.currentTarget.id == 'swipe') {
+            swipeTextInput(evnt);
+            return;
+        }
+        else {
+            document.getElementById("btn-randomize").click();
+        }
+    }
+    if (evnt.currentTarget.type == 'text') {
+        normalTextInput(evnt);
+    }
+}
+
+
+function rememberFocus(evnt) {
+    if (evnt.currentTarget.tagName == 'INPUT') {
+        lastFocusedInput = evnt.currentTarget;
+    }
+}
+
+
 // set global variables and attach event listeners:
 var user_input = get_user_input();
 var chosen;
+var lastFocusedInput;
 
 
 for (var text_input of document.querySelectorAll('input[type = text]')) {
-    text_input.addEventListener('keyup', keyUpHandler);
+    text_input.addEventListener('blur', rememberFocus);
 }
 
-for (var radio of document.querySelectorAll('input[type = radio]')) {
-    radio.addEventListener('click', click_handler);
+for (var input of document.querySelectorAll('input')) {
+    input.addEventListener('keyup', keyUpHandler);
+}
+
+for (var clickable of document.querySelectorAll("input:not([type = text])")) {
+    clickable.addEventListener('click', click_handler);
 }
 
 document.getElementById('btn-randomize').addEventListener('click',

@@ -9,14 +9,13 @@
             color: red;
         }
         </style>
-        <script src="../multifile/notcards.js" type="text/javascript"></script>
         <script src="../multifile/cards.js" type="text/javascript"></script>
         
         <script type="text/javascript">
         function display_counters() {
 
         var attack_list = document.createElement('ul');
-        for (var attack of existing_cards) {
+        for (var attack of EXISTING_CARDS) {
             if (attack.types.indexOf('Attack') == -1) {
                 continue;
             }
@@ -36,8 +35,8 @@
                 tag_list.appendChild(definition_term);
 
                 var definition_definition = document.createElement('dd');
-                for (var card_nr in existing_cards) {
-                    var counter_card = existing_cards[card_nr];
+                for (var card_nr in EXISTING_CARDS) {
+                    var counter_card = EXISTING_CARDS[card_nr];
                     if (counter_card.tags.indexOf(counter_tag) == -1) {
                         continue;
                     }
