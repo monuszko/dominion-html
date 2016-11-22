@@ -771,7 +771,7 @@ function ban_all_reqs(only_here, chosen) {
 }
 
 
-// TODO: keyboard swipe, swipe without conditions
+// swipe without conditions
 function swipe(figure, chosen, user_input) {
     var figure_index = figure.id.match(/\d+/)[0];
 
@@ -849,6 +849,7 @@ function click_handler(evnt) {
     var clicked = evnt.currentTarget;
     if (clicked.id == 'btn-randomize') {
         chosen = show_kingdom(user_input);
+        lastFocusedInput.focus();
     }
     else if (clicked.type == 'radio') {
         user_input[clicked.name] = clicked.id;
@@ -899,7 +900,7 @@ function keyUpHandler(evnt) {
             return;
         }
         else {
-            document.getElementById("btn-randomize").click();
+            chosen = show_kingdom(user_input);
         }
     }
     if (evnt.currentTarget.type == 'text') {
@@ -920,13 +921,9 @@ var user_input = get_user_input();
 var chosen;
 var lastFocusedInput;
 
-
-for (var text_input of document.querySelectorAll('input[type = text]')) {
-    text_input.addEventListener('blur', rememberFocus);
-}
-
 for (var input of document.querySelectorAll('input')) {
     input.addEventListener('keyup', keyUpHandler);
+    input.addEventListener('blur', rememberFocus);
 }
 
 for (var clickable of document.querySelectorAll("input:not([type = text])")) {
