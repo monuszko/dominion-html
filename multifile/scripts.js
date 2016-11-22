@@ -46,9 +46,11 @@ function get_user_input() {
         'expansions': document.getElementById('expansions').value,
         'costs': document.getElementById('costs').value,
         'sets': document.getElementById('sets').value,
-        'notcards': document.querySelector('input[name = "notcards"]:checked').id,
+        'newbies': document.getElementById('newbies').checked,
+        'attacks': document.querySelector('input[name = "attacks"]:checked').id,
         'prosperity': document.querySelector('input[name = "prosperity"]:checked').id,
         'darkages': document.querySelector('input[name = "darkages"]:checked').id,
+        'notcards': document.querySelector('input[name = "notcards"]:checked').id,
         recalculate () {
             this['owned_sets'] = this.get_owned_sets();
             this['promo_names'] = this.get_promo_names();
@@ -440,7 +442,7 @@ function attacksCountered(chosen) {
 
 // Check more sophisticated conditions, card relationships etc.
 // These can't really be done on the first run.
-function conditionsPassed(chosen) {
+function conditionsPassed(chosen, user_input) {
 
     // condition: cards that NEED attack should appear alongside attacks
     if ((chosen.tags['needs_attacks'] >= 1) && !chosen.card_types.has('Attack')) {
@@ -450,8 +452,7 @@ function conditionsPassed(chosen) {
     }
 
     // condition: attacks
-    var attacks = document.querySelector('input[name = "attacks"]:checked').id;
-    if (attacks == 'attacks-none') {
+    if (user_input['attacks'] == 'attacks-none') {
         if (chosen.card_types.has('Attack')) {
             console.log('Attacks forbidden, so rejecting the set:');
             console.log(chosen.names);
@@ -460,7 +461,7 @@ function conditionsPassed(chosen) {
         }
     // TODO: The above can be checked on first run, but is it worth it ?
 
-    if (attacks == 'attacks-countered') {
+    if (user_input['attacks'] == 'attacks-countered') {
         if (!attacksCountered(chosen)) {
             return false;
         }
@@ -627,7 +628,7 @@ function show_kingdom(user_input) {
         may_add_shelters(chosen.cards, user_input['darkages']);
 
         [chosen.tags, chosen.card_types] = get_stats(chosen.cards);
-        if (!conditionsPassed(chosen)) {
+        if (!conditionsPassed(chosen, user_input)) {
             continue;
         }
         break;
