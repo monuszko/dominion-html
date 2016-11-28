@@ -392,7 +392,7 @@ function up_to_ten(chosen, user_input) {
 }
 
 
-function attackCountered(attack_card, chosen) {
+function attackCountered(attack_card, tags) {
     var counters = attack_card.countered_by || [];
 
     if (counters.indexOf('M_mostly_harmless') > -1) {
@@ -400,12 +400,12 @@ function attackCountered(attack_card, chosen) {
         return true;
     }
 
-    if (chosen.names.has('Young Witch')) {
+    if (attack_card.name == 'Young Witch') {
         console.log('Young Witch has a counter by definition.');
         return true;
     }
 
-    if (chosen.tags['counters_attacks'] > 0) {
+    if (tags['counters_attacks'] > 0) {
         console.log('Attack ' + attack_card.name + ' countered by Moat/Lighthouse.');
         return true;
     }
@@ -417,7 +417,7 @@ function attackCountered(attack_card, chosen) {
             if (attack_card.tags.indexOf(counter) > -1) {
                 counters_itself = 1;
             }
-            if (chosen.tags[counter] - counters_itself > 0) {
+            if (tags[counter] - counters_itself > 0) {
                 console.log(attack_card.name + ' countered by ' + counter);
                 return true;
         }
@@ -427,11 +427,10 @@ function attackCountered(attack_card, chosen) {
 }
 
 
-function attacksCountered(chosen) {
-        for (var card of chosen.cards) {
+function attacksCountered(cards, tags) {
+        for (var card of cards) {
             if (card.types.indexOf('Attack') != -1) {
-                if (!attackCountered(card, chosen)) {
-                     console.log(chosen.names);
+                if (!attackCountered(card, tags)) {
                      return false;
                 }
             }
@@ -442,27 +441,27 @@ function attacksCountered(chosen) {
 
 // Check more sophisticated conditions, card relationships etc.
 // These can't really be done on the first run.
-function conditionsPassed(chosen, user_input) {
+function conditionsPassed(cards, user_input) {
+    var tags, card_types
+    [tags, card_types] = get_stats(cards);
 
     // condition: cards that NEED attack should appear alongside attacks
-    if ((chosen.tags['needs_attacks'] >= 1) && !chosen.card_types.has('Attack')) {
-        console.log(chosen.names);
+    if ((tags['needs_attacks'] >= 1) && !card_types.has('Attack')) {
         console.log('REJECTING set because it has cards that need attacks but no attacks.');
         return false;
     }
 
     // condition: attacks
     if (user_input['attacks'] == 'attacks-none') {
-        if (chosen.card_types.has('Attack')) {
+        if (card_types.has('Attack')) {
             console.log('Attacks forbidden, so rejecting the set:');
-            console.log(chosen.names);
             return false
             }
         }
     // TODO: The above can be checked on first run, but is it worth it ?
 
     if (user_input['attacks'] == 'attacks-countered') {
-        if (!attacksCountered(chosen)) {
+        if (!attacksCountered(cards, tags)) {
             return false;
         }
     }
@@ -627,8 +626,7 @@ function show_kingdom(user_input) {
         may_add_colony_platinum(chosen.cards, user_input['prosperity']);
         may_add_shelters(chosen.cards, user_input['darkages']);
 
-        [chosen.tags, chosen.card_types] = get_stats(chosen.cards);
-        if (!conditionsPassed(chosen, user_input)) {
+        if (!conditionsPassed(chosen.cards, user_input)) {
             continue;
         }
         break;
@@ -727,7 +725,7 @@ function get_notcard_count(owned_cards, notcards) {
 // are no longer met. A replacement for that card will have to meet them all!
 function get_only_here(cards, card_index, user_input, notcard_count) {
     // Step 1: for each requirement, get sum of requirements for all cards
-    // chosen so far except this particualr card.
+    // chosen so far except this particualar card.
     var only_here = {
         'sets': '',
         'costs': '',
@@ -772,7 +770,7 @@ function ban_all_reqs(only_here, chosen) {
 }
 
 
-// swipe without conditions
+// TODO: hold CTRL for swipe without conditions
 function swipe(figure, chosen, user_input) {
     var figure_index = figure.id.match(/\d+/)[0];
 
@@ -782,15 +780,14 @@ function swipe(figure, chosen, user_input) {
 
     only_here = get_only_here(chosen.cards, card_index, user_input, chosen.notcard_count);
 
-    new_card_requirements = [only_here['sets'], only_here['costs'], only_here['types'], chosen.roles[old_card.name]];
-
     unban_all_reqs(only_here, chosen);
-
-    new_card = chosen.random_pool.find(passes_swipe_tests, new_card_requirements);
-    chosen.cards[card_index] = new_card ? new_card : old_card;
+    var old_role = (chosen.roles[card_name]);
+    var everything = [chosen, user_input, only_here, card_index, old_role];
+    new_card = chosen.random_pool.find(passes_swipe_tests, everything);
     ban_all_reqs(only_here, chosen);
 
     if (new_card) {
+        chosen.cards[card_index] = new_card;
         chosen.names.delete(old_card.name);
         chosen.swiped_names.add(old_card.name);
         chosen.names.add(new_card.name);
@@ -804,10 +801,13 @@ function swipe(figure, chosen, user_input) {
 }
 
 
-// TODO: pass all arguments so that it doesn't rely on globals
-// TODO: conditionsPassed
 function passes_swipe_tests(card, thisArg) {
-    var requirements = this;
+    var old_role = this[4];
+    var replac = this[3]; // index of replaced card
+    var requirements = this[2];
+    var user_input = this[1];
+    var chosen = this[0];
+
     if (chosen.names.has(card.name)) {
         return false;
     }
@@ -817,13 +817,18 @@ function passes_swipe_tests(card, thisArg) {
     if (card_is_banned(card, chosen, user_input['newbies'])) {
         return false;
     }
-    if (!has_all_requirements(card, this)) {
+    if (!has_all_requirements(card, requirements)) {
         return false;
     }
-    if (this[3] == 'bane') {
+    if (old_role == 'bane') {
         if (card.cost != 2 && card.cost != 3) {
             return false;
         }
+    }
+    var cards = chosen.cards;
+    var cards = cards.slice(0, replac).concat([card]).concat(cards.slice(replac  + 1));
+    if (!conditionsPassed(cards, user_input)) {
+        return false;
     }
     return true;
 }
@@ -831,15 +836,15 @@ function passes_swipe_tests(card, thisArg) {
 
 function has_all_requirements(card, requirements) {
     var sets_removed = sets_it_removes(card, user_input['sets']);
-    if (chars_removed(requirements[0], sets_removed)) {
+    if (chars_removed(requirements['sets'], sets_removed)) {
         return false;
     }
     var costs_removed = costs_it_removes(card, user_input['costs']);
-    if (chars_removed(requirements[1], costs_removed)) {
+    if (chars_removed(requirements['costs'], costs_removed)) {
         return false;
     }
     var types_removed = types_it_removes(card, 'N'.repeat(chosen.notcard_count));
-    if (chars_removed(requirements[2], types_removed)) {
+    if (chars_removed(requirements['types'], types_removed)) {
         return false
     }
     return true;
