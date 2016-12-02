@@ -58,7 +58,7 @@ function get_user_input() {
                 else if (input.type == 'checkbox') {
                     this[input.id] = input.checked;
                 }
-                else if (input.type == 'radio' && input.checked == true) {
+                else if (input.type == 'radio' && input.checked) {
                     this[input.name] = input.id;
                 }
             }
@@ -270,9 +270,7 @@ function types_it_removes(card, needed_types) {
     var types = '';
     if (card.types.indexOf('Event') != -1 ||
             card.types.indexOf('Landmark') != -1) {
-        types += 'N';
-        // N is for Notcard. Dominion rules say the new horizontal cards
-        // are not affected by rules referring to *cards*.
+        types += 'H';
     }
     return types;
 }
@@ -292,12 +290,12 @@ function card_is_banned(card, chosen, newbies) {
     if (card.debt && chosen.banned_costs.has('d')) {
         return true;
     }
-    if (is_notcard(card) && chosen.banned_types.has('n')) {
+    if (is_horizontal(card) && chosen.banned_types.has('h')) {
         return true;
     }
     // like in Roman numerals, there's no number for 'zero',
     // so events/landmarks have to be banned if zero is wanted.
-    if (is_notcard(card) && chosen.notcard_count == 0) {
+    if (is_horizontal(card) && chosen.horizontal_count == 0) {
         return true;
     }
     return false;
@@ -306,7 +304,7 @@ function card_is_banned(card, chosen, newbies) {
 
 // Dominion rules state the horizontal cards - Events and Landmarks - are not
 // affected by card text using the word "card".
-function is_notcard(card) {
+function is_horizontal(card) {
     if (card.types.indexOf('Event') != -1 ||
             card.types.indexOf('Landmark') != -1) {
         return true;
@@ -349,7 +347,7 @@ function get_required_cards(chosen, user_input) {
     var needed_costs = user_input['costs'];
     var needed_sets = user_input['sets'];
 
-    var needed_types = 'N'.repeat(chosen.notcard_count);
+    var needed_types = 'H'.repeat(chosen.horizontal_count);
 
     chosen.random_pool = shuffled_array(user_input['owned_cards']);
 
@@ -379,7 +377,10 @@ function get_required_cards(chosen, user_input) {
             chosen.banned_types = updated_banned(chosen.banned_types, types_removed, needed_types);
 
             chosen.cards.push(card);
-            chosen.names.add(card.name);
+            chosen.roles[card.name] = 'normal';
+            if (is_horizontal(card)) {
+                chosen.roles[card.name] = 'horizontal';
+            }
         }
     }
     return chosen;
@@ -389,18 +390,18 @@ function get_required_cards(chosen, user_input) {
     // but are okay to have.
 function up_to_ten(chosen, user_input) {
     for (var card of chosen.random_pool) {
-        if (chosen.cards.length == 10 + chosen.notcard_count) {
+        if (chosen.cards.length == 10 + chosen.horizontal_count) {
             chosen.success = true;
             break;
         }
-        if (chosen.names.has(card.name)) {
+        if (chosen.roles[card.name]) {
             continue;
         }
         if (card_is_banned(card, chosen, user_input['newbies'])) {
             continue;
         }
         chosen.cards.push(card);
-        chosen.names.add(card.name);
+        chosen.roles[card.name] = 'normal';
     }
     return chosen;
 }
@@ -500,6 +501,16 @@ function paintCard(source, target_index, roles) {
     target.classList.add(source.set);
 
     target.setAttribute('alt', source.text);
+    if (source.name == 'Black Market') {
+        var bm_stock = [];
+        for (var bm of Object.keys(roles)) {
+            if (roles[bm] == 'black market') {
+                bm_stock.push(bm);
+            }
+        }
+        bm_stock = '\n\nStock: ' + bm_stock.join(', ');
+        target.setAttribute('alt', target.getAttribute('alt') + bm_stock);
+    }
     target.querySelector('figcaption').textContent = source.name;
     target.querySelector('.card-type').innerHTML = abbrev(source.types);
 
@@ -518,7 +529,7 @@ function paintCard(source, target_index, roles) {
         target.querySelector('.coin-cost').textContent='';
     }
 
-    if (is_notcard(source)) {
+    if (is_horizontal(source)) {
         target.classList.add('horizontal');
     }
 
@@ -551,13 +562,16 @@ function present_results(chosen) {
     var result = chosen.cards;
     
     function card_role(x) {
-        if (is_notcard(x)) {
-            return 2;
+        switch (chosen.roles[x.name]) {
+            case 'horizontal':
+                return 2;
+            case 'bane':
+                return 1;
+            case 'normal':
+                return 0;
+            default:
+                return -1;
         }
-        else if (chosen.roles[x.name] == 'bane') {
-            return 1;
-        }
-        return 0;
     }
 
     result = nice_and_stable_insertion_sort(result, function(a){return a.cost;});
@@ -602,7 +616,7 @@ function show_kingdom(user_input) {
 
     // chosen - stores context of a single "Randomize" button press
     var chosen = new Object();
-    chosen.notcard_count = get_notcard_count(user_input['owned_cards'], user_input['notcards']);
+    chosen.horizontal_count = get_horizontal_count(user_input['owned_cards'], user_input['horizontals']);
 
     hide_all_cards();
     if (user_input.is_bad()) {
@@ -611,10 +625,14 @@ function show_kingdom(user_input) {
 
     for (var attempt = 0; attempt < max_tries; attempt++) {
         chosen.cards = new Array();
-        chosen.names = new Set();
-        // TODO: Black market!
-        chosen.roles = new Object(); // Metadata: bane, black market choices...
-        chosen.swiped_names = new Set();
+
+        // A little help on roles:
+        //
+        // normal: a normally selected card,
+        // horizontal: landmark/event, not affected by rules mentioning 'card',
+        // black market: part of the Black Market stock,
+        // swiped - player manually rejected this card,
+        chosen.roles = new Object();
         chosen.success = false;
         chosen.banned_sets = new Set(); // user inputs uppercase set letters
         chosen.banned_costs = new Set(); // P/D; no uppercase digits (yet!)
@@ -626,7 +644,11 @@ function show_kingdom(user_input) {
         }
         var chosen = up_to_ten(chosen, user_input);
 
-        if (chosen.names.has('Young Witch')) {
+        may_add_colony_platinum(chosen.cards, user_input['prosperity']);
+        may_add_shelters(chosen.cards, user_input['darkages']);
+        chosen.roles = may_add_black_market_stock(chosen.roles, chosen.random_pool);
+        if (chosen.roles['Young Witch'] == 'normal' ||
+                chosen.roles['Young Witch'] == 'black market') {
             var args = [chosen, user_input['newbies']];
             var bane = chosen.random_pool.find(passes_bane_tests, args);
             if (!bane) {
@@ -634,10 +656,7 @@ function show_kingdom(user_input) {
             }
             chosen.roles[bane.name] = 'bane';
             chosen.cards.push(bane);
-            chosen.names.add(bane.name);
         }
-        may_add_colony_platinum(chosen.cards, user_input['prosperity']);
-        may_add_shelters(chosen.cards, user_input['darkages']);
 
         if (!conditionsPassed(chosen.cards, user_input)) {
             continue;
@@ -655,13 +674,13 @@ function show_kingdom(user_input) {
 
 function passes_bane_tests(card, thisArg) {
     var chosen = this[0];
-    if (chosen.names.has(card.name)) {
+    if (chosen.roles[card.name]) {
         return false;
     }
     if (card.cost != 2 && card.cost != 3) {
         return false;
     }
-    if (is_notcard(card)) {
+    if (is_horizontal(card)) {
         return false;
     }
     var newbies = this[1];
@@ -669,6 +688,18 @@ function passes_bane_tests(card, thisArg) {
         return false;
     }
     return true;
+}
+
+
+function may_add_black_market_stock(roles, cards) {
+    if (roles['Black Market']) {
+        var stock = cards.filter(c => !Boolean(roles[c.name]));
+        stock = stock.slice(0, parseInt(user_input['black_market']));
+        for (var s of stock) {
+            roles[s.name] = 'black market';
+        }
+    }
+    return roles;
 }
 
 
@@ -723,26 +754,26 @@ function may_add_shelters(chosen_cards, darkages) {
 }
 
 
-// get the number of notcards that will be used in this
+// get the number of horizontals that will be used in this
 // Dominion game. It may vary when 'random' is selected.
-function get_notcard_count(owned_cards, notcards) {
-    var notcard_count;
-    var num_owned = owned_cards.filter(is_notcard).length;
+function get_horizontal_count(owned_cards, horizontals) {
+    var horizontal_count;
+    var num_owned = owned_cards.filter(is_horizontal).length;
     if (num_owned == 0) {
         return 0;
     }
-    notcard_count = notcards.slice(-1);
-    if (isNaN(notcard_count)) {
-        notcard_count = Math.floor(Math.random() * 3);
+    horizontal_count = horizontals.slice(-1);
+    if (isNaN(horizontal_count)) {
+        horizontal_count = Math.floor(Math.random() * 3);
     }
-    return parseInt(notcard_count);
+    return parseInt(horizontal_count);
 }
 
 
 // For a card, get a map with sets/costs/types only the card satisfies.
 // The point - without this card, user-specified cost/set/type conditions
 // are no longer met. A replacement for that card will have to meet them all!
-function get_only_here(cards, card_index, user_input, notcard_count) {
+function get_only_here(cards, card_index, user_input, horizontal_count) {
     // Step 1: for each requirement, get sum of requirements for all cards
     // chosen so far except this particualar card.
     var only_here = {
@@ -758,14 +789,14 @@ function get_only_here(cards, card_index, user_input, notcard_count) {
         only_here['sets'] += sets_it_removes(cards[i], user_input['sets']);
         only_here['costs'] += costs_it_removes(cards[i], user_input['costs']);
 
-        only_here['types'] += types_it_removes(cards[i], 'N'.repeat(chosen.notcard_count));
+        only_here['types'] += types_it_removes(cards[i], 'H'.repeat(chosen.horizontal_count));
     }
 
     // Step 2: all_met_requirements - requirement_of_this_card
 
     only_here['sets'] = chars_removed(user_input['sets'], only_here['sets']);
     only_here['costs'] = chars_removed(user_input['costs'], only_here['costs']);
-    only_here['types'] = chars_removed('N'.repeat(notcard_count), only_here['types']);
+    only_here['types'] = chars_removed('H'.repeat(horizontal_count), only_here['types']);
     return only_here;
 }
 
@@ -797,7 +828,15 @@ function swipe(figure, chosen, user_input) {
     var card_index = chosen.cards.findIndex(c => c['name'] == card_name);
     var old_card = chosen.cards[card_index];
 
-    only_here = get_only_here(chosen.cards, card_index, user_input, chosen.notcard_count);
+    if (old_card.name == 'Black Market') {
+        for (var k of Object.keys(chosen.roles)) {
+            if (chosen.roles[k] == 'black market') {
+                delete chosen.roles[k];
+            }
+        }
+    }
+
+    only_here = get_only_here(chosen.cards, card_index, user_input, chosen.horizontal_count);
 
     unban_all_reqs(only_here, chosen);
     var old_role = (chosen.roles[card_name]);
@@ -807,13 +846,11 @@ function swipe(figure, chosen, user_input) {
 
     if (new_card) {
         chosen.cards[card_index] = new_card;
-        chosen.names.delete(old_card.name);
-        chosen.swiped_names.add(old_card.name);
-        chosen.names.add(new_card.name);
+        chosen.roles[new_card.name] = 'normal';
         if (chosen.roles[old_card.name] == 'bane') {
-            delete chosen.roles[old_card.name];
             chosen.roles[new_card.name] = 'bane';
         }
+        chosen.roles[old_card.name] = 'swiped';
         paintCard(new_card, figure_index, chosen.roles);
     }
     return chosen;
@@ -827,10 +864,7 @@ function passes_swipe_tests(card, thisArg) {
     var user_input = this[1];
     var chosen = this[0];
 
-    if (chosen.names.has(card.name)) {
-        return false;
-    }
-    if (chosen.swiped_names.has(card.name)) {
+    if (chosen.roles[card.name]) {
         return false;
     }
     if (card_is_banned(card, chosen, user_input['newbies'])) {
@@ -845,7 +879,7 @@ function passes_swipe_tests(card, thisArg) {
         }
     }
     var cards = chosen.cards;
-    var cards = cards.slice(0, replac).concat([card]).concat(cards.slice(replac  + 1));
+    var cards = cards.slice(0, replac).concat([card]).concat(cards.slice(replac + 1));
     if (!conditionsPassed(cards, user_input)) {
         return false;
     }
@@ -862,7 +896,7 @@ function has_all_requirements(card, requirements) {
     if (chars_removed(requirements['costs'], costs_removed)) {
         return false;
     }
-    var types_removed = types_it_removes(card, 'N'.repeat(chosen.notcard_count));
+    var types_removed = types_it_removes(card, 'H'.repeat(chosen.horizontal_count));
     if (chars_removed(requirements['types'], types_removed)) {
         return false
     }
