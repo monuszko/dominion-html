@@ -962,9 +962,6 @@ function keyUpHandler(evnt) {
             chosen = show_kingdom(user_input);
         }
     }
-    if (evnt.currentTarget.type == 'text') {
-        normalTextInput(evnt);
-    }
 }
 
 
@@ -985,8 +982,12 @@ for (var input of document.querySelectorAll('input')) {
     input.addEventListener('blur', rememberFocus);
 }
 
-for (var clickable of document.querySelectorAll("input:not([type = text])")) {
+for (var clickable of document.querySelectorAll("input:not([type='text'])")) {
     clickable.addEventListener('click', click_handler);
+}
+
+for (var text of document.querySelectorAll("input[type='text']")) {
+    text.addEventListener('input', normalTextInput);
 }
 
 document.getElementById('btn-randomize').addEventListener('click',
