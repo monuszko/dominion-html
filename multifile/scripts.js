@@ -43,7 +43,6 @@ PROMOS =  {
 // TODO: camelCase
 // TODO: jslint
 // TODO: modules
-// TODO: readme
 
 // This object collects and stores data entered by user.
 function get_user_input() {
