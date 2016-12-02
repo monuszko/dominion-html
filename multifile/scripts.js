@@ -40,17 +40,31 @@ PROMOS =  {
 }
 
 
+// TODO: camelCase
+// TODO: jslint
+// TODO: modules
+// TODO: readme
+
+// This object collects and stores data entered by user.
 function get_user_input() {
 
     user_input = {
-        'expansions': document.getElementById('expansions').value,
-        'costs': document.getElementById('costs').value,
-        'sets': document.getElementById('sets').value,
-        'newbies': document.getElementById('newbies').checked,
-        'attacks': document.querySelector('input[name = "attacks"]:checked').id,
-        'prosperity': document.querySelector('input[name = "prosperity"]:checked').id,
-        'darkages': document.querySelector('input[name = "darkages"]:checked').id,
-        'notcards': document.querySelector('input[name = "notcards"]:checked').id,
+
+        collect_inputs () {
+            for (var input of document.getElementsByTagName('input')) {
+                if (input.type == 'text') {
+                    this[input.id] = input.value;
+                }
+                else if (input.type == 'checkbox') {
+                    this[input.id] = input.checked;
+                }
+                else if (input.type == 'radio' && input.checked == true) {
+                    this[input.name] = input.id;
+                }
+            }
+        },
+
+        // User input that requires a little extra work or is inferred
         recalculate () {
             this['owned_sets'] = this.get_owned_sets();
             this['promo_names'] = this.get_promo_names();
@@ -148,6 +162,7 @@ function get_user_input() {
         }
     }
 
+    user_input.collect_inputs();
     user_input.recalculate();
     return user_input;
 }
@@ -209,7 +224,6 @@ function costs_it_removes(card, needed_costs) {
     if (needed_costs.includes(card.cost)) {
         costs += card.cost;
     }
-    // TODO: potion makes more sense as a tag
     if (card.potion) {
         if (needed_costs.includes('p')) {
             costs += 'p';
@@ -413,7 +427,6 @@ function attackCountered(attack_card, tags) {
     var counters_itself;
     for (var counter of counters) {
             counters_itself = 0;
-            // TODO: don't use tags.indexOf, use tags[]
             if (attack_card.tags.indexOf(counter) > -1) {
                 counters_itself = 1;
             }
@@ -560,7 +573,7 @@ function present_results(chosen) {
 function get_stats(cards) {
     // Check what card types there are. ONLY USED IN ONE PLACE
     var card_types = new Set();
-    var tags = new Array()
+    var tags = new Object()
 
     for (var card of cards) {
         for (var typ of card.types) {
@@ -613,9 +626,9 @@ function show_kingdom(user_input) {
         }
         var chosen = up_to_ten(chosen, user_input);
 
-        // TODO: bug with bane+potion
         if (chosen.names.has('Young Witch')) {
-            var bane = get_bane(chosen.random_pool, chosen.names);
+            var args = [chosen, user_input['newbies']];
+            var bane = chosen.random_pool.find(passes_bane_tests, args);
             if (!bane) {
                 continue;
             }
@@ -640,16 +653,22 @@ function show_kingdom(user_input) {
 }
 
 
-// TODO: possible bugs when no card fits
-function get_bane(cards, card_names) {
-    for (var card of cards) {
-        if (is_notcard(card)) {
-            continue;
-        }
-        if ((card.cost == 2 || card.cost == 3) && !card_names.has(card.name)) {
-            return card;
-        }
+function passes_bane_tests(card, thisArg) {
+    var chosen = this[0];
+    if (chosen.names.has(card.name)) {
+        return false;
     }
+    if (card.cost != 2 && card.cost != 3) {
+        return false;
+    }
+    if (is_notcard(card)) {
+        return false;
+    }
+    var newbies = this[1];
+    if (card_is_banned(card, chosen, newbies)) {
+        return false;
+    }
+    return true;
 }
 
 
