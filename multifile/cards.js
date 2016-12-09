@@ -29,7 +29,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Black Market",
         "set": "promos",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+2 Coin\\n\\nReveal the top 3 cards of the Black Market deck. You may buy one of them immediately. But the unbought cards at the bottom of the Black Market deck in any order.",
@@ -102,9 +102,9 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Amulet",
         "set": "adventures",
         "tags": [
-            "mass_trasher",
-            "virtual_coin",
-            "silver_generator"
+            "massTrasher",
+            "virtualCoin",
+            "silverGenerator"
         ],
         "text": "Now and at the start of your next turn, choose one: +1 Coin; or trash a card from your hand; or gain a Silver.",
         "types": [
@@ -128,13 +128,13 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
+        "counteredBy": [
             "gainer"
         ],
         "name": "Bridge Troll",
         "set": "adventures",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "Each other player takes his -1 Coin token. Now and at the start of your next turn: +1 Buy.\\n\\n\\nWhile this is in play, cards cost 1 Coin less on your turn, but not less than 0 Coin.",
         "types": [
@@ -149,8 +149,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Caravan Guard",
         "set": "adventures",
         "tags": [
-            "needs_attacks",
-            "virtual_coin"
+            "needsAttacks",
+            "virtualCoin"
         ],
         "text": "+1 Card\\n+1 Action\\nAt the start of your next turn, +1 Coin.\\n\\n\\nWhen another player plays an Attack card, you may play this from your hand. (+1 Action has no effect if it's not your turn.)",
         "types": [
@@ -227,16 +227,16 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
+        "counteredBy": [
             "trasher",
-            "likes_being_trashed",
-            "spam_filter"
+            "likesBeingTrashed",
+            "spamFilter"
         ],
         "name": "Giant",
         "set": "adventures",
         "tags": [
-            "junk_attack",
-            "virtual_coin",
+            "junkAttack",
+            "virtualCoin",
             "complicated"
         ],
         "text": "Turn over your Journey token (it starts face up). If it's face down, +1 Coin. If it's face up, +5 Coin and each other player reveals the top card of his deck, trashes it if it costs from 3 Coin to 6 Coin, and otherwise discards it and gains a Curse.",
@@ -251,8 +251,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Guide",
         "set": "adventures",
         "tags": [
-            "draw_to_x",
-            "deck_inspector"
+            "drawToX",
+            "deckInspector"
         ],
         "text": "+1 Card\\n+1 Action\\nPut this on your Tavern mat.\\n\\n\\nAt the start of your next turn, you may call this, to discard your hand and draw 5 cards.",
         "types": [
@@ -263,10 +263,10 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
+        "counteredBy": [
             "gainer",
             "trasher",
-            "trash_for_benefit"
+            "trashForBenefit"
         ],
         "name": "Haunted Woods",
         "set": "adventures",
@@ -320,7 +320,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Messenger",
         "set": "adventures",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "gainer",
             "complicated"
         ],
@@ -335,8 +335,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Miser",
         "set": "adventures",
         "tags": [
-            "early_trasher",
-            "virtual_coin"
+            "earlyTrasher",
+            "virtualCoin"
         ],
         "text": "Choose one: Put a Copper from your hand onto your Tavern mat; or +1 per Copper on your Tavern mat.",
         "types": [
@@ -363,7 +363,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Peasant",
         "set": "adventures",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+1 Buy\\n+1 Coin\\n\\n\\nWhen you discard this from play, you may exchange it for a Soldier.",
@@ -414,7 +414,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Raze",
         "set": "adventures",
         "tags": [
-            "trash_for_benefit",
+            "trashForBenefit",
             "trasher"
         ],
         "text": "+1 Action\\n\\nTrash this or a card from your hand. Look at the number of cards from the top of your deck equal to the cost in Coins of the trashed card. Put one into your hand and discard the rest.",
@@ -425,15 +425,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 1,
         "cost": 5,
-        "countered_by": [
-            "draw_to_x",
-            "steals_treasure",
-            "treasure_trasher"
+        "counteredBy": [
+            "drawToX",
+            "stealsTreasure",
+            "treasureTrasher"
         ],
         "name": "Relic",
         "set": "adventures",
         "tags": [
-            "handsize_attack"
+            "handsizeAttack"
         ],
         "text": "2 Coin\\n\\nWhen you play this, each other player puts his -1 Card token on his deck.",
         "types": [
@@ -469,15 +469,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
+        "counteredBy": [
             "gainer",
-            "spam_filter",
-            "virtual_coin"
+            "spamFilter",
+            "virtualCoin"
         ],
         "name": "Swamp Hag",
         "set": "adventures",
         "tags": [
-            "junk_attack"
+            "junkAttack"
         ],
         "text": "Until your next turn, when any other player buys a card, he gains a Curse.\\nAt the start of your next turn, +3 Coin\\n.",
         "types": [
@@ -492,7 +492,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Transmogrify",
         "set": "adventures",
         "tags": [
-            "trash_for_benefit"
+            "trashForBenefit"
         ],
         "text": "+1 Action\\nPut this on your Tavern mat.\\n\\n\\nAt the start of your turn, you may call this, to trash a card from your hand, gain a card costing up to 1 Coin more than it, and put that card into your hand.",
         "types": [
@@ -517,7 +517,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Wine Merchant",
         "set": "adventures",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Buy\\n+4 Coin\\nPut this on your Tavern mat.\\n\\n\\nAt the end of your Buy phase, if you have at least 2 Coin unspent, you may discard this from your Tavern mat.",
         "types": [
@@ -540,7 +540,7 @@ const EXISTING_CARDS = JSON.parse(`
         "types": ["Event"],
         "name": "Borrow",
         "set": "adventures",
-        "tags": ["virtual_coin"],
+        "tags": ["virtualCoin"],
         "text": "Once per turn: If your -1 Card token isn't on your deck, put it there and +1 Coin. "
     },
     {
@@ -585,7 +585,7 @@ const EXISTING_CARDS = JSON.parse(`
         "types": ["Event"],
         "name": "Bonfire",
         "set": "adventures",
-        "tags": ["early_trasher"],
+        "tags": ["earlyTrasher"],
         "text": "Trash up to 2 cards you have in play."
     },
     {
@@ -684,7 +684,7 @@ const EXISTING_CARDS = JSON.parse(`
         "types": ["Event"],
         "name": "Training",
         "set": "adventures",
-        "tags": ["virtual_coin"],
+        "tags": ["virtualCoin"],
         "text": "Move your +1 Coin token to an Action Supply pile (when you play a card from that pile, you first get +1 Coin)."
     },
     {
@@ -724,7 +724,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Apothecary",
         "set": "alchemy",
         "tags": [
-            "copper_strategy"
+            "copperStrategy"
         ],
         "text": "+1 Card\\n+1 Action\\n\\nReveal the top 4 cards of your deck. Put the revealed Coppers and Potions into your hand. Put the other cards back on top of your deck in any order.",
         "types": [
@@ -737,7 +737,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Apprentice",
         "set": "alchemy",
         "tags": [
-            "trash_for_benefit",
+            "trashForBenefit",
             "complicated"
         ],
         "text": "+1 Action\\n\\nTrash a card from your hand. +1 Card per Coins it costs. +2 cards if it has Potion in its cost.",
@@ -749,15 +749,15 @@ const EXISTING_CARDS = JSON.parse(`
         "actions": 1,
         "cost": 3,
         "potion": true,
-        "countered_by": [
+        "counteredBy": [
             "trasher",
-            "mass_trasher",
-            "spam_filter"
+            "massTrasher",
+            "spamFilter"
         ],
         "name": "Familiar",
         "set": "alchemy",
         "tags": [
-            "mass_trasher",
+            "massTrasher",
             "trasher"
         ],
         "text": "+1 Card\\n+1 Action\\n\\nEach other player gains a Curse.",
@@ -784,7 +784,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Herbalist",
         "set": "alchemy",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Buy\\n+1 Coin\\n\\n\\nWhen you discard this from play, you may put one of your Treasures from play on top of your deck.",
         "types": [
@@ -821,9 +821,9 @@ const EXISTING_CARDS = JSON.parse(`
         "actions": 1,
         "cost": 2,
         "potion": true,
-        "countered_by": [
+        "counteredBy": [
             "sifter",
-            "deck_inspector"
+            "deckInspector"
         ],
         "name": "Scrying Pool",
         "set": "alchemy",
@@ -844,7 +844,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Transmute",
         "set": "alchemy",
         "tags": [
-            "trash_for_benefit",
+            "trashForBenefit",
             "complicated"
         ],
         "text": "Trash a card from your hand.\\nIf it's an...\\nAction card, gain a Duchy\\nTreasure card, gain a Transmute\\nVictory card, gain a Gold",
@@ -873,7 +873,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Vineyard",
         "set": "alchemy",
         "tags": [
-            "action_fetishist"
+            "actionFetishist"
         ],
         "text": "Worth 1 Victory for every 3 Action cards in your deck (rounded down).",
         "types": [
@@ -886,7 +886,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Fairgrounds",
         "set": "cornucopia",
         "tags": [
-            "likes_diversity",
+            "likesDiversity",
             "complicated"
         ],
         "text": "Worth 2 Victory for every 5 differently named cards in your deck (rounded down).",
@@ -910,16 +910,16 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 3,
-        "countered_by": [
+        "counteredBy": [
             "sifter",
-            "deck_inspector",
+            "deckInspector",
             "trasher",
-            "mass_trasher"
+            "massTrasher"
         ],
         "name": "Fortune Teller",
         "set": "cornucopia",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+2 Coin\\n\\nEach other player reveals cards from the top of his deck until he reveals a Victory or Curse card. He puts it on the top and discards the other revealed cards.",
         "types": [
@@ -944,7 +944,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Harvest",
         "set": "cornucopia",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "complicated"
         ],
         "text": "Reveal the top 4 cards of your deck, then discard them. +1 Coin per differently named card revealed.",
@@ -958,7 +958,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Horn of Plenty",
         "set": "cornucopia",
         "tags": [
-            "likes_diversity",
+            "likesDiversity",
             "gainer",
             "complicated"
         ],
@@ -973,7 +973,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Horse Traders",
         "set": "cornucopia",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Buy\\n+3 Coin\\nDiscard 2 cards\\n\\n\\nWhen another player plays an Attack card, you may set this aside from your hand. If you do, then at the start of your next turn, +1 Card and return this to your hand.",
         "types": [
@@ -997,15 +997,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
-            "silver_generator",
-            "copper_strategy",
-            "spam_filter"
+        "counteredBy": [
+            "silverGenerator",
+            "copperStrategy",
+            "spamFilter"
         ],
         "name": "Jester",
         "set": "cornucopia",
         "tags": [
-            "junk_attack",
+            "junkAttack",
             "complicated"
         ],
         "text": "+2 Coin\\n\\nEach other player discards the top card of his deck. If it's a Victory card, he gains a Curse. Otherwise either he gains a copy of the discarded card or you do, your choice.",
@@ -1020,8 +1020,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Menagerie",
         "set": "cornucopia",
         "tags": [
-            "counters_handsize",
-            "likes_diversity",
+            "countersHandsize",
+            "likesDiversity",
             "complicated"
         ],
         "text": "+1 Card\\n\\nReveal your hand. If there are no duplicate cards in it, +3 Cards. Otherwise, +1 Card.",
@@ -1035,7 +1035,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Remake",
         "set": "cornucopia",
         "tags": [
-            "mass_trasher"
+            "massTrasher"
         ],
         "text": "Do this twice: Trash a card from your hand, then gain a card costing exactly 1 Coin more than the trashed card.",
         "types": [
@@ -1048,7 +1048,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Tournament",
         "set": "cornucopia",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+1 Action\\n\\nEach player may reveal a Province from his hand.\\nIf you do, discard it and gain a Prize (from the Prize pile) or a Duchy, putting it on top of your deck.\\nIf no-one else does, +1 Card, +1 Coin.",
@@ -1059,15 +1059,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 4,
-        "countered_by": [
-            "mass_trasher",
+        "counteredBy": [
+            "massTrasher",
             "trasher",
-            "spam_filter"
+            "spamFilter"
         ],
         "name": "Young Witch",
         "set": "cornucopia",
         "tags": [
-            "junk_attack",
+            "junkAttack",
             "complicated"
         ],
         "text": "+2 Cards\\n\\nDiscard 2 cards. Each other player may reveal a Bane card from his hand. If he doesn't, he gains a Curse.\\n\\n\\nSetup: Add an extra Kingdom card pile costing 2 Coin or 3 Coin to the Supply. Cards from that pile are Bane cards.",
@@ -1082,7 +1082,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Altar",
         "set": "darkages",
         "tags": [
-            "trash_for_benefit",
+            "trashForBenefit",
             "gainer"
         ],
         "text": "Trash a card from your hand. Gain a card costing up to 5 Coin.",
@@ -1133,7 +1133,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Beggar",
         "set": "darkages",
         "tags": [
-            "spam_filter"
+            "spamFilter"
         ],
         "text": "Gain 3 Coppers, putting them into your hand.\\n\\n\\nWhen another player plays an Attack card, you may discard this. If you do, gain two Silvers, putting one on top of your deck.",
         "types": [
@@ -1147,7 +1147,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Catacombs",
         "set": "darkages",
         "tags": [
-            "likes_being_trashed",
+            "likesBeingTrashed",
             "complicated"
         ],
         "text": "Look at the top 3 cards of your deck. Choose one: Put them into your hand; or discard them and +3 Cards.\\n\\n\\nWhen you trash this, gain a cheaper card.",
@@ -1161,8 +1161,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Count",
         "set": "darkages",
         "tags": [
-            "mass_trasher",
-            "virtual_coin",
+            "massTrasher",
+            "virtualCoin",
             "complicated"
         ],
         "text": "Choose one: Discard 2 cards; or put a card from your hand on top of your deck; or gain a Copper.\\n\\nChoose one: +3 Coin; or trash your hand; or gain a Duchy.",
@@ -1176,8 +1176,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Counterfeit",
         "set": "darkages",
         "tags": [
-            "early_trasher",
-            "treasure_eater"
+            "earlyTrasher",
+            "treasureEater"
         ],
         "text": "1 Coin\\n+1 Buy\\n\\nWhen you play this, you may play a Treasure from your hand twice. If you do, trash that Treasure.",
         "types": [
@@ -1187,15 +1187,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 1,
         "cost": 5,
-        "countered_by": [
-            "likes_diversity",
-            "action_fetishist"
+        "counteredBy": [
+            "likesDiversity",
+            "actionFetishist"
         ],
         "name": "Cultist",
         "set": "darkages",
         "tags": [
-            "junk_attack",
-            "likes_being_trashed"
+            "junkAttack",
+            "likesBeingTrashed"
         ],
         "text": "+2 Cards\\n\\nEach other player gains a Ruins. You may play a Cultist from your hand.\\n\\n\\nWhen you trash this, +3 Cards.",
         "types": [
@@ -1210,9 +1210,9 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Death Cart",
         "set": "darkages",
         "tags": [
-            "trash_for_benefit",
-            "action_fetishist",
-            "virtual_coin"
+            "trashForBenefit",
+            "actionFetishist",
+            "virtualCoin"
         ],
         "text": "+5 Coin\\n\\nYou may trash an Action card from your hand. If you don't, trash this.\\n\\n\\nWhen you gain this, gain 2 Ruins.",
         "types": [
@@ -1226,7 +1226,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Feodum",
         "set": "darkages",
         "tags": [
-            "likes_being_trashed"
+            "likesBeingTrashed"
         ],
         "text": "Worth 1 Victory for every 3 Silvers in your deck (rounded down).\\n\\n\\nWhen you trash this, gain 3 Silvers.",
         "types": [
@@ -1240,8 +1240,8 @@ const EXISTING_CARDS = JSON.parse(`
         "set": "darkages",
         "tags": [
             "trasher",
-            "early_trasher",
-            "virtual_coin",
+            "earlyTrasher",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+1 Action\\n+1 Buy\\nTrash a card from your hand. +1 Per differently named Treasure in the trash.",
@@ -1255,7 +1255,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Fortress",
         "set": "darkages",
         "tags": [
-            "likes_being_trashed",
+            "likesBeingTrashed",
             "complicated"
         ],
         "text": "+1 Card\\n+2 Actions\\n\\n\\nWhen you trash this, put it into your hand.",
@@ -1269,7 +1269,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Graverobber",
         "set": "darkages",
         "tags": [
-            "trash_for_benefit",
+            "trashForBenefit",
             "gainer",
             "complicated"
         ],
@@ -1299,7 +1299,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Hunting Grounds",
         "set": "darkages",
         "tags": [
-            "likes_being_trashed",
+            "likesBeingTrashed",
             "complicated"
         ],
         "text": "+4 Cards\\n\\n\\nWhen you trash this, gain a Duchy or 3 Estates.",
@@ -1325,8 +1325,8 @@ const EXISTING_CARDS = JSON.parse(`
         "set": "darkages",
         "tags": [
             "trasher",
-            "early_trasher",
-            "virtual_coin"
+            "earlyTrasher",
+            "virtualCoin"
         ],
         "text": "+1 Card\\n+1 Action\\n+1 Coin\\n\\nTrash a card from your hand.",
         "types": [
@@ -1336,14 +1336,14 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
-            "draw_to_x",
-            "likes_being_discarded"
+        "counteredBy": [
+            "drawToX",
+            "likesBeingDiscarded"
         ],
         "name": "Knights",
         "set": "darkages",
         "tags": [
-            "handsize_attack",
+            "handsizeAttack",
             "complicated"
         ],
         "text": "(varies)\\nEach other player reveals the top 2 cards of his deck, trashes one of them costing from 3 Coin to 6 Coin, and discards the rest. If a Knight is trashed by this, trash this card.",
@@ -1356,15 +1356,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 4,
-        "countered_by": [
+        "counteredBy": [
             "trasher",
-            "likes_diversity",
-            "action_fetishist"
+            "likesDiversity",
+            "actionFetishist"
         ],
         "name": "Marauder",
         "set": "darkages",
         "tags": [
-            "junk_attack"
+            "junkAttack"
         ],
         "text": "Gain a Spoils from the Spoils pile. Each other player gains a Ruins.",
         "types": [
@@ -1379,7 +1379,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Market Square",
         "set": "darkages",
         "tags": [
-            "likes_being_discarded",
+            "likesBeingDiscarded",
             "complicated"
         ],
         "text": "+1 Card\\n+1 Action\\n+1 Buy\\n\\n\\nWhen one of your cards is trashed, you may discard this from your hand. If you do, gain a Gold.",
@@ -1394,8 +1394,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Mystic",
         "set": "darkages",
         "tags": [
-            "deck_inspector",
-            "virtual_coin",
+            "deckInspector",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+1 Action\\n+2 Coins\\n\\nName a card.\\nReveal the top card of your deck. If it's the named card, put it into your hand.",
@@ -1406,8 +1406,8 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
-            "silver_generator"
+        "counteredBy": [
+            "silverGenerator"
         ],
         "name": "Pillage",
         "set": "darkages",
@@ -1426,8 +1426,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Poor House",
         "set": "darkages",
         "tags": [
-            "virtual_coin",
-            "likes_being_discarded",
+            "virtualCoin",
+            "likesBeingDiscarded",
             "complicated"
         ],
         "text": "+4 Coin\\n\\nReveal your hand. -1 Coin per Treasure card in your hand, to a minimum of 0 Coin.",
@@ -1441,7 +1441,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Procession",
         "set": "darkages",
         "tags": [
-            "trash_for_benefit"
+            "trashForBenefit"
         ],
         "text": "You may play an Action card from your hand twice. Trash it. Gain an Action card costing exactly 1 Coin more than it.",
         "types": [
@@ -1454,7 +1454,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Rats",
         "set": "darkages",
         "tags": [
-            "likes_being_trashed",
+            "likesBeingTrashed",
             "complicated"
         ],
         "text": "+1 Card\\n+1 Action\\n\\nGain a Rats. Trash a card from your hand other than a Rats (or reveal your hand of all Rats).\\n\\n\\nWhen you trash this, +1 Card.",
@@ -1469,7 +1469,7 @@ const EXISTING_CARDS = JSON.parse(`
         "set": "darkages",
         "tags": [
             "overpowered",
-            "trash_for_benefit"
+            "trashForBenefit"
         ],
         "text": "+1 Action\\n\\nName a card. Reveal cards from the top of your deck until you reveal a Victory card that is not the named card. Discard the other cards. Trash the Victory card and gain a Victory card costing up to 3 Coin more than it.",
         "types": [
@@ -1479,13 +1479,13 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
+        "counteredBy": [
             "gainer"
         ],
         "name": "Rogue",
         "set": "darkages",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+2 Coin\\n\\nIf there are any cards in the trash costing from 3 Coin to 6 Coin, gain one of them. Otherwise, each other player reveals the top 2 cards of his deck, trashes one of them costing from 3 Coin to 6 Coin, and discards the rest.",
@@ -1511,7 +1511,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Scavenger",
         "set": "darkages",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+2 Coin\\nYou may put your deck into your discard pile. Look through your discard pile and put one card from it on top of your deck.",
@@ -1525,10 +1525,10 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Squire",
         "set": "darkages",
         "tags": [
-            "needs_attacks",
-            "likes_being_trashed",
-            "virtual_coin",
-            "silver_generator"
+            "needsAttacks",
+            "likesBeingTrashed",
+            "virtualCoin",
+            "silverGenerator"
         ],
         "text": "+1 Coin\\n\\nChoose one: +2 Actions; or +2 Buys; or gain a Silver.\\n\\n\\nWhen you trash this, gain an Attack card.",
         "types": [
@@ -1541,7 +1541,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Storeroom",
         "set": "darkages",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+1 Buy\\n\\nDiscard any number of cards. +1 Card per card discarded.\\nDiscard any number of cards. +1 Coin per card discarded the second time.",
@@ -1552,14 +1552,14 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 1,
         "cost": 4,
-        "countered_by": [
-            "draw_to_x",
-            "likes_being_discarded"
+        "counteredBy": [
+            "drawToX",
+            "likesBeingDiscarded"
         ],
         "name": "Urchin",
         "set": "darkages",
         "tags": [
-            "handsize_attack",
+            "handsizeAttack",
             "complicated"
         ],
         "text": "+1 Card\\n+1 Action\\n\\nEach other player discards down to 4 cards in hand.\\n\\n\\nWhen you play another attack card with this in play, you may trash this. If you do, gain a Mercenary from the Mercenary pile.",
@@ -1606,16 +1606,16 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 1,
         "cost": 4,
-        "countered_by": [
-            "trash_for_benefit",
-            "deck_inspector",
+        "counteredBy": [
+            "trashForBenefit",
+            "deckInspector",
             "sifter"
         ],
         "name": "Bureaucrat",
         "set": "dominion",
         "tags": [
-            "handsize_attack",
-            "silver_generator"
+            "handsizeAttack",
+            "silverGenerator"
         ],
         "text": "Gain a Silver card; put it on top of your deck. Each other player reveals a Victory card from his hand and puts it on his deck (or reveals a hand with no Victory cards).",
         "types": [
@@ -1642,7 +1642,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Chancellor",
         "set": "dominion",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+2 Coins\\n\\nYou may immediately put your deck into your discard pile.",
@@ -1653,16 +1653,16 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 2,
-        "countered_by": [
-            "treasure_trasher",
-            "steals_treasure"
+        "counteredBy": [
+            "treasureTrasher",
+            "stealsTreasure"
         ],
         "name": "Chapel",
         "set": "dominion",
         "tags": [
             "overpowered",
-            "mass_trasher",
-            "early_trasher",
+            "massTrasher",
+            "earlyTrasher",
             "complicated"
         ],
         "text": "Trash up to 4 cards from your hand.",
@@ -1700,7 +1700,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Festival",
         "set": "dominion",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+2 Actions\\n+1 Buy\\n+2 Coins",
         "types": [
@@ -1735,7 +1735,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Library",
         "set": "dominion",
         "tags": [
-            "draw_to_x"
+            "drawToX"
         ],
         "text": "Draw until you have 7 cards in hand. You may set aside any Action cards drawn this way, as you draw them; discard the set aside cards after you finish drawing.",
         "types": [
@@ -1748,7 +1748,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Market",
         "set": "dominion",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Card\\n+1 Action\\n+1 Buy\\n+1 Coin",
         "types": [
@@ -1758,15 +1758,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 4,
-        "countered_by": [
-            "draw_to_x",
-            "likes_being_discarded"
+        "counteredBy": [
+            "drawToX",
+            "likesBeingDiscarded"
         ],
         "name": "Militia",
         "set": "dominion",
         "tags": [
-            "handsize_attack",
-            "virtual_coin"
+            "handsizeAttack",
+            "virtualCoin"
         ],
         "text": "+2 Coins\\n\\nEach other player discards down to 3 cards in his hand.",
         "types": [
@@ -1780,7 +1780,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Mine",
         "set": "dominion",
         "tags": [
-            "trash_for_benefit"
+            "trashForBenefit"
         ],
         "text": "Trash a Treasure card from your hand. Gain a Treasure card costing up to 3 Coins or more; put it into your hand.",
         "types": [
@@ -1793,8 +1793,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Moat",
         "set": "dominion",
         "tags": [
-            "needs_attacks",
-            "counters_attacks"
+            "needsAttacks",
+            "countersAttacks"
         ],
         "text": "+2 Cards\\n\\n\\nWhen another player plays an Attack card, you may reveal this from your hand. If you do, you are unaffected by that Attack.",
         "types": [
@@ -1808,9 +1808,9 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Moneylender",
         "set": "dominion",
         "tags": [
-            "early_trasher",
-            "treasure_eater",
-            "virtual_coin"
+            "earlyTrasher",
+            "treasureEater",
+            "virtualCoin"
         ],
         "text": "Trash a Copper card from your hand. If you do, +3 Coins.",
         "types": [
@@ -1823,7 +1823,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Remodel",
         "set": "dominion",
         "tags": [
-            "trash_for_benefit"
+            "trashForBenefit"
         ],
         "text": "Trash a card from your hand. Gain a card costing up to 2 Coins more than the trashed card.",
         "types": [
@@ -1844,10 +1844,10 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 1,
         "cost": 4,
-        "countered_by": [
-            "M_mostly_harmless",
+        "counteredBy": [
+            "MMostlyHarmless",
             "sifter",
-            "deck_inspector"
+            "deckInspector"
         ],
         "name": "Spy",
         "set": "dominion",
@@ -1861,14 +1861,14 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 4,
-        "countered_by": [
-            "virtual_coin"
+        "counteredBy": [
+            "virtualCoin"
         ],
         "name": "Thief",
         "set": "dominion",
         "tags": [
-            "treasure_trasher",
-            "steals_treasure"
+            "treasureTrasher",
+            "stealsTreasure"
         ],
         "text": "Each other player reveals the top 2 cards of his deck. If they are revealed any Treasure cards, they trash one of them that you choose. You may gain any or all of these trashed cards. They discard the other revealed cards.",
         "types": [
@@ -1901,18 +1901,18 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
-            "mass_trasher",
+        "counteredBy": [
+            "massTrasher",
             "trasher",
-            "spam_filter",
+            "spamFilter",
             "gainer",
-            "silver_generator"
+            "silverGenerator"
         ],
         "name": "Witch",
         "set": "dominion",
         "tags": [
             "overpowered",
-            "junk_attack"
+            "junkAttack"
         ],
         "text": "+2 Cards\\nEach other player gains a Curse card.",
         "types": [
@@ -1926,7 +1926,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Woodcutter",
         "set": "dominion",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Buy\\n+2 Coins",
         "types": [
@@ -1963,7 +1963,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Baker",
         "set": "guilds",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "complicated"
         ],
         "text": "\\n+1 Card\\n+1 Action\\nTake a Coin token.\\n\\n\\nSetup: Each player takes a Coin token.",
@@ -1978,8 +1978,8 @@ const EXISTING_CARDS = JSON.parse(`
         "set": "guilds",
         "tags": [
             "trasher",
-            "trash_for_benefit",
-            "virtual_coin"
+            "trashForBenefit",
+            "virtualCoin"
         ],
         "text": "Take 2 Coin tokens. You may trash a card from your hand and then pay any number of Coin tokens. If you did trash a card, gain a card with a cost up to the cost of the trashed card plus the number of Coin tokens you paid.",
         "types": [
@@ -1992,7 +1992,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Candlestick Maker",
         "set": "guilds",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Action\\n+1 Buy\\n\\nTake a Coin token.",
         "types": [
@@ -2002,12 +2002,12 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 3,
-        "cost_extra": "+",
+        "costExtra": "+",
         "name": "Doctor",
         "set": "guilds",
         "tags": [
-            "mass_trasher",
-            "deck_inspector",
+            "massTrasher",
+            "deckInspector",
             "complicated"
         ],
         "text": "Name a card. Reveal the top 3 cards of your deck. Trash the matches. Put the rest back on top in any order.\\n\\n\\nWhen you buy this, you may overpay for it. For each 1 Coin you overpaid, look at the top card of your deck; trash it, discard it, or put it back.",
@@ -2018,11 +2018,11 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 1,
         "cost": 4,
-        "cost_extra": "+",
+        "costExtra": "+",
         "name": "Herald",
         "set": "guilds",
         "tags": [
-            "action_fetishist"
+            "actionFetishist"
         ],
         "text": "+1 Card\\n+1 Action\\n\\nReveal the top card of your deck. If it's an Action card, play it.\\n\\n\\nWhen you buy this, you may overpay for it. For each 1 Coin you overpaid, look through your discard pile and put a card from it on top of your deck.",
         "types": [
@@ -2035,7 +2035,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Journeyman",
         "set": "guilds",
         "tags": [
-            "counters_junk"
+            "countersJunk"
         ],
         "text": "Name a card. Reveal cards from the top of your deck until you reveal 3 cards that are not the named card. Put those cards into your hand and discard the rest.",
         "types": [
@@ -2045,11 +2045,11 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 3,
-        "cost_extra": "+",
+        "costExtra": "+",
         "name": "Masterpiece",
         "set": "guilds",
         "tags": [
-            "silver_generator"
+            "silverGenerator"
         ],
         "text": "1 Coin\\n\\n\\nWhen you buy this, you may overpay for it. If you do, gain a Silver per 1 Coin you overpaid.",
         "types": [
@@ -2062,7 +2062,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Merchant Guild",
         "set": "guilds",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+1 Buy\\n+1 Coin\\n\\n\\nWhile this is in play, when you buy a card, take a Coin token.",
@@ -2076,7 +2076,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Plaza",
         "set": "guilds",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+1 Card\\n+2 Actions\\nYou may discard a Treasure card. If you do, take a Coin token.",
@@ -2087,16 +2087,16 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
-            "mass_trasher",
+        "counteredBy": [
+            "massTrasher",
             "trasher",
-            "spam_filter",
-            "steals_treasure"
+            "spamFilter",
+            "stealsTreasure"
         ],
         "name": "Soothsayer",
         "set": "guilds",
         "tags": [
-            "junk_attack",
+            "junkAttack",
             "gainer"
         ],
         "text": "Gain a Gold. Each other player gains a Curse. Each player who did draws a card.",
@@ -2108,11 +2108,11 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 2,
-        "cost_extra": "+",
+        "costExtra": "+",
         "name": "Stonemason",
         "set": "guilds",
         "tags": [
-            "trash_for_benefit",
+            "trashForBenefit",
             "complicated"
         ],
         "text": "Trash a card from your hand. Gain 2 cards costing less than it.\\n\\n\\nWhen you buy this, you may overpay for it. If you do, gain 2 Action cards each costing the amount you overpaid.",
@@ -2123,15 +2123,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 4,
-        "countered_by": [
-            "steals_treasure",
-            "treasure_trasher"
+        "counteredBy": [
+            "stealsTreasure",
+            "treasureTrasher"
         ],
         "name": "Taxman",
         "set": "guilds",
         "tags": [
-            "handsize_attack",
-            "treasure_eater"
+            "handsizeAttack",
+            "treasureEater"
         ],
         "text": "You may trash a Treasure card from your hand. Each other player with 5 or more cards in hand discards a copy of it (or reveals a hand without it). Gain a Treasure card costing up to 3 Coins more than the trashed card, putting it on top of your deck.",
         "types": [
@@ -2167,7 +2167,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Cartographer",
         "set": "hinterlands",
         "tags": [
-            "deck_inspector"
+            "deckInspector"
         ],
         "text": "+1 Card\\n+1 Action\\n\\nLook at the top 4 cards of your deck. Put them back on top in any order.",
         "types": [
@@ -2191,7 +2191,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Develop",
         "set": "hinterlands",
         "tags": [
-            "trash_for_benefit"
+            "trashForBenefit"
         ],
         "text": "Trash a card from your hand. Gain a card costing exactly 1 Coin more than it and gain a card costing exactly 1 Coin less than it, putting them on top of your deck.",
         "types": [
@@ -2204,7 +2204,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Duchess",
         "set": "hinterlands",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+2 Coin\\n\\nEach player (including you) looks at the top card of his deck, and discards it or puts it back.\\n\\n\\nIn games using this, when you gain a Duchy, you may gain a Duchess.",
         "types": [
@@ -2217,7 +2217,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Embassy",
         "set": "hinterlands",
         "tags": [
-            "indirect_interaction"
+            "indirectInteraction"
         ],
         "text": "+5 Cards\\nDiscard 3 cards.\\n\\n\\nWhen you gain this, each other player gains a Silver.",
         "types": [
@@ -2253,7 +2253,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Haggler",
         "set": "hinterlands",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "gainer"
         ],
         "text": "+2 Coin\\n\\n\\nWhile this is in play, when you buy a card, gain a card costing less than it that is not a Victory card.",
@@ -2267,7 +2267,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Highway",
         "set": "hinterlands",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Card\\n+1 Action\\n\\n\\nWhile this is in play, cards cost 1 Coin less, but not less than 0 Coins.",
         "types": [
@@ -2277,14 +2277,14 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 1,
         "cost": 5,
-        "countered_by": [
-            "spam_filter"
+        "counteredBy": [
+            "spamFilter"
         ],
         "name": "Ill-Gotten Gains",
         "set": "hinterlands",
         "tags": [
             "overpowered",
-            "junk_attack"
+            "junkAttack"
         ],
         "text": "1 Coin\\n\\nWhen you play this, you may gain a Copper, putting it into your hand.\\n\\n\\nWhen you gain this, each other player gains a Curse.",
         "types": [
@@ -2311,10 +2311,10 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Jack of All Trades",
         "set": "hinterlands",
         "tags": [
-            "deck_inspector",
+            "deckInspector",
             "trasher",
-            "draw_to_x",
-            "silver_generator"
+            "drawToX",
+            "silverGenerator"
         ],
         "text": "Gain a Silver.\\nLook at the top card of your deck; discard it or put it back.\\nDraw until you have 5 cards in hand.\\nYou may trash a card from your hand that is not a Treasure.",
         "types": [
@@ -2335,14 +2335,14 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
-            "draw_to_x",
-            "likes_being_discarded"
+        "counteredBy": [
+            "drawToX",
+            "likesBeingDiscarded"
         ],
         "name": "Margrave",
         "set": "hinterlands",
         "tags": [
-            "handsize_attack"
+            "handsizeAttack"
         ],
         "text": "+3 Cards\\n+1 Buy\\nEach other player draws a card, then discards down to 3 cards in hand.",
         "types": [
@@ -2353,15 +2353,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 4,
-        "countered_by": [
-            "M_alt_treasure",
-            "virtual_coin"
+        "counteredBy": [
+            "MAltTreasure",
+            "virtualCoin"
         ],
         "name": "Noble Brigand",
         "set": "hinterlands",
         "tags": [
-            "treasure_trasher",
-            "steals_treasure"
+            "treasureTrasher",
+            "stealsTreasure"
         ],
         "text": "+1 Coin\\n\\nWhen you buy this or play it, each other player reveals the top 2 cards of his deck, trashes a revealed Silver or Gold you choose, and discards the rest. If he didn't reveal a Treasure, he gains a Copper. You gain the trashed cards.",
         "types": [
@@ -2375,7 +2375,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Nomad Camp",
         "set": "hinterlands",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Buy\\n+2 Coin\\n\\n\\nWhen you gain this, put it on top of your deck.",
         "types": [
@@ -2388,7 +2388,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Oasis",
         "set": "hinterlands",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Card\\n+1 Action\\n+1 Coin\\nDiscard a card.",
         "types": [
@@ -2398,14 +2398,14 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 3,
-        "countered_by": [
-            "deck_inspector",
+        "counteredBy": [
+            "deckInspector",
             "sifter"
         ],
         "name": "Oracle",
         "set": "hinterlands",
         "tags": [
-            "deck_inspector",
+            "deckInspector",
             "complicated"
         ],
         "text": "Each player (including you) reveals the top 2 cards of his deck, and you choose one: either he discards them, or he puts them back on top in an order he chooses.\\n\\n+2 Cards",
@@ -2442,9 +2442,9 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Spice Merchant",
         "set": "hinterlands",
         "tags": [
-            "early_trasher",
-            "treasure_eater",
-            "virtual_coin"
+            "earlyTrasher",
+            "treasureEater",
+            "virtualCoin"
         ],
         "text": "You may trash a Treasure from your hand. If you do, choose one: +2 Cards and +1 Action; or +2 Coins and +1 Buy.",
         "types": [
@@ -2468,9 +2468,9 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Trader",
         "set": "hinterlands",
         "tags": [
-            "spam_filter",
-            "silver_generator",
-            "trash_for_benefit"
+            "spamFilter",
+            "silverGenerator",
+            "trashForBenefit"
         ],
         "text": "Trash a card from your hand. Gain a number of Silvers equal to its cost in coins.\\n\\n\\nWhen you would gain a card, you may reveal this from your hand. If you do, instead, gain a Silver.",
         "types": [
@@ -2484,7 +2484,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Tunnel",
         "set": "hinterlands",
         "tags": [
-            "likes_being_discarded"
+            "likesBeingDiscarded"
         ],
         "text": "2 Victory\\n\\n\\nWhen you discard this other than during a Clean-up phase, you may reveal it. If you do, gain a Gold.",
         "types": [
@@ -2498,7 +2498,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Baron",
         "set": "intrigue",
         "tags": [
-            "virtual_coin",
+            "virtualCoin",
             "gainer"
         ],
         "text": "+1 Buy\\n\\nYou may discard an Estate card. If you do, +4 Coins. Otherwise, gain an Estate card.",
@@ -2512,7 +2512,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Bridge",
         "set": "intrigue",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Buy\\n+1 Coin\\n\\n All cards (including cards in players' hands) cost 1 Coin less this turn, but not less than 0 Coins.",
         "types": [
@@ -2525,7 +2525,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Conspirator",
         "set": "intrigue",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+2 Coins\\n\\nIf you've played 3 or more Actions this turn (counting this): +1 Card, +1 Action.",
         "types": [
@@ -2583,7 +2583,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Harem",
         "set": "intrigue",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "2 Coins\\n 2 Victory",
         "types": [
@@ -2630,15 +2630,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 1,
         "cost": 5,
-        "countered_by": [
-            "likes_being_discarded",
-            "draw_to_x"
+        "counteredBy": [
+            "likesBeingDiscarded",
+            "drawToX"
         ],
         "name": "Minion",
         "set": "intrigue",
         "tags": [
-            "handsize_attack",
-            "virtual_coin"
+            "handsizeAttack",
+            "virtualCoin"
         ],
         "text": "+1 Action\\n\\nChoose one: +2 Coins; or discard your hand, +4 Cards, and each other player with at least 5 cards in hand discards his hand and draws 4 cards.",
         "types": [
@@ -2652,7 +2652,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Nobles",
         "set": "intrigue",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "Choose one: +3 Cards; or +2 Actions.\\n\\n\\n2 Victory",
         "types": [
@@ -2666,7 +2666,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Pawn",
         "set": "intrigue",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "Choose two: +1 Card; +1 Action; +1 Buy; +1 Coin. (The choices must be different.)",
         "types": [
@@ -2676,9 +2676,9 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
-            "copper_strategy",
-            "trash_for_benefit"
+        "counteredBy": [
+            "copperStrategy",
+            "trashForBenefit"
         ],
         "name": "Saboteur",
         "set": "intrigue",
@@ -2708,8 +2708,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Secret Chamber",
         "set": "intrigue",
         "tags": [
-            "needs_attacks",
-            "virtual_coin"
+            "needsAttacks",
+            "virtualCoin"
         ],
         "text": "Discard any number of cards. +1 Coin per card discarded.\\n\\n\\nWhen another player plays an Attack card, you may reveal this from your hand. If you do, +2 Cards, then put 2 cards from your hand on top of your deck.",
         "types": [
@@ -2734,8 +2734,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Steward",
         "set": "intrigue",
         "tags": [
-            "mass_trasher",
-            "virtual_coin"
+            "massTrasher",
+            "virtualCoin"
         ],
         "text": "Choose one: +2 Cards; or +2 Coins; or trash 2 cards from your hand.",
         "types": [
@@ -2745,13 +2745,13 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 3,
-        "countered_by": [
-            "deck_inspector"
+        "counteredBy": [
+            "deckInspector"
         ],
         "name": "Swindler",
         "set": "intrigue",
         "tags": [
-            "junk_attack",
+            "junkAttack",
             "complicated"
         ],
         "text": "+2 Coins\\n\\nEach other player trashes the top card of his deck and gains a card with the same cost that you choose.",
@@ -2763,18 +2763,18 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
-            "likes_being_discarded",
-            "draw_to_x",
-            "spam_filter",
+        "counteredBy": [
+            "likesBeingDiscarded",
+            "drawToX",
+            "spamFilter",
             "trasher",
-            "mass_trasher"
+            "massTrasher"
         ],
         "name": "Torturer",
         "set": "intrigue",
         "tags": [
-            "handsize_attack",
-            "junk_attack"
+            "handsizeAttack",
+            "junkAttack"
         ],
         "text": "+3 Cards\\n\\nEach other player chooses one: he discards 2 cards, or he gains a Curse card, putting it in his hand.",
         "types": [
@@ -2788,8 +2788,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Trading Post",
         "set": "intrigue",
         "tags": [
-            "early_trasher",
-            "mass_trasher"
+            "earlyTrasher",
+            "massTrasher"
         ],
         "text": "Trash 2 cards from your hand. If you do, gain a Silver card; put it into your hand.",
         "types": [
@@ -2813,7 +2813,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Upgrade",
         "set": "intrigue",
         "tags": [
-            "trash_for_benefit"
+            "trashForBenefit"
         ],
         "text": "+1 Card\\n+1 Action\\n\\nTrash a card from your hand. Gain a card costing exactly 1 Coin more than it.",
         "types": [
@@ -2850,9 +2850,9 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Bishop",
         "set": "prosperity",
         "tags": [
-            "trash_for_benefit",
-            "VP_generator",
-            "virtual_coin"
+            "trashForBenefit",
+            "VPGenerator",
+            "virtualCoin"
         ],
         "text": "+1 Coin\\n+1 Victory token\\nTrash a card from your hand. +Victory tokens equal to half its cost in coins, rounded down.\\nEach other player may trash a card from his hand.",
         "types": [
@@ -2887,7 +2887,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Counting House",
         "set": "prosperity",
         "tags": [
-            "copper_strategy"
+            "copperStrategy"
         ],
         "text": "Look through your discard pile, reveal any number of Copper cards from it, and put them into your hand.",
         "types": [
@@ -2900,7 +2900,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Expand",
         "set": "prosperity",
         "tags": [
-            "trash_for_benefit"
+            "trashForBenefit"
         ],
         "text": "Trash a card from your hand. Gain a card costing up to 3 Coins more than the trashed card.",
         "types": [
@@ -2913,8 +2913,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Forge",
         "set": "prosperity",
         "tags": [
-            "trash_for_benefit",
-            "mass_trasher"
+            "trashForBenefit",
+            "massTrasher"
         ],
         "text": "Trash any number of cards from your hand. Gain a card with cost exactly equal to the total cost in coins of the trashed cards.",
         "types": [
@@ -2924,17 +2924,17 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 6,
-        "countered_by": [
-            "draw_to_x",
-            "likes_being_discarded"
+        "counteredBy": [
+            "drawToX",
+            "likesBeingDiscarded"
         ],
         "name": "Goons",
         "set": "prosperity",
         "tags": [
             "overpowered",
-            "handsize_attack",
-            "virtual_coin",
-            "VP_generator"
+            "handsizeAttack",
+            "virtualCoin",
+            "VPGenerator"
         ],
         "text": "+1 Buy\\n+2 Coin\\n\\nEach other player discards down to 3 cards in hand.\\n\\n\\nWhile this is in play, when you buy a card, +1 Victory token.",
         "types": [
@@ -2948,7 +2948,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Grand Market",
         "set": "prosperity",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Card\\n+1 Action\\n+1 Buy\\n+2 Coin\\n\\n\\nYou can't buy this if you have Copper in play.",
         "types": [
@@ -2985,7 +2985,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Loan",
         "set": "prosperity",
         "tags": [
-            "early_trasher"
+            "earlyTrasher"
         ],
         "text": "1 Coin\\n\\nWhen you play this, reveal cards from your deck until you reveal a Treasure. Discard it or trash it. Discard the other cards.",
         "types": [
@@ -3011,8 +3011,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Monument",
         "set": "prosperity",
         "tags": [
-            "VP_generator",
-            "virtual_coin"
+            "VPGenerator",
+            "virtualCoin"
         ],
         "text": "+2 Coins\\n+1 Victory token",
         "types": [
@@ -3022,15 +3022,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
-            "mass_trasher",
-            "spam_filter",
-            "virtual_coin"
+        "counteredBy": [
+            "massTrasher",
+            "spamFilter",
+            "virtualCoin"
         ],
         "name": "Mountebank",
         "set": "prosperity",
         "tags": [
-            "junk_attack"
+            "junkAttack"
         ],
         "text": "+2 Coin\\n\\nEach other player may discard a Curse. If he doesn't, he gains a Curse and a Copper.",
         "types": [
@@ -3041,11 +3041,11 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 1,
         "cost": 8,
-        "cost_extra": "+",
+        "costExtra": "+",
         "name": "Peddler",
         "set": "prosperity",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Card\\n+1 Action\\n+1 Coin\\n\\n\\nDuring your Buy phase, this costs 2 Coin less per Action card you have in play, but not less than 0 Coin.",
         "types": [
@@ -3066,9 +3066,9 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
+        "counteredBy": [
             "sifter",
-            "deck_inspector"
+            "deckInspector"
         ],
         "name": "Rabble",
         "set": "prosperity",
@@ -3110,7 +3110,7 @@ const EXISTING_CARDS = JSON.parse(`
         "set": "prosperity",
         "tags": [
             "trasher",
-            "virtual_coin",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+1 Buy\\n+1 Coin per token on the Trade Route mat.\\nTrash a card from your hand.\\n\\n\\nSetup: Put a token on each Victory card Supply pile. When a card is gained from that pile, move the token to the Trade Route mat.",
@@ -3124,8 +3124,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Vault",
         "set": "prosperity",
         "tags": [
-            "indirect_interaction",
-            "virtual_coin",
+            "indirectInteraction",
+            "virtualCoin",
             "sifter"
         ],
         "text": "+2 Cards\\n\\nDiscard any number of cards. +1 Coin per card discarded. Each other player may discard 2 cards. If he does, he draws a card.",
@@ -3152,8 +3152,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Watchtower",
         "set": "prosperity",
         "tags": [
-            "draw_to_x",
-            "spam_filter"
+            "drawToX",
+            "spamFilter"
         ],
         "text": "Draw until you have 6 cards in hand.\\n\\n\\nWhen you gain a card, you may reveal this from your hand. If you do, either trash this card, or put it on top of your deck.",
         "types": [
@@ -3175,19 +3175,19 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 3,
-        "countered_by": [
-            "handsize_attack",
-            "mass_trasher",
-            "early_trasher",
-            "treasure_eater"
+        "counteredBy": [
+            "handsizeAttack",
+            "massTrasher",
+            "earlyTrasher",
+            "treasureEater"
         ],
         "name": "Ambassador",
         "set": "seaside",
         "tags": [
             "overpowered",
-            "junk_attack",
-            "mass_trasher",
-            "early_trasher"
+            "junkAttack",
+            "massTrasher",
+            "earlyTrasher"
         ],
         "text": "Reveal a card from your hand. Return up to 2 copies of it from your hand to the Supply. Then each player gains a copy of it.",
         "types": [
@@ -3201,7 +3201,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Bazaar",
         "set": "seaside",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Card\\n+2 Actions\\n+1 Coin",
         "types": [
@@ -3223,15 +3223,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 4,
-        "countered_by": [
-            "draw_to_x",
-            "early_trasher",
-            "virtual_coin"
+        "counteredBy": [
+            "drawToX",
+            "earlyTrasher",
+            "virtualCoin"
         ],
         "name": "Cutpurse",
         "set": "seaside",
         "tags": [
-            "handsize_attack"
+            "handsizeAttack"
         ],
         "text": "+2 Coins\\n\\nEach other player discards a Copper card (or reveals a hand with no Copper).",
         "types": [
@@ -3242,15 +3242,15 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 2,
-        "countered_by": [
-            "spam_filter",
+        "counteredBy": [
+            "spamFilter",
             "trasher",
-            "mass_trasher"
+            "massTrasher"
         ],
         "name": "Embargo",
         "set": "seaside",
         "tags": [
-            "junk_attack",
+            "junkAttack",
             "complicated"
         ],
         "text": "+2 Coins\\n\\nTrash this card. Put an Embargo token on top of a Supply pile.\\n\\n\\nWhen a player buys a card, he gains a Curse card per Embargo token on that pile.",
@@ -3264,7 +3264,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Explorer",
         "set": "seaside",
         "tags": [
-            "silver_generator"
+            "silverGenerator"
         ],
         "text": "You may reveal a Province from your hand. If you do, gain a Gold card, putting it into your hand. Otherwise, gain a Silver card, putting it into your hand. ",
         "types": [
@@ -3277,7 +3277,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Fishing Village",
         "set": "seaside",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+2 Actions\\n+1 Coin\\n\\nAt the start of your next turn:\\n+1 Action\\n+1 Coin",
         "types": [
@@ -3288,16 +3288,16 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 5,
-        "countered_by": [
-            "deck_inspector",
+        "counteredBy": [
+            "deckInspector",
             "sifter",
-            "draw_to_x",
-            "likes_being_discarded"
+            "drawToX",
+            "likesBeingDiscarded"
         ],
         "name": "Ghost Ship",
         "set": "seaside",
         "tags": [
-            "handsize_attack"
+            "handsizeAttack"
         ],
         "text": "+2 Cards\\n\\nEach other player with 4 or more cards in hand puts cards from his hand on top of his deck until he has 3 cards in his hand.",
         "types": [
@@ -3337,8 +3337,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Lighthouse",
         "set": "seaside",
         "tags": [
-            "needs_attacks",
-            "counters_attacks"
+            "needsAttacks",
+            "countersAttacks"
         ],
         "text": "+1 Action\\n\\nNow and at the start of your next turn: +1 Coin.\\n\\n\\nWhile this is in play, when another player plays an Attack card, it doesn't affect you.",
         "types": [
@@ -3353,7 +3353,7 @@ const EXISTING_CARDS = JSON.parse(`
         "set": "seaside",
         "tags": [
             "trasher",
-            "deck_inspector",
+            "deckInspector",
             "complicated"
         ],
         "text": "+1 Action\\n\\nLook at the top 3 cards of your deck. Trash one of them. Discard one of them. Put the other one on top of your deck.",
@@ -3367,7 +3367,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Merchant Ship",
         "set": "seaside",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "Now and at the start of your next turn: +2 Coins.",
         "types": [
@@ -3394,8 +3394,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Navigator",
         "set": "seaside",
         "tags": [
-            "deck_inspector",
-            "virtual_coin",
+            "deckInspector",
+            "virtualCoin",
             "complicated"
         ],
         "text": "+2 Coins\\n\\nLook at the top 5 cards of your deck. Either discard all of them, or put them back on top of your deck in any order.",
@@ -3431,14 +3431,14 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 4,
-        "countered_by": [
-            "virtual_coin"
+        "counteredBy": [
+            "virtualCoin"
         ],
         "name": "Pirate Ship",
         "set": "seaside",
         "tags": [
-            "treasure_trasher",
-            "virtual_coin"
+            "treasureTrasher",
+            "virtualCoin"
         ],
         "text": "Choose one: Each other player reveals the top 2 cards of his deck, trashes a revealed Treasure that you choose, discards the rest, and if anyone trashed a Treasure you take a coin token; or +1 Coin per Coin token you've taken with Pirate Ships this game.",
         "types": [
@@ -3452,7 +3452,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Salvager",
         "set": "seaside",
         "tags": [
-            "trash_for_benefit"
+            "trashForBenefit"
         ],
         "text": "+1 Buy\\n\\nTrash a card from your hand. +Coins equal to its cost.",
         "types": [
@@ -3462,18 +3462,18 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 4,
-        "countered_by": [
+        "counteredBy": [
             "trasher",
-            "mass_trasher",
-            "spam_filter"
+            "massTrasher",
+            "spamFilter"
         ],
         "name": "Sea Hag",
         "set": "seaside",
         "tags": [
             "overpowered",
-            "junk_attack",
+            "junkAttack",
             "sifter",
-            "deck_inspector"
+            "deckInspector"
         ],
         "text": "Each other player discards the top card of his deck, then gains a Curse card, putting it on top of his deck.",
         "types": [
@@ -3523,7 +3523,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Treasury",
         "set": "seaside",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+1 Card\\n+1 Action\\n+1 Coin\\n\\n\\nWhen you discard this from play, if you didn't buy a Victory card this turn, you may put this on top of your deck.",
         "types": [
@@ -3564,8 +3564,8 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Engineer",
         "set": "empires",
         "tags": [
-            "trash_for_benefit",
-            "toilet_paper"
+            "trashForBenefit",
+            "toiletPaper"
         ],
         "text": "Gain a card costing up to 4 Coin. You may trash this. If you do, gain a card costing up to 4 Coin.",
         "types": [
@@ -3664,13 +3664,13 @@ const EXISTING_CARDS = JSON.parse(`
     {
         "actions": 0,
         "cost": 3,
-        "countered_by": [
-            "mass_trasher",
+        "counteredBy": [
+            "massTrasher",
             "trasher",
-            "spam_filter",
-            "draw_to_x",
-            "likes_being_discarded",
-            "counters_handsize"
+            "spamFilter",
+            "drawToX",
+            "likesBeingDiscarded",
+            "countersHandsize"
         ],
         "name": "Catapult",
         "set": "empires",
@@ -3857,7 +3857,7 @@ const EXISTING_CARDS = JSON.parse(`
         "name": "Legionary",
         "set": "empires",
         "tags": [
-            "virtual_coin"
+            "virtualCoin"
         ],
         "text": "+3 Coin\\n\\nYou may reveal a Gold from your hand. If you do, each other player discards down to 2 cards in hand, then draws a card.",
         "types": [

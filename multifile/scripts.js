@@ -53,11 +53,11 @@
     // TODO: jslint
 
     // This object collects and stores data entered by user.
-    function get_user_input() {
+    function getUserInput() {
 
-        user_input = {
+        userInput = {
 
-            collect_inputs () {
+            collectInputs () {
                 for (var input of document.getElementsByTagName('input')) {
                     if (input.type == 'text') {
                         this[input.id] = input.value;
@@ -73,79 +73,79 @@
 
             // User input that requires a little extra work or is inferred
             recalculate () {
-                this['owned_sets'] = this.get_owned_sets();
-                this['promo_names'] = this.get_promo_names();
-                this['owned_cards'] = this.get_owned_cards();
-                this.mark_owned_sets();
-                this.mark_owned_promos();
+                this['ownedSets'] = this.getOwnedSets();
+                this['promoNames'] = this.getPromoNames();
+                this['ownedCards'] = this.getOwnedCards();
+                this.markOwnedSets();
+                this.markOwnedPromos();
             },
 
-            get_owned_sets () {
-                var owned_sets = new Set();
+            getOwnedSets () {
+                var ownedSets = new Set();
 
-                var which_sets = this['expansions'];
-                var needed_sets = this['sets'].toLowerCase();
-                var needed_costs = this['costs'].toLowerCase();
+                var whichSets = this['expansions'];
+                var neededSets = this['sets'].toLowerCase();
+                var neededCosts = this['costs'].toLowerCase();
 
                 for (var letter of Object.keys(LETTER_TO_SET)) {
 
-                    if (which_sets.includes(letter) || needed_sets.includes(letter)) {
+                    if (whichSets.includes(letter) || neededSets.includes(letter)) {
                         var expansion = LETTER_TO_SET[letter];
-                        owned_sets.add(expansion)
+                        ownedSets.add(expansion)
                     }
-                    if (needed_costs.includes('p')) {
-                        owned_sets.add('alchemy');
+                    if (neededCosts.includes('p')) {
+                        ownedSets.add('alchemy');
                     }
-                    if (needed_costs.includes('d')) {
-                        owned_sets.add('empires');
+                    if (neededCosts.includes('d')) {
+                        ownedSets.add('empires');
                     }
                     // TODO: add overpay and cost 7,8... once the dust has settled.
                 }
-                return owned_sets;
+                return ownedSets;
             },
 
-            get_promo_names () {
-                var promo_names = new Set();
+            getPromoNames () {
+                var promoNames = new Set();
 
-                for (var promo_name of Object.keys(PROMOS)) {
-                    var digit = PROMOS[promo_name];
-                    if (user_input['expansions'].includes(digit)) {
-                        promo_names.add(promo_name);
+                for (var promoName of Object.keys(PROMOS)) {
+                    var digit = PROMOS[promoName];
+                    if (userInput['expansions'].includes(digit)) {
+                        promoNames.add(promoName);
                     }
                 }
-                return promo_names;
+                return promoNames;
             },
 
-            get_owned_cards () {
-                var owned_cards = [];
+            getOwnedCards () {
+                var ownedCards = [];
 
                 for (var card of EXISTING_CARDS) {
-                    if (this['owned_sets'].has(card.set)) {
-                        owned_cards.push(card);
+                    if (this['ownedSets'].has(card.set)) {
+                        ownedCards.push(card);
                     }
-                else if (this['promo_names'].has(card.name)) {
-                        owned_cards.push(card);
+                else if (this['promoNames'].has(card.name)) {
+                        ownedCards.push(card);
                     }
                 }
-                return owned_cards;
+                return ownedCards;
             },
 
-            is_bad () {
-                if (this['owned_cards'].length < 13) {
+            isBad () {
+                if (this['ownedCards'].length < 13) {
                     return true;
                 }
                 for (var id of ['sets', 'costs']) {
-                    if (upper_with_lower(this[id])) {
+                    if (upperWithLower(this[id])) {
                         return true;
                     }
                 }
                 return false;
             },
 
-            mark_owned_sets () {
+            markOwnedSets () {
                 for (var set of Object.keys(SET_TO_LETTER)) {
                     var span = document.getElementById('set-' + set);
-                    if (this['owned_sets'].has(set)) {
+                    if (this['ownedSets'].has(set)) {
                         span.classList.add('selected');
                     }
                     else {
@@ -154,12 +154,12 @@
                 }
             },
 
-            mark_owned_promos () {
-                for (var promo_name of Object.keys(PROMOS)) {
-                    var digit = PROMOS[promo_name];
+            markOwnedPromos () {
+                for (var promoName of Object.keys(PROMOS)) {
+                    var digit = PROMOS[promoName];
                     var span = document.getElementById('promo-' + digit);
 
-                    if (this['promo_names'].has(promo_name)) {
+                    if (this['promoNames'].has(promoName)) {
                         span.classList.add('selected');
                     }
                     else {
@@ -169,15 +169,15 @@
             }
         }
 
-        user_input.collect_inputs();
-        user_input.recalculate();
-        return user_input;
+        userInput.collectInputs();
+        userInput.recalculate();
+        return userInput;
     }
 
 
     // ECMAScript doesn't specify that Array.sort() is stable, and Chrome uses
     // QuickSort instead of InsertionSort for lists > 10, so I need to roll my own.
-    function nice_and_stable_insertion_sort(alist, key) {
+    function niceAndStableInsertionSort(alist, key) {
         var len = alist.length;
         var position, currentvalue;
 
@@ -200,10 +200,10 @@
             return words;
         }
         for (var word of words) {
-            first_letter = word[0];
-            last_letter = word.slice(-1);
+            firstLetter = word[0];
+            lastLetter = word.slice(-1);
             middle = '<span class="notphone">' + word.slice(1, -1) + '</span>';
-            abbrev.push(first_letter + middle + last_letter);
+            abbrev.push(firstLetter + middle + lastLetter);
         }
         abbrev = abbrev.join('-');
         return abbrev
@@ -214,7 +214,7 @@
      * Randomize array element order in-place.
      * Using Durstenfeld shuffle algorithm.
      */
-    function shuffled_array(array) {
+    function shuffledArray(array) {
         for (var i = array.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
             var temp = array[i];
@@ -226,24 +226,24 @@
 
 
     // TODO: smells of object method!
-    function costs_it_removes(card, needed_costs) {
+    function costsItRemoves(card, neededCosts) {
         var costs = '';
-        if (needed_costs.includes(card.cost)) {
+        if (neededCosts.includes(card.cost)) {
             costs += card.cost;
         }
         if (card.potion) {
-            if (needed_costs.includes('p')) {
+            if (neededCosts.includes('p')) {
                 costs += 'p';
             }
-            else if (needed_costs.includes('P')) {
+            else if (neededCosts.includes('P')) {
                 costs += 'P';
             }
         }
         if (card.debt > 0) {
-            if (needed_costs.includes('d')) {
+            if (neededCosts.includes('d')) {
                 costs += 'd';
             }
-            else if (needed_costs.includes('D')) {
+            else if (neededCosts.includes('D')) {
                 costs += 'D';
             }
         }
@@ -252,13 +252,13 @@
 
 
     // TODO: smells of object method!
-    function sets_it_removes(card, needed_sets) {
+    function setsItRemoves(card, neededSets) {
         var sets = '';
         var letter = SET_TO_LETTER[card.set];
-        if (needed_sets.includes(letter)) {
+        if (neededSets.includes(letter)) {
             sets += letter;
         }
-        else if (needed_sets.includes(letter.toUpperCase())) {
+        else if (neededSets.includes(letter.toUpperCase())) {
             sets += letter.toUpperCase();
         }
         else if (card.set == 'promos') {
@@ -273,7 +273,7 @@
     }
 
 
-    function types_it_removes(card, needed_types) {
+    function typesItRemoves(card, neededTypes) {
         var types = '';
         if (card.types.indexOf('Event') != -1 ||
                 card.types.indexOf('Landmark') != -1) {
@@ -284,25 +284,25 @@
 
 
     // TODO: smells of object method!
-    function card_is_banned(card, chosen, newbies) {
+    function cardIsBanned(card, chosen, newbies) {
         if (newbies && card.tags.indexOf('complicated') != -1) {
             return true;
         }
-        if (chosen.banned_sets.has(SET_TO_LETTER[card.set])) {
+        if (chosen.bannedSets.has(SET_TO_LETTER[card.set])) {
             return true;
         }
-        if (card.potion && chosen.banned_costs.has('p')) {
+        if (card.potion && chosen.bannedCosts.has('p')) {
             return true;
         }
-        if (card.debt && chosen.banned_costs.has('d')) {
+        if (card.debt && chosen.bannedCosts.has('d')) {
             return true;
         }
-        if (is_horizontal(card) && chosen.banned_types.has('h')) {
+        if (isHorizontal(card) && chosen.bannedTypes.has('h')) {
             return true;
         }
         // like in Roman numerals, there's no number for 'zero',
         // so events/landmarks have to be banned if zero is wanted.
-        if (is_horizontal(card) && chosen.horizontal_count == 0) {
+        if (isHorizontal(card) && chosen.horizontalCount == 0) {
             return true;
         }
         return false;
@@ -311,7 +311,7 @@
 
     // Dominion rules state the horizontal cards - Events and Landmarks - are not
     // affected by card text using the word "card".
-    function is_horizontal(card) {
+    function isHorizontal(card) {
         if (card.types.indexOf('Event') != -1 ||
                 card.types.indexOf('Landmark') != -1) {
             return true;
@@ -320,21 +320,21 @@
     }
 
 
-    function chars_removed(removed_in, removed) {
+    function charsRemoved(removedIn, removed) {
         for (var ch of removed) {
-            removed_in = removed_in.replace(ch, '');
+            removedIn = removedIn.replace(ch, '');
         }
-        return removed_in;
+        return removedIn;
     }
 
 
     // if set of the processed card is on the list of EXACT set requirements
     // AND the card finishes the requirement, ban the set. More would exceed
     // the EXACT requirement.
-    function updated_banned(banned, chars_removed, requirement_string) {
-        var exact_requirements = chars_removed.replace(/[^A-Z]/g, '');
-        for (var ch of exact_requirements) {
-            if (!requirement_string.includes(ch)) {
+    function updatedBanned(banned, charsRemoved, requirementString) {
+        var exactRequirements = charsRemoved.replace(/[^A-Z]/g, '');
+        for (var ch of exactRequirements) {
+            if (!requirementString.includes(ch)) {
                 banned.add(ch.toLowerCase());
             }
         }
@@ -344,48 +344,48 @@
 
     // return true if the string contains the SAME LETTER in upper and lowercase.
     // It makes no sense to request EXACTLY 3 Seaside AND 3+ Seaside cards.
-    function upper_with_lower(text) {
+    function upperWithLower(text) {
         return (new Set(text).size != new Set(text.toLowerCase()).size);
     }
 
     // Requirements like costs or expansions can be checked independently
     // on a card-by-card basis, meaning they can be fulfilled on the first run!
-    function get_required_cards(chosen, user_input) {
-        var needed_costs = user_input['costs'];
-        var needed_sets = user_input['sets'];
+    function getRequiredCards(chosen, userInput) {
+        var neededCosts = userInput['costs'];
+        var neededSets = userInput['sets'];
 
-        var needed_types = 'H'.repeat(chosen.horizontal_count);
+        var neededTypes = 'H'.repeat(chosen.horizontalCount);
 
-        chosen.random_pool = shuffled_array(user_input['owned_cards']);
+        chosen.randomPool = shuffledArray(userInput['ownedCards']);
 
-        for (var card of chosen.random_pool) {
-            if (!(needed_costs || needed_sets || needed_types)) {
+        for (var card of chosen.randomPool) {
+            if (!(neededCosts || neededSets || neededTypes)) {
                 chosen.success = true;
                 break;
             }
             if (chosen.cards.length == 10) {
                 break;
             }
-            if (card_is_banned(card, chosen, user_input['newbies'])) {
+            if (cardIsBanned(card, chosen, userInput['newbies'])) {
                 continue;
             }
-            var costs_removed = costs_it_removes(card, needed_costs);
-            var sets_removed = sets_it_removes(card, needed_sets);
-            var types_removed = types_it_removes(card, needed_types);
+            var costsRemoved = costsItRemoves(card, neededCosts);
+            var setsRemoved = setsItRemoves(card, neededSets);
+            var typesRemoved = typesItRemoves(card, neededTypes);
 
-            if (costs_removed || sets_removed || types_removed) {
+            if (costsRemoved || setsRemoved || typesRemoved) {
                 
-                needed_sets = chars_removed(needed_sets, sets_removed);
-                needed_costs = chars_removed(needed_costs, costs_removed);
-                needed_types = chars_removed(needed_types, types_removed);
+                neededSets = charsRemoved(neededSets, setsRemoved);
+                neededCosts = charsRemoved(neededCosts, costsRemoved);
+                neededTypes = charsRemoved(neededTypes, typesRemoved);
 
-                chosen.banned_sets = updated_banned(chosen.banned_sets, sets_removed, needed_sets);
-                chosen.banned_costs = updated_banned(chosen.banned_costs, costs_removed, needed_costs);
-                chosen.banned_types = updated_banned(chosen.banned_types, types_removed, needed_types);
+                chosen.bannedSets = updatedBanned(chosen.bannedSets, setsRemoved, neededSets);
+                chosen.bannedCosts = updatedBanned(chosen.bannedCosts, costsRemoved, neededCosts);
+                chosen.bannedTypes = updatedBanned(chosen.bannedTypes, typesRemoved, neededTypes);
 
                 chosen.cards.push(card);
                 chosen.roles[card.name] = 'normal';
-                if (is_horizontal(card)) {
+                if (isHorizontal(card)) {
                     chosen.roles[card.name] = 'horizontal';
                 }
             }
@@ -395,16 +395,16 @@
 
         // time to pad the result with cards which weren't requested
         // but are okay to have.
-    function up_to_ten(chosen, user_input) {
-        for (var card of chosen.random_pool) {
-            if (chosen.cards.length == 10 + chosen.horizontal_count) {
+    function upToTen(chosen, userInput) {
+        for (var card of chosen.randomPool) {
+            if (chosen.cards.length == 10 + chosen.horizontalCount) {
                 chosen.success = true;
                 break;
             }
             if (chosen.roles[card.name]) {
                 continue;
             }
-            if (card_is_banned(card, chosen, user_input['newbies'])) {
+            if (cardIsBanned(card, chosen, userInput['newbies'])) {
                 continue;
             }
             chosen.cards.push(card);
@@ -414,36 +414,36 @@
     }
 
 
-    function attackCountered(attack_card, tags) {
-        var counters = attack_card.countered_by || [];
+    function attackCountered(attackCard, tags) {
+        var counters = attackCard.counteredBy || [];
 
         if (counters.indexOf('M_mostly_harmless') > -1) {
-            console.log(attack_card.name + ' is mostly harmless.');
+            console.log(attackCard.name + ' is mostly harmless.');
             return true;
         }
 
-        if (attack_card.name == 'Young Witch') {
+        if (attackCard.name == 'Young Witch') {
             console.log('Young Witch has a counter by definition.');
             return true;
         }
 
-        if (tags['counters_attacks'] > 0) {
-            console.log('Attack ' + attack_card.name + ' countered by Moat/Lighthouse.');
+        if (tags['countersAttacks'] > 0) {
+            console.log('Attack ' + attackCard.name + ' countered by Moat/Lighthouse.');
             return true;
         }
 
-        var counters_itself;
+        var countersItself;
         for (var counter of counters) {
-                counters_itself = 0;
-                if (attack_card.tags.indexOf(counter) > -1) {
-                    counters_itself = 1;
+                countersItself = 0;
+                if (attackCard.tags.indexOf(counter) > -1) {
+                    countersItself = 1;
                 }
-                if (tags[counter] - counters_itself > 0) {
-                    console.log(attack_card.name + ' countered by ' + counter);
+                if (tags[counter] - countersItself > 0) {
+                    console.log(attackCard.name + ' countered by ' + counter);
                     return true;
             }
         }
-        console.log(attack_card.name + ' NOT COUNTERED');
+        console.log(attackCard.name + ' NOT COUNTERED');
         return false;
     }
 
@@ -462,26 +462,26 @@
 
     // Check more sophisticated conditions, card relationships etc.
     // These can't really be done on the first run.
-    function conditionsPassed(cards, user_input) {
-        var tags, card_types
-        [tags, card_types] = get_stats(cards);
+    function conditionsPassed(cards, userInput) {
+        var tags, cardTypes
+        [tags, cardTypes] = getStats(cards);
 
         // condition: cards that NEED attack should appear alongside attacks
-        if ((tags['needs_attacks'] >= 1) && !card_types.has('Attack')) {
+        if ((tags['needsAttacks'] >= 1) && !cardTypes.has('Attack')) {
             console.log('REJECTING set because it has cards that need attacks but no attacks.');
             return false;
         }
 
         // condition: attacks
-        if (user_input['attacks'] == 'attacks-none') {
-            if (card_types.has('Attack')) {
+        if (userInput['attacks'] == 'attacks-none') {
+            if (cardTypes.has('Attack')) {
                 console.log('Attacks forbidden, so rejecting the set:');
                 return false
                 }
             }
         // TODO: The above can be checked on first run, but is it worth it ?
 
-        if (user_input['attacks'] == 'attacks-countered') {
+        if (userInput['attacks'] == 'attacks-countered') {
             if (!attacksCountered(cards, tags)) {
                 return false;
             }
@@ -490,16 +490,16 @@
     }
 
 
-    function hide_all_cards() {
-        var displayed_cards = document.getElementsByTagName('figure');
-        for (var dcard of displayed_cards) {
+    function hideAllCards() {
+        var displayedCards = document.getElementsByTagName('figure');
+        for (var dcard of displayedCards) {
             dcard.classList.add('hidden');
         }
     }
 
 
-    function paintCard(source, target_index, roles) {
-        var target = document.getElementById('card-' + target_index);
+    function paintCard(source, targetIndex, roles) {
+        var target = document.getElementById('card-' + targetIndex);
         target.classList.remove('hidden');
         target.classList.remove('reaction', 'treasure', 'duration', 'victory', 'reserve', 'landmark', 'bane', 'horizontal');
         for (var set of Object.keys(SET_TO_LETTER)) {
@@ -509,20 +509,20 @@
 
         target.setAttribute('alt', source.text);
         if (source.name == 'Black Market') {
-            var bm_stock = [];
+            var bmStock = [];
             for (var bm of Object.keys(roles)) {
                 if (roles[bm] == 'black market') {
-                    bm_stock.push(bm);
+                    bmStock.push(bm);
                 }
             }
-            bm_stock = '\n\nStock: ' + bm_stock.join(', ');
-            target.setAttribute('alt', target.getAttribute('alt') + bm_stock);
+            bmStock = '\n\nStock: ' + bmStock.join(', ');
+            target.setAttribute('alt', target.getAttribute('alt') + bmStock);
         }
         target.querySelector('figcaption').textContent = source.name;
         target.querySelector('.card-type').innerHTML = abbrev(source.types);
 
         target.querySelector('.coin-cost').textContent = source.cost;
-        target.querySelector('.coin-cost').textContent += source.cost_extra || '';
+        target.querySelector('.coin-cost').textContent += source.costExtra || '';
         target.querySelector('.debt-cost').textContent = source.debt || '';
 
         if (source.potion) {
@@ -536,7 +536,7 @@
             target.querySelector('.coin-cost').textContent='';
         }
 
-        if (is_horizontal(source)) {
+        if (isHorizontal(source)) {
             target.classList.add('horizontal');
         }
 
@@ -565,10 +565,10 @@
     }
 
 
-    function present_results(chosen) {
+    function presentResults(chosen) {
         var result = chosen.cards;
         
-        function card_role(x) {
+        function cardRole(x) {
             switch (chosen.roles[x.name]) {
                 case 'horizontal':
                     return 2;
@@ -581,8 +581,8 @@
             }
         }
 
-        result = nice_and_stable_insertion_sort(result, function(a){return a.cost;});
-        result = nice_and_stable_insertion_sort(result, card_role);
+        result = niceAndStableInsertionSort(result, function(a){return a.cost;});
+        result = niceAndStableInsertionSort(result, cardRole);
         // insert chosen cards into page:
         for (var i = 0; i < result.length; i++) {
             paintCard(result[i], i, chosen.roles);
@@ -591,17 +591,17 @@
 
 
     // TODO: method on chosen ?
-    function get_stats(cards) {
+    function getStats(cards) {
         // Check what card types there are. ONLY USED IN ONE PLACE
-        var card_types = new Set();
+        var cardTypes = new Set();
         var tags = new Object()
 
         for (var card of cards) {
             for (var typ of card.types) {
-                card_types.add(typ);
+                cardTypes.add(typ);
                 if (typ == 'Treasure') {
                     // TODO: the tag seems currently unused.
-                    tags['SPECIAL_alt_treasure'] = 1;
+                    tags['SPECIALaltTreasure'] = 1;
                 }
             }
             for (var tag of card.tags) {
@@ -614,23 +614,23 @@
                 }
             }
         }
-        return [tags, card_types];
+        return [tags, cardTypes];
     }
 
 
-    function show_kingdom(user_input) {
-        var max_tries = 1000;
+    function showKingdom(userInput) {
+        var maxTries = 1000;
 
         // chosen - stores context of a single "Randomize" button press
         var chosen = new Object();
-        chosen.horizontal_count = get_horizontal_count(user_input['owned_cards'], user_input['horizontals']);
+        chosen.horizontalCount = getHorizontalCount(userInput['ownedCards'], userInput['horizontals']);
 
-        hide_all_cards();
-        if (user_input.is_bad()) {
+        hideAllCards();
+        if (userInput.isBad()) {
             return chosen;
         }
 
-        for (var attempt = 0; attempt < max_tries; attempt++) {
+        for (var attempt = 0; attempt < maxTries; attempt++) {
             chosen.cards = new Array();
 
             // A little help on roles:
@@ -641,23 +641,23 @@
             // swiped - player manually rejected this card,
             chosen.roles = new Object();
             chosen.success = false;
-            chosen.banned_sets = new Set(); // user inputs uppercase set letters
-            chosen.banned_costs = new Set(); // P/D; no uppercase digits (yet!)
-            chosen.banned_types = new Set();
+            chosen.bannedSets = new Set(); // user inputs uppercase set letters
+            chosen.bannedCosts = new Set(); // P/D; no uppercase digits (yet!)
+            chosen.bannedTypes = new Set();
 
-            var chosen = get_required_cards(chosen, user_input);
+            var chosen = getRequiredCards(chosen, userInput);
             if (!chosen.success) {
                 continue;
             }
-            var chosen = up_to_ten(chosen, user_input);
+            var chosen = upToTen(chosen, userInput);
 
-            may_add_colony_platinum(chosen.cards, user_input['prosperity']);
-            may_add_shelters(chosen.cards, user_input['darkages']);
-            chosen.roles = may_add_black_market_stock(chosen.roles, chosen.random_pool);
+            mayAddColonyPlatinum(chosen.cards, userInput['prosperity']);
+            mayAddShelters(chosen.cards, userInput['darkages']);
+            chosen.roles = mayAddBlackMarketStock(chosen.roles, chosen.randomPool);
             if (chosen.roles['Young Witch'] == 'normal' ||
                     chosen.roles['Young Witch'] == 'black market') {
-                var args = [chosen, user_input['newbies']];
-                var bane = chosen.random_pool.find(passes_bane_tests, args);
+                var args = [chosen, userInput['newbies']];
+                var bane = chosen.randomPool.find(passesBaneTests, args);
                 if (!bane) {
                     continue;
                 }
@@ -665,21 +665,21 @@
                 chosen.cards.push(bane);
             }
 
-            if (!conditionsPassed(chosen.cards, user_input)) {
+            if (!conditionsPassed(chosen.cards, userInput)) {
                 continue;
             }
             break;
         }
-        if (attempt == max_tries) {
-            hide_all_cards();
+        if (attempt == maxTries) {
+            hideAllCards();
             return chosen;
         }
-        present_results(chosen);
+        presentResults(chosen);
         return chosen;
     }
 
 
-    function passes_bane_tests(card, thisArg) {
+    function passesBaneTests(card, thisArg) {
         var chosen = this[0];
         if (chosen.roles[card.name]) {
             return false;
@@ -687,21 +687,21 @@
         if (card.cost != 2 && card.cost != 3) {
             return false;
         }
-        if (is_horizontal(card)) {
+        if (isHorizontal(card)) {
             return false;
         }
         var newbies = this[1];
-        if (card_is_banned(card, chosen, newbies)) {
+        if (cardIsBanned(card, chosen, newbies)) {
             return false;
         }
         return true;
     }
 
 
-    function may_add_black_market_stock(roles, cards) {
+    function mayAddBlackMarketStock(roles, cards) {
         if (roles['Black Market']) {
             var stock = cards.filter(c => !Boolean(roles[c.name]));
-            stock = stock.slice(0, parseInt(user_input['black_market']));
+            stock = stock.slice(0, parseInt(userInput['black-market']));
             for (var s of stock) {
                 roles[s.name] = 'black market';
             }
@@ -710,12 +710,12 @@
     }
 
 
-    function may_add_colony_platinum(chosen_cards, prosperity) {
+    function mayAddColonyPlatinum(chosenCards, prosperity) {
         if (prosperity == 'prosperity-never') {
             // Do nothing
         }
         else if (prosperity == 'prosperity-1') {
-            for (var card of chosen_cards) {
+            for (var card of chosenCards) {
                 if (card.cost >= 6) {
                     document.getElementById('colony').classList.remove('hidden');
                     document.getElementById('platinum').classList.remove('hidden');
@@ -724,8 +724,8 @@
             }
         }
         else if (prosperity == 'prosperity-proportional') {
-            var to_check = Math.floor(Math.random() * 10);
-            if (chosen_cards[to_check].set == 'prosperity') {
+            var toCheck = Math.floor(Math.random() * 10);
+            if (chosenCards[toCheck].set == 'prosperity') {
                 document.getElementById('colony').classList.remove('hidden');
                 document.getElementById('platinum').classList.remove('hidden');
             }
@@ -737,12 +737,12 @@
     }
 
 
-    function may_add_shelters(chosen_cards, darkages) {
+    function mayAddShelters(chosenCards, darkages) {
         if (darkages == 'darkages-never') {
             // Do nothing
         }
         else if (darkages =='darkages-1') {
-            for (var card of chosen_cards) {
+            for (var card of chosenCards) {
                 if (card.set == 'darkages') {
                     shelters.classList.remove('hidden');
                     break;
@@ -750,8 +750,8 @@
             }
         }
         else if (darkages =='darkages-proportional') {
-            var to_check = Math.floor(Math.random() * 10);
-            if (chosen_cards[to_check].set == 'darkages') {
+            var toCheck = Math.floor(Math.random() * 10);
+            if (chosenCards[toCheck].set == 'darkages') {
                 shelters.classList.remove('hidden');
             }
         }
@@ -763,64 +763,64 @@
 
     // get the number of horizontals that will be used in this
     // Dominion game. It may vary when 'random' is selected.
-    function get_horizontal_count(owned_cards, horizontals) {
-        var horizontal_count;
-        var num_owned = owned_cards.filter(is_horizontal).length;
-        if (num_owned == 0) {
+    function getHorizontalCount(ownedCards, horizontals) {
+        var horizontalCount;
+        var numOwned = ownedCards.filter(isHorizontal).length;
+        if (numOwned == 0) {
             return 0;
         }
-        horizontal_count = horizontals.slice(-1);
-        if (isNaN(horizontal_count)) {
-            horizontal_count = Math.floor(Math.random() * 3);
+        horizontalCount = horizontals.slice(-1);
+        if (isNaN(horizontalCount)) {
+            horizontalCount = Math.floor(Math.random() * 3);
         }
-        return parseInt(horizontal_count);
+        return parseInt(horizontalCount);
     }
 
 
     // For a card, get a map with sets/costs/types only the card satisfies.
     // The point - without this card, user-specified cost/set/type conditions
     // are no longer met. A replacement for that card will have to meet them all!
-    function get_only_here(cards, card_index, user_input, horizontal_count) {
+    function getOnlyHere(cards, cardIndex, userInput, horizontalCount) {
         // Step 1: for each requirement, get sum of requirements for all cards
-        // chosen so far except this particualar card.
-        var only_here = {
-            'sets': '',
-            'costs': '',
-            'types': ''
+        // chosen so far except this particular card.
+        var onlyHere = {
+            'Sets': '',
+            'Costs': '',
+            'Types': ''
         }
 
         for (var i in cards) {
-            if (i == card_index) {
+            if (i == cardIndex) {
                 continue;
             }
-            only_here['sets'] += sets_it_removes(cards[i], user_input['sets']);
-            only_here['costs'] += costs_it_removes(cards[i], user_input['costs']);
+            onlyHere['Sets'] += setsItRemoves(cards[i], userInput['sets']);
+            onlyHere['Costs'] += costsItRemoves(cards[i], userInput['costs']);
 
-            only_here['types'] += types_it_removes(cards[i], 'H'.repeat(chosen.horizontal_count));
+            onlyHere['Types'] += typesItRemoves(cards[i], 'H'.repeat(chosen.horizontalCount));
         }
 
-        // Step 2: all_met_requirements - requirement_of_this_card
+        // Step 2: allMetRequirements - requirementOfThisCard
 
-        only_here['sets'] = chars_removed(user_input['sets'], only_here['sets']);
-        only_here['costs'] = chars_removed(user_input['costs'], only_here['costs']);
-        only_here['types'] = chars_removed('H'.repeat(horizontal_count), only_here['types']);
-        return only_here;
+        onlyHere['Sets'] = charsRemoved(userInput['sets'], onlyHere['Sets']);
+        onlyHere['Costs'] = charsRemoved(userInput['costs'], onlyHere['Costs']);
+        onlyHere['Types'] = charsRemoved('H'.repeat(horizontalCount), onlyHere['Types']);
+        return onlyHere;
     }
 
 
-    function unban_all_reqs(only_here, chosen) {
-        for (var word of Object.keys(only_here)) {
-            for (ch of only_here[word]) {
-                chosen['banned_' + word].delete(ch.toLowerCase());
+    function unbanAllReqs(onlyHere, chosen) {
+        for (var word of Object.keys(onlyHere)) {
+            for (ch of onlyHere[word]) {
+                chosen['banned' + word].delete(ch.toLowerCase());
             }
         }
     }
 
 
-    function ban_all_reqs(only_here, chosen) {
-        for (var word of Object.keys(only_here)) {
-            var set = chosen['banned_' + word];
-            for (ch of only_here[word]) {
+    function banAllReqs(onlyHere, chosen) {
+        for (var word of Object.keys(onlyHere)) {
+            var set = chosen['banned' + word];
+            for (ch of onlyHere[word]) {
                 set.add(ch.toLowerCase());
             }
         }
@@ -828,14 +828,14 @@
 
 
     // TODO: hold CTRL for swipe without conditions
-    function swipe(figure, chosen, user_input) {
-        var figure_index = figure.id.match(/\d+/)[0];
+    function swipe(figure, chosen, userInput) {
+        var figureIndex = figure.id.match(/\d+/)[0];
 
-        var card_name = figure.querySelector('figcaption').textContent;
-        var card_index = chosen.cards.findIndex(c => c['name'] == card_name);
-        var old_card = chosen.cards[card_index];
+        var cardName = figure.querySelector('figcaption').textContent;
+        var cardIndex = chosen.cards.findIndex(c => c['name'] == cardName);
+        var oldCard = chosen.cards[cardIndex];
 
-        if (old_card.name == 'Black Market') {
+        if (oldCard.name == 'Black Market') {
             for (var k of Object.keys(chosen.roles)) {
                 if (chosen.roles[k] == 'black market') {
                     delete chosen.roles[k];
@@ -843,97 +843,97 @@
             }
         }
 
-        only_here = get_only_here(chosen.cards, card_index, user_input, chosen.horizontal_count);
+        onlyHere = getOnlyHere(chosen.cards, cardIndex, userInput, chosen.horizontalCount);
 
-        unban_all_reqs(only_here, chosen);
-        var old_role = (chosen.roles[card_name]);
-        var everything = [chosen, user_input, only_here, card_index, old_role];
-        new_card = chosen.random_pool.find(passes_swipe_tests, everything);
-        ban_all_reqs(only_here, chosen);
+        unbanAllReqs(onlyHere, chosen);
+        var oldRole = (chosen.roles[cardName]);
+        var everything = [chosen, userInput, onlyHere, cardIndex, oldRole];
+        newCard = chosen.randomPool.find(passesSwipeTests, everything);
+        banAllReqs(onlyHere, chosen);
 
-        if (new_card) {
-            chosen.cards[card_index] = new_card;
-            chosen.roles[new_card.name] = 'normal';
-            if (chosen.roles[old_card.name] == 'bane') {
-                chosen.roles[new_card.name] = 'bane';
+        if (newCard) {
+            chosen.cards[cardIndex] = newCard;
+            chosen.roles[newCard.name] = 'normal';
+            if (chosen.roles[oldCard.name] == 'bane') {
+                chosen.roles[newCard.name] = 'bane';
             }
-            chosen.roles[old_card.name] = 'swiped';
-            paintCard(new_card, figure_index, chosen.roles);
+            chosen.roles[oldCard.name] = 'swiped';
+            paintCard(newCard, figureIndex, chosen.roles);
         }
         return chosen;
     }
 
 
-    function passes_swipe_tests(card, thisArg) {
-        var old_role = this[4];
+    function passesSwipeTests(card, thisArg) {
+        var oldRole = this[4];
         var replac = this[3]; // index of replaced card
         var requirements = this[2];
-        var user_input = this[1];
+        var userInput = this[1];
         var chosen = this[0];
 
         if (chosen.roles[card.name]) {
             return false;
         }
-        if (card_is_banned(card, chosen, user_input['newbies'])) {
+        if (cardIsBanned(card, chosen, userInput['newbies'])) {
             return false;
         }
-        if (!has_all_requirements(card, requirements)) {
+        if (!hasAllRequirements(card, requirements)) {
             return false;
         }
-        if (old_role == 'bane') {
+        if (oldRole == 'bane') {
             if (card.cost != 2 && card.cost != 3) {
                 return false;
             }
         }
         var cards = chosen.cards;
         var cards = cards.slice(0, replac).concat([card]).concat(cards.slice(replac + 1));
-        if (!conditionsPassed(cards, user_input)) {
+        if (!conditionsPassed(cards, userInput)) {
             return false;
         }
         return true;
     }
 
 
-    function has_all_requirements(card, requirements) {
-        var sets_removed = sets_it_removes(card, user_input['sets']);
-        if (chars_removed(requirements['sets'], sets_removed)) {
+    function hasAllRequirements(card, requirements) {
+        var setsRemoved = setsItRemoves(card, userInput['sets']);
+        if (charsRemoved(requirements['Sets'], setsRemoved)) {
             return false;
         }
-        var costs_removed = costs_it_removes(card, user_input['costs']);
-        if (chars_removed(requirements['costs'], costs_removed)) {
+        var costsRemoved = costsItRemoves(card, userInput['costs']);
+        if (charsRemoved(requirements['Costs'], costsRemoved)) {
             return false;
         }
-        var types_removed = types_it_removes(card, 'H'.repeat(chosen.horizontal_count));
-        if (chars_removed(requirements['types'], types_removed)) {
+        var typesRemoved = typesItRemoves(card, 'H'.repeat(chosen.horizontalCount));
+        if (charsRemoved(requirements['Types'], typesRemoved)) {
             return false
         }
         return true;
     }
 
 
-    function click_handler(evnt) {
+    function clickHandler(evnt) {
         var clicked = evnt.currentTarget;
         if (clicked.id == 'btn-randomize') {
-            chosen = show_kingdom(user_input);
+            chosen = showKingdom(userInput);
             lastFocusedInput.focus();
         }
         else if (clicked.type == 'radio') {
-            user_input[clicked.name] = clicked.id;
+            userInput[clicked.name] = clicked.id;
         }
         else if (clicked.type == 'checkbox') {
-            user_input[clicked.id] = clicked.id;
+            userInput[clicked.id] = clicked.id;
         }
         else if (clicked.id.startsWith('card-')) {
-            chosen = swipe(clicked, chosen, user_input);
+            chosen = swipe(clicked, chosen, userInput);
             lastFocusedInput.focus();
         }
     }
 
 
     function normalTextInput(evnt) {
-        var input_id = evnt.currentTarget.id;
-        user_input[input_id] = document.getElementById(input_id).value;
-        user_input.recalculate();
+        var inputId = evnt.currentTarget.id;
+        userInput[inputId] = document.getElementById(inputId).value;
+        userInput.recalculate();
     }
 
 
@@ -952,8 +952,8 @@
             var cards = document.querySelectorAll("figure[id^='card-']:not(.hidden)");
             val = Math.min(cards.length - 1, val);
             if (val > -1) {
-                var to_swipe = document.getElementById('card-' + val);
-                chosen = swipe(to_swipe, chosen, user_input);
+                var toSwipe = document.getElementById('card-' + val);
+                chosen = swipe(toSwipe, chosen, userInput);
             }
         }
     }
@@ -966,7 +966,7 @@
                 return;
             }
             else {
-                chosen = show_kingdom(user_input);
+                chosen = showKingdom(userInput);
             }
         }
     }
@@ -980,7 +980,7 @@
 
 
     // set global variables and attach event listeners:
-    var user_input = get_user_input();
+    var userInput = getUserInput();
     var chosen;
     var lastFocusedInput;
 
@@ -990,7 +990,7 @@
     }
 
     for (var clickable of document.querySelectorAll("input:not([type='text'])")) {
-        clickable.addEventListener('click', click_handler);
+        clickable.addEventListener('click', clickHandler);
     }
 
     for (var text of document.querySelectorAll("input[type='text']")) {
@@ -998,10 +998,10 @@
     }
 
     document.getElementById('btn-randomize').addEventListener('click',
-            click_handler);
+            clickHandler);
 
     for (var fig of document.getElementsByTagName('figure')) {
-        fig.addEventListener('click', click_handler);
+        fig.addEventListener('click', clickHandler);
     }
 
 
